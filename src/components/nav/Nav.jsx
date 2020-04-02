@@ -62,7 +62,7 @@ const LoginMenu = (loggedIn, selected, handleNavClick) => {
           active={selected === profileName}
           onClick={() => handleNavClick(profileName, "/profile")}
         >
-          My Profile
+          Profile
         </MenuItem>
         <MenuItem
           name={logoutName}

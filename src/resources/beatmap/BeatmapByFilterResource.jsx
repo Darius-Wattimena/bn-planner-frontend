@@ -1,6 +1,6 @@
-import {Resource} from 'rest-hooks';
 import {BASE_URL} from "../../Settings";
 import BeatmapResource from "./BeatmapResource";
+import {Resource} from "rest-hooks";
 
 export default class BeatmapByFilterResource extends Resource {
   uuid = undefined;
@@ -14,11 +14,22 @@ export default class BeatmapByFilterResource extends Resource {
 
   static urlRoot = BASE_URL + '/v1/beatmap/searchByFilter';
 
-  static searchShape(body) {
+  /*getFetchKey(params) {
+    return "GET " + this.urlRoot
+  }
+
+  fetch(params) {
+    return BeatmapByFilterResource.fetch('get', this.urlRoot, params)
+  }*/
+
+  static searchShape() {
     return {
-      ...this.detailShape(),
+      ...this(),
+      getFetchKey(params) {
+        return "GET " + this.urlRoot
+      },
       fetch(params) {
-        return BeatmapByFilterResource.fetch('post', BASE_URL + '/v1/beatmap/searchByFilter', body)
+        return BeatmapByFilterResource.fetch('get', this.urlRoot, params)
       }
     }
   }

@@ -1,16 +1,21 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background-image: url("assets/background.png") !important;
+}
+
 .App {
   text-align: center;
-  background-image: url("assets/background.png");
-  background: #292929;
   width: 100vw;
-  height: 100vh;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
   color: #d7d7d7;
 }
 
-.container {
+.base-container {
   margin: 2vh 2vw;
   padding: 1vh 1vw;
   background-color: #242424;
