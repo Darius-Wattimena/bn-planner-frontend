@@ -13,6 +13,7 @@ import {
   TableRow
 } from "semantic-ui-react";
 import BeatmapByFilterResource from "../../resources/beatmap/BeatmapByFilterResource";
+import BeatmapFilter from "./BeatmapFilter";
 
 const Beatmaps = () => {
   const [page, setPage] = useState(1);
@@ -43,6 +44,7 @@ const Beatmaps = () => {
   return (
     <div>
       <h1>Beatmaps</h1>
+      <BeatmapFilter />
       <Table celled inverted selectable>
         <TableHeader>
           <TableRow>
