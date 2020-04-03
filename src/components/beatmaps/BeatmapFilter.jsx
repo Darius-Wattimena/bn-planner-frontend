@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Form, Table} from "semantic-ui-react";
 import {BEATMAP_STATUS} from "../../Constants";
 
@@ -36,6 +36,7 @@ function getOption(status) {
 }
 
 const BeatmapFilter = (props) => {
+
   function handleFilterSet(group, value) {
     let newFilter = props.filter;
     newFilter[group] = value;
@@ -45,62 +46,67 @@ const BeatmapFilter = (props) => {
   }
 
   return (
-    <Table inverted>
-      <Table.Header>
+    <div>
+      <Table inverted>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Limit</Table.HeaderCell>
+            <Table.HeaderCell>Artist</Table.HeaderCell>
+            <Table.HeaderCell>Title</Table.HeaderCell>
+            <Table.HeaderCell>Mapper</Table.HeaderCell>
+            <Table.HeaderCell>Status</Table.HeaderCell>
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
         <Table.Row>
-          <Table.HeaderCell>Limit</Table.HeaderCell>
-          <Table.HeaderCell>Artist</Table.HeaderCell>
-          <Table.HeaderCell>Title</Table.HeaderCell>
-          <Table.HeaderCell>Mapper</Table.HeaderCell>
-          <Table.HeaderCell>Status</Table.HeaderCell>
-          <Table.HeaderCell />
+          <Table.Cell width={"2"}>
+            <Button.Group fluid>
+              <Button inverted primary active={props.limit === 10} onClick={() => handleFilterSet("limit", 10 )}>10</Button>
+              <Button inverted secondary active={props.limit === 20} onClick={() => handleFilterSet("limit", 20)}>20</Button>
+              <Button inverted secondary active={props.limit === 50} onClick={() => handleFilterSet("limit", 50)}>50</Button>
+            </Button.Group>
+          </Table.Cell>
+          <Table.Cell width={"2"}>
+            <Form inverted>
+              <FilterField
+                id={"artist"}
+                label={"Artist"}
+                group={"artist"}
+                handleFilterSet={handleFilterSet}
+              />
+            </Form>
+          </Table.Cell>
+          <Table.Cell width={"3"}>
+            <Form inverted>
+              <FilterField
+                id={"title"}
+                label={"Title"}
+                group={"title"}
+                handleFilterSet={handleFilterSet}
+              />
+            </Form>
+          </Table.Cell>
+          <Table.Cell width={"2"}>
+            <Form inverted>
+              <FilterField
+                id={"mapper"}
+                label={"Mapper"}
+                group={"mapper"}
+                handleFilterSet={handleFilterSet}
+              />
+            </Form>
+          </Table.Cell>
+          <Table.Cell width={"4"}>
+            <Form>
+              <Form.Dropdown placeholder='Status' fluid multiple selection options={options} onChange={(event, data) => handleAddStatusFilter(data.value, props.filter, handleFilterSet)} />
+            </Form>
+          </Table.Cell>
+          <Table.Cell width={"3"}>
+            <Button inverted color={"green"} fluid onClick={() => props.setOpenModalOpen(true)}>Add Beatmap</Button>
+          </Table.Cell>
         </Table.Row>
-      </Table.Header>
-      <Table.Row>
-        <Table.Cell width={"2"}>
-          <Button.Group fluid>
-            <Button inverted primary active={props.limit === 10} onClick={() => handleFilterSet("limit", 10 )}>10</Button>
-            <Button inverted secondary active={props.limit === 20} onClick={() => handleFilterSet("limit", 20)}>20</Button>
-            <Button inverted secondary active={props.limit === 50} onClick={() => handleFilterSet("limit", 50)}>50</Button>
-          </Button.Group>
-        </Table.Cell>
-        <Table.Cell width={"2"}>
-          <Form inverted>
-            <FilterField
-              id={"artist"}
-              label={"Artist"}
-              group={"artist"}
-              handleFilterSet={handleFilterSet}
-            />
-          </Form>
-        </Table.Cell>
-        <Table.Cell width={"3"}>
-          <Form inverted>
-            <FilterField
-              id={"title"}
-              label={"Title"}
-              group={"title"}
-              handleFilterSet={handleFilterSet}
-            />
-          </Form>
-        </Table.Cell>
-        <Table.Cell width={"2"}>
-          <Form inverted>
-            <FilterField
-              id={"mapper"}
-              label={"Mapper"}
-              group={"mapper"}
-              handleFilterSet={handleFilterSet}
-            />
-          </Form>
-        </Table.Cell>
-        <Table.Cell width={"7"}>
-          <Form>
-            <Form.Dropdown placeholder='Status' fluid multiple selection options={options} onChange={(event, data) => handleAddStatusFilter(data.value, props.filter, handleFilterSet)} />
-          </Form>
-        </Table.Cell>
-      </Table.Row>
-    </Table>
+      </Table>
+    </div>
   )
 };
 

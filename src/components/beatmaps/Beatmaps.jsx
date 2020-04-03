@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import BeatmapFilter from "./BeatmapFilter";
 import BeatmapsList from "./BeatmapsList";
 import "./Beatmaps.css"
+import AddBeatmapModal from "./modals/AddBeatmapModal";
 
 const filterDefaultState = {
   "artist": null,
@@ -16,11 +17,13 @@ const filterDefaultState = {
 
 const Beatmaps = () => {
   const [filter, setFilter] = useState(filterDefaultState);
+  const [openModalOpen, setOpenModalOpen] = useState(false);
 
   return (
     <div>
       <h1>Beatmaps</h1>
-      <BeatmapFilter filter={filter} setFilter={setFilter} />
+      <AddBeatmapModal open={openModalOpen} setOpen={setOpenModalOpen} />
+      <BeatmapFilter filter={filter} setFilter={setFilter} setOpenModalOpen={setOpenModalOpen} />
       <BeatmapsList filter={filter} setFilter={setFilter} />
     </div>
   )

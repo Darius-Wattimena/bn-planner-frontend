@@ -27,6 +27,14 @@ const Api = {
       method: 'GET',
       endpoint: 'v1/beatmap/searchByFilter' + filterToUrlParams(filter)
     };
+  },
+  addBeatmap: (beatmap) => {
+    return {
+      method: 'POST',
+      endpoint: 'v1/beatmap/add',
+      body: beatmap,
+      header: { "Content-Type": "application/json" }
+    }
   }
 };
 

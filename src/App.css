@@ -11,8 +11,8 @@ body {
   width: 100vw;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
-  color: #d7d7d7;
+p, h1, h2, h3, h4, h5, h6, label {
+  color: #d7d7d7 !important;
 }
 
 .base-container {
@@ -24,4 +24,23 @@ p, h1, h2, h3, h4, h5, h6 {
 .filter {
   background-color: #2b2b2b;
   padding: 1vw 1vh;
+}
+
+.ui.modal {
+  background-color: #242424 !important;
+}
+
+.ui.modal > .header {
+  background-color: #242424 !important;
+  color: #d7d7d7 !important;
+}
+
+.ui.modal > .content {
+  background-color: #2b2b2b !important;
+  color: #d7d7d7;
+}
+
+.ui.modal > .actions {
+  background-color: #242424 !important;
+  color: #d7d7d7;
 }
