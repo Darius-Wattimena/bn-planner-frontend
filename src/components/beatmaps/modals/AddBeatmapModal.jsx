@@ -1,13 +1,15 @@
 import React, {useState} from "react";
-import {Button, Form, Header, Icon, Modal} from "semantic-ui-react";
+import {Button, Form, Header, Icon, Message, Modal} from "semantic-ui-react";
 import {useMutation} from "react-fetching-library";
 import Api from "../../../resources/Api";
 
 const AddBeatmapModal = (props) => {
-  const [id, setId] = useState("");
-  const [artist, setArtist] = useState("");
-  const [title, setTitle] = useState("");
-  const [mapper, setMapper] = useState("");
+  const [formValues, setFormValues] = useState({
+    beatmapId: "",
+    artist: "",
+    title: "",
+    mapper: ""
+  });
 
   const { loading, payload, mutate, error } = useMutation(Api.addBeatmap);
   const handleSubmit = async (formValues) => {
@@ -16,17 +18,28 @@ const AddBeatmapModal = (props) => {
     if (mutateError) {
       console.log(mutateError)
     } else {
+      setFormValues({
+        beatmapId: "",
+        artist: "",
+        title: "",
+        mapper: ""
+      });
       props.setOpen(false);
     }
   };
 
+  function setFormValue(field, value) {
+    let newFormValues = formValues;
+    newFormValues[field] = value;
+    setFormValues({
+      ...newFormValues
+    });
+  }
+
   function verifyData() {
-    return handleSubmit({
-      beatmapId: id,
-      artist,
-      title,
-      mapper
-    })
+    if (isNaN(formValues.beatmapId)) {
+      return handleSubmit(formValues)
+    }
   }
 
   return (
@@ -40,26 +53,34 @@ const AddBeatmapModal = (props) => {
           <Form.Input
             label={"Beatmap Set ID"}
             placeholder={"Beatmap Set ID"}
-            value={id}
-            onChange={event => setId(event.target.value)}
+            value={formValues.beatmapId}
+            onChange={event => setFormValue("beatmapId", event.target.value)}
+            error={isNaN(formValues.beatmapId)}
+          />
+          <Message
+            visible={isNaN(formValues.beatmapId)}
+            error
+            header='The beatmap ID should be a number'
+            content='You can only add a beatmap to the beatmaps if you provide a valid beatmap ID.'
+            className={"error-message"}
           />
           <Form.Input
             label={"Artist"}
             placeholder='Artist'
-            value={artist}
-            onChange={event => setArtist(event.target.value)}
+            value={formValues.artist}
+            onChange={event => setFormValue("artist", event.target.value)}
           />
           <Form.Input
             label={"Title"}
             placeholder='Title'
-            value={title}
-            onChange={event => setTitle(event.target.value)}
+            value={formValues.title}
+            onChange={event => setFormValue("title", event.target.value)}
           />
           <Form.Input
             label={"Mapper"}
             placeholder='Mapper'
-            value={mapper}
-            onChange={event => setMapper(event.target.value)}
+            value={formValues.mapper}
+            onChange={event => setFormValue("mapper", event.target.value)}
           />
         </Form>
       </Modal.Content>

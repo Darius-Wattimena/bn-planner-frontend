@@ -44,3 +44,7 @@ p, h1, h2, h3, h4, h5, h6, label {
   background-color: #242424 !important;
   color: #d7d7d7;
 }
+
+.error-message > .content > p {
+  color: #9f3a38 !important;
+}
