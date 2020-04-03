@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { CacheProvider } from 'rest-hooks';
+import {ClientContextProvider} from "react-fetching-library";
+import {Client} from "./resources/Client";
 
 ReactDOM.render(
     <React.StrictMode>
-      <CacheProvider>
+      <ClientContextProvider client={Client}>
         <App />
-      </CacheProvider>
+      </ClientContextProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );

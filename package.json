@@ -8,9 +8,9 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-fetching-library": "^1.7.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "rest-hooks": "^4.5.9",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
     "spinners-react": "^1.0.3"

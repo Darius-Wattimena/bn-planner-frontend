@@ -7,17 +7,9 @@ const filterDefaultState = {
   "artist": null,
   "title": null,
   "mapper": null,
-  "isPending": null,
-  "isWorkInProgress": null,
-  "isAwaitingResponse": null,
-  "isBubbled": null,
-  "isQualified": null,
-  "isPopped": null,
-  "isDisqualified": null,
-  "isGraved": null,
-  "isRanked": null,
-  "limit": 1,
-  "skip": 0,
+  "status": [],
+  "limit": 10,
+  "page": 1,
   "countTotal": true,
   "nominator": []
 };
@@ -29,7 +21,7 @@ const Beatmaps = () => {
     <div>
       <h1>Beatmaps</h1>
       <BeatmapFilter filter={filter} setFilter={setFilter} />
-      <BeatmapsList filter={filter} />
+      <BeatmapsList filter={filter} setFilter={setFilter} />
     </div>
   )
 };

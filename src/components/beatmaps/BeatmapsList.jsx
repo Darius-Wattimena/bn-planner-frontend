@@ -1,18 +1,25 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Icon, Image, Label, Menu, MenuItem, Table} from "semantic-ui-react";
 import {BEATMAP_STATUS} from "../../Constants";
 import UserAvatar from "../user/UserAvatar";
-import {useResource} from "rest-hooks";
-import BeatmapByFilterResource from "../../resources/beatmap/BeatmapByFilterResource";
+import {useQuery} from "react-fetching-library";
+import Api from "../../resources/Api";
+import {OSU_ID} from "../../Settings";
 
 const BeatmapsList = (props) => {
-  const [page, setPage] = useState(1);
-  const beatmaps = useResource(BeatmapByFilterResource.detailShape(), props.filter);
+  let request = Api.fetchBeatmapsByFilter(props.filter);
 
-  const from  = (props.filter.limit * (page - 1)) + 1;
-  const to = from + beatmaps.count - 1;
+  console.log(request);
 
-  console.log({filter: props.filter, beatmaps});
+  const { loading, payload, error } = useQuery(request);
+
+  function handleFilterSetPage(value) {
+    let newFilter = props.filter;
+    newFilter["page"] = value;
+    props.setFilter({
+      ...newFilter
+    })
+  }
 
   function getNominatorDetails(nominators, nominator) {
     const nominatorDetails = getNominator(nominators, nominator);
@@ -41,7 +48,7 @@ const BeatmapsList = (props) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {beatmaps.response.map(beatmap => {
+        {payload && payload.response.map(beatmap => {
           let displayStatus = getReadableStatus(beatmap.status);
           return (
             <Table.Row>
@@ -62,8 +69,8 @@ const BeatmapsList = (props) => {
               <Table.Cell width={"2"}>{getNominatorDetails(beatmap.nominators, 2)}</Table.Cell>
               <Table.Cell width={"3"}>
                 <Button.Group fluid>
-                  <NominatorButton isNominator={false} />
-                  <NominateButton isNominated={false} />
+                  <NominatorButton nominators={beatmap.nominators} userId={OSU_ID} />
+                  <NominateButton status={beatmap.status} />
                   <Button inverted secondary>
                     <Icon name={"eye"} />
                   </Button>
@@ -82,20 +89,19 @@ const BeatmapsList = (props) => {
       <Table.Footer>
         <Table.Row>
           <Table.HeaderCell width={"2"}>
-            Total Beatmaps: {beatmaps.count}
+            {payload &&
+              <p>Total beatmaps {payload.total}</p>
+            }
           </Table.HeaderCell>
-          <Table.HeaderCell width={"2"}>
-            Showing: {from} Until: {to}
-          </Table.HeaderCell>
-          <Table.HeaderCell width={"12"} colSpan={"5"}>
+          <Table.HeaderCell width={"14"} colSpan={"6"}>
             <Menu inverted floated='right' pagination>
-              {page !== 1 &&
-              <MenuItem as='a' icon onClick={setPage(page - 1)}>
-                <Icon name='chevron left' />
-              </MenuItem>
+              {props.filter.page !== 1 &&
+                <MenuItem as='a' icon onClick={() => handleFilterSetPage(props.filter.page - 1)}>
+                  <Icon name='chevron left' />
+                </MenuItem>
               }
-              <MenuItem as='a' icon>{page}</MenuItem>
-              <MenuItem as='a' icon onClick={() => setPage(page + 1)}>
+              <MenuItem as='a' icon>{props.filter.page}</MenuItem>
+              <MenuItem as='a' icon onClick={() => handleFilterSetPage(props.filter.page + 1)}>
                 <Icon name='chevron right' />
               </MenuItem>
             </Menu>
@@ -118,11 +124,19 @@ function getNominator(nominators, nominator) {
   }
 }
 
-const NominateButton = ({isNominated}) => {
-  if (isNominated) {
+const NominateButton = ({status}) => {
+  if (status === BEATMAP_STATUS.Bubbled.name) {
     return (
       <Button inverted color={"red"}>
-        <Icon name={"stop"} />
+        <Icon name={"cloud"} />
+      </Button>
+    )
+  }
+
+  if (status === BEATMAP_STATUS.Qualified.name) {
+    return (
+      <Button inverted color={"red"}>
+        <Icon name={"erase"} />
       </Button>
     )
   } else {
@@ -135,7 +149,7 @@ const NominateButton = ({isNominated}) => {
 };
 
 const NominatorButton = ({nominators}) => {
-  let isNominator = true;
+  let isNominator = false;
 
   if (isNominator) {
     return (

@@ -2,13 +2,14 @@ import React from "react";
 import {Button, Form, Table} from "semantic-ui-react";
 import {BEATMAP_STATUS} from "../../Constants";
 
-const FilterField = ({id, label}) => {
+const FilterField = ({id, label, group, handleFilterSet}) => {
   return (
     <Form.Input
       id={id}
       placeholder={label}
       size={"small"}
       fluid
+      onChange={(event, data) => handleFilterSet(group, data.value)}
     />
   )
 };
@@ -68,6 +69,8 @@ const BeatmapFilter = (props) => {
             <FilterField
               id={"artist"}
               label={"Artist"}
+              group={"artist"}
+              handleFilterSet={handleFilterSet}
             />
           </Form>
         </Table.Cell>
@@ -76,6 +79,8 @@ const BeatmapFilter = (props) => {
             <FilterField
               id={"title"}
               label={"Title"}
+              group={"title"}
+              handleFilterSet={handleFilterSet}
             />
           </Form>
         </Table.Cell>
@@ -84,17 +89,45 @@ const BeatmapFilter = (props) => {
             <FilterField
               id={"mapper"}
               label={"Mapper"}
+              group={"mapper"}
+              handleFilterSet={handleFilterSet}
             />
           </Form>
         </Table.Cell>
         <Table.Cell width={"7"}>
           <Form>
-            <Form.Dropdown placeholder='Status' fluid multiple selection options={options} />
+            <Form.Dropdown placeholder='Status' fluid multiple selection options={options} onChange={(event, data) => handleAddStatusFilter(data.value, props.filter, handleFilterSet)} />
           </Form>
         </Table.Cell>
       </Table.Row>
     </Table>
   )
 };
+
+function handleAddStatusFilter(value, filter, handleFilterSet) {
+  if (value) {
+    let filterKey = "status";
+
+    //console.log(value);
+
+    if (value.length === 0) {
+      handleFilterSet(filterKey, [])
+    } else {
+      for (let status in BEATMAP_STATUS) {
+        let statusValue = BEATMAP_STATUS[status];
+        if (value.includes(statusValue.name) && !filter[filterKey].includes(statusValue.name)) {
+          let currentStatuses = filter[filterKey];
+          currentStatuses.push(statusValue.name);
+          handleFilterSet(filterKey, currentStatuses)
+        } else if (!value.includes(statusValue.name) && filter[filterKey].includes(statusValue.name)) {
+          let statuses = filter[filterKey];
+          const index = statuses.indexOf(statusValue.name);
+          const newValue = statuses.slice(0, index).concat(statuses.slice(index + 1, statuses.length));
+          handleFilterSet(filterKey, newValue)
+        }
+      }
+    }
+  }
+}
 
 export default BeatmapFilter
