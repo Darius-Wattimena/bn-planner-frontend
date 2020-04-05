@@ -37,7 +37,7 @@ const AddBeatmapModal = (props) => {
   }
 
   function verifyData() {
-    if (isNaN(formValues.beatmapId)) {
+    if (!isNaN(formValues.beatmapId)) {
       return handleSubmit(formValues)
     }
   }
