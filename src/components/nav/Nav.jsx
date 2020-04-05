@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {Icon, Menu, MenuItem} from "semantic-ui-react";
-import { useHistory } from "react-router-dom";
+import {Menu, MenuItem} from "semantic-ui-react";
+import {useHistory} from "react-router-dom";
 import catchLogo from "../../assets/catch.svg"
 import "./Nav.css"
 
@@ -24,7 +24,7 @@ const Nav = () => {
     <nav className={"nav-header"}>
       <Menu secondary inverted>
         <MenuItem>
-          <img src={catchLogo}  alt={""}/>
+          <img src={catchLogo} alt={""}/>
         </MenuItem>
         <MenuItem
           name={homeName}
@@ -47,7 +47,7 @@ const Nav = () => {
         >
           Users
         </MenuItem>
-        <LoginMenu loggedIn={true} selected={selected} handleNavClick={handleNavClick} />
+        <LoginMenu loggedIn={true} selected={selected} handleNavClick={handleNavClick}/>
       </Menu>
     </nav>
   )

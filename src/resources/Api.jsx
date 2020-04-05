@@ -1,4 +1,3 @@
-
 function filterToUrlParams(filter) {
   let result = "";
   let first = true;
@@ -33,7 +32,13 @@ const Api = {
       method: 'POST',
       endpoint: 'v1/beatmap/add',
       body: beatmap,
-      header: { "Content-Type": "application/json" }
+      header: {"Content-Type": "application/json"}
+    }
+  },
+  getBeatmap: (id) => {
+    return {
+      method: 'GET',
+      endpoint: 'v1/beatmap/' + id
     }
   }
 };

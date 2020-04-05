@@ -8,7 +8,7 @@ import {Container} from "semantic-ui-react";
 const Routes = () => {
   return (
     <BrowserRouter>
-      <Nav />
+      <Nav/>
       <div className={"base-container"}>
         <Container fluid>
           <Route exact path="/" component={Home}/>

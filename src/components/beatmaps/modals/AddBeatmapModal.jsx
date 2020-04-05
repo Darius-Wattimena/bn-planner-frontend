@@ -11,9 +11,9 @@ const AddBeatmapModal = (props) => {
     mapper: ""
   });
 
-  const { loading, payload, mutate, error } = useMutation(Api.addBeatmap);
+  const {loading, payload, mutate, error} = useMutation(Api.addBeatmap);
   const handleSubmit = async (formValues) => {
-    const { error: mutateError } = await mutate(formValues);
+    const {error: mutateError} = await mutate(formValues);
 
     if (mutateError) {
       console.log(mutateError)

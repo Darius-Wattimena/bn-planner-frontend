@@ -7,12 +7,12 @@ import {ClientContextProvider} from "react-fetching-library";
 import {Client} from "./resources/Client";
 
 ReactDOM.render(
-    <React.StrictMode>
-      <ClientContextProvider client={Client}>
-        <App />
-      </ClientContextProvider>
-    </React.StrictMode>,
-    document.getElementById('root')
+  <React.StrictMode>
+    <ClientContextProvider client={Client}>
+      <App/>
+    </ClientContextProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -3,6 +3,7 @@ import BeatmapFilter from "./BeatmapFilter";
 import BeatmapsList from "./BeatmapsList";
 import "./Beatmaps.css"
 import AddBeatmapModal from "./modals/AddBeatmapModal";
+import ViewBeatmapModal from "./modals/ViewBeatmapModal";
 
 const filterDefaultState = {
   "artist": null,
@@ -17,14 +18,17 @@ const filterDefaultState = {
 
 const Beatmaps = () => {
   const [filter, setFilter] = useState(filterDefaultState);
-  const [openModalOpen, setOpenModalOpen] = useState(false);
+  const [selectedBeatmap, setSelectedBeatmap] = useState(0);
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [viewModalOpen, setViewModalOpen] = useState(false);
 
   return (
     <div>
       <h1>Beatmaps</h1>
-      <AddBeatmapModal open={openModalOpen} setOpen={setOpenModalOpen} />
-      <BeatmapFilter filter={filter} setFilter={setFilter} setOpenModalOpen={setOpenModalOpen} />
-      <BeatmapsList filter={filter} setFilter={setFilter} />
+      <ViewBeatmapModal open={viewModalOpen} setOpen={setViewModalOpen} id={selectedBeatmap} />
+      <AddBeatmapModal open={addModalOpen} setOpen={setAddModalOpen}/>
+      <BeatmapFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen}/>
+      <BeatmapsList filter={filter} setFilter={setFilter} setViewModalOpen={setViewModalOpen} setSelectedBeatmap={setSelectedBeatmap}/>
     </div>
   )
 };

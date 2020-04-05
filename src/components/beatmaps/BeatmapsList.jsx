@@ -1,17 +1,21 @@
 import React from "react";
-import {Button, Icon, Image, Label, Menu, MenuItem, Table} from "semantic-ui-react";
+import {Button, Icon, Image, Label, Table} from "semantic-ui-react";
 import {BEATMAP_STATUS} from "../../Constants";
 import UserAvatar from "../user/UserAvatar";
 import {useQuery} from "react-fetching-library";
 import Api from "../../resources/Api";
 import {OSU_ID} from "../../Settings";
+import BasicPagination from "../generic/BasicPagination";
 
 const BeatmapsList = (props) => {
   let request = Api.fetchBeatmapsByFilter(props.filter);
+  const {loading, payload, error} = useQuery(request);
 
-  console.log(request);
+  let possibleLastPage = 0;
 
-  const { loading, payload, error } = useQuery(request);
+  if (!loading && !error) {
+    possibleLastPage = payload.total / props.filter.limit
+  }
 
   function handleFilterSetPage(value) {
     let newFilter = props.filter;
@@ -24,10 +28,10 @@ const BeatmapsList = (props) => {
   function getNominatorDetails(nominators, nominator) {
     const nominatorDetails = getNominator(nominators, nominator);
     if (nominatorDetails) {
-      return (<UserAvatar userDetails={nominatorDetails} />)
-    } else if(nominators.length === 1) {
+      return (<UserAvatar userDetails={nominatorDetails}/>)
+    } else if (nominators.length === 1) {
       if (nominator === 1) {
-        return (<UserAvatar userDetails={nominatorDetails} />)
+        return (<UserAvatar userDetails={nominatorDetails}/>)
       }
     }
 
@@ -60,7 +64,7 @@ const BeatmapsList = (props) => {
                       {displayStatus.full}
                     </Label>
                   }
-                  src={"https://assets.ppy.sh/beatmaps/" + beatmap.osuId + "/covers/cover.jpg"} />
+                  src={"https://assets.ppy.sh/beatmaps/" + beatmap.osuId + "/covers/cover.jpg"}/>
               </Table.Cell>
               <Table.Cell width={"2"}>{beatmap.artist}</Table.Cell>
               <Table.Cell width={"3"}>{beatmap.title}</Table.Cell>
@@ -69,16 +73,19 @@ const BeatmapsList = (props) => {
               <Table.Cell width={"2"}>{getNominatorDetails(beatmap.nominators, 2)}</Table.Cell>
               <Table.Cell width={"3"}>
                 <Button.Group fluid>
-                  <NominatorButton nominators={beatmap.nominators} userId={OSU_ID} />
-                  <NominateButton status={beatmap.status} />
-                  <Button inverted secondary>
-                    <Icon name={"eye"} />
+                  <NominatorButton nominators={beatmap.nominators} userId={OSU_ID}/>
+                  <Button inverted color={"blue"} onClick={() => {
+                    props.setSelectedBeatmap(beatmap.osuId);
+                    props.setViewModalOpen(true)
+                  }}>
+                    <Icon name={"eye"}/>
                   </Button>
                   <Button inverted secondary>
-                    <Icon name={"pencil"} />
+                    <Icon name={"pencil"}/>
                   </Button>
-                  <Button inverted secondary onClick={()=> window.open("https://osu.ppy.sh/beatmapsets/" + beatmap.osuId, "_blank")}>
-                    <Icon name={"linkify"} />
+                  <Button inverted secondary
+                          onClick={() => window.open("https://osu.ppy.sh/beatmapsets/" + beatmap.osuId, "_blank")}>
+                    <Icon name={"linkify"}/>
                   </Button>
                 </Button.Group>
               </Table.Cell>
@@ -90,21 +97,11 @@ const BeatmapsList = (props) => {
         <Table.Row>
           <Table.HeaderCell width={"2"}>
             {payload &&
-              <p>Total beatmaps {payload.total}</p>
+            <p>Total found beatmaps {payload.total}</p>
             }
           </Table.HeaderCell>
           <Table.HeaderCell width={"14"} colSpan={"6"}>
-            <Menu inverted floated='right' pagination>
-              {props.filter.page !== 1 &&
-                <MenuItem as='a' icon onClick={() => handleFilterSetPage(props.filter.page - 1)}>
-                  <Icon name='chevron left' />
-                </MenuItem>
-              }
-              <MenuItem as='a' icon>{props.filter.page}</MenuItem>
-              <MenuItem as='a' icon onClick={() => handleFilterSetPage(props.filter.page + 1)}>
-                <Icon name='chevron right' />
-              </MenuItem>
-            </Menu>
+            <BasicPagination currentPage={props.filter.page} lastPage={possibleLastPage} setPage={handleFilterSetPage}/>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>
@@ -115,7 +112,7 @@ const BeatmapsList = (props) => {
 function getNominator(nominators, nominator) {
   if (nominators.length === 2) {
     return nominators[nominator - 1]
-  } else if(nominators.length === 1) {
+  } else if (nominators.length === 1) {
     if (nominator === 1) {
       return nominators[nominator - 1]
     }
@@ -128,7 +125,7 @@ const NominateButton = ({status}) => {
   if (status === BEATMAP_STATUS.Bubbled.name) {
     return (
       <Button inverted color={"red"}>
-        <Icon name={"cloud"} />
+        <Icon name={"cloud"}/>
       </Button>
     )
   }
@@ -136,13 +133,13 @@ const NominateButton = ({status}) => {
   if (status === BEATMAP_STATUS.Qualified.name) {
     return (
       <Button inverted color={"red"}>
-        <Icon name={"erase"} />
+        <Icon name={"erase"}/>
       </Button>
     )
   } else {
     return (
       <Button inverted color={"green"}>
-        <Icon name={"cloud"} />
+        <Icon name={"cloud"}/>
       </Button>
     )
   }
@@ -154,13 +151,13 @@ const NominatorButton = ({nominators}) => {
   if (isNominator) {
     return (
       <Button inverted color={"red"}>
-        <Icon name={"minus"} />
+        <Icon name={"minus"}/>
       </Button>
     )
   } else {
     return (
       <Button inverted color={"green"}>
-        <Icon name={"user plus"} />
+        <Icon name={"user plus"}/>
       </Button>
     )
   }

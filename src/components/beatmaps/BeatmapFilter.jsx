@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Form, Table} from "semantic-ui-react";
 import {BEATMAP_STATUS} from "../../Constants";
 
@@ -55,15 +55,18 @@ const BeatmapFilter = (props) => {
             <Table.HeaderCell>Title</Table.HeaderCell>
             <Table.HeaderCell>Mapper</Table.HeaderCell>
             <Table.HeaderCell>Status</Table.HeaderCell>
-            <Table.HeaderCell />
+            <Table.HeaderCell/>
           </Table.Row>
         </Table.Header>
         <Table.Row>
           <Table.Cell width={"2"}>
             <Button.Group fluid>
-              <Button inverted primary active={props.limit === 10} onClick={() => handleFilterSet("limit", 10 )}>10</Button>
-              <Button inverted secondary active={props.limit === 20} onClick={() => handleFilterSet("limit", 20)}>20</Button>
-              <Button inverted secondary active={props.limit === 50} onClick={() => handleFilterSet("limit", 50)}>50</Button>
+              <Button inverted primary active={props.limit === 10}
+                      onClick={() => handleFilterSet("limit", 10)}>10</Button>
+              <Button inverted secondary active={props.limit === 20}
+                      onClick={() => handleFilterSet("limit", 20)}>20</Button>
+              <Button inverted secondary active={props.limit === 50}
+                      onClick={() => handleFilterSet("limit", 50)}>50</Button>
             </Button.Group>
           </Table.Cell>
           <Table.Cell width={"2"}>
@@ -98,11 +101,12 @@ const BeatmapFilter = (props) => {
           </Table.Cell>
           <Table.Cell width={"4"}>
             <Form>
-              <Form.Dropdown placeholder='Status' fluid multiple selection options={options} onChange={(event, data) => handleAddStatusFilter(data.value, props.filter, handleFilterSet)} />
+              <Form.Dropdown placeholder='Status' fluid multiple selection options={options}
+                             onChange={(event, data) => handleAddStatusFilter(data.value, props.filter, handleFilterSet)}/>
             </Form>
           </Table.Cell>
           <Table.Cell width={"3"}>
-            <Button inverted color={"green"} fluid onClick={() => props.setOpenModalOpen(true)}>Add Beatmap</Button>
+            <Button inverted color={"green"} fluid onClick={() => props.setAddModalOpen(true)}>Add Beatmap</Button>
           </Table.Cell>
         </Table.Row>
       </Table>
@@ -113,8 +117,6 @@ const BeatmapFilter = (props) => {
 function handleAddStatusFilter(value, filter, handleFilterSet) {
   if (value) {
     let filterKey = "status";
-
-    //console.log(value);
 
     if (value.length === 0) {
       handleFilterSet(filterKey, [])

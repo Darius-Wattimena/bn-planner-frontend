@@ -1,14 +1,14 @@
-import React, { Suspense } from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
 import Routes from "./Routes";
-import { SpinnerCircular } from 'spinners-react';
+import {SpinnerCircular} from 'spinners-react';
 
 function App() {
   return (
     <div className="App">
       <Suspense fallback={SpinnerCircular}>
-        <Routes />
+        <Routes/>
       </Suspense>
     </div>
   );
