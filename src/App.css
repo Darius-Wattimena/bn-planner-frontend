@@ -15,8 +15,20 @@ p, h1, h2, h3, h4, h5, h6, label {
     color: #d7d7d7 !important;
 }
 
-.base-container {
+.base-container-large {
     margin: 2vh 2vw;
+    padding: 1vh 1vw;
+    background-color: #242424;
+}
+
+.base-container {
+    margin: 2vh 10vw;
+    padding: 1vh 1vw;
+    background-color: #242424;
+}
+
+.base-container-small {
+    margin: 2vh 20vw;
     padding: 1vh 1vw;
     background-color: #242424;
 }

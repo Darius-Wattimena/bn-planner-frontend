@@ -1,0 +1,52 @@
+.ui.selectable.table tbody tr.user-row.user-role-bn:hover {
+    background: linear-gradient(to left, transparent, transparent 50%, rgba(114, 73, 165, 0.8) 100%, transparent 75%) !important;
+}
+
+.ui.selectable.table tbody tr.user-row.user-role-pbn:hover {
+    background: linear-gradient(to left, transparent, transparent 50%, rgba(165, 52, 148, 0.8) 100%, transparent 75%) !important;
+}
+
+.ui.selectable.table tbody tr.user-row.user-role-nat:hover {
+    background: linear-gradient(to left, transparent, transparent 50%, rgba(165, 78, 75, 0.8) 100%, transparent 75%) !important;
+}
+
+.user-row.user-role-bn {
+    background: linear-gradient(to left, transparent, transparent 50%, rgba(114, 73, 165, 0.5) 100%, transparent 75%);
+}
+
+.user-row.user-role-pbn {
+    background: linear-gradient(to left, transparent, transparent 50%, rgba(165, 52, 148, 0.5) 100%, transparent 75%);
+}
+
+.user-row.user-role-nat {
+    background: linear-gradient(to left, transparent, transparent 50%, rgba(165, 78, 75, 0.5) 100%, transparent 75%);
+}
+
+.ui.label.user-role-bn {
+    background-color: #7249a5 !important;
+    color: #d7d7d7 !important;
+}
+
+.ui.label.user-role-pbn {
+    background-color: #a53494 !important;
+    color: #d7d7d7 !important;
+}
+
+.ui.label.user-role-nat {
+    background-color: #a54e4b !important;
+    color: #d7d7d7 !important;
+}
+
+.ui.label.user-role-observer {
+    background-color: #a5a5a5 !important;
+    color: #242424 !important;
+}
+
+.user-banner {
+    max-width: 64px !important;
+    max-height: 64px;
+}
+
+.users-page {
+    max-width: 80vw;
+}

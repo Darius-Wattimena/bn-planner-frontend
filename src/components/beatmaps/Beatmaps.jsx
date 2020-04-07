@@ -4,6 +4,7 @@ import BeatmapsList from "./BeatmapsList";
 import "./Beatmaps.css"
 import AddBeatmapModal from "./modals/AddBeatmapModal";
 import ViewBeatmapModal from "./modals/ViewBeatmapModal";
+import {Container} from "semantic-ui-react";
 
 const filterDefaultState = {
   "artist": null,
@@ -23,12 +24,14 @@ const Beatmaps = () => {
   const [viewModalOpen, setViewModalOpen] = useState(false);
 
   return (
-    <div>
-      <h1>Beatmaps</h1>
-      <ViewBeatmapModal open={viewModalOpen} setOpen={setViewModalOpen} id={selectedBeatmap} />
-      <AddBeatmapModal open={addModalOpen} setOpen={setAddModalOpen}/>
-      <BeatmapFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen}/>
-      <BeatmapsList filter={filter} setFilter={setFilter} setViewModalOpen={setViewModalOpen} setSelectedBeatmap={setSelectedBeatmap}/>
+    <div className={"base-container-large"}>
+      <Container fluid>
+        <h1>Beatmaps</h1>
+        <ViewBeatmapModal open={viewModalOpen} setOpen={setViewModalOpen} id={selectedBeatmap} />
+        <AddBeatmapModal open={addModalOpen} setOpen={setAddModalOpen}/>
+        <BeatmapFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen}/>
+        <BeatmapsList filter={filter} setFilter={setFilter} setViewModalOpen={setViewModalOpen} setSelectedBeatmap={setSelectedBeatmap}/>
+      </Container>
     </div>
   )
 };

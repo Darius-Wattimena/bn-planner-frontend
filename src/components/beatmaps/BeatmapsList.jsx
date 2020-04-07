@@ -14,7 +14,7 @@ const BeatmapsList = (props) => {
   let possibleLastPage = 0;
 
   if (!loading && !error) {
-    possibleLastPage = payload.total / props.filter.limit
+    possibleLastPage = Math.floor(payload.total / props.filter.limit)
   }
 
   function handleFilterSetPage(value) {
@@ -52,7 +52,7 @@ const BeatmapsList = (props) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {payload && payload.response.map(beatmap => {
+        {payload && payload.response && payload.response.map(beatmap => {
           let displayStatus = getReadableStatus(beatmap.status);
           return (
             <Table.Row>
@@ -97,7 +97,7 @@ const BeatmapsList = (props) => {
         <Table.Row>
           <Table.HeaderCell width={"2"}>
             {payload &&
-            <p>Total found beatmaps {payload.total}</p>
+            <p>{payload.total} Beatmaps Found</p>
             }
           </Table.HeaderCell>
           <Table.HeaderCell width={"14"} colSpan={"6"}>

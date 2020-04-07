@@ -50,3 +50,26 @@ export const BEATMAP_STATUS = {
     color: "beatmap-status-unknown"
   }
 };
+
+export const USER_ROLES = {
+  Observer: {
+    name: "OBS",
+    full: "Observer",
+    color: "user-role-observer"
+  },
+  BeatmapNominator: {
+    name: "BN",
+    full: "Beatmap Nominator",
+    color: "user-role-bn"
+  },
+  ProbationBeatmapNominator: {
+    name: "PBN",
+    full: "Probation Beatmap Nominator",
+    color: "user-role-pbn"
+  },
+  NominationAssessmentTeam: {
+    name: "NAT",
+    full: "Nomination Assessment Team",
+    color: "user-role-nat"
+  }
+};
