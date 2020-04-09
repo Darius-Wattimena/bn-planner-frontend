@@ -17,16 +17,16 @@ const UserFilter = (props) => {
     <div>
       <Table inverted>
         <Table.Header>
-          <Table.Row>
+          <Table.Row textAlign={"center"}>
             <Table.HeaderCell>Limit</Table.HeaderCell>
             <Table.HeaderCell>Name</Table.HeaderCell>
             <Table.HeaderCell>Role</Table.HeaderCell>
             <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
-        <Table.Row>
+        <Table.Row textAlign={"center"}>
           <Table.Cell width={"2"}>
-            <Button.Group>
+            <Button.Group fluid>
               <Button inverted primary active={props.filter.limit === 10}
                       onClick={() => handleFilterSet("limit", 10)}>10</Button>
               <Button inverted secondary active={props.filter.limit === 20}
@@ -44,7 +44,7 @@ const UserFilter = (props) => {
               />
             </Form>
           </Table.Cell>
-          <Table.Cell width={"6"}>
+          <Table.Cell width={"9"}>
             <Form>
               <Form.Dropdown placeholder='Roles' fluid multiple selection options={options} value={props.filter.roles}
                              onChange={(event, data) => handleMultiSelectFilter("roles", data.value, props.filter, handleFilterSet, USER_ROLES)}/>

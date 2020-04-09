@@ -2,16 +2,15 @@ import React, {useState} from "react";
 import {useMutation, useQuery} from "react-fetching-library";
 import Api from "../../../resources/Api";
 import {Button, Form, Header, Icon, Modal} from "semantic-ui-react";
+import {getBeatmapStatusOptions} from "../../../util/BeatmapUtil";
 
-const EditBeatmapModal = (props) => {
+const EditBeatmapStatusModal = (props) => {
   const {loading, payload, error} = useQuery(Api.getBeatmap(props.id));
-  const {saveLoading, mutate, saveError} = useMutation(Api.updateBeatmap);
+  const {saveLoading, mutate, saveError} = useMutation(Api.updateBeatmapStatus);
   const [formValues, setFormValues] = useState({
     osuId: "",
     artist: "",
     title: "",
-    mapper: "",
-    note: "",
     status: ""
   });
 
@@ -25,17 +24,16 @@ const EditBeatmapModal = (props) => {
     return handleSubmit(formValues)
   }
 
-  const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues);
+  const handleSubmit = async (values) => {
+    const {error: mutateError} = await mutate(values);
 
     if (mutateError) {
       console.log(mutateError)
     } else {
       setFormValues({
+        osuId: "",
         artist: "",
         title: "",
-        mapper: "",
-        note: "",
         status: ""
       });
       props.query();
@@ -55,45 +53,28 @@ const EditBeatmapModal = (props) => {
     <Modal
       open={props.open}
       onOpen={() => setFormValues({
+        osuId: "",
         artist: "",
         title: "",
-        mapper: "",
-        note: "",
         status: ""
       })}
       onClose={() => props.setOpen(false)}
     >
       {!loading && !error &&
-        <Header content={payload.artist + ' - ' + payload.title}/>
+      <Header content={'Changing beatmap status of \'' + payload.artist + ' - ' + payload.title + '\''}/>
       }
       {!loading && !error &&
-        <Modal.Content>
-          <Form>
-            <Form.Input
-              label={"Artist"}
-              placeholder='Artist'
-              value={formValues.artist}
-              onChange={event => setFormValue("artist", event.target.value)}
-            />
-            <Form.Input
-              label={"Title"}
-              placeholder='Title'
-              value={formValues.title}
-              onChange={event => setFormValue("title", event.target.value)}
-            />
-            <Form.Input
-              label={"Mapper"}
-              placeholder='Mapper'
-              value={formValues.mapper}
-              onChange={event => setFormValue("mapper", event.target.value)}
-            />
-            <Form.TextArea
-              label={"Notes"}
-              placeholder='Notes'
-              value={formValues.note}
-              onChange={event => setFormValue("note", event.target.value)} />
-          </Form>
-        </Modal.Content>
+      <Modal.Content>
+        <Form>
+          <Form.Dropdown
+            label={"Beatmap Status"}
+            selection
+            value={formValues.status}
+            options={getBeatmapStatusOptions()}
+            onChange={(event, data) => setFormValue("status", data.value)}
+          />
+        </Form>
+      </Modal.Content>
       }
       <Modal.Actions>
         <Button color='red' onClick={() => props.setOpen(false)} inverted>
@@ -107,4 +88,4 @@ const EditBeatmapModal = (props) => {
   )
 };
 
-export default EditBeatmapModal
+export default EditBeatmapStatusModal

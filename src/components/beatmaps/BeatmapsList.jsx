@@ -4,7 +4,7 @@ import {BEATMAP_STATUS} from "../../Constants";
 import UserAvatar from "../user/UserAvatar";
 import BasicPagination from "../generic/BasicPagination";
 
-const BeatmapsList = ({loading, error, payload, filter, setFilter, query, setEditModalOpen, setSelectedBeatmap}) => {
+const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalOpen, setSelectedBeatmap, setEditStatusModalOpen}) => {
   let possibleLastPage = 0;
 
   if (!loading && !error) {
@@ -65,9 +65,16 @@ const BeatmapsList = ({loading, error, payload, filter, setFilter, query, setEdi
               <Table.Cell width={"2"} textAlign={"center"}>{beatmap.mapper}</Table.Cell>
               <Table.Cell width={"2"}>{getNominatorDetails(beatmap.nominators, 1)}</Table.Cell>
               <Table.Cell width={"2"}>{getNominatorDetails(beatmap.nominators, 2)}</Table.Cell>
-              <Table.Cell width={"1"}>
-                <Button.Group>
+              <Table.Cell width={"2"}>
+                <Button.Group fluid>
+                  setEditStatusModalOpen
                   <Button inverted color={"green"} onClick={() => {
+                    setSelectedBeatmap(beatmap.osuId);
+                    setEditStatusModalOpen(true)
+                  }}>
+                    <Icon name={"cloud"}/>
+                  </Button>
+                  <Button inverted color={"yellow"} onClick={() => {
                     setSelectedBeatmap(beatmap.osuId);
                     setEditModalOpen(true)
                   }}>

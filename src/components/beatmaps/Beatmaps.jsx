@@ -7,6 +7,7 @@ import EditBeatmapModal from "./modals/EditBeatmapModal";
 import {Container} from "semantic-ui-react";
 import Api from "../../resources/Api";
 import {useQuery} from "react-fetching-library";
+import EditBeatmapStatusModal from "./modals/EditBeatmapStatusModal";
 
 const filterDefaultState = {
   "artist": null,
@@ -24,6 +25,7 @@ const Beatmaps = () => {
   const [selectedBeatmap, setSelectedBeatmap] = useState(0);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editStatusModalOpen, setEditStatusModalOpen] = useState(false);
 
   let request = Api.fetchBeatmapsByFilter(filter);
   const {loading, payload, error, query} = useQuery(request);
@@ -40,8 +42,10 @@ const Beatmaps = () => {
           filter={filter}
           setFilter={setFilter}
           setEditModalOpen={setEditModalOpen}
+          setEditStatusModalOpen={setEditStatusModalOpen}
           setSelectedBeatmap={setSelectedBeatmap}
         />
+        <EditBeatmapStatusModal query={query} open={editStatusModalOpen} setOpen={setEditStatusModalOpen} id={selectedBeatmap} />
         <EditBeatmapModal query={query} open={editModalOpen} setOpen={setEditModalOpen} id={selectedBeatmap} />
         <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen}/>
       </Container>

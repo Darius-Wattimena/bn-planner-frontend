@@ -26,7 +26,7 @@ const UserList = (props) => {
   return (
     <Table inverted selectable>
       <Table.Header>
-        <Table.Row>
+        <Table.Row textAlign={"center"}>
           <Table.HeaderCell />
           <Table.HeaderCell>Name</Table.HeaderCell>
           <Table.HeaderCell>Role</Table.HeaderCell>
@@ -40,7 +40,7 @@ const UserList = (props) => {
         {payload && payload.response && payload.response.map(user => {
           let userRole = getReadableRole(user.role);
           return (
-            <Table.Row className={"user-row " + userRole.color}>
+            <Table.Row className={"user-row " + userRole.color} textAlign={"center"}>
               <Table.Cell width={"2"}>
                 <Image  className={"user-banner"} fluid src={user.profilePictureUri}/>
               </Table.Cell>

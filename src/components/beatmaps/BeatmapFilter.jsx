@@ -1,6 +1,7 @@
 import React from "react";
 import {Button, Form, Table} from "semantic-ui-react";
 import {BEATMAP_STATUS} from "../../Constants";
+import {getBeatmapStatusOptions} from "../../util/BeatmapUtil";
 
 const FilterField = ({id, label, group, handleFilterSet}) => {
   return (
@@ -13,27 +14,6 @@ const FilterField = ({id, label, group, handleFilterSet}) => {
     />
   )
 };
-
-const options = [
-  getOption(BEATMAP_STATUS.Pending),
-  getOption(BEATMAP_STATUS.WorkInProgress),
-  getOption(BEATMAP_STATUS.AwaitingResponse),
-  getOption(BEATMAP_STATUS.Bubbled),
-  getOption(BEATMAP_STATUS.Qualified),
-  getOption(BEATMAP_STATUS.Ranked),
-  getOption(BEATMAP_STATUS.Popped),
-  getOption(BEATMAP_STATUS.Disqualified),
-  getOption(BEATMAP_STATUS.Graved)
-];
-
-function getOption(status) {
-  return {
-    key: status.name,
-    text: status.full,
-    value: status.name,
-    className: status.className
-  }
-}
 
 const BeatmapFilter = (props) => {
 
@@ -49,7 +29,7 @@ const BeatmapFilter = (props) => {
     <div>
       <Table inverted>
         <Table.Header>
-          <Table.Row>
+          <Table.Row textAlign={"center"}>
             <Table.HeaderCell>Limit</Table.HeaderCell>
             <Table.HeaderCell>Artist</Table.HeaderCell>
             <Table.HeaderCell>Title</Table.HeaderCell>
@@ -101,12 +81,12 @@ const BeatmapFilter = (props) => {
           </Table.Cell>
           <Table.Cell width={"4"}>
             <Form>
-              <Form.Dropdown placeholder='Status' fluid multiple selection options={options}
+              <Form.Dropdown placeholder='Status' fluid multiple selection options={getBeatmapStatusOptions()}
                              onChange={(event, data) => handleAddStatusFilter(data.value, props.filter, handleFilterSet)}/>
             </Form>
           </Table.Cell>
-          <Table.Cell width={"1"}>
-            <Button inverted color={"green"} onClick={() => props.setAddModalOpen(true)}>Add Beatmap</Button>
+          <Table.Cell width={"2"}>
+            <Button fluid inverted color={"green"} onClick={() => props.setAddModalOpen(true)}>Add Beatmap</Button>
           </Table.Cell>
         </Table.Row>
       </Table>
