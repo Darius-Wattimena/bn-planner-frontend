@@ -1,18 +1,18 @@
 import Api from "../../resources/Api";
 import {useQuery} from "react-fetching-library";
-import {Button, Card, Icon, Image, Label, Table} from "semantic-ui-react";
+import {Button, Icon, Image, Label, Table} from "semantic-ui-react";
 import React from "react";
 import BasicPagination from "../generic/BasicPagination";
-import {BEATMAP_STATUS, USER_ROLES} from "../../Constants";
+import {getReadableRole} from "../../util/UserUtil";
 
 const UserList = (props) => {
   let request = Api.fetchUsersByFilter(props.filter);
-  const {loading, payload, error} = useQuery(request);
+  const {loading, payload, error, query} = useQuery(request);
 
   let possibleLastPage = 0;
 
   if (!loading && !error) {
-    possibleLastPage = Math.floor(payload.total / props.filter.limit)
+    possibleLastPage = Math.ceil(payload.total / props.filter.limit)
   }
 
   function handleFilterSetPage(value) {
@@ -23,20 +23,6 @@ const UserList = (props) => {
     })
   }
 
-  function getReadableRole(unreadableRole) {
-    if (unreadableRole) {
-      const keys = Object.keys(USER_ROLES);
-      for (const key of keys) {
-        let status = USER_ROLES[key];
-        if (status.name === unreadableRole) {
-          return status
-        }
-      }
-    } else {
-      return USER_ROLES["Observer"];
-    }
-  }
-
   return (
     <Table inverted selectable>
       <Table.Header>
@@ -44,7 +30,9 @@ const UserList = (props) => {
           <Table.HeaderCell />
           <Table.HeaderCell>Name</Table.HeaderCell>
           <Table.HeaderCell>Role</Table.HeaderCell>
-          <Table.HeaderCell>Has Website Account</Table.HeaderCell>
+          <Table.HeaderCell>Is Connect</Table.HeaderCell>
+          <Table.HeaderCell>Can Edit</Table.HeaderCell>
+          <Table.HeaderCell>Is Admin</Table.HeaderCell>
           <Table.HeaderCell>Actions</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -58,8 +46,14 @@ const UserList = (props) => {
               </Table.Cell>
               <Table.Cell width={"2"}>{user.osuName}</Table.Cell>
               <Table.Cell width={"3"}><Label className={userRole.color}>{userRole.full}</Label></Table.Cell>
-              <Table.Cell>
-                <HasAccountIcon hasAccount={user.hasBoundAccount} />
+              <Table.Cell width={"2"}>
+                <AccessIcon hasAccess={user.hasBoundAccount} />
+              </Table.Cell>
+              <Table.Cell width={"2"}>
+                <AccessIcon hasAccess={user.hasEditPermissions} />
+              </Table.Cell>
+              <Table.Cell width={"2"}>
+                <AccessIcon hasAccess={user.hasAdminPermissions} />
               </Table.Cell>
               <Table.Cell width={"2"}>
                 <Button.Group>
@@ -81,12 +75,12 @@ const UserList = (props) => {
       </Table.Body>
       <Table.Footer>
         <Table.Row>
-          <Table.HeaderCell width={"1"}>
+          <Table.HeaderCell width={"2"} textAlign={"center"}>
             {payload &&
             <p>{payload.total} User Found</p>
             }
           </Table.HeaderCell>
-          <Table.HeaderCell width={"8"} colSpan={"3"}>
+          <Table.HeaderCell width={"14"} colSpan={"6"}>
             <BasicPagination currentPage={props.filter.page} lastPage={possibleLastPage} setPage={handleFilterSetPage}/>
           </Table.HeaderCell>
         </Table.Row>
@@ -95,14 +89,18 @@ const UserList = (props) => {
   )
 };
 
-function HasAccountIcon(hasAccount) {
-  if (hasAccount) {
+function AccessIcon({hasAccess}) {
+  if (hasAccess && hasAccess === true) {
     return (
-      <Icon name={"check"} color={"green"} />
+      <div>
+        <Icon size={"large"} name={"check"} color={"green"} />
+      </div>
     )
   } else {
     return (
-      <Icon name={"cancel"} color={"red"} />
+      <div>
+        <Icon size={"large"}  name={"cancel"} color={"red"} />
+      </div>
     )
   }
 }

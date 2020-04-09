@@ -2,35 +2,29 @@ import React from "react";
 import {Button, Icon, Image, Label, Table} from "semantic-ui-react";
 import {BEATMAP_STATUS} from "../../Constants";
 import UserAvatar from "../user/UserAvatar";
-import {useQuery} from "react-fetching-library";
-import Api from "../../resources/Api";
-import {OSU_ID} from "../../Settings";
 import BasicPagination from "../generic/BasicPagination";
 
-const BeatmapsList = (props) => {
-  let request = Api.fetchBeatmapsByFilter(props.filter);
-  const {loading, payload, error} = useQuery(request);
-
+const BeatmapsList = ({loading, error, payload, filter, setFilter, query, setEditModalOpen, setSelectedBeatmap}) => {
   let possibleLastPage = 0;
 
   if (!loading && !error) {
-    possibleLastPage = Math.floor(payload.total / props.filter.limit)
+    possibleLastPage = Math.ceil(payload.total / filter.limit)
   }
 
   function handleFilterSetPage(value) {
-    let newFilter = props.filter;
+    let newFilter = filter;
     newFilter["page"] = value;
-    props.setFilter({
+    setFilter({
       ...newFilter
     })
   }
 
-  function getNominatorDetails(nominators, nominator) {
-    const nominatorDetails = getNominator(nominators, nominator);
+  function getNominatorDetails(nominators, nominatorNumber) {
+    const nominatorDetails = getNominator(nominators, nominatorNumber);
     if (nominatorDetails) {
       return (<UserAvatar userDetails={nominatorDetails}/>)
     } else if (nominators.length === 1) {
-      if (nominator === 1) {
+      if (nominatorNumber === 1) {
         return (<UserAvatar userDetails={nominatorDetails}/>)
       }
     }
@@ -41,7 +35,7 @@ const BeatmapsList = (props) => {
   return (
     <Table inverted selectable>
       <Table.Header>
-        <Table.Row>
+        <Table.Row textAlign={"center"}>
           <Table.HeaderCell>#</Table.HeaderCell>
           <Table.HeaderCell>Artist</Table.HeaderCell>
           <Table.HeaderCell>Title</Table.HeaderCell>
@@ -66,24 +60,20 @@ const BeatmapsList = (props) => {
                   }
                   src={"https://assets.ppy.sh/beatmaps/" + beatmap.osuId + "/covers/cover.jpg"}/>
               </Table.Cell>
-              <Table.Cell width={"2"}>{beatmap.artist}</Table.Cell>
-              <Table.Cell width={"3"}>{beatmap.title}</Table.Cell>
-              <Table.Cell width={"2"}>{beatmap.mapper}</Table.Cell>
+              <Table.Cell width={"2"} textAlign={"center"}>{beatmap.artist}</Table.Cell>
+              <Table.Cell width={"3"} textAlign={"center"}>{beatmap.title}</Table.Cell>
+              <Table.Cell width={"2"} textAlign={"center"}>{beatmap.mapper}</Table.Cell>
               <Table.Cell width={"2"}>{getNominatorDetails(beatmap.nominators, 1)}</Table.Cell>
               <Table.Cell width={"2"}>{getNominatorDetails(beatmap.nominators, 2)}</Table.Cell>
-              <Table.Cell width={"3"}>
-                <Button.Group fluid>
-                  <NominatorButton nominators={beatmap.nominators} userId={OSU_ID}/>
-                  <Button inverted color={"blue"} onClick={() => {
-                    props.setSelectedBeatmap(beatmap.osuId);
-                    props.setViewModalOpen(true)
+              <Table.Cell width={"1"}>
+                <Button.Group>
+                  <Button inverted color={"green"} onClick={() => {
+                    setSelectedBeatmap(beatmap.osuId);
+                    setEditModalOpen(true)
                   }}>
-                    <Icon name={"eye"}/>
-                  </Button>
-                  <Button inverted secondary>
                     <Icon name={"pencil"}/>
                   </Button>
-                  <Button inverted secondary
+                  <Button inverted color={"blue"}
                           onClick={() => window.open("https://osu.ppy.sh/beatmapsets/" + beatmap.osuId, "_blank")}>
                     <Icon name={"linkify"}/>
                   </Button>
@@ -95,13 +85,13 @@ const BeatmapsList = (props) => {
       </Table.Body>
       <Table.Footer>
         <Table.Row>
-          <Table.HeaderCell width={"2"}>
+          <Table.HeaderCell textAlign={"center"}>
             {payload &&
-            <p>{payload.total} Beatmaps Found</p>
+            <p>{payload.total} Beatmap(s) Found</p>
             }
           </Table.HeaderCell>
-          <Table.HeaderCell width={"14"} colSpan={"6"}>
-            <BasicPagination currentPage={props.filter.page} lastPage={possibleLastPage} setPage={handleFilterSetPage}/>
+          <Table.HeaderCell colSpan={"6"}>
+            <BasicPagination currentPage={filter.page} lastPage={possibleLastPage} setPage={handleFilterSetPage}/>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>
@@ -120,48 +110,6 @@ function getNominator(nominators, nominator) {
     return null
   }
 }
-
-const NominateButton = ({status}) => {
-  if (status === BEATMAP_STATUS.Bubbled.name) {
-    return (
-      <Button inverted color={"red"}>
-        <Icon name={"cloud"}/>
-      </Button>
-    )
-  }
-
-  if (status === BEATMAP_STATUS.Qualified.name) {
-    return (
-      <Button inverted color={"red"}>
-        <Icon name={"erase"}/>
-      </Button>
-    )
-  } else {
-    return (
-      <Button inverted color={"green"}>
-        <Icon name={"cloud"}/>
-      </Button>
-    )
-  }
-};
-
-const NominatorButton = ({nominators}) => {
-  let isNominator = false;
-
-  if (isNominator) {
-    return (
-      <Button inverted color={"red"}>
-        <Icon name={"minus"}/>
-      </Button>
-    )
-  } else {
-    return (
-      <Button inverted color={"green"}>
-        <Icon name={"user plus"}/>
-      </Button>
-    )
-  }
-};
 
 function getReadableStatus(unreadableStatus) {
   if (unreadableStatus) {

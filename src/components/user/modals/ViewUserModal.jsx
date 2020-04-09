@@ -3,7 +3,7 @@ import {useQuery} from "react-fetching-library";
 import Api from "../../../resources/Api";
 import {Button, Form, Header, Icon, Item, Message, Modal} from "semantic-ui-react";
 
-const ViewBeatmapModal = (props) => {
+const ViewUserModal = (props) => {
   const {loading, payload, error} = useQuery(Api.getBeatmap(props.id));
 
   return (
@@ -53,4 +53,4 @@ const ViewBeatmapModal = (props) => {
   )
 };
 
-export default ViewBeatmapModal
+export default ViewUserModal

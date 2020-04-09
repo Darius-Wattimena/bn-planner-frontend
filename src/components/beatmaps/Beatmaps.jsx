@@ -3,8 +3,10 @@ import BeatmapFilter from "./BeatmapFilter";
 import BeatmapsList from "./BeatmapsList";
 import "./Beatmaps.css"
 import AddBeatmapModal from "./modals/AddBeatmapModal";
-import ViewBeatmapModal from "./modals/ViewBeatmapModal";
+import EditBeatmapModal from "./modals/EditBeatmapModal";
 import {Container} from "semantic-ui-react";
+import Api from "../../resources/Api";
+import {useQuery} from "react-fetching-library";
 
 const filterDefaultState = {
   "artist": null,
@@ -21,16 +23,27 @@ const Beatmaps = () => {
   const [filter, setFilter] = useState(filterDefaultState);
   const [selectedBeatmap, setSelectedBeatmap] = useState(0);
   const [addModalOpen, setAddModalOpen] = useState(false);
-  const [viewModalOpen, setViewModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+
+  let request = Api.fetchBeatmapsByFilter(filter);
+  const {loading, payload, error, query} = useQuery(request);
 
   return (
     <div className={"base-container-large"}>
       <Container fluid>
         <h1>Beatmaps</h1>
-        <ViewBeatmapModal open={viewModalOpen} setOpen={setViewModalOpen} id={selectedBeatmap} />
-        <AddBeatmapModal open={addModalOpen} setOpen={setAddModalOpen}/>
         <BeatmapFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen}/>
-        <BeatmapsList filter={filter} setFilter={setFilter} setViewModalOpen={setViewModalOpen} setSelectedBeatmap={setSelectedBeatmap}/>
+        <BeatmapsList
+          loading={loading}
+          payload={payload}
+          error={error}
+          filter={filter}
+          setFilter={setFilter}
+          setEditModalOpen={setEditModalOpen}
+          setSelectedBeatmap={setSelectedBeatmap}
+        />
+        <EditBeatmapModal query={query} open={editModalOpen} setOpen={setEditModalOpen} id={selectedBeatmap} />
+        <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen}/>
       </Container>
     </div>
   )

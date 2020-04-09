@@ -16,6 +16,7 @@ const filterDefaultState = {
 const Users = () => {
   const [filter, setFilter] = useState(filterDefaultState);
 
+  console.log(filter);
   return (
     <div className={"base-container-small"}>
       <Container fluid>

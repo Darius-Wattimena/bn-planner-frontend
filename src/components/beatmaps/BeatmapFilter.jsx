@@ -61,11 +61,11 @@ const BeatmapFilter = (props) => {
         <Table.Row>
           <Table.Cell width={"2"}>
             <Button.Group fluid>
-              <Button inverted primary active={props.limit === 10}
+              <Button inverted primary active={props.filter.limit === 10}
                       onClick={() => handleFilterSet("limit", 10)}>10</Button>
-              <Button inverted secondary active={props.limit === 20}
+              <Button inverted secondary active={props.filter.limit === 20}
                       onClick={() => handleFilterSet("limit", 20)}>20</Button>
-              <Button inverted secondary active={props.limit === 50}
+              <Button inverted secondary active={props.filter.limit === 50}
                       onClick={() => handleFilterSet("limit", 50)}>50</Button>
             </Button.Group>
           </Table.Cell>
@@ -105,8 +105,8 @@ const BeatmapFilter = (props) => {
                              onChange={(event, data) => handleAddStatusFilter(data.value, props.filter, handleFilterSet)}/>
             </Form>
           </Table.Cell>
-          <Table.Cell width={"3"}>
-            <Button inverted color={"green"} fluid onClick={() => props.setAddModalOpen(true)}>Add Beatmap</Button>
+          <Table.Cell width={"1"}>
+            <Button inverted color={"green"} onClick={() => props.setAddModalOpen(true)}>Add Beatmap</Button>
           </Table.Cell>
         </Table.Row>
       </Table>

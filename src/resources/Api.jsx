@@ -41,6 +41,22 @@ const Api = {
       header: {"Content-Type": "application/json"}
     }
   },
+  updateBeatmap: (beatmap) => {
+    return {
+      method: 'PUT',
+      endpoint: 'v1/beatmap/' + beatmap.osuId + "/update",
+      body: beatmap,
+      header: {"Content-Type": "application/json"}
+    }
+  },
+  addUser: (user) => {
+    return {
+      method: 'POST',
+      endpoint: 'v1/user/add',
+      body: user,
+      header: {"Content-Type": "application/json"}
+    }
+  },
   getBeatmap: (id) => {
     return {
       method: 'GET',

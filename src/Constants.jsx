@@ -71,5 +71,10 @@ export const USER_ROLES = {
     name: "NAT",
     full: "Nomination Assessment Team",
     color: "user-role-nat"
+  },
+  RetiredCatch: {
+    name: "CA",
+    full: "osu!catch Alumni",
+    color: "user-role-ca"
   }
 };

@@ -5,11 +5,13 @@ import Api from "../../../resources/Api";
 
 const AddBeatmapModal = (props) => {
   const [formValues, setFormValues] = useState({
-    beatmapId: "",
+    beatmapUrl: "",
     artist: "",
     title: "",
     mapper: ""
   });
+
+  const [incorrectUrl, setIncorrectUrl] = useState(false);
 
   const {loading, payload, mutate, error} = useMutation(Api.addBeatmap);
   const handleSubmit = async (formValues) => {
@@ -19,11 +21,12 @@ const AddBeatmapModal = (props) => {
       console.log(mutateError)
     } else {
       setFormValues({
-        beatmapId: "",
+        beatmapUrl: "",
         artist: "",
         title: "",
         mapper: ""
       });
+      props.query();
       props.setOpen(false);
     }
   };
@@ -37,7 +40,7 @@ const AddBeatmapModal = (props) => {
   }
 
   function verifyData() {
-    if (!isNaN(formValues.beatmapId)) {
+    if (formValues.beatmapUrl.startsWith("https://osu.ppy.sh/beatmapsets/") || formValues.beatmapUrl.startsWith("https://osu.ppy.sh/s/")) {
       return handleSubmit(formValues)
     }
   }
@@ -51,17 +54,16 @@ const AddBeatmapModal = (props) => {
       <Modal.Content>
         <Form>
           <Form.Input
-            label={"Beatmap Set ID"}
-            placeholder={"Beatmap Set ID"}
-            value={formValues.beatmapId}
-            onChange={event => setFormValue("beatmapId", event.target.value)}
-            error={isNaN(formValues.beatmapId)}
+            label={"Beatmap URL"}
+            placeholder={"Beatmap URL"}
+            value={formValues.beatmapUrl}
+            onChange={event => setFormValue("beatmapUrl", event.target.value)}
           />
           <Message
-            visible={isNaN(formValues.beatmapId)}
+            visible={incorrectUrl === true}
             error
-            header='The beatmap ID should be a number'
-            content='You can only add a beatmap to the beatmaps if you provide a valid beatmap ID.'
+            header="The provided beatmap url is not correct"
+            content="A beatmap url should either start with: 'https://osu.ppy.sh/beatmapsets/' or 'https://osu.ppy.sh/s/' and then followed by the beatmap set id to be counted as a correct url"
             className={"error-message"}
           />
           <Form.Input
