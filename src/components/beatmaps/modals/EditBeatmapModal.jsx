@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useMutation, useQuery} from "react-fetching-library";
 import Api from "../../../resources/Api";
-import {Button, Form, Header, Icon, Image, Modal} from "semantic-ui-react";
+import {Button, Form, Grid, Header, Icon, Image, List, Modal} from "semantic-ui-react";
 import {getBeatmapStatusOptions, getNominatorOptions} from "../../../util/BeatmapUtil";
 
 const EditBeatmapModal = (props) => {
@@ -14,7 +14,8 @@ const EditBeatmapModal = (props) => {
     mapper: "",
     note: "",
     status: "",
-    nominators: [0, 0]
+    nominators: [0, 0],
+    events: []
   });
 
   if (!loading && !error && props.id) {
@@ -40,7 +41,8 @@ const EditBeatmapModal = (props) => {
         mapper: "",
         note: "",
         status: "",
-        nominators: [0, 0]
+        nominators: [0, 0],
+        events: []
       });
       props.query();
       props.setOpen(false);
@@ -57,7 +59,6 @@ const EditBeatmapModal = (props) => {
 
   return (
     <Modal
-      size={"small"}
       open={props.open}
       onOpen={() => setFormValues({
         osuId: "",
@@ -66,7 +67,8 @@ const EditBeatmapModal = (props) => {
         mapper: "",
         note: "",
         status: "",
-        nominators: [0, 0]
+        nominators: [0, 0],
+        events: []
       })}
       onClose={() => props.setOpen(false)}
     >
@@ -77,60 +79,80 @@ const EditBeatmapModal = (props) => {
           </div>
           <Header content={"Edit Beatmap : " + payload.artist + " - " + payload.title}/>
         </div>
-        /**/
       }
       {!loading && !error &&
         <Modal.Content>
-          <Form>
-            <h3>Settings</h3>
-            <Form.Dropdown
-              label={"Status"}
-              selection
-              value={formValues.status}
-              options={getBeatmapStatusOptions()}
-              onChange={(_, data) => setFormValue("status", data.value)}
-            />
-            <Form.Dropdown
-              label={"Nominator #1"}
-              selection
-              search
-              options={getNominatorOptions(props.users)}
-              value={formValues.nominators[0]}
-              onChange={(_, data) => setFormValue("nominators", [data.value, formValues.nominators[1]])}
-            />
-            <Form.Dropdown
-              label={"Nominator #2"}
-              selection
-              search
-              options={getNominatorOptions(props.users)}
-              value={formValues.nominators[1]}
-              onChange={(_, data) => setFormValue("nominators", [formValues.nominators[0], data.value])}
-            />
-            <h3>Metadata</h3>
-            <Form.Input
-              label={"Artist"}
-              placeholder='Artist'
-              value={formValues.artist}
-              onChange={event => setFormValue("artist", event.target.value)}
-            />
-            <Form.Input
-              label={"Title"}
-              placeholder='Title'
-              value={formValues.title}
-              onChange={event => setFormValue("title", event.target.value)}
-            />
-            <Form.Input
-              label={"Mapper"}
-              placeholder='Mapper'
-              value={formValues.mapper}
-              onChange={event => setFormValue("mapper", event.target.value)}
-            />
-            <Form.TextArea
-              label={"Notes"}
-              placeholder='Notes'
-              value={formValues.note}
-              onChange={event => setFormValue("note", event.target.value)} />
-          </Form>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={10}>
+                <Form>
+                  <h3>Settings</h3>
+                  <Form.Dropdown
+                    label={"Status"}
+                    selection
+                    value={formValues.status}
+                    options={getBeatmapStatusOptions()}
+                    onChange={(_, data) => setFormValue("status", data.value)}
+                  />
+                  <Form.Dropdown
+                    label={"Nominator #1"}
+                    selection
+                    search
+                    options={getNominatorOptions(props.users)}
+                    value={formValues.nominators[0]}
+                    onChange={(_, data) => setFormValue("nominators", [data.value, formValues.nominators[1]])}
+                  />
+                  <Form.Dropdown
+                    label={"Nominator #2"}
+                    selection
+                    search
+                    options={getNominatorOptions(props.users)}
+                    value={formValues.nominators[1]}
+                    onChange={(_, data) => setFormValue("nominators", [formValues.nominators[0], data.value])}
+                  />
+                  <h3>Metadata</h3>
+                  <Form.Input
+                    label={"Artist"}
+                    placeholder='Artist'
+                    value={formValues.artist}
+                    onChange={event => setFormValue("artist", event.target.value)}
+                  />
+                  <Form.Input
+                    label={"Title"}
+                    placeholder='Title'
+                    value={formValues.title}
+                    onChange={event => setFormValue("title", event.target.value)}
+                  />
+                  <Form.Input
+                    label={"Mapper"}
+                    placeholder='Mapper'
+                    value={formValues.mapper}
+                    onChange={event => setFormValue("mapper", event.target.value)}
+                  />
+                  <Form.TextArea
+                    label={"Notes"}
+                    placeholder='Notes'
+                    value={formValues.note}
+                    onChange={event => setFormValue("note", event.target.value)} />
+                </Form>
+              </Grid.Column>
+              <Grid.Column width={6}>
+                <h3>Events</h3>
+                <List divided relaxed>
+                  {formValues.events.map(event => {
+                    return (
+                      <List.Item>
+                        <List.Content>
+                          <List.Header>{event.title}</List.Header>
+                          <List.Description>{event.description}</List.Description>
+                        </List.Content>
+                      </List.Item>
+                    )
+                  })}
+                </List>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Modal.Content>
       }
       <Modal.Actions>
