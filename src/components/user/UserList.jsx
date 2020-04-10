@@ -30,7 +30,7 @@ const UserList = (props) => {
           <Table.HeaderCell />
           <Table.HeaderCell>Name</Table.HeaderCell>
           <Table.HeaderCell>Role</Table.HeaderCell>
-          <Table.HeaderCell>Is Connect</Table.HeaderCell>
+          <Table.HeaderCell>Has Account</Table.HeaderCell>
           <Table.HeaderCell>Can Edit</Table.HeaderCell>
           <Table.HeaderCell>Is Admin</Table.HeaderCell>
           <Table.HeaderCell>Actions</Table.HeaderCell>

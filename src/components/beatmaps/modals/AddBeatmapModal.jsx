@@ -41,8 +41,29 @@ const AddBeatmapModal = (props) => {
 
   function verifyData() {
     if (formValues.beatmapUrl.startsWith("https://osu.ppy.sh/beatmapsets/") || formValues.beatmapUrl.startsWith("https://osu.ppy.sh/s/")) {
-      return handleSubmit(formValues)
+      let preparedValues = formValues;
+      let splitUrl = formValues.beatmapUrl.split("/");
+      let setId;
+
+      if (formValues.beatmapUrl.startsWith("https://osu.ppy.sh/beatmapsets/")) {
+        if (splitUrl[splitUrl.length - 2] === "beatmapsets") {
+          setId = splitUrl[splitUrl.length - 1]
+        } else {
+          setId = splitUrl[splitUrl.length - 2].split('#')[0]
+        }
+      } else {
+        setId = splitUrl[splitUrl.length - 1]
+      }
+
+      if (!isNaN(setId)) {
+        preparedValues["beatmapId"] = setId;
+
+        setIncorrectUrl(false);
+        return handleSubmit(preparedValues)
+      }
     }
+
+    setIncorrectUrl(true)
   }
 
   return (

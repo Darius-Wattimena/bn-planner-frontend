@@ -41,11 +41,11 @@ const BeatmapFilter = (props) => {
         <Table.Row>
           <Table.Cell width={"2"}>
             <Button.Group fluid>
-              <Button inverted primary active={props.filter.limit === 10}
+              <Button inverted primary={props.filter.limit === 10} secondary={props.filter.limit !== 10} active={props.filter.limit === 10}
                       onClick={() => handleFilterSet("limit", 10)}>10</Button>
-              <Button inverted secondary active={props.filter.limit === 20}
+              <Button inverted primary={props.filter.limit === 20} secondary={props.filter.limit !== 20} active={props.filter.limit === 20}
                       onClick={() => handleFilterSet("limit", 20)}>20</Button>
-              <Button inverted secondary active={props.filter.limit === 50}
+              <Button inverted primary={props.filter.limit === 50} secondary={props.filter.limit !== 50} active={props.filter.limit === 50}
                       onClick={() => handleFilterSet("limit", 50)}>50</Button>
             </Button.Group>
           </Table.Cell>

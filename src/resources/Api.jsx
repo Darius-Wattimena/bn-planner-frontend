@@ -49,18 +49,18 @@ const Api = {
       header: {"Content-Type": "application/json"}
     }
   },
-  updateBeatmapStatus: (beatmap) => {
-    return {
-      method: 'PUT',
-      endpoint: 'v1/beatmap/' + beatmap.osuId + "?status=" + beatmap.status,
-    }
-  },
   addUser: (user) => {
     return {
       method: 'POST',
       endpoint: 'v1/user/add',
       body: user,
       header: {"Content-Type": "application/json"}
+    }
+  },
+  getUsers: () => {
+    return {
+      method: 'GET',
+      endpoint: 'v1/user/findAll'
     }
   },
   getBeatmap: (id) => {

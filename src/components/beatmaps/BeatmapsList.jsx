@@ -4,7 +4,7 @@ import {BEATMAP_STATUS} from "../../Constants";
 import UserAvatar from "../user/UserAvatar";
 import BasicPagination from "../generic/BasicPagination";
 
-const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalOpen, setSelectedBeatmap, setEditStatusModalOpen}) => {
+const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalOpen, setSelectedBeatmap}) => {
   let possibleLastPage = 0;
 
   if (!loading && !error) {
@@ -21,7 +21,7 @@ const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalO
 
   function getNominatorDetails(nominators, nominatorNumber) {
     const nominatorDetails = getNominator(nominators, nominatorNumber);
-    if (nominatorDetails) {
+    if (nominatorDetails && nominatorDetails !== 0) {
       return (<UserAvatar userDetails={nominatorDetails}/>)
     } else if (nominators.length === 1) {
       if (nominatorNumber === 1) {
@@ -51,14 +51,11 @@ const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalO
           return (
             <Table.Row>
               <Table.Cell className={"beatmap-banner"} width={"2"}>
-                <Image
-                  fluid
-                  label={
+                <Image fluid label={
                     <Label ribbon horizontal className={displayStatus.className}>
                       {displayStatus.full}
                     </Label>
-                  }
-                  src={"https://assets.ppy.sh/beatmaps/" + beatmap.osuId + "/covers/cover.jpg"}/>
+                  } src={"https://assets.ppy.sh/beatmaps/" + beatmap.osuId + "/covers/cover.jpg"}/>
               </Table.Cell>
               <Table.Cell width={"2"} textAlign={"center"}>{beatmap.artist}</Table.Cell>
               <Table.Cell width={"3"} textAlign={"center"}>{beatmap.title}</Table.Cell>
@@ -69,12 +66,6 @@ const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalO
                 <Button.Group fluid>
                   setEditStatusModalOpen
                   <Button inverted color={"green"} onClick={() => {
-                    setSelectedBeatmap(beatmap.osuId);
-                    setEditStatusModalOpen(true)
-                  }}>
-                    <Icon name={"cloud"}/>
-                  </Button>
-                  <Button inverted color={"yellow"} onClick={() => {
                     setSelectedBeatmap(beatmap.osuId);
                     setEditModalOpen(true)
                   }}>

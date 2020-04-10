@@ -1,4 +1,21 @@
 import {BEATMAP_STATUS} from "../Constants";
+import {getReadableRole} from "./UserUtil";
+
+export function getNominatorOptions(users) {
+  if (users && Array.isArray(users)) {
+    let preparedUsers = users.map(user => ({
+      key: user.osuId,
+      text: user.osuName,
+      value: user.osuId,
+      className: getReadableRole(user.role).color
+    }))
+
+    return [
+      {key: 0, text: 'none', value: 0},
+      ...preparedUsers
+    ]
+  }
+}
 
 export function getBeatmapStatusOptions() {
   return [
