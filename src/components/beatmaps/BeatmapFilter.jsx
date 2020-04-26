@@ -37,57 +37,59 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter}) => {
             <Table.HeaderCell/>
           </Table.Row>
         </Table.Header>
-        <Table.Row>
-          <Table.Cell width={"2"}>
-            <Button.Group fluid>
-              <Button inverted primary={filter.limit === 10} secondary={filter.limit !== 10} active={filter.limit === 10}
-                      onClick={() => handleFilterSet("limit", 10)}>10</Button>
-              <Button inverted primary={filter.limit === 20} secondary={filter.limit !== 20} active={filter.limit === 20}
-                      onClick={() => handleFilterSet("limit", 20)}>20</Button>
-              <Button inverted primary={filter.limit === 50} secondary={filter.limit !== 50} active={filter.limit === 50}
-                      onClick={() => handleFilterSet("limit", 50)}>50</Button>
-            </Button.Group>
-          </Table.Cell>
-          <Table.Cell width={"2"}>
-            <Form inverted>
-              <FilterField
-                id={"artist"}
-                label={"Artist"}
-                group={"artist"}
-                handleFilterSet={handleFilterSet}
-              />
-            </Form>
-          </Table.Cell>
-          <Table.Cell width={"3"}>
-            <Form inverted>
-              <FilterField
-                id={"title"}
-                label={"Title"}
-                group={"title"}
-                handleFilterSet={handleFilterSet}
-              />
-            </Form>
-          </Table.Cell>
-          <Table.Cell width={"2"}>
-            <Form inverted>
-              <FilterField
-                id={"mapper"}
-                label={"Mapper"}
-                group={"mapper"}
-                handleFilterSet={handleFilterSet}
-              />
-            </Form>
-          </Table.Cell>
-          <Table.Cell width={"4"}>
-            <Form>
-              <Form.Dropdown placeholder='Status' fluid multiple selection options={getBeatmapStatusOptions()}
-                             onChange={(event, data) => handleAddStatusFilter(data.value, filter, handleFilterSet)}/>
-            </Form>
-          </Table.Cell>
-          <Table.Cell width={"2"}>
-            <Button fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add Beatmap</Button>
-          </Table.Cell>
-        </Table.Row>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell width={"2"}>
+              <Button.Group fluid>
+                <Button inverted primary={filter.limit === 10} secondary={filter.limit !== 10} active={filter.limit === 10}
+                        onClick={() => handleFilterSet("limit", 10)}>10</Button>
+                <Button inverted primary={filter.limit === 20} secondary={filter.limit !== 20} active={filter.limit === 20}
+                        onClick={() => handleFilterSet("limit", 20)}>20</Button>
+                <Button inverted primary={filter.limit === 50} secondary={filter.limit !== 50} active={filter.limit === 50}
+                        onClick={() => handleFilterSet("limit", 50)}>50</Button>
+              </Button.Group>
+            </Table.Cell>
+            <Table.Cell width={"2"}>
+              <Form inverted>
+                <FilterField
+                  id={"artist"}
+                  label={"Artist"}
+                  group={"artist"}
+                  handleFilterSet={handleFilterSet}
+                />
+              </Form>
+            </Table.Cell>
+            <Table.Cell width={"3"}>
+              <Form inverted>
+                <FilterField
+                  id={"title"}
+                  label={"Title"}
+                  group={"title"}
+                  handleFilterSet={handleFilterSet}
+                />
+              </Form>
+            </Table.Cell>
+            <Table.Cell width={"2"}>
+              <Form inverted>
+                <FilterField
+                  id={"mapper"}
+                  label={"Mapper"}
+                  group={"mapper"}
+                  handleFilterSet={handleFilterSet}
+                />
+              </Form>
+            </Table.Cell>
+            <Table.Cell width={"4"}>
+              <Form>
+                <Form.Dropdown placeholder='Status' fluid multiple selection options={getBeatmapStatusOptions()}
+                               onChange={(event, data) => handleAddStatusFilter(data.value, filter, handleFilterSet)}/>
+              </Form>
+            </Table.Cell>
+            <Table.Cell width={"2"}>
+              <Button fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add Beatmap</Button>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
       </Table>
     </div>
   )

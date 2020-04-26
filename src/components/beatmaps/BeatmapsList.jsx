@@ -5,7 +5,6 @@ import UserAvatar from "../user/UserAvatar";
 import BasicPagination from "../generic/BasicPagination";
 
 const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalOpen, setSelectedBeatmap}) => {
-  const [showingIndex, setShowingIndex] = useState(-1);
   let possibleLastPage = 0;
 
   if (!loading && !error) {
@@ -47,10 +46,10 @@ const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalO
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {payload && payload.response && payload.response.map(beatmap => {
+        {payload && payload.response && payload.response.map((beatmap, index) => {
           let displayStatus = getReadableStatus(beatmap.status);
           return (
-            <Table.Row>
+            <Table.Row id={"beatmap-item-" + index}>
               <Table.Cell className={"beatmap-banner"} width={"2"}>
                 <Image fluid label={
                   <Label ribbon horizontal className={displayStatus.className}>

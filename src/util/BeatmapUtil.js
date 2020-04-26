@@ -19,9 +19,9 @@ export function getNominatorOptions(users) {
 
 export function getBeatmapStatusOptions() {
   return [
-    getOption(BEATMAP_STATUS.Pending),
-    getOption(BEATMAP_STATUS.WorkInProgress),
     getOption(BEATMAP_STATUS.AwaitingResponse),
+    getOption(BEATMAP_STATUS.WorkInProgress),
+    getOption(BEATMAP_STATUS.Pending),
     getOption(BEATMAP_STATUS.Bubbled),
     getOption(BEATMAP_STATUS.Qualified),
     getOption(BEATMAP_STATUS.Ranked),

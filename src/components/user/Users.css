@@ -30,22 +30,22 @@
     background: linear-gradient(to left, transparent, transparent 50%, rgba(105, 105, 105, 0.5) 100%, transparent 75%);
 }
 
-.ui.label.user-role-bn, .item.user-role-bn {
+.ui.label.user-role-bn, .ui.form .ui.dropdown div.menu div.item.user-role-bn, .ui.form .field.error .ui.dropdown div.menu div.item.user-role-bn, .ui.dropdown div .item.user-role-bn > span.text {
     background-color: #7249a5 !important;
     color: #d7d7d7 !important;
 }
 
-.ui.label.user-role-pbn, .item.user-role-pbn {
+.ui.label.user-role-pbn, .item.user-role-pbn, .item.user-role-pbn > span.text {
     background-color: #995ba5 !important;
     color: #d7d7d7 !important;
 }
 
-.ui.label.user-role-nat, .item.user-role-nat {
+.ui.label.user-role-nat, .item.user-role-nat, .item.user-role-nat > span.text {
     background-color: #a53d3c !important;
     color: #d7d7d7 !important;
 }
 
-.ui.label.user-role-ca, .item.user-role-ca {
+.ui.label.user-role-ca, .item.user-role-ca, .item.user-role-ca > span.text {
     background-color: #555555 !important;
     color: #d7d7d7 !important;
 }

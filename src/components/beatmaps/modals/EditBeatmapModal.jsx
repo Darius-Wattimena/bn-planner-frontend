@@ -18,15 +18,30 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
     nominators: [0, 0],
     events: []
   });
+  const [showingSameNominatorWarning, setShowingSameNominatorWarning] = useState(false);
 
   if (!loading && !error && id) {
     if (payload !== "" && (formValues.artist === "" || (formValues.osuId !== "" && formValues.osuId !== payload.osuId))) {
       setFormValues(payload);
+      verifyNominatorSelected(payload.nominators);
+    }
+  }
+
+  function verifyNominatorSelected(nominators) {
+    if (nominators[0] !== 0 || nominators[1] !== 0) {
+      if (nominators[0] === nominators[1]) {
+        setShowingSameNominatorWarning(true)
+      } else {
+        setShowingSameNominatorWarning(false)
+      }
     }
   }
 
   function verifyData() {
-    return handleSubmit(formValues)
+    verifyNominatorSelected(formValues.nominators);
+    if (!showingSameNominatorWarning) {
+      return handleSubmit(formValues)
+    }
   }
 
   const handleSubmit = async (formValues) => {
@@ -58,6 +73,8 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
       ...newFormValues
     });
   }
+
+  console.log({formValues, showingSameNominatorWarning});
 
   return (
     <Modal
@@ -102,7 +119,11 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
                     search
                     options={getNominatorOptions(users)}
                     value={formValues.nominators[0]}
-                    onChange={(_, data) => setFormValue("nominators", [data.value, formValues.nominators[1]])}
+                    onChange={(_, data) => {
+                      setFormValue("nominators", [data.value, formValues.nominators[1]]);
+                      verifyNominatorSelected([data.value, formValues.nominators[1]]);
+                    }}
+                    error={showingSameNominatorWarning}
                   />
                   <Form.Dropdown
                     label={"Nominator #2"}
@@ -110,7 +131,11 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
                     search
                     options={getNominatorOptions(users)}
                     value={formValues.nominators[1]}
-                    onChange={(_, data) => setFormValue("nominators", [formValues.nominators[0], data.value])}
+                    onChange={(_, data) => {
+                      setFormValue("nominators", [formValues.nominators[0], data.value]);
+                      verifyNominatorSelected([formValues.nominators[0], data.value]);
+                    }}
+                    error={showingSameNominatorWarning}
                   />
                   <h3>Metadata</h3>
                   <Form.Input
@@ -150,7 +175,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
         <Button color='red' onClick={() => setOpen(false)} inverted>
           <Icon name='close' /> Close
         </Button>
-        <Button color='green' onClick={verifyData} inverted>
+        <Button color='green' disabled={showingSameNominatorWarning} onClick={verifyData} inverted>
           <Icon name='checkmark' /> Save
         </Button>
       </Modal.Actions>

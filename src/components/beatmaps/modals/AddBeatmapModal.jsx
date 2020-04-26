@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Form, Header, Icon, Message, Modal} from "semantic-ui-react";
+import {Button, Form, Header, Icon, Image, Message, Modal} from "semantic-ui-react";
 import {useMutation} from "react-fetching-library";
 import Api from "../../../resources/Api";
 
@@ -71,7 +71,9 @@ const AddBeatmapModal = (props) => {
       open={props.open}
       onClose={() => props.setOpen(false)}
     >
-      <Header content='Add Beatmap' />
+      <div className={"modal-header"}>
+        <Header content='Add Beatmap' />
+      </div>
       <Modal.Content>
         <Form>
           <Form.Input

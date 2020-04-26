@@ -1,5 +1,5 @@
 import React from "react";
-import {Image, List, Popup} from "semantic-ui-react";
+import {Image, List} from "semantic-ui-react";
 import {unix} from "dayjs";
 
 const BeatmapEventList = ({events}) => {
