@@ -3,9 +3,10 @@ import {useMutation, useQuery} from "react-fetching-library";
 import Api from "../../../resources/Api";
 import {Button, Form, Grid, Header, Icon, Image, List, Modal} from "semantic-ui-react";
 import {getBeatmapStatusOptions, getNominatorOptions} from "../../../util/BeatmapUtil";
+import BeatmapEventList from "../BeatmapEventList";
 
-const EditBeatmapModal = (props) => {
-  const {loading, payload, error} = useQuery(Api.getBeatmap(props.id));
+const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap}) => {
+  const {loading, payload, error} = useQuery(Api.getDetailedBeatmap(id, open));
   const {saveLoading, mutate, saveError} = useMutation(Api.updateBeatmap);
   const [formValues, setFormValues] = useState({
     osuId: "",
@@ -18,7 +19,7 @@ const EditBeatmapModal = (props) => {
     events: []
   });
 
-  if (!loading && !error && props.id) {
+  if (!loading && !error && id) {
     if (payload !== "" && (formValues.artist === "" || (formValues.osuId !== "" && formValues.osuId !== payload.osuId))) {
       setFormValues(payload);
     }
@@ -44,8 +45,9 @@ const EditBeatmapModal = (props) => {
         nominators: [0, 0],
         events: []
       });
-      props.query();
-      props.setOpen(false);
+      setOpen(false);
+      query();
+      setSelectedBeatmap(0)
     }
   };
 
@@ -59,7 +61,7 @@ const EditBeatmapModal = (props) => {
 
   return (
     <Modal
-      open={props.open}
+      open={open}
       onOpen={() => setFormValues({
         osuId: "",
         artist: "",
@@ -70,21 +72,21 @@ const EditBeatmapModal = (props) => {
         nominators: [0, 0],
         events: []
       })}
-      onClose={() => props.setOpen(false)}
+      onClose={() => setOpen(false)}
     >
       {!loading && !error && payload.osuId &&
         <div className={"modal-header"}>
           <div className={"modal-header-image"}>
             <Image fluid src={"https://assets.ppy.sh/beatmaps/" + payload.osuId + "/covers/cover.jpg"}/>
           </div>
-          <Header content={"Edit Beatmap : " + payload.artist + " - " + payload.title}/>
+          <Header content={"Editing Beatmap : " + payload.artist + " - " + payload.title}/>
         </div>
       }
       {!loading && !error &&
         <Modal.Content>
           <Grid>
             <Grid.Row>
-              <Grid.Column width={10}>
+              <Grid.Column width={8}>
                 <Form>
                   <h3>Settings</h3>
                   <Form.Dropdown
@@ -98,7 +100,7 @@ const EditBeatmapModal = (props) => {
                     label={"Nominator #1"}
                     selection
                     search
-                    options={getNominatorOptions(props.users)}
+                    options={getNominatorOptions(users)}
                     value={formValues.nominators[0]}
                     onChange={(_, data) => setFormValue("nominators", [data.value, formValues.nominators[1]])}
                   />
@@ -106,7 +108,7 @@ const EditBeatmapModal = (props) => {
                     label={"Nominator #2"}
                     selection
                     search
-                    options={getNominatorOptions(props.users)}
+                    options={getNominatorOptions(users)}
                     value={formValues.nominators[1]}
                     onChange={(_, data) => setFormValue("nominators", [formValues.nominators[0], data.value])}
                   />
@@ -136,27 +138,16 @@ const EditBeatmapModal = (props) => {
                     onChange={event => setFormValue("note", event.target.value)} />
                 </Form>
               </Grid.Column>
-              <Grid.Column width={6}>
+              <Grid.Column width={8}>
                 <h3>Events</h3>
-                <List divided relaxed>
-                  {formValues.events.map(event => {
-                    return (
-                      <List.Item>
-                        <List.Content>
-                          <List.Header>{event.title}</List.Header>
-                          <List.Description>{event.description}</List.Description>
-                        </List.Content>
-                      </List.Item>
-                    )
-                  })}
-                </List>
+                <BeatmapEventList events={formValues.events} />
               </Grid.Column>
             </Grid.Row>
           </Grid>
         </Modal.Content>
       }
       <Modal.Actions>
-        <Button color='red' onClick={() => props.setOpen(false)} inverted>
+        <Button color='red' onClick={() => setOpen(false)} inverted>
           <Icon name='close' /> Close
         </Button>
         <Button color='green' onClick={verifyData} inverted>

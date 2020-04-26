@@ -57,3 +57,7 @@
         min-width: 100vw;
     }
 }
+
+.beatmap-event-item {
+    margin: 1vh 0;
+}

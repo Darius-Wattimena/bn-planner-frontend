@@ -68,6 +68,12 @@ const Api = {
       method: 'GET',
       endpoint: 'v1/beatmap/' + id
     }
+  },
+  getDetailedBeatmap: (id, open) => {
+    return {
+      method: 'GET',
+      endpoint: 'v1/beatmap/' + id + '/detailed'
+    }
   }
 };
 

@@ -43,8 +43,12 @@ const Beatmaps = () => {
           setEditModalOpen={setEditModalOpen}
           setSelectedBeatmap={setSelectedBeatmap}
         />
-        <EditBeatmapModal query={query} open={editModalOpen} setOpen={setEditModalOpen} id={selectedBeatmap} users={userQuery.payload} />
-        <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen}/>
+        {selectedBeatmap && selectedBeatmap !== 0 &&
+          <div>
+            <EditBeatmapModal query={query} open={editModalOpen} setOpen={setEditModalOpen} id={selectedBeatmap} users={userQuery.payload} setSelectedBeatmap={setSelectedBeatmap}/>
+            <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen}/>
+          </div>
+        }
       </Container>
     </div>
   )

@@ -65,3 +65,8 @@ p, h1, h2, h3, h4, h5, h6, label {
 .error-message > .content > p {
     color: #9f3a38 !important;
 }
+
+.scrollable-list {
+    height: 60vh;
+    overflow-y: scroll;
+}
