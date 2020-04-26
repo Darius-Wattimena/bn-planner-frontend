@@ -10,7 +10,6 @@ const AddBeatmapModal = (props) => {
     title: "",
     mapper: ""
   });
-
   const [incorrectUrl, setIncorrectUrl] = useState(false);
 
   const {loading, payload, mutate, error} = useMutation(Api.addBeatmap);
@@ -47,23 +46,23 @@ const AddBeatmapModal = (props) => {
 
       if (formValues.beatmapUrl.startsWith("https://osu.ppy.sh/beatmapsets/")) {
         if (splitUrl[splitUrl.length - 2] === "beatmapsets") {
-          setId = splitUrl[splitUrl.length - 1]
+          setId = splitUrl[splitUrl.length - 1];
         } else {
-          setId = splitUrl[splitUrl.length - 2].split('#')[0]
+          setId = splitUrl[splitUrl.length - 2].split('#')[0];
         }
       } else {
-        setId = splitUrl[splitUrl.length - 1]
+        setId = splitUrl[splitUrl.length - 1];
       }
 
       if (!isNaN(setId)) {
         preparedValues["beatmapId"] = setId;
 
         setIncorrectUrl(false);
-        return handleSubmit(preparedValues)
+        return handleSubmit(preparedValues);
       }
     }
 
-    setIncorrectUrl(true)
+    setIncorrectUrl(true);
   }
 
   return (
@@ -72,7 +71,7 @@ const AddBeatmapModal = (props) => {
       onClose={() => props.setOpen(false)}
     >
       <div className={"modal-header"}>
-        <Header content='Add Beatmap' />
+        <Header content='Add New Beatmap' />
       </div>
       <Modal.Content>
         <Form>

@@ -5,9 +5,10 @@ import Api from "../../../resources/Api";
 
 const AddUserModal = (props) => {
   const [formValues, setFormValues] = useState({
-    osuId: "",
-    name: ""
+    osuUrl: "",
+    osuName: ""
   });
+  const [incorrectUrl, setIncorrectUrl] = useState(false);
 
   const {loading, payload, mutate, error} = useMutation(Api.addUser);
   const handleSubmit = async (formValues) => {
@@ -17,9 +18,10 @@ const AddUserModal = (props) => {
       console.log(mutateError)
     } else {
       setFormValues({
-        osuId: "",
-        name: ""
+        osuUrl: "",
+        osuName: ""
       });
+      props.query();
       props.setOpen(false);
     }
   };
@@ -33,9 +35,22 @@ const AddUserModal = (props) => {
   }
 
   function verifyData() {
-    if (!isNaN(formValues.osuId)) {
-      return handleSubmit(formValues)
+    if (formValues.osuUrl.startsWith("https://osu.ppy.sh/users/") || formValues.osuUrl.startsWith("https://old.ppy.sh/u/")) {
+      let preparedValues = formValues;
+      let splitUrl = formValues.osuUrl.split("/");
+      let userId;
+
+      userId = splitUrl[splitUrl.length - 1];
+
+      if (!isNaN(userId)) {
+        preparedValues["osuId"] = userId;
+
+        setIncorrectUrl(false);
+        return handleSubmit(preparedValues)
+      }
     }
+
+    setIncorrectUrl(true);
   }
 
   return (
@@ -43,28 +58,29 @@ const AddUserModal = (props) => {
       open={props.open}
       onClose={() => props.setOpen(false)}
     >
-      <Header content='Add Beatmap' />
+      <div className={"modal-header"}>
+        <Header content='Add New User' />
+      </div>
       <Modal.Content>
         <Form>
           <Form.Input
-            label={"User ID"}
-            placeholder={"User ID"}
-            value={formValues.osuId}
-            onChange={event => setFormValue("osuId", event.target.value)}
-            error={isNaN(formValues.osuId)}
+            label={"User URL"}
+            placeholder={"https://osu.ppy.sh/users/<USER_ID>"}
+            value={formValues.osuUrl}
+            onChange={event => setFormValue("osuUrl", event.target.value)}
           />
           <Message
-            visible={isNaN(formValues.osuId)}
+            visible={incorrectUrl === true}
             error
-            header='Your osu ID should be a number'
-            content='You can only add a user to the bn planner if you provide a valid user ID.'
+            header="The provided user url is not correct"
+            content="A user url should either start with: 'https://osu.ppy.sh/users/' or 'https://old.ppy.sh/u/' and then followed by the beatmap set id to be counted as a correct url"
             className={"error-message"}
           />
           <Form.Input
             label={"Name"}
             placeholder='Name'
-            value={formValues.name}
-            onChange={event => setFormValue("name", event.target.value)}
+            value={formValues.osuName}
+            onChange={event => setFormValue("osuName", event.target.value)}
           />
         </Form>
       </Modal.Content>

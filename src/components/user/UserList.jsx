@@ -1,24 +1,20 @@
-import Api from "../../resources/Api";
-import {useQuery} from "react-fetching-library";
 import {Button, Icon, Image, Label, Table} from "semantic-ui-react";
 import React from "react";
 import BasicPagination from "../generic/BasicPagination";
 import {getReadableRole} from "../../util/UserUtil";
 
-const UserList = (props) => {
-  let request = Api.fetchUsersByFilter(props.filter);
-  const {loading, payload, error, query} = useQuery(request);
+const UserList = ({loading, error, filter, setFilter, payload, setEditModalOpen, setSelectedUser}) => {
 
   let possibleLastPage = 0;
 
   if (!loading && !error) {
-    possibleLastPage = Math.ceil(payload.total / props.filter.limit)
+    possibleLastPage = Math.ceil(payload.total / filter.limit)
   }
 
   function handleFilterSetPage(value) {
-    let newFilter = props.filter;
+    let newFilter = filter;
     newFilter["page"] = value;
-    props.setFilter({
+    setFilter({
       ...newFilter
     })
   }
@@ -57,10 +53,10 @@ const UserList = (props) => {
               </Table.Cell>
               <Table.Cell width={"2"}>
                 <Button.Group>
-                  <Button inverted color={"green"}>
-                    <Icon name={"eye"}/>
-                  </Button>
-                  <Button inverted color={"orange"}>
+                  <Button inverted color={"green"} onClick={_ => {
+                    setSelectedUser(user.osuId);
+                    setEditModalOpen(true)
+                  }}>
                     <Icon name={"pencil"}/>
                   </Button>
                   <Button inverted color={"blue"}
@@ -81,7 +77,7 @@ const UserList = (props) => {
             }
           </Table.HeaderCell>
           <Table.HeaderCell width={"14"} colSpan={"6"}>
-            <BasicPagination currentPage={props.filter.page} lastPage={possibleLastPage} setPage={handleFilterSetPage}/>
+            <BasicPagination currentPage={filter.page} lastPage={possibleLastPage} setPage={handleFilterSetPage}/>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>

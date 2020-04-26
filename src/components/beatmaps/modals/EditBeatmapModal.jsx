@@ -6,7 +6,7 @@ import {getBeatmapStatusOptions, getNominatorOptions} from "../../../util/Beatma
 import BeatmapEventList from "../BeatmapEventList";
 
 const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap}) => {
-  const {loading, payload, error} = useQuery(Api.getDetailedBeatmap(id, open));
+  const {loading, payload, error} = useQuery(Api.getDetailedBeatmap(id));
   const {saveLoading, mutate, saveError} = useMutation(Api.updateBeatmap);
   const [formValues, setFormValues] = useState({
     osuId: "",
@@ -73,8 +73,6 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
       ...newFormValues
     });
   }
-
-  console.log({formValues, showingSameNominatorWarning});
 
   return (
     <Modal

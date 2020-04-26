@@ -49,6 +49,14 @@ const Api = {
       header: {"Content-Type": "application/json"}
     }
   },
+  updateUser: (user) => {
+    return {
+      method: 'PUT',
+      endpoint: 'v1/user/' + user.osuId + "/update",
+      body: user,
+      header: {"Content-Type": "application/json"}
+    }
+  },
   addUser: (user) => {
     return {
       method: 'POST',
@@ -63,13 +71,13 @@ const Api = {
       endpoint: 'v1/user/findAll'
     }
   },
-  getBeatmap: (id) => {
+  getDetailedUser: (id) => {
     return {
       method: 'GET',
-      endpoint: 'v1/beatmap/' + id
+      endpoint: 'v1/user/' + id + '/detailed'
     }
   },
-  getDetailedBeatmap: (id, open) => {
+  getDetailedBeatmap: (id) => {
     return {
       method: 'GET',
       endpoint: 'v1/beatmap/' + id + '/detailed'

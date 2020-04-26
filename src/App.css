@@ -11,7 +11,8 @@ body {
     width: 100vw;
 }
 
-p, h1, h2, h3, h4, h5, h6, label {
+p, h1, h2, h3, h4, h5, h6,
+div.field .ui.toggle.checkbox input:checked~label, label {
     color: #d7d7d7 !important;
 }
 

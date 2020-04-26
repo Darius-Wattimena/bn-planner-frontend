@@ -4,12 +4,11 @@ import React from "react";
 
 
 
-const UserFilter = (props) => {
+const UserFilter = ({filter, setFilter, setAddModalOpen}) => {
   function handleFilterSet(group, value) {
-    let newFilter = props.filter;
-    newFilter[group] = value;
-    props.setFilter({
-      ...newFilter
+    filter[group] = value;
+    setFilter({
+      ...filter
     })
   }
 
@@ -27,9 +26,9 @@ const UserFilter = (props) => {
         <Table.Row textAlign={"center"}>
           <Table.Cell width={"2"}>
             <Button.Group fluid>
-              <Button inverted primary active={props.filter.limit === 10}
+              <Button inverted primary active={filter.limit === 10}
                       onClick={() => handleFilterSet("limit", 10)}>10</Button>
-              <Button inverted secondary active={props.filter.limit === 20}
+              <Button inverted secondary active={filter.limit === 20}
                       onClick={() => handleFilterSet("limit", 20)}>20</Button>
             </Button.Group>
           </Table.Cell>
@@ -40,18 +39,18 @@ const UserFilter = (props) => {
                 label={"Name"}
                 group={"name"}
                 handleFilterSet={handleFilterSet}
-                value={props.filter.name}
+                value={filter.name}
               />
             </Form>
           </Table.Cell>
           <Table.Cell width={"9"}>
             <Form>
-              <Form.Dropdown placeholder='Roles' fluid multiple selection options={options} value={props.filter.roles}
-                             onChange={(event, data) => handleMultiSelectFilter("roles", data.value, props.filter, handleFilterSet, USER_ROLES)}/>
+              <Form.Dropdown placeholder='Roles' fluid multiple selection options={options} value={filter.roles}
+                             onChange={(event, data) => handleMultiSelectFilter("roles", data.value, filter, handleFilterSet, USER_ROLES)}/>
             </Form>
           </Table.Cell>
           <Table.Cell width={"2"}>
-            <Button inverted color={"green"} fluid>Add User</Button>
+            <Button fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add User</Button>
           </Table.Cell>
         </Table.Row>
       </Table>
