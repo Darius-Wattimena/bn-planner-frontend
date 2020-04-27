@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import catchLogo from "../../assets/catch.svg"
 import "./Nav.css"
 import {useCookies} from "react-cookie";
+import {basePermissions} from "../../Routes";
 
 const homeName = "home";
 const beatmapsName = "beatmaps";
@@ -12,7 +13,7 @@ const loginName = "login";
 const logoutName = "logout";
 const profileName = "profile";
 
-const Nav = ({setLoginOpen, setRegisterOpen}) => {
+const Nav = ({setLoginOpen, setRegisterOpen, setPermissions}) => {
   let history = useHistory();
   const [cookies, setCookie] = useCookies(['bnplanner_token']);
   const [selected, setSelected] = useState("");
@@ -56,13 +57,14 @@ const Nav = ({setLoginOpen, setRegisterOpen}) => {
           selected={selected}
           handleNavClick={handleNavClick}
           setCookie={setCookie}
+          setPermissions={setPermissions}
         />
       </Menu>
     </nav>
   )
 };
 
-const LoginMenu = ({loggedIn, selected, handleNavClick, setLoginOpen, setRegisterOpen, setCookie}) => {
+const LoginMenu = ({loggedIn, selected, handleNavClick, setLoginOpen, setRegisterOpen, setCookie, setPermissions}) => {
   if (loggedIn) {
     return (
       <Menu.Menu position='right'>
@@ -77,7 +79,10 @@ const LoginMenu = ({loggedIn, selected, handleNavClick, setLoginOpen, setRegiste
         <MenuItem
           name={logoutName}
           active={selected === logoutName}
-          onClick={() => setCookie("bnplanner_token", "")}
+          onClick={() => {
+            setCookie("bnplanner_token", "");
+            setPermissions(basePermissions)
+          }}
         >
           Logout
         </MenuItem>

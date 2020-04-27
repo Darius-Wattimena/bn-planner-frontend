@@ -4,7 +4,7 @@ import {BEATMAP_STATUS} from "../../Constants";
 import UserAvatar from "../user/UserAvatar";
 import BasicPagination from "../generic/BasicPagination";
 
-const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalOpen, setSelectedBeatmap}) => {
+const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalOpen, setSelectedBeatmap, canEdit}) => {
   let possibleLastPage = 0;
 
   if (!loading && !error) {
@@ -69,7 +69,8 @@ const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalO
                     setSelectedBeatmap(beatmap.osuId);
                     setEditModalOpen(true)
                   }}>
-                    <Icon name={"pencil"}/>
+                    <Icon name={canEdit ? "pencil" : "eye"}/>
+                    {canEdit ? "Edit" : "View"}
                   </Button>
                   <Button inverted color={"blue"}
                           onClick={() => window.open("https://osu.ppy.sh/beatmapsets/" + beatmap.osuId, "_blank")}>

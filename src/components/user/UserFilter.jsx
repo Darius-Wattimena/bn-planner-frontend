@@ -23,36 +23,38 @@ const UserFilter = ({filter, setFilter, setAddModalOpen}) => {
             <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
-        <Table.Row textAlign={"center"}>
-          <Table.Cell width={"2"}>
-            <Button.Group fluid>
-              <Button inverted primary active={filter.limit === 10}
-                      onClick={() => handleFilterSet("limit", 10)}>10</Button>
-              <Button inverted secondary active={filter.limit === 20}
-                      onClick={() => handleFilterSet("limit", 20)}>20</Button>
-            </Button.Group>
-          </Table.Cell>
-          <Table.Cell width={"2"}>
-            <Form inverted>
-              <FilterField
-                id={"name"}
-                label={"Name"}
-                group={"name"}
-                handleFilterSet={handleFilterSet}
-                value={filter.name}
-              />
-            </Form>
-          </Table.Cell>
-          <Table.Cell width={"9"}>
-            <Form>
-              <Form.Dropdown placeholder='Roles' fluid multiple selection options={options} value={filter.roles}
-                             onChange={(event, data) => handleMultiSelectFilter("roles", data.value, filter, handleFilterSet, USER_ROLES)}/>
-            </Form>
-          </Table.Cell>
-          <Table.Cell width={"2"}>
-            <Button fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add User</Button>
-          </Table.Cell>
-        </Table.Row>
+        <Table.Body>
+          <Table.Row textAlign={"center"}>
+            <Table.Cell width={"2"}>
+              <Button.Group fluid>
+                <Button inverted primary active={filter.limit === 10}
+                        onClick={() => handleFilterSet("limit", 10)}>10</Button>
+                <Button inverted secondary active={filter.limit === 20}
+                        onClick={() => handleFilterSet("limit", 20)}>20</Button>
+              </Button.Group>
+            </Table.Cell>
+            <Table.Cell width={"2"}>
+              <Form inverted>
+                <FilterField
+                  id={"name"}
+                  label={"Name"}
+                  group={"name"}
+                  handleFilterSet={handleFilterSet}
+                  value={filter.name}
+                />
+              </Form>
+            </Table.Cell>
+            <Table.Cell width={"9"}>
+              <Form>
+                <Form.Dropdown placeholder='Roles' fluid multiple selection options={options} value={filter.roles}
+                               onChange={(event, data) => handleMultiSelectFilter("roles", data.value, filter, handleFilterSet, USER_ROLES)}/>
+              </Form>
+            </Table.Cell>
+            <Table.Cell width={"2"}>
+              <Button fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add User</Button>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
       </Table>
     </div>
   )
@@ -82,7 +84,7 @@ const FilterField = ({id, label, group, handleFilterSet, value}) => {
       placeholder={label}
       size={"small"}
       fluid
-      value={value}
+      value={value ? value : ""}
       onChange={(event, data) => handleFilterSet(group, data.value)}
     />
   )

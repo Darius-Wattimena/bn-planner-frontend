@@ -17,13 +17,13 @@ const RegisterModal = ({open, setOpen}) => {
 
   const handleRegisterSubmit = async () => {
     if (registerFormValues.password === registerFormValues.confirm) {
+      setNotSamePasswordError(false);
       const {error: mutateError} = await registerMutate(registerFormValues);
 
       if (mutateError) {
         setRegisterError(true);
       } else {
         setRegisterError(false);
-        setNotSamePasswordError(false);
         setRegisterFormValues({
           username: "",
           password: "",
@@ -60,7 +60,7 @@ const RegisterModal = ({open, setOpen}) => {
             info
             visible={registerError !== true}
             header="Do NOT use your osu credential!"
-            content="When you register a new account please do not provide us with your osu login. The site has no connection to your osu account, the only connection we have is the bind your account has to a planner user."
+            content="The site has no connection to your osu account, the only connection it has is the bind from your chosen username to a planner user."
             className={"info-message"}
           />
           <Form.Input

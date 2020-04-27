@@ -6,7 +6,7 @@ import {getBeatmapStatusOptions, getNominatorOptions} from "../../../util/Beatma
 import BeatmapEventList from "../BeatmapEventList";
 import {useCookies} from "react-cookie";
 
-const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap}) => {
+const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, canEdit}) => {
   const {loading, payload, error} = useQuery(Api.getDetailedBeatmap(id));
   const {mutate} = useMutation(Api.updateBeatmap);
   const [formValues, setFormValues] = useState({
@@ -107,6 +107,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
                 <Form>
                   <h3>Settings</h3>
                   <Form.Dropdown
+                    disabled={!canEdit}
                     label={"Status"}
                     selection
                     value={formValues.status}
@@ -114,6 +115,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
                     onChange={(_, data) => setFormValue("status", data.value)}
                   />
                   <Form.Dropdown
+                    disabled={!canEdit}
                     label={"Nominator #1"}
                     selection
                     search
@@ -126,6 +128,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
                     error={showingSameNominatorWarning}
                   />
                   <Form.Dropdown
+                    disabled={!canEdit}
                     label={"Nominator #2"}
                     selection
                     search
@@ -139,24 +142,28 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
                   />
                   <h3>Metadata</h3>
                   <Form.Input
+                    disabled={!canEdit}
                     label={"Artist"}
                     placeholder='Artist'
                     value={formValues.artist}
                     onChange={event => setFormValue("artist", event.target.value)}
                   />
                   <Form.Input
+                    disabled={!canEdit}
                     label={"Title"}
                     placeholder='Title'
                     value={formValues.title}
                     onChange={event => setFormValue("title", event.target.value)}
                   />
                   <Form.Input
+                    disabled={!canEdit}
                     label={"Mapper"}
                     placeholder='Mapper'
                     value={formValues.mapper}
                     onChange={event => setFormValue("mapper", event.target.value)}
                   />
                   <Form.TextArea
+                    disabled={!canEdit}
                     label={"Notes"}
                     placeholder='Notes'
                     value={formValues.note}
@@ -171,14 +178,24 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
           </Grid>
         </Modal.Content>
       }
+      {canEdit === true &&
+        <Modal.Actions>
+          <Button color='red' onClick={() => setOpen(false)} inverted>
+            <Icon name='close' /> Close
+          </Button>
+          <Button color='green' disabled={showingSameNominatorWarning} onClick={verifyData} inverted>
+            <Icon name='checkmark' /> Save
+          </Button>
+        </Modal.Actions>
+      }
+      {canEdit === false &&
       <Modal.Actions>
-        <Button color='red' onClick={() => setOpen(false)} inverted>
+        <Button color='green' onClick={() => setOpen(false)} inverted>
           <Icon name='close' /> Close
         </Button>
-        <Button color='green' disabled={showingSameNominatorWarning} onClick={verifyData} inverted>
-          <Icon name='checkmark' /> Save
-        </Button>
       </Modal.Actions>
+      }
+
     </Modal>
   )
 };

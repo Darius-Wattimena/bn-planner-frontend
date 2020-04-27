@@ -4,7 +4,7 @@ import {useMutation} from "react-fetching-library";
 import Api from "../../resources/Api";
 import {useCookies} from "react-cookie";
 
-const LoginModal = ({open, setOpen, setCanEdit, setIsAdmin}) => {
+const LoginModal = ({open, setOpen}) => {
   const [cookies, setCookie] = useCookies(['bnplanner_token']);
   const {mutate: loginMutate} = useMutation(Api.login);
 

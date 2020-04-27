@@ -9,7 +9,7 @@ import RegisterModal from "./components/authentication/RegisterModal";
 import {useCookies} from "react-cookie";
 import jwt_decode from "jwt-decode"
 
-const basePermissions = {
+export const basePermissions = {
   empty: true
 };
 
@@ -20,11 +20,9 @@ const Routes = () => {
 
   const [permissions, setPermissions] = useState(basePermissions);
 
-  console.log({cookies, permissions, test: permissions === basePermissions});
   if (cookies && cookies.bnplanner_token && cookies.bnplanner_token !== "" && permissions === basePermissions) {
     //Process JWT token and get read the permissions from this
     let decoded = jwt_decode(cookies.bnplanner_token);
-    console.log(decoded);
     setPermissions({
       canEdit: decoded.canEdit,
       isAdmin: decoded.isAdmin
@@ -47,7 +45,7 @@ const Routes = () => {
 
   return (
     <BrowserRouter>
-      <Nav setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} />
+      <Nav setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setPermissions={setPermissions} />
       <LoginModal open={loginOpen} setOpen={setLoginOpen} />
       <RegisterModal open={registerOpen} setOpen={setRegisterOpen} />
       <Switch>

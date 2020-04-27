@@ -26,7 +26,6 @@ const Users = ({canEdit, isAdmin}) => {
   let request = Api.fetchUsersByFilter(filter);
   const {loading, payload, error, query} = useQuery(request);
 
-  console.log(filter);
   return (
     <div className={"base-container-small"}>
       <Container fluid>
