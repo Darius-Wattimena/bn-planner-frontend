@@ -21,6 +21,23 @@ function filterToUrlParams(filter) {
 }
 
 const Api = {
+  login: (login) => {
+    console.log(login);
+    return {
+      method: 'POST',
+      endpoint: 'v1/auth/login',
+      body: login,
+      header: {"Content-Type": "application/json"}
+    }
+  },
+  register: (login) => {
+    return {
+      method: 'POST',
+      endpoint: 'v1/auth/register',
+      body: login,
+      header: {"Content-Type": "application/json"}
+    }
+  },
   fetchBeatmapsByFilter: (filter) => {
     return {
       method: 'GET',

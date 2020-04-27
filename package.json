@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "dayjs": "^1.8.25",
     "react": "^16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-fetching-library": "^1.7.4",
     "react-router-dom": "^5.1.2",

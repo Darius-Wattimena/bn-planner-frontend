@@ -3,6 +3,7 @@ import {Menu, MenuItem} from "semantic-ui-react";
 import {useHistory} from "react-router-dom";
 import catchLogo from "../../assets/catch.svg"
 import "./Nav.css"
+import {useCookies} from "react-cookie";
 
 const homeName = "home";
 const beatmapsName = "beatmaps";
@@ -11,8 +12,9 @@ const loginName = "login";
 const logoutName = "logout";
 const profileName = "profile";
 
-const Nav = () => {
+const Nav = ({setLoginOpen}) => {
   let history = useHistory();
+  const [cookies, setCookie] = useCookies(['bnplanner_token']);
   const [selected, setSelected] = useState("");
 
   function handleNavClick(itemName, location) {
@@ -47,27 +49,34 @@ const Nav = () => {
         >
           Users
         </MenuItem>
-        <LoginMenu loggedIn={true} selected={selected} handleNavClick={handleNavClick}/>
+        <LoginMenu
+          setLoginOpen={setLoginOpen}
+          loggedIn={cookies.bnplanner_token && cookies.bnplanner_token !== ""}
+          selected={selected}
+          handleNavClick={handleNavClick}
+          setCookie={setCookie}
+        />
       </Menu>
     </nav>
   )
 };
 
-const LoginMenu = (loggedIn, selected, handleNavClick) => {
+const LoginMenu = ({loggedIn, selected, handleNavClick, setLoginOpen, setCookie}) => {
   if (loggedIn) {
     return (
       <Menu.Menu position='right'>
         <MenuItem
+          disabled={true}
           name={profileName}
           active={selected === profileName}
           onClick={() => handleNavClick(profileName, "/profile")}
         >
-          Profile
+          TODO Profile
         </MenuItem>
         <MenuItem
           name={logoutName}
           active={selected === logoutName}
-          onClick={() => handleNavClick(logoutName, "/logout")}
+          onClick={() => setCookie("bnplanner_token", "")}
         >
           Logout
         </MenuItem>
@@ -79,7 +88,7 @@ const LoginMenu = (loggedIn, selected, handleNavClick) => {
         <MenuItem
           name={loginName}
           active={selected === loginName}
-          onClick={() => handleNavClick(loginName, "/login")}
+          onClick={() => setLoginOpen(true)}
         >
           Login
         </MenuItem>
