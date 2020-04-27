@@ -19,7 +19,7 @@ const filterDefaultState = {
   "nominator": []
 };
 
-const Beatmaps = () => {
+const Beatmaps = ({canEdit, isAdmin}) => {
   const userQuery = useQuery(Api.getUsers());
   const [filter, setFilter] = useState(filterDefaultState);
   const [selectedBeatmap, setSelectedBeatmap] = useState(0);
@@ -33,7 +33,7 @@ const Beatmaps = () => {
     <div className={"base-container-large"}>
       <Container fluid>
         <h1>Beatmaps</h1>
-        <BeatmapFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen}/>
+        <BeatmapFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} canEdit={canEdit}/>
         <BeatmapsList
           loading={loading}
           payload={payload}
@@ -43,9 +43,9 @@ const Beatmaps = () => {
           setEditModalOpen={setEditModalOpen}
           setSelectedBeatmap={setSelectedBeatmap}
         />
-        <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen}/>
+        <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} canEdit={canEdit} />
         {selectedBeatmap !== 0 &&
-          <EditBeatmapModal query={query} open={editModalOpen} setOpen={setEditModalOpen} id={selectedBeatmap} users={userQuery.payload} setSelectedBeatmap={setSelectedBeatmap}/>
+          <EditBeatmapModal query={query} open={editModalOpen} setOpen={setEditModalOpen} id={selectedBeatmap} users={userQuery.payload} setSelectedBeatmap={setSelectedBeatmap} canEdit={canEdit}/>
         }
       </Container>
     </div>

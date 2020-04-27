@@ -47,7 +47,7 @@ export const BEATMAP_STATUS = {
   Unknown: {
     name: "Unknown",
     full: "Unknown",
-    color: "beatmap-status-unknown"
+    className: "beatmap-status-unknown"
   }
 };
 
@@ -55,26 +55,26 @@ export const USER_ROLES = {
   Observer: {
     name: "OBS",
     full: "Observer",
-    color: "user-role-observer"
+    className: "user-role-observer"
   },
   BeatmapNominator: {
     name: "BN",
     full: "Beatmap Nominator",
-    color: "user-role-bn"
+    className: "user-role-bn"
   },
   ProbationBeatmapNominator: {
     name: "PBN",
     full: "Probation Beatmap Nominator",
-    color: "user-role-pbn"
+    className: "user-role-pbn"
   },
   NominationAssessmentTeam: {
     name: "NAT",
     full: "Nomination Assessment Team",
-    color: "user-role-nat"
+    className: "user-role-nat"
   },
   RetiredCatch: {
     name: "CA",
     full: "osu!catch Alumni",
-    color: "user-role-ca"
+    className: "user-role-ca"
   }
 };

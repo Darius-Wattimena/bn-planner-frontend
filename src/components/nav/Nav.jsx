@@ -12,7 +12,7 @@ const loginName = "login";
 const logoutName = "logout";
 const profileName = "profile";
 
-const Nav = ({setLoginOpen}) => {
+const Nav = ({setLoginOpen, setRegisterOpen}) => {
   let history = useHistory();
   const [cookies, setCookie] = useCookies(['bnplanner_token']);
   const [selected, setSelected] = useState("");
@@ -51,6 +51,7 @@ const Nav = ({setLoginOpen}) => {
         </MenuItem>
         <LoginMenu
           setLoginOpen={setLoginOpen}
+          setRegisterOpen={setRegisterOpen}
           loggedIn={cookies.bnplanner_token && cookies.bnplanner_token !== ""}
           selected={selected}
           handleNavClick={handleNavClick}
@@ -61,7 +62,7 @@ const Nav = ({setLoginOpen}) => {
   )
 };
 
-const LoginMenu = ({loggedIn, selected, handleNavClick, setLoginOpen, setCookie}) => {
+const LoginMenu = ({loggedIn, selected, handleNavClick, setLoginOpen, setRegisterOpen, setCookie}) => {
   if (loggedIn) {
     return (
       <Menu.Menu position='right'>
@@ -85,6 +86,13 @@ const LoginMenu = ({loggedIn, selected, handleNavClick, setLoginOpen, setCookie}
   } else {
     return (
       <Menu.Menu position='right'>
+        <MenuItem
+          name={loginName}
+          active={selected === loginName}
+          onClick={() => setRegisterOpen(true)}
+        >
+          Register
+        </MenuItem>
         <MenuItem
           name={loginName}
           active={selected === loginName}

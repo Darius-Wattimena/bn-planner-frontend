@@ -15,7 +15,7 @@ const FilterField = ({id, label, group, handleFilterSet}) => {
   )
 };
 
-const BeatmapFilter = ({filter, setAddModalOpen, setFilter}) => {
+const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit}) => {
 
   function handleFilterSet(group, value) {
     filter[group] = value;
@@ -86,7 +86,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter}) => {
               </Form>
             </Table.Cell>
             <Table.Cell width={"2"}>
-              <Button fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add Beatmap</Button>
+              <Button disabled={!canEdit} fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add Beatmap</Button>
             </Table.Cell>
           </Table.Row>
         </Table.Body>

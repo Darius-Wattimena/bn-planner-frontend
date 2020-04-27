@@ -7,8 +7,8 @@ export function getNominatorOptions(users) {
       key: user.osuId,
       text: user.osuName,
       value: user.osuId,
-      className: getReadableRole(user.role).color
-    }))
+      className: getReadableRole(user.role).className
+    }));
 
     return [
       {key: 0, text: 'none', value: 0},
@@ -24,9 +24,9 @@ export function getBeatmapStatusOptions() {
     getOption(BEATMAP_STATUS.Pending),
     getOption(BEATMAP_STATUS.Bubbled),
     getOption(BEATMAP_STATUS.Qualified),
-    getOption(BEATMAP_STATUS.Ranked),
     getOption(BEATMAP_STATUS.Popped),
     getOption(BEATMAP_STATUS.Disqualified),
+    getOption(BEATMAP_STATUS.Ranked),
     getOption(BEATMAP_STATUS.Graved)
   ]
 }

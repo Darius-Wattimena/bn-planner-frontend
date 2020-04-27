@@ -6,9 +6,7 @@ import {Container} from "semantic-ui-react";
 import AddUserModal from "./modals/AddUserModal";
 import Api from "../../resources/Api";
 import {useQuery} from "react-fetching-library";
-import BeatmapsList from "../beatmaps/BeatmapsList";
 import EditUserModal from "./modals/EditUserModal";
-import EditBeatmapModal from "../beatmaps/modals/EditBeatmapModal";
 
 const filterDefaultState = {
   "osuId": null,
@@ -19,7 +17,7 @@ const filterDefaultState = {
   "countTotal": true
 };
 
-const Users = () => {
+const Users = ({canEdit, isAdmin}) => {
   const [filter, setFilter] = useState(filterDefaultState);
   const [selectedUser, setSelectedUser] = useState(0);
   const [addModalOpen, setAddModalOpen] = useState(false);

@@ -9,9 +9,9 @@ const BeatmapEventList = ({events}) => {
       <List divided relaxed inverted celled className={"scrollable-list"}>
         {events.sort(function(a, b){
           return b.timestamp-a.timestamp
-        }).map(event => {
+        }).map((event, index) => {
           return (
-            <List.Item>
+            <List.Item key={"event-item-" + index}>
               <Image avatar src={event.user.profilePictureUri}/>
               <List.Content>
                 <List.Header>{event.title}</List.Header>

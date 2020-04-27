@@ -22,7 +22,7 @@ const UserList = ({loading, error, filter, setFilter, payload, setEditModalOpen,
   return (
     <Table inverted selectable>
       <Table.Header>
-        <Table.Row textAlign={"center"}>
+        <Table.Row key={"user-list-header"} textAlign={"center"}>
           <Table.HeaderCell />
           <Table.HeaderCell>Name</Table.HeaderCell>
           <Table.HeaderCell>Role</Table.HeaderCell>
@@ -33,15 +33,15 @@ const UserList = ({loading, error, filter, setFilter, payload, setEditModalOpen,
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {payload && payload.response && payload.response.map(user => {
+        {payload && payload.response && payload.response.map((user, index) => {
           let userRole = getReadableRole(user.role);
           return (
-            <Table.Row className={"user-row " + userRole.color} textAlign={"center"}>
+            <Table.Row key={"user-list-" + index} className={"user-row " + userRole.className} textAlign={"center"}>
               <Table.Cell width={"2"}>
                 <Image  className={"user-banner"} fluid src={user.profilePictureUri}/>
               </Table.Cell>
               <Table.Cell width={"2"}>{user.osuName}</Table.Cell>
-              <Table.Cell width={"3"}><Label className={userRole.color}>{userRole.full}</Label></Table.Cell>
+              <Table.Cell width={"3"}><Label className={userRole.className}>{userRole.full}</Label></Table.Cell>
               <Table.Cell width={"2"}>
                 <AccessIcon hasAccess={user.hasBoundAccount} />
               </Table.Cell>
@@ -70,7 +70,7 @@ const UserList = ({loading, error, filter, setFilter, payload, setEditModalOpen,
         })}
       </Table.Body>
       <Table.Footer>
-        <Table.Row>
+        <Table.Row key={"user-list-footer"}>
           <Table.HeaderCell width={"2"} textAlign={"center"}>
             {payload &&
             <p>{payload.total} User Found</p>

@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Accordion, Button, Icon, Image, Label, Table} from "semantic-ui-react";
+import React from "react";
+import {Button, Icon, Image, Label, Table} from "semantic-ui-react";
 import {BEATMAP_STATUS} from "../../Constants";
 import UserAvatar from "../user/UserAvatar";
 import BasicPagination from "../generic/BasicPagination";
@@ -35,7 +35,7 @@ const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalO
   return (
     <Table inverted selectable>
       <Table.Header>
-        <Table.Row textAlign={"center"}>
+        <Table.Row key={"beatmap-list-header"} textAlign={"center"}>
           <Table.HeaderCell>#</Table.HeaderCell>
           <Table.HeaderCell>Artist</Table.HeaderCell>
           <Table.HeaderCell>Title</Table.HeaderCell>
@@ -49,7 +49,7 @@ const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalO
         {payload && payload.response && payload.response.map((beatmap, index) => {
           let displayStatus = getReadableStatus(beatmap.status);
           return (
-            <Table.Row id={"beatmap-item-" + index}>
+            <Table.Row key={"beatmap-list-item-" + index}>
               <Table.Cell className={"beatmap-banner"} width={"2"}>
                 <Image fluid label={
                   <Label ribbon horizontal className={displayStatus.className}>
@@ -82,7 +82,7 @@ const BeatmapsList = ({loading, error, payload, filter, setFilter, setEditModalO
         })}
       </Table.Body>
       <Table.Footer>
-        <Table.Row>
+        <Table.Row key={"beatmap-list-footer"}>
           <Table.HeaderCell textAlign={"center"}>
             {payload &&
             <p>{payload.total} Beatmap(s) Found</p>

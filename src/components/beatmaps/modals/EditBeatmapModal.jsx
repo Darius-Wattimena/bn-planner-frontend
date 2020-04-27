@@ -1,13 +1,14 @@
 import React, {useState} from "react";
 import {useMutation, useQuery} from "react-fetching-library";
 import Api from "../../../resources/Api";
-import {Button, Form, Grid, Header, Icon, Image, List, Modal} from "semantic-ui-react";
+import {Button, Form, Grid, Header, Icon, Image, Modal} from "semantic-ui-react";
 import {getBeatmapStatusOptions, getNominatorOptions} from "../../../util/BeatmapUtil";
 import BeatmapEventList from "../BeatmapEventList";
+import {useCookies} from "react-cookie";
 
 const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap}) => {
   const {loading, payload, error} = useQuery(Api.getDetailedBeatmap(id));
-  const {saveLoading, mutate, saveError} = useMutation(Api.updateBeatmap);
+  const {mutate} = useMutation(Api.updateBeatmap);
   const [formValues, setFormValues] = useState({
     osuId: "",
     artist: "",
@@ -19,6 +20,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
     events: []
   });
   const [showingSameNominatorWarning, setShowingSameNominatorWarning] = useState(false);
+  const [cookies] = useCookies(['bnplanner_token']);
 
   if (!loading && !error && id) {
     if (payload !== "" && (formValues.artist === "" || (formValues.osuId !== "" && formValues.osuId !== payload.osuId))) {
@@ -45,7 +47,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap})
   }
 
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_token);
 
     if (mutateError) {
       console.log(mutateError)

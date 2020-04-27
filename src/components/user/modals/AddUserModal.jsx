@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Button, Form, Header, Icon, Message, Modal} from "semantic-ui-react";
 import {useMutation} from "react-fetching-library";
 import Api from "../../../resources/Api";
+import {useCookies} from "react-cookie";
 
 const AddUserModal = (props) => {
   const [formValues, setFormValues] = useState({
@@ -9,10 +10,11 @@ const AddUserModal = (props) => {
     osuName: ""
   });
   const [incorrectUrl, setIncorrectUrl] = useState(false);
+  const [cookies] = useCookies(['bnplanner_token']);
 
-  const {loading, payload, mutate, error} = useMutation(Api.addUser);
+  const {mutate} = useMutation(Api.addUser);
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_token);
 
     if (mutateError) {
       console.log(mutateError)

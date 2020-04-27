@@ -22,12 +22,11 @@ function filterToUrlParams(filter) {
 
 const Api = {
   login: (login) => {
-    console.log(login);
     return {
       method: 'POST',
       endpoint: 'v1/auth/login',
       body: login,
-      header: {"Content-Type": "application/json"}
+      headers: {"Content-Type": "application/json"}
     }
   },
   register: (login) => {
@@ -35,7 +34,7 @@ const Api = {
       method: 'POST',
       endpoint: 'v1/auth/register',
       body: login,
-      header: {"Content-Type": "application/json"}
+      headers: {"Content-Type": "application/json"}
     }
   },
   fetchBeatmapsByFilter: (filter) => {
@@ -50,36 +49,48 @@ const Api = {
       endpoint: 'v1/user/searchByFilter' + filterToUrlParams(filter)
     };
   },
-  addBeatmap: (beatmap) => {
+  addBeatmap: (beatmap, token) => {
     return {
       method: 'POST',
       endpoint: 'v1/beatmap/add',
       body: beatmap,
-      header: {"Content-Type": "application/json"}
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      }
     }
   },
-  updateBeatmap: (beatmap) => {
+  updateBeatmap: (beatmap, token) => {
     return {
       method: 'PUT',
       endpoint: 'v1/beatmap/' + beatmap.osuId + "/update",
       body: beatmap,
-      header: {"Content-Type": "application/json"}
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      }
     }
   },
-  updateUser: (user) => {
+  updateUser: (user, token) => {
     return {
       method: 'PUT',
       endpoint: 'v1/user/' + user.osuId + "/update",
       body: user,
-      header: {"Content-Type": "application/json"}
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      }
     }
   },
-  addUser: (user) => {
+  addUser: (user, token) => {
     return {
       method: 'POST',
       endpoint: 'v1/user/add',
       body: user,
-      header: {"Content-Type": "application/json"}
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      }
     }
   },
   getUsers: () => {

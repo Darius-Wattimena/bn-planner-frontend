@@ -1,4 +1,4 @@
-import {BEATMAP_STATUS, USER_ROLES} from "../Constants";
+import {USER_ROLES} from "../Constants";
 
 export function getReadableRole(unreadableRole) {
   if (unreadableRole) {
