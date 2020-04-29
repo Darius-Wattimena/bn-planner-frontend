@@ -6,7 +6,7 @@ import BeatmapEventList from "../../beatmaps/BeatmapEventList";
 import {getUserRoles} from "../../../util/UserUtil";
 import {useCookies} from "react-cookie";
 
-const EditUserModal = ({id, open, query, setOpen, setSelectedUser}) => {
+const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin}) => {
   const {loading, payload, error} = useQuery(Api.getDetailedUser(id));
   const {mutate} = useMutation(Api.updateUser);
   const [formValues, setFormValues] = useState({
@@ -62,19 +62,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser}) => {
   console.log(formValues);
 
   return (
-    <Modal
-      open={open}
-      onOpen={() => setFormValues({
-        osuId: "",
-        osuName: "",
-        hasEditPermissions: false,
-        hasAdminPermissions: false,
-        authId: "",
-        role: "",
-        events: []
-      })}
-      onClose={() => setOpen(false)}
-    >
+    <Modal open={open} onClose={() => setOpen(false)}>
       {!loading && !error && payload.osuId &&
         <div className={"modal-header"}>
           <Header content={"Editing User : " + payload.osuName}/>
@@ -88,13 +76,14 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser}) => {
                 <Form>
                   <h3>Information</h3>
                   <Form.Input
+                    disabled={!isAdmin}
                     label={"Name"}
                     placeholder='Name'
                     value={formValues.osuName}
                     onChange={event => setFormValue("osuName", event.target.value)}
                   />
-                  <h3>Settings</h3>
                   <Form.Dropdown
+                    disabled={!isAdmin}
                     label={"Role"}
                     selection
                     value={formValues.role}
@@ -102,12 +91,14 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser}) => {
                     onChange={(_, data) => setFormValue("role", data.value)}
                   />
                   <Form.Checkbox
+                    disabled={!isAdmin}
                     toggle
                     label={"Is Admin"}
                     checked={formValues.hasAdminPermissions}
                     onChange={() => setFormValue("hasAdminPermissions", !formValues.hasAdminPermissions)}
                   />
                   <Form.Checkbox
+                    disabled={!isAdmin}
                     toggle
                     label={"Can Edit"}
                     checked={formValues.hasEditPermissions}

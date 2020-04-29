@@ -3,7 +3,7 @@ import React from "react";
 import BasicPagination from "../generic/BasicPagination";
 import {getReadableRole} from "../../util/UserUtil";
 
-const UserList = ({loading, error, filter, setFilter, payload, setEditModalOpen, setSelectedUser}) => {
+const UserList = ({loading, error, filter, setFilter, payload, setEditModalOpen, setSelectedUser, isAdmin}) => {
 
   let possibleLastPage = 0;
 
@@ -57,7 +57,7 @@ const UserList = ({loading, error, filter, setFilter, payload, setEditModalOpen,
                     setSelectedUser(user.osuId);
                     setEditModalOpen(true)
                   }}>
-                    <Icon name={"pencil"}/>
+                    <Icon name={isAdmin ? "pencil" : "eye"}/>
                   </Button>
                   <Button inverted color={"blue"}
                           onClick={() => window.open("https://osu.ppy.sh/users/" + user.osuId, "_blank")}>

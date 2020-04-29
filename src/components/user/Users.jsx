@@ -30,7 +30,7 @@ const Users = ({canEdit, isAdmin}) => {
     <div className={"base-container-small"}>
       <Container fluid>
         <h1>Users</h1>
-        <UserFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} />
+        <UserFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} isAdmin={isAdmin} />
         <UserList
           filter={filter}
           setFilter={setFilter}
@@ -39,6 +39,7 @@ const Users = ({canEdit, isAdmin}) => {
           error={error}
           setEditModalOpen={setEditModalOpen}
           setSelectedUser={setSelectedUser}
+          isAdmin={isAdmin}
         />
         <AddUserModal query={query} open={addModalOpen} setOpen={setAddModalOpen}/>
         {selectedUser !== 0 &&
@@ -47,7 +48,9 @@ const Users = ({canEdit, isAdmin}) => {
             open={editModalOpen}
             setOpen={setEditModalOpen}
             query={query}
-            setSelectedUser={setSelectedUser}/>
+            setSelectedUser={setSelectedUser}
+            isAdmin={isAdmin}
+          />
         }
       </Container>
     </div>

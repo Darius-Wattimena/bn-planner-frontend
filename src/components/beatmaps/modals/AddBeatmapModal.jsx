@@ -68,10 +68,7 @@ const AddBeatmapModal = (props) => {
   }
 
   return (
-    <Modal
-      open={props.open}
-      onClose={() => props.setOpen(false)}
-    >
+    <Modal open={props.open} onClose={() => props.setOpen(false)}>
       <div className={"modal-header"}>
         <Header content='Add New Beatmap' />
       </div>

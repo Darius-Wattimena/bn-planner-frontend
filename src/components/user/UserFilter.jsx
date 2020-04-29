@@ -4,7 +4,7 @@ import React from "react";
 
 
 
-const UserFilter = ({filter, setFilter, setAddModalOpen}) => {
+const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin}) => {
   function handleFilterSet(group, value) {
     filter[group] = value;
     setFilter({
@@ -27,13 +27,13 @@ const UserFilter = ({filter, setFilter, setAddModalOpen}) => {
           <Table.Row textAlign={"center"}>
             <Table.Cell width={"2"}>
               <Button.Group fluid>
-                <Button inverted primary active={filter.limit === 10}
+                <Button inverted primary={filter.limit === 10} secondary={filter.limit !== 10} active={filter.limit === 10}
                         onClick={() => handleFilterSet("limit", 10)}>10</Button>
-                <Button inverted secondary active={filter.limit === 20}
+                <Button inverted primary={filter.limit === 20} secondary={filter.limit !== 20} active={filter.limit === 20}
                         onClick={() => handleFilterSet("limit", 20)}>20</Button>
               </Button.Group>
             </Table.Cell>
-            <Table.Cell width={"2"}>
+            <Table.Cell width={"4"}>
               <Form inverted>
                 <FilterField
                   id={"name"}
@@ -44,14 +44,14 @@ const UserFilter = ({filter, setFilter, setAddModalOpen}) => {
                 />
               </Form>
             </Table.Cell>
-            <Table.Cell width={"9"}>
+            <Table.Cell width={"7"}>
               <Form>
                 <Form.Dropdown placeholder='Roles' fluid multiple selection options={options} value={filter.roles}
                                onChange={(event, data) => handleMultiSelectFilter("roles", data.value, filter, handleFilterSet, USER_ROLES)}/>
               </Form>
             </Table.Cell>
             <Table.Cell width={"2"}>
-              <Button fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add User</Button>
+              <Button disabled={!isAdmin} fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add User</Button>
             </Table.Cell>
           </Table.Row>
         </Table.Body>

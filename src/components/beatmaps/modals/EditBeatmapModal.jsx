@@ -77,20 +77,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
   }
 
   return (
-    <Modal
-      open={open}
-      onOpen={() => setFormValues({
-        osuId: "",
-        artist: "",
-        title: "",
-        mapper: "",
-        note: "",
-        status: "",
-        nominators: [0, 0],
-        events: []
-      })}
-      onClose={() => setOpen(false)}
-    >
+    <Modal open={open} onClose={() => setOpen(false)}>
       {!loading && !error && payload.osuId &&
         <div className={"modal-header"}>
           <div className={"modal-header-image"}>

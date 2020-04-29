@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import BeatmapFilter from "./BeatmapFilter";
-import BeatmapsList from "./BeatmapsList";
+import BeatmapList from "./BeatmapList";
 import "./Beatmaps.css"
 import AddBeatmapModal from "./modals/AddBeatmapModal";
 import EditBeatmapModal from "./modals/EditBeatmapModal";
@@ -34,7 +34,7 @@ const Beatmaps = ({canEdit, isAdmin}) => {
       <Container fluid>
         <h1>Beatmaps</h1>
         <BeatmapFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} canEdit={canEdit}/>
-        <BeatmapsList
+        <BeatmapList
           loading={loading}
           payload={payload}
           error={error}

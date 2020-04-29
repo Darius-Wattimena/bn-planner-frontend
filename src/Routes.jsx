@@ -8,6 +8,7 @@ import LoginModal from "./components/authentication/LoginModal";
 import RegisterModal from "./components/authentication/RegisterModal";
 import {useCookies} from "react-cookie";
 import jwt_decode from "jwt-decode"
+import Home from "./components/home/Home";
 
 export const basePermissions = {
   empty: true
@@ -49,6 +50,7 @@ const Routes = () => {
       <LoginModal open={loginOpen} setOpen={setLoginOpen} />
       <RegisterModal open={registerOpen} setOpen={setRegisterOpen} />
       <Switch>
+        <Route exact path={"/"} component={Home}/>
         <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} />} />
         <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} />} />
         <Route component={NotFound} />
