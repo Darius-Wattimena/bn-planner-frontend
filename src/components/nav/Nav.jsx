@@ -26,7 +26,7 @@ const Nav = ({setLoginOpen, setRegisterOpen, setPermissions}) => {
   return (
     <nav className={"nav-header"}>
       <Menu secondary inverted>
-        <MenuItem>
+        <MenuItem onClick={() => handleNavClick(homeName, "/")}>
           <img src={catchLogo} alt={""}/>
         </MenuItem>
         <MenuItem

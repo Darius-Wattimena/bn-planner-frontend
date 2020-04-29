@@ -16,6 +16,8 @@ const filterDefaultState = {
   "limit": 10,
   "page": 1,
   "countTotal": true,
+  "hideRanked": true,
+  "hideGraved": true,
   "nominator": []
 };
 
@@ -29,20 +31,28 @@ const Beatmaps = ({canEdit, isAdmin}) => {
   let request = Api.fetchBeatmapsByFilter(filter);
   const {loading, payload, error, query} = useQuery(request);
 
+  function handleFilterSetPage(value) {
+    let newFilter = filter;
+    newFilter["page"] = value;
+    setFilter({
+      ...newFilter
+    })
+  }
+
   return (
     <div className={"base-container-large"}>
       <Container fluid>
         <h1>Beatmaps</h1>
-        <BeatmapFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} canEdit={canEdit}/>
+        <BeatmapFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} canEdit={canEdit} setPage={handleFilterSetPage}/>
         <BeatmapList
           loading={loading}
           payload={payload}
           error={error}
           filter={filter}
-          setFilter={setFilter}
           setEditModalOpen={setEditModalOpen}
           setSelectedBeatmap={setSelectedBeatmap}
           canEdit={canEdit}
+          setPage={handleFilterSetPage}
         />
         <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} />
         {selectedBeatmap !== 0 &&

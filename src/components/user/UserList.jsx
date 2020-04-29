@@ -3,20 +3,11 @@ import React from "react";
 import BasicPagination from "../generic/BasicPagination";
 import {getReadableRole} from "../../util/UserUtil";
 
-const UserList = ({loading, error, filter, setFilter, payload, setEditModalOpen, setSelectedUser, isAdmin}) => {
-
+const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, setSelectedUser, isAdmin}) => {
   let possibleLastPage = 0;
 
   if (!loading && !error) {
     possibleLastPage = Math.ceil(payload.total / filter.limit)
-  }
-
-  function handleFilterSetPage(value) {
-    let newFilter = filter;
-    newFilter["page"] = value;
-    setFilter({
-      ...newFilter
-    })
   }
 
   return (
@@ -36,32 +27,32 @@ const UserList = ({loading, error, filter, setFilter, payload, setEditModalOpen,
         {payload && payload.response && payload.response.map((user, index) => {
           let userRole = getReadableRole(user.role);
           return (
-            <Table.Row key={"user-list-" + index} className={"user-row " + userRole.className} textAlign={"center"}>
+            <Table.Row key={"user-list-" + index} className={"user-row " + userRole.className}>
               <Table.Cell width={"2"}>
                 <Image  className={"user-banner"} fluid src={user.profilePictureUri}/>
               </Table.Cell>
-              <Table.Cell width={"2"}>{user.osuName}</Table.Cell>
-              <Table.Cell width={"3"}><Label className={userRole.className}>{userRole.full}</Label></Table.Cell>
-              <Table.Cell width={"2"}>
+              <Table.Cell width={"2"} textAlign={"center"}>{user.osuName}</Table.Cell>
+              <Table.Cell width={"3"} textAlign={"center"}><Label className={userRole.className}>{userRole.full}</Label></Table.Cell>
+              <Table.Cell textAlign={"center"}>
                 <AccessIcon hasAccess={user.hasBoundAccount} />
               </Table.Cell>
-              <Table.Cell width={"2"}>
+              <Table.Cell textAlign={"center"}>
                 <AccessIcon hasAccess={user.hasEditPermissions} />
               </Table.Cell>
-              <Table.Cell width={"2"}>
+              <Table.Cell textAlign={"center"}>
                 <AccessIcon hasAccess={user.hasAdminPermissions} />
               </Table.Cell>
-              <Table.Cell width={"2"}>
-                <Button.Group>
+              <Table.Cell width={"2"} textAlign={"center"}>
+                <Button.Group fluid>
                   <Button inverted color={"green"} onClick={_ => {
                     setSelectedUser(user.osuId);
                     setEditModalOpen(true)
                   }}>
-                    <Icon name={isAdmin ? "pencil" : "eye"}/>
+                    <Icon fitted name={isAdmin ? "pencil" : "eye"}/>
                   </Button>
                   <Button inverted color={"blue"}
                           onClick={() => window.open("https://osu.ppy.sh/users/" + user.osuId, "_blank")}>
-                    <Icon name={"linkify"}/>
+                    <Icon fitted name={"linkify"}/>
                   </Button>
                 </Button.Group>
               </Table.Cell>
@@ -77,7 +68,7 @@ const UserList = ({loading, error, filter, setFilter, payload, setEditModalOpen,
             }
           </Table.HeaderCell>
           <Table.HeaderCell width={"14"} colSpan={"6"}>
-            <BasicPagination currentPage={filter.page} lastPage={possibleLastPage} setPage={handleFilterSetPage}/>
+            <BasicPagination currentPage={filter.page} lastPage={possibleLastPage} setPage={setPage}/>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>
@@ -89,13 +80,13 @@ function AccessIcon({hasAccess}) {
   if (hasAccess && hasAccess === true) {
     return (
       <div>
-        <Icon size={"large"} name={"check"} color={"green"} />
+        <Icon fitted size={"large"} name={"check"} color={"green"} />
       </div>
     )
   } else {
     return (
       <div>
-        <Icon size={"large"}  name={"cancel"} color={"red"} />
+        <Icon fitted size={"large"}  name={"cancel"} color={"red"} />
       </div>
     )
   }

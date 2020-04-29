@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Icon, Image, Label, Table} from "semantic-ui-react";
+import {Button, Icon, Image, Label, Popup, Table} from "semantic-ui-react";
 import UserAvatar from "../user/UserAvatar";
 
 const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, setEditModalOpen}) => {
@@ -38,7 +38,7 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
         } src={"https://assets.ppy.sh/beatmaps/" + beatmap.osuId + "/covers/cover.jpg"}/>
       </Table.Cell>
       <Table.Cell width={"2"} textAlign={"center"}>{beatmap.artist}</Table.Cell>
-      <Table.Cell width={"3"} textAlign={"center"}>{beatmap.title}</Table.Cell>
+      <Table.Cell width={"2"} textAlign={"center"}>{beatmap.title}</Table.Cell>
       <Table.Cell width={"2"} textAlign={"center"}>{beatmap.mapper}</Table.Cell>
       <Table.Cell width={"2"}>
         <NominatorDetails nominators={beatmap.nominators} nominatorNumber={1} />
@@ -46,19 +46,30 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
       <Table.Cell width={"2"}>
         <NominatorDetails nominators={beatmap.nominators} nominatorNumber={2} />
       </Table.Cell>
-      <Table.Cell width={"2"}>
+      <Table.Cell width={"1"} textAlign={"center"}>
+        {beatmap.note &&
+          <Popup trigger={
+            <Icon size={"large"} name={"sticky note"} />
+          }>
+            <Popup.Content>
+              {beatmap.note}
+            </Popup.Content>
+          </Popup>
+        }
+      </Table.Cell>
+      <Table.Cell width={"2"} textAlign={"center"}>
         <Button.Group fluid>
           setEditStatusModalOpen
           <Button inverted color={"green"} onClick={() => {
             setSelectedBeatmap(beatmap.osuId);
             setEditModalOpen(true)
           }}>
-            <Icon name={canEdit ? "pencil" : "eye"}/>
-            {canEdit ? "Edit" : "View"}
+            <Icon fitted name={canEdit ? "pencil" : "eye"}/>
+            {/*{canEdit ? "Edit" : "View"}*/}
           </Button>
           <Button inverted color={"blue"}
                   onClick={() => window.open("https://osu.ppy.sh/beatmapsets/" + beatmap.osuId, "_blank")}>
-            <Icon name={"linkify"}/>
+            <Icon fitted name={"linkify"}/>
           </Button>
         </Button.Group>
       </Table.Cell>

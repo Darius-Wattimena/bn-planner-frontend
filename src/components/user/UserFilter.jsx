@@ -4,12 +4,13 @@ import React from "react";
 
 
 
-const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin}) => {
+const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, setPage}) => {
   function handleFilterSet(group, value) {
     filter[group] = value;
     setFilter({
       ...filter
-    })
+    });
+    setPage(1)
   }
 
   return (
@@ -33,7 +34,7 @@ const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin}) => {
                         onClick={() => handleFilterSet("limit", 20)}>20</Button>
               </Button.Group>
             </Table.Cell>
-            <Table.Cell width={"4"}>
+            <Table.Cell width={"5"}>
               <Form inverted>
                 <FilterField
                   id={"name"}

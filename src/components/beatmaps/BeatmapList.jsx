@@ -4,19 +4,11 @@ import {BEATMAP_STATUS} from "../../Constants";
 import BasicPagination from "../generic/BasicPagination";
 import BeatmapListItem from "./BeatmapListItem";
 
-const BeatmapList = ({loading, error, payload, filter, setFilter, setEditModalOpen, setSelectedBeatmap, canEdit}) => {
+const BeatmapList = ({loading, error, payload, filter, setEditModalOpen, setSelectedBeatmap, canEdit, setPage}) => {
   let possibleLastPage = 0;
 
   if (!loading && !error) {
     possibleLastPage = Math.ceil(payload.total / filter.limit)
-  }
-
-  function handleFilterSetPage(value) {
-    let newFilter = filter;
-    newFilter["page"] = value;
-    setFilter({
-      ...newFilter
-    })
   }
 
   return (
@@ -29,6 +21,7 @@ const BeatmapList = ({loading, error, payload, filter, setFilter, setEditModalOp
           <Table.HeaderCell>Mapper</Table.HeaderCell>
           <Table.HeaderCell>Nominator #1</Table.HeaderCell>
           <Table.HeaderCell>Nominator #2</Table.HeaderCell>
+          <Table.HeaderCell>Note</Table.HeaderCell>
           <Table.HeaderCell>Actions</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -52,8 +45,8 @@ const BeatmapList = ({loading, error, payload, filter, setFilter, setEditModalOp
             <p>{payload.total} Beatmap(s) Found</p>
             }
           </Table.HeaderCell>
-          <Table.HeaderCell colSpan={"6"}>
-            <BasicPagination currentPage={filter.page} lastPage={possibleLastPage} setPage={handleFilterSetPage}/>
+          <Table.HeaderCell colSpan={"8"}>
+            <BasicPagination currentPage={filter.page} lastPage={possibleLastPage} setPage={setPage}/>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>

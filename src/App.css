@@ -4,6 +4,7 @@ html, body {
 
 body {
     background-image: url("assets/background.png") !important;
+    background-attachment: fixed !important;
 }
 
 .App {

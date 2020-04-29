@@ -15,13 +15,14 @@ const FilterField = ({id, label, group, handleFilterSet}) => {
   )
 };
 
-const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit}) => {
+const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) => {
 
   function handleFilterSet(group, value) {
     filter[group] = value;
     setFilter({
       ...filter
-    })
+    });
+    setPage(1)
   }
 
   return (
@@ -34,6 +35,8 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit}) => {
             <Table.HeaderCell>Title</Table.HeaderCell>
             <Table.HeaderCell>Mapper</Table.HeaderCell>
             <Table.HeaderCell>Status</Table.HeaderCell>
+            <Table.HeaderCell>Show Ranked</Table.HeaderCell>
+            <Table.HeaderCell>Show Graved</Table.HeaderCell>
             <Table.HeaderCell/>
           </Table.Row>
         </Table.Header>
@@ -83,6 +86,24 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit}) => {
               <Form>
                 <Form.Dropdown placeholder='Status' fluid multiple selection options={getBeatmapStatusOptions()}
                                onChange={(event, data) => handleAddStatusFilter(data.value, filter, handleFilterSet)}/>
+              </Form>
+            </Table.Cell>
+            <Table.Cell>
+              <Form>
+                <Form.Checkbox
+                  toggle
+                  checked={!filter.hideRanked}
+                  onChange={() => handleFilterSet("hideRanked", !filter.hideRanked)}
+                />
+              </Form>
+            </Table.Cell>
+            <Table.Cell>
+              <Form>
+                <Form.Checkbox
+                  toggle
+                  checked={!filter.hideGraved}
+                  onChange={() => handleFilterSet("hideGraved", !filter.hideGraved)}
+                />
               </Form>
             </Table.Cell>
             <Table.Cell width={"2"}>

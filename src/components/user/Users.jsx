@@ -26,20 +26,28 @@ const Users = ({canEdit, isAdmin}) => {
   let request = Api.fetchUsersByFilter(filter);
   const {loading, payload, error, query} = useQuery(request);
 
+  function handleFilterSetPage(value) {
+    let newFilter = filter;
+    newFilter["page"] = value;
+    setFilter({
+      ...newFilter
+    })
+  }
+
   return (
     <div className={"base-container-small"}>
       <Container fluid>
         <h1>Users</h1>
-        <UserFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} isAdmin={isAdmin} />
+        <UserFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} isAdmin={isAdmin} setPage={handleFilterSetPage} />
         <UserList
           filter={filter}
-          setFilter={setFilter}
           loading={loading}
           payload={payload}
           error={error}
           setEditModalOpen={setEditModalOpen}
           setSelectedUser={setSelectedUser}
           isAdmin={isAdmin}
+          setPage={handleFilterSetPage}
         />
         <AddUserModal query={query} open={addModalOpen} setOpen={setAddModalOpen}/>
         {selectedUser !== 0 &&
