@@ -13,7 +13,7 @@ const loginName = "login";
 const logoutName = "logout";
 const profileName = "profile";
 
-const Nav = ({setLoginOpen, setRegisterOpen, setPermissions}) => {
+const Nav = ({setLoginOpen, setRegisterOpen, setPermissions, userId}) => {
   let history = useHistory();
   const [cookies, setCookie] = useCookies(['bnplanner_token']);
   const [selected, setSelected] = useState("");
@@ -53,28 +53,27 @@ const Nav = ({setLoginOpen, setRegisterOpen, setPermissions}) => {
         <LoginMenu
           setLoginOpen={setLoginOpen}
           setRegisterOpen={setRegisterOpen}
-          loggedIn={cookies.bnplanner_token && cookies.bnplanner_token !== ""}
           selected={selected}
           handleNavClick={handleNavClick}
           setCookie={setCookie}
           setPermissions={setPermissions}
+          userId={userId}
         />
       </Menu>
     </nav>
   )
 };
 
-const LoginMenu = ({loggedIn, selected, handleNavClick, setLoginOpen, setRegisterOpen, setCookie, setPermissions}) => {
-  if (loggedIn) {
+const LoginMenu = ({selected, handleNavClick, setLoginOpen, setRegisterOpen, setCookie, setPermissions, userId}) => {
+  if (userId !== 0) {
     return (
       <Menu.Menu position='right'>
         <MenuItem
-          disabled={true}
           name={profileName}
           active={selected === profileName}
-          onClick={() => handleNavClick(profileName, "/profile")}
+          onClick={() => handleNavClick(profileName, "/profile/" + userId)}
         >
-          TODO Profile
+          Profile
         </MenuItem>
         <MenuItem
           name={logoutName}

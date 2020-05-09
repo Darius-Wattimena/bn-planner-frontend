@@ -9,6 +9,7 @@ import RegisterModal from "./components/authentication/RegisterModal";
 import {useCookies} from "react-cookie";
 import jwt_decode from "jwt-decode"
 import Home from "./components/home/Home";
+import Profile from "./components/profile/Profile";
 
 export const basePermissions = {
   empty: true
@@ -26,7 +27,8 @@ const Routes = () => {
     let decoded = jwt_decode(cookies.bnplanner_token);
     setPermissions({
       canEdit: decoded.canEdit,
-      isAdmin: decoded.isAdmin
+      isAdmin: decoded.isAdmin,
+      userId: decoded.osuId
     })
   }
 
@@ -44,15 +46,23 @@ const Routes = () => {
     isAdmin = false
   }
 
+  let userId;
+  if (permissions.userId) {
+    userId = permissions.userId
+  } else {
+    userId = 0
+  }
+
   return (
     <BrowserRouter>
-      <Nav setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setPermissions={setPermissions} />
+      <Nav setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setPermissions={setPermissions} userId={userId} />
       <LoginModal open={loginOpen} setOpen={setLoginOpen} />
       <RegisterModal open={registerOpen} setOpen={setRegisterOpen} />
       <Switch>
         <Route exact path={"/"} component={Home}/>
         <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} />} />
         <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} />} />
+        <Route path={"/profile/:userId"} component={Profile}/>
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
