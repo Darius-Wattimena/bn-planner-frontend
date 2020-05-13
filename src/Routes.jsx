@@ -7,9 +7,11 @@ import NotFound from "./components/notFound/NotFound";
 import LoginModal from "./components/authentication/LoginModal";
 import RegisterModal from "./components/authentication/RegisterModal";
 import {useCookies} from "react-cookie";
-import jwt_decode from "jwt-decode"
 import Home from "./components/home/Home";
 import Profile from "./components/profile/Profile";
+import Login from "./components/login/Login";
+import {useQuery} from "react-fetching-library";
+import Api from "./resources/Api";
 
 export const basePermissions = {
   empty: true
@@ -18,17 +20,18 @@ export const basePermissions = {
 const Routes = () => {
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
-  const [cookies] = useCookies(['bnplanner_token']);
+  const [cookies] = useCookies(['bnplanner_osu_access_token']);
+
+  const { payload, loading, error } = useQuery(Api.getUserInfo(cookies.bnplanner_osu_access_token));
 
   const [permissions, setPermissions] = useState(basePermissions);
 
-  if (cookies && cookies.bnplanner_token && cookies.bnplanner_token !== "" && permissions === basePermissions) {
-    //Process JWT token and get read the permissions from this
-    let decoded = jwt_decode(cookies.bnplanner_token);
+  if (cookies && cookies.bnplanner_osu_access_token && cookies.bnplanner_osu_access_token !== ""
+    && !loading && !error && payload && payload !== "" && permissions === basePermissions) {
     setPermissions({
-      canEdit: decoded.canEdit,
-      isAdmin: decoded.isAdmin,
-      userId: decoded.osuId
+      canEdit: payload.canEdit,
+      isAdmin: payload.isAdmin,
+      userId: payload.id
     })
   }
 
@@ -55,14 +58,15 @@ const Routes = () => {
 
   return (
     <BrowserRouter>
-      <Nav setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setPermissions={setPermissions} userId={userId} />
+      <Nav userId={userId} />
       <LoginModal open={loginOpen} setOpen={setLoginOpen} />
       <RegisterModal open={registerOpen} setOpen={setRegisterOpen} />
       <Switch>
-        <Route exact path={"/"} component={Home}/>
+        <Route exact path={"/"} component={Home} />
         <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} />} />
         <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} />} />
-        <Route path={"/profile/:userId"} component={Profile}/>
+        <Route path={"/login"} component={Login} />
+        <Route path={"/profile/:userId"} component={Profile} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

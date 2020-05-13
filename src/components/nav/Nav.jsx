@@ -3,19 +3,16 @@ import {Menu, MenuItem} from "semantic-ui-react";
 import {useHistory} from "react-router-dom";
 import catchLogo from "../../assets/catch.svg"
 import "./Nav.css"
-import {useCookies} from "react-cookie";
-import {basePermissions} from "../../Routes";
+import {ENV} from "../../Settings";
 
 const homeName = "home";
 const beatmapsName = "beatmaps";
 const usersName = "users";
 const loginName = "login";
-const logoutName = "logout";
 const profileName = "profile";
 
-const Nav = ({setLoginOpen, setRegisterOpen, setPermissions, userId}) => {
+const Nav = ({userId}) => {
   let history = useHistory();
-  const [cookies, setCookie] = useCookies(['bnplanner_token']);
   const [selected, setSelected] = useState("");
 
   function handleNavClick(itemName, location) {
@@ -51,12 +48,8 @@ const Nav = ({setLoginOpen, setRegisterOpen, setPermissions, userId}) => {
           Users
         </MenuItem>
         <LoginMenu
-          setLoginOpen={setLoginOpen}
-          setRegisterOpen={setRegisterOpen}
           selected={selected}
           handleNavClick={handleNavClick}
-          setCookie={setCookie}
-          setPermissions={setPermissions}
           userId={userId}
         />
       </Menu>
@@ -64,7 +57,7 @@ const Nav = ({setLoginOpen, setRegisterOpen, setPermissions, userId}) => {
   )
 };
 
-const LoginMenu = ({selected, handleNavClick, setLoginOpen, setRegisterOpen, setCookie, setPermissions, userId}) => {
+const LoginMenu = ({selected, handleNavClick, userId}) => {
   if (userId !== 0) {
     return (
       <Menu.Menu position='right'>
@@ -75,32 +68,16 @@ const LoginMenu = ({selected, handleNavClick, setLoginOpen, setRegisterOpen, set
         >
           Profile
         </MenuItem>
-        <MenuItem
-          name={logoutName}
-          active={selected === logoutName}
-          onClick={() => {
-            setCookie("bnplanner_token", "");
-            setPermissions(basePermissions)
-          }}
-        >
-          Logout
-        </MenuItem>
       </Menu.Menu>
     )
   } else {
+    const osuLoginUrl = "https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=" + ENV.osu.id +"&redirect_uri=" + ENV.osu.redirect + "&response_type=code";
     return (
       <Menu.Menu position='right'>
         <MenuItem
           name={loginName}
           active={selected === loginName}
-          onClick={() => setRegisterOpen(true)}
-        >
-          Register
-        </MenuItem>
-        <MenuItem
-          name={loginName}
-          active={selected === loginName}
-          onClick={() => setLoginOpen(true)}
+          onClick={() => window.location.href = osuLoginUrl}
         >
           Login
         </MenuItem>

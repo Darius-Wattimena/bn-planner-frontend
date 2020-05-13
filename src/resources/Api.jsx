@@ -110,7 +110,16 @@ const Api = {
       method: 'GET',
       endpoint: 'v1/beatmap/' + id + '/detailed'
     }
-  }
+  },
+  getUserInfo: (token) => {
+    return {
+      method: 'GET',
+      endpoint: 'v1/osu/userInfo',
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    }
+}
 };
 
 export default Api
