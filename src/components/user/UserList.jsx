@@ -17,7 +17,6 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
           <Table.HeaderCell />
           <Table.HeaderCell>Name</Table.HeaderCell>
           <Table.HeaderCell>Role</Table.HeaderCell>
-          <Table.HeaderCell>Has Account</Table.HeaderCell>
           <Table.HeaderCell>Can Edit</Table.HeaderCell>
           <Table.HeaderCell>Is Admin</Table.HeaderCell>
           <Table.HeaderCell>Actions</Table.HeaderCell>
@@ -33,9 +32,6 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
               </Table.Cell>
               <Table.Cell width={"2"} textAlign={"center"}>{user.osuName}</Table.Cell>
               <Table.Cell width={"3"} textAlign={"center"}><Label className={userRole.className}>{userRole.full}</Label></Table.Cell>
-              <Table.Cell textAlign={"center"}>
-                <AccessIcon hasAccess={user.hasBoundAccount} />
-              </Table.Cell>
               <Table.Cell textAlign={"center"}>
                 <AccessIcon hasAccess={user.hasEditPermissions} />
               </Table.Cell>

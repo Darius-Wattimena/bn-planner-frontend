@@ -20,7 +20,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
     events: []
   });
   const [showingSameNominatorWarning, setShowingSameNominatorWarning] = useState(false);
-  const [cookies] = useCookies(['bnplanner_token']);
+  const [cookies] = useCookies(['bnplanner_osu_access_token']);
 
   if (!loading && !error && id) {
     if (payload !== "" && (formValues.artist === "" || (formValues.osuId !== "" && formValues.osuId !== payload.osuId))) {
@@ -47,7 +47,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
   }
 
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_token);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token);
 
     if (mutateError) {
       console.log(mutateError)

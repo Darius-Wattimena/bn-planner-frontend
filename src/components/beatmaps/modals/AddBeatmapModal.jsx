@@ -12,11 +12,11 @@ const AddBeatmapModal = (props) => {
     mapper: ""
   });
   const [incorrectUrl, setIncorrectUrl] = useState(false);
-  const [cookies] = useCookies(['bnplanner_token']);
+  const [cookies] = useCookies(['bnplanner_osu_access_token']);
 
   const {mutate} = useMutation(Api.addBeatmap);
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_token);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token);
 
     if (mutateError) {
       console.log(mutateError)

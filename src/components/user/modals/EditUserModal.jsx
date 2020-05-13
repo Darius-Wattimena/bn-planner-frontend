@@ -18,7 +18,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin}) => 
     role: "",
     events: []
   });
-  const [cookies] = useCookies(['bnplanner_token']);
+  const [cookies] = useCookies(['bnplanner_osu_access_token']);
 
   if (!loading && !error && id) {
     if (payload !== "" && (formValues.osuName === "" || (formValues.osuId !== "" && formValues.osuId !== payload.osuId))) {
@@ -31,7 +31,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin}) => 
   }
 
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_token);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token);
 
     if (mutateError) {
       console.log(mutateError)

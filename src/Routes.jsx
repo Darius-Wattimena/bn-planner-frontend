@@ -4,8 +4,6 @@ import Beatmaps from "./components/beatmaps/Beatmaps";
 import Nav from "./components/nav/Nav";
 import Users from "./components/user/Users";
 import NotFound from "./components/notFound/NotFound";
-import LoginModal from "./components/authentication/LoginModal";
-import RegisterModal from "./components/authentication/RegisterModal";
 import {useCookies} from "react-cookie";
 import Home from "./components/home/Home";
 import Profile from "./components/profile/Profile";
@@ -18,8 +16,6 @@ export const basePermissions = {
 };
 
 const Routes = () => {
-  const [loginOpen, setLoginOpen] = useState(false);
-  const [registerOpen, setRegisterOpen] = useState(false);
   const [cookies] = useCookies(['bnplanner_osu_access_token']);
 
   const { payload, loading, error } = useQuery(Api.getUserInfo(cookies.bnplanner_osu_access_token));
@@ -59,8 +55,6 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Nav userId={userId} />
-      <LoginModal open={loginOpen} setOpen={setLoginOpen} />
-      <RegisterModal open={registerOpen} setOpen={setRegisterOpen} />
       <Switch>
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} />} />
