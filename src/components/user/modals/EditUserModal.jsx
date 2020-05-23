@@ -6,7 +6,7 @@ import BeatmapEventList from "../../beatmaps/BeatmapEventList";
 import {getUserRoles} from "../../../util/UserUtil";
 import {useCookies} from "react-cookie";
 
-const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin}) => {
+const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, userId}) => {
   const {loading, payload, error} = useQuery(Api.getDetailedUser(id));
   const {mutate} = useMutation(Api.updateUser);
   const [formValues, setFormValues] = useState({
@@ -31,7 +31,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin}) => 
   }
 
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId);
 
     if (mutateError) {
       console.log(mutateError)

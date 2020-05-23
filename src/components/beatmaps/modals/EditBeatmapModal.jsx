@@ -6,7 +6,7 @@ import {getBeatmapStatusOptions, getNominatorOptions} from "../../../util/Beatma
 import BeatmapEventList from "../BeatmapEventList";
 import {useCookies} from "react-cookie";
 
-const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, canEdit}) => {
+const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, canEdit, userId}) => {
   const {loading, payload, error} = useQuery(Api.getDetailedBeatmap(id));
   const {mutate} = useMutation(Api.updateBeatmap);
   const [formValues, setFormValues] = useState({
@@ -47,7 +47,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
   }
 
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId);
 
     if (mutateError) {
       console.log(mutateError)

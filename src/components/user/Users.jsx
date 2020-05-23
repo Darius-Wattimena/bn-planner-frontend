@@ -7,6 +7,7 @@ import AddUserModal from "./modals/AddUserModal";
 import Api from "../../resources/Api";
 import {useQuery} from "react-fetching-library";
 import EditUserModal from "./modals/EditUserModal";
+import AddBeatmapModal from "../beatmaps/modals/AddBeatmapModal";
 
 const filterDefaultState = {
   "osuId": null,
@@ -17,7 +18,7 @@ const filterDefaultState = {
   "countTotal": true
 };
 
-const Users = ({canEdit, isAdmin}) => {
+const Users = ({canEdit, isAdmin, userId}) => {
   const [filter, setFilter] = useState(filterDefaultState);
   const [selectedUser, setSelectedUser] = useState(0);
   const [addModalOpen, setAddModalOpen] = useState(false);
@@ -49,7 +50,7 @@ const Users = ({canEdit, isAdmin}) => {
           isAdmin={isAdmin}
           setPage={handleFilterSetPage}
         />
-        <AddUserModal query={query} open={addModalOpen} setOpen={setAddModalOpen}/>
+        <AddUserModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId} />
         {selectedUser !== 0 &&
           <EditUserModal
             id={selectedUser}
@@ -58,6 +59,7 @@ const Users = ({canEdit, isAdmin}) => {
             query={query}
             setSelectedUser={setSelectedUser}
             isAdmin={isAdmin}
+            userId={userId}
           />
         }
       </Container>

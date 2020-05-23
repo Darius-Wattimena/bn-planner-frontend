@@ -4,7 +4,7 @@ import {useMutation} from "react-fetching-library";
 import Api from "../../../resources/Api";
 import {useCookies} from "react-cookie";
 
-const AddBeatmapModal = (props) => {
+const AddBeatmapModal = ({open, query, setOpen, userId}) => {
   const [formValues, setFormValues] = useState({
     beatmapUrl: "",
     artist: "",
@@ -16,7 +16,7 @@ const AddBeatmapModal = (props) => {
 
   const {mutate} = useMutation(Api.addBeatmap);
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId);
 
     if (mutateError) {
       console.log(mutateError)
@@ -27,8 +27,8 @@ const AddBeatmapModal = (props) => {
         title: "",
         mapper: ""
       });
-      props.query();
-      props.setOpen(false);
+      query();
+      setOpen(false);
     }
   };
 
@@ -68,7 +68,7 @@ const AddBeatmapModal = (props) => {
   }
 
   return (
-    <Modal open={props.open} onClose={() => props.setOpen(false)}>
+    <Modal open={open} onClose={() => setOpen(false)}>
       <div className={"modal-header"}>
         <Header content='Add New Beatmap' />
       </div>
@@ -108,7 +108,7 @@ const AddBeatmapModal = (props) => {
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='red' onClick={() => props.setOpen(false)} inverted>
+        <Button color='red' onClick={() => setOpen(false)} inverted>
           <Icon name='close' /> Cancel
         </Button>
         <Button color='green' onClick={verifyData} inverted>

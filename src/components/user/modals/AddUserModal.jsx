@@ -4,7 +4,7 @@ import {useMutation} from "react-fetching-library";
 import Api from "../../../resources/Api";
 import {useCookies} from "react-cookie";
 
-const AddUserModal = (props) => {
+const AddUserModal = ({open, query, setOpen, userId}) => {
   const [formValues, setFormValues] = useState({
     osuUrl: "",
     osuName: ""
@@ -14,7 +14,7 @@ const AddUserModal = (props) => {
 
   const {mutate} = useMutation(Api.addUser);
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId);
 
     if (mutateError) {
       console.log(mutateError)
@@ -23,8 +23,8 @@ const AddUserModal = (props) => {
         osuUrl: "",
         osuName: ""
       });
-      props.query();
-      props.setOpen(false);
+      query();
+      setOpen(false);
     }
   };
 
@@ -56,7 +56,7 @@ const AddUserModal = (props) => {
   }
 
   return (
-    <Modal open={props.open} onClose={() => props.setOpen(false)}>
+    <Modal open={open} onClose={() => setOpen(false)}>
       <div className={"modal-header"}>
         <Header content='Add New User' />
       </div>
@@ -84,7 +84,7 @@ const AddUserModal = (props) => {
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='red' onClick={() => props.setOpen(false)} inverted>
+        <Button color='red' onClick={() => setOpen(false)} inverted>
           <Icon name='close' /> Cancel
         </Button>
         <Button color='green' onClick={verifyData} inverted>

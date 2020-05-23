@@ -49,47 +49,51 @@ const Api = {
       endpoint: 'v1/user/searchByFilter' + filterToUrlParams(filter)
     };
   },
-  addBeatmap: (beatmap, token) => {
+  addBeatmap: (beatmap, token, userId) => {
     return {
       method: 'POST',
       endpoint: 'v1/beatmap/add',
       body: beatmap,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
       }
     }
   },
-  updateBeatmap: (beatmap, token) => {
+  updateBeatmap: (beatmap, token, userId) => {
     return {
       method: 'PUT',
       endpoint: 'v1/beatmap/' + beatmap.osuId + "/update",
       body: beatmap,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
       }
     }
   },
-  updateUser: (user, token) => {
+  updateUser: (user, token, userId) => {
     return {
       method: 'PUT',
       endpoint: 'v1/user/' + user.osuId + "/update",
       body: user,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
       }
     }
   },
-  addUser: (user, token) => {
+  addUser: (user, token, userId) => {
     return {
       method: 'POST',
       endpoint: 'v1/user/add',
       body: user,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
       }
     }
   },

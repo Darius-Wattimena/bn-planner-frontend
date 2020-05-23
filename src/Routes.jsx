@@ -57,8 +57,8 @@ const Routes = () => {
       <Nav userId={userId} />
       <Switch>
         <Route exact path={"/"} component={Home} />
-        <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} />} />
-        <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} />} />
+        <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} />} />
+        <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} userId={userId} />} />
         <Route path={"/login"} component={Login} />
         <Route path={"/profile/:userId"} component={Profile} />
         <Route component={NotFound} />

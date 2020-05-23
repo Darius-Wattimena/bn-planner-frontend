@@ -34,7 +34,7 @@ const Login = (props) => {
       });
   }, []);
 
-  return <div />
+  return null;
 };
 
 export default Login
