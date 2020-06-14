@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Icon, Image, Label, Table} from "semantic-ui-react";
+import {Table} from "semantic-ui-react";
 import {BEATMAP_STATUS} from "../../Constants";
 import BasicPagination from "../generic/BasicPagination";
 import BeatmapListItem from "./BeatmapListItem";
@@ -59,12 +59,12 @@ function getReadableStatus(unreadableStatus) {
     const keys = Object.keys(BEATMAP_STATUS);
     for (const key of keys) {
       let status = BEATMAP_STATUS[key];
-      if (status.name === unreadableStatus) {
+      if (status.id === unreadableStatus) {
         return status
       }
     }
   } else {
-    return BEATMAP_STATUS["Unknown"];
+    return BEATMAP_STATUS["Pending"];
   }
 }
 

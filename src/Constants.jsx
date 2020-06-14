@@ -1,53 +1,38 @@
 export const BEATMAP_STATUS = {
-  Pending: {
-    name: "Pending",
-    full: "Pending",
-    className: "beatmap-status-pending"
-  },
-  WorkInProgress: {
-    name: "WorkInProgress",
-    full: "Work In Progress",
-    className: "beatmap-status-wip"
-  },
-  AwaitingResponse: {
-    name: "AwaitingResponse",
-    full: "Awaiting Response",
-    className: "beatmap-status-ar"
-  },
-  Bubbled: {
-    name: "Bubbled",
-    full: "Bubbled",
-    className: "beatmap-status-bubbed"
-  },
   Qualified: {
+    id: 1,
     name: "Qualified",
-    full: "Qualified",
     className: "beatmap-status-qualified"
   },
-  Ranked: {
-    name: "Ranked",
-    full: "Ranked",
-    className: "beatmap-status-ranked"
+  Bubbled: {
+    id: 2,
+    name: "Bubbled",
+    className: "beatmap-status-bubbed"
   },
-  Popped: {
-    name: "Popped",
-    full: "Popped",
-    className: "beatmap-status-popped"
+  Pending: {
+    id: 3,
+    name: "Pending",
+    className: "beatmap-status-pending"
   },
   Disqualified: {
+    id: 4,
     name: "Disqualified",
-    full: "Disqualified",
     className: "beatmap-status-dqed"
   },
-  Graved: {
-    name: "Graved",
-    full: "Graved",
-    className: "beatmap-status-graved"
+  Popped: {
+    id: 5,
+    name: "Popped",
+    className: "beatmap-status-popped"
   },
-  Unknown: {
-    name: "Unknown",
-    full: "Unknown",
-    className: "beatmap-status-unknown"
+  Ranked: {
+    id: 6,
+    name: "Ranked",
+    className: "beatmap-status-ranked"
+  },
+  Graved: {
+    id: 7,
+    name: "Graved",
+    className: "beatmap-status-graved"
   }
 };
 

@@ -59,8 +59,6 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
     });
   }
 
-  console.log(formValues);
-
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       {!loading && !error && payload.osuId &&

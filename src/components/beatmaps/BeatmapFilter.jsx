@@ -85,7 +85,9 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
             <Table.Cell width={"4"}>
               <Form>
                 <Form.Dropdown placeholder='Status' fluid multiple selection options={getBeatmapStatusOptions()}
-                               onChange={(event, data) => handleAddStatusFilter(data.value, filter, handleFilterSet)}/>
+                               onChange={(event, data) =>
+                                 handleAddStatusFilter(data.value, filter, handleFilterSet)
+                               }/>
               </Form>
             </Table.Cell>
             <Table.Cell>
@@ -125,13 +127,13 @@ function handleAddStatusFilter(value, filter, handleFilterSet) {
     } else {
       for (let status in BEATMAP_STATUS) {
         let statusValue = BEATMAP_STATUS[status];
-        if (value.includes(statusValue.name) && !filter[filterKey].includes(statusValue.name)) {
+        if (value.includes(statusValue.id) && !filter[filterKey].includes(statusValue.id)) {
           let currentStatuses = filter[filterKey];
-          currentStatuses.push(statusValue.name);
+          currentStatuses.push(statusValue.id);
           handleFilterSet(filterKey, currentStatuses)
-        } else if (!value.includes(statusValue.name) && filter[filterKey].includes(statusValue.name)) {
+        } else if (!value.includes(statusValue.id) && filter[filterKey].includes(statusValue.id)) {
           let statuses = filter[filterKey];
-          const index = statuses.indexOf(statusValue.name);
+          const index = statuses.indexOf(statusValue.id);
           const newValue = statuses.slice(0, index).concat(statuses.slice(index + 1, statuses.length));
           handleFilterSet(filterKey, newValue)
         }

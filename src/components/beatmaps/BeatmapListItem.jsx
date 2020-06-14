@@ -33,7 +33,7 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
       <Table.Cell className={"beatmap-banner"} width={"2"}>
         <Image fluid label={
           <Label ribbon horizontal className={displayStatus.className}>
-            {displayStatus.full}
+            {displayStatus.name}
           </Label>
         } src={"https://assets.ppy.sh/beatmaps/" + beatmap.osuId + "/covers/cover.jpg"}/>
       </Table.Cell>

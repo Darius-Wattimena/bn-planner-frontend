@@ -22,10 +22,7 @@ const AddBeatmapModal = ({open, query, setOpen, userId}) => {
       console.log(mutateError)
     } else {
       setFormValues({
-        beatmapUrl: "",
-        artist: "",
-        title: "",
-        mapper: ""
+        beatmapUrl: ""
       });
       query();
       setOpen(false);
@@ -42,13 +39,12 @@ const AddBeatmapModal = ({open, query, setOpen, userId}) => {
 
   function verifyData() {
     if (formValues.beatmapUrl.startsWith("https://osu.ppy.sh/beatmapsets/") || formValues.beatmapUrl.startsWith("https://osu.ppy.sh/s/")) {
-      let preparedValues = formValues;
       let splitUrl = formValues.beatmapUrl.split("/");
       let setId;
 
       if (formValues.beatmapUrl.startsWith("https://osu.ppy.sh/beatmapsets/")) {
         if (splitUrl[splitUrl.length - 2] === "beatmapsets") {
-          setId = splitUrl[splitUrl.length - 1];
+          setId = splitUrl[splitUrl.length - 2];
         } else {
           setId = splitUrl[splitUrl.length - 2].split('#')[0];
         }
@@ -57,7 +53,9 @@ const AddBeatmapModal = ({open, query, setOpen, userId}) => {
       }
 
       if (!isNaN(setId)) {
-        preparedValues["beatmapId"] = setId;
+        let preparedValues = {
+          "beatmapId": setId
+        };
 
         setIncorrectUrl(false);
         return handleSubmit(preparedValues);
@@ -86,24 +84,6 @@ const AddBeatmapModal = ({open, query, setOpen, userId}) => {
             header="The provided beatmap url is not correct"
             content="A beatmap url should either start with: 'https://osu.ppy.sh/beatmapsets/' or 'https://osu.ppy.sh/s/' and then followed by the beatmap set id to be counted as a correct url"
             className={"error-message"}
-          />
-          <Form.Input
-            label={"Artist"}
-            placeholder='Artist'
-            value={formValues.artist}
-            onChange={event => setFormValue("artist", event.target.value)}
-          />
-          <Form.Input
-            label={"Title"}
-            placeholder='Title'
-            value={formValues.title}
-            onChange={event => setFormValue("title", event.target.value)}
-          />
-          <Form.Input
-            label={"Mapper"}
-            placeholder='Mapper'
-            value={formValues.mapper}
-            onChange={event => setFormValue("mapper", event.target.value)}
           />
         </Form>
       </Modal.Content>

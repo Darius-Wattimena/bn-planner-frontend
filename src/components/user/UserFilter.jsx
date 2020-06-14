@@ -13,8 +13,6 @@ const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, setPage}) => {
     setPage(1)
   }
 
-  console.log(filter)
-
   return (
     <div>
       <Table inverted>
