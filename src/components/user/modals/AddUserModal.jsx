@@ -6,8 +6,7 @@ import {useCookies} from "react-cookie";
 
 const AddUserModal = ({open, query, setOpen, userId}) => {
   const [formValues, setFormValues] = useState({
-    osuUrl: "",
-    osuName: ""
+    osuUrl: ""
   });
   const [incorrectUrl, setIncorrectUrl] = useState(false);
   const [cookies] = useCookies(['bnplanner_osu_access_token']);
@@ -38,14 +37,15 @@ const AddUserModal = ({open, query, setOpen, userId}) => {
 
   function verifyData() {
     if (formValues.osuUrl.startsWith("https://osu.ppy.sh/users/") || formValues.osuUrl.startsWith("https://old.ppy.sh/u/")) {
-      let preparedValues = formValues;
       let splitUrl = formValues.osuUrl.split("/");
       let userId;
 
       userId = splitUrl[splitUrl.length - 1];
 
       if (!isNaN(userId)) {
-        preparedValues["osuId"] = userId;
+        let preparedValues = {
+          "osuId": userId
+        }
 
         setIncorrectUrl(false);
         return handleSubmit(preparedValues)
@@ -74,12 +74,6 @@ const AddUserModal = ({open, query, setOpen, userId}) => {
             header="The provided user url is not correct"
             content="A user url should either start with: 'https://osu.ppy.sh/users/' or 'https://old.ppy.sh/u/' and then followed by the beatmap set id to be counted as a correct url"
             className={"error-message"}
-          />
-          <Form.Input
-            label={"Name"}
-            placeholder='Name'
-            value={formValues.osuName}
-            onChange={event => setFormValue("osuName", event.target.value)}
           />
         </Form>
       </Modal.Content>

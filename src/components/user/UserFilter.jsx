@@ -13,6 +13,8 @@ const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, setPage}) => {
     setPage(1)
   }
 
+  console.log(filter)
+
   return (
     <div>
       <Table inverted>
@@ -48,7 +50,9 @@ const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, setPage}) => {
             <Table.Cell width={"7"}>
               <Form>
                 <Form.Dropdown placeholder='Roles' fluid multiple selection options={options} value={filter.roles}
-                               onChange={(event, data) => handleMultiSelectFilter("roles", data.value, filter, handleFilterSet, USER_ROLES)}/>
+                               onChange={(event, data) =>
+                                 handleMultiSelectFilter("roles", data.value, filter, handleFilterSet, USER_ROLES)
+                               }/>
               </Form>
             </Table.Cell>
             <Table.Cell width={"2"}>
@@ -71,9 +75,9 @@ const options = [
 
 function getOption(status) {
   return {
-    key: status.name,
+    key: status.id,
     text: status.full,
-    value: status.name,
+    value: status.id,
     className: status.className
   }
 }
@@ -98,14 +102,14 @@ function handleMultiSelectFilter(key, value, filter, handleFilterSet, items) {
     } else {
       for (let item in items) {
         let filterValue = items[item];
-        if (value.includes(filterValue.name) && !filter[key].includes(filterValue.name)) {
-          let currentStatuses = filter[key];
-          currentStatuses.push(filterValue.name);
-          handleFilterSet(key, currentStatuses)
-        } else if (!value.includes(filterValue.name) && filter[key].includes(filterValue.name)) {
-          let statuses = filter[key];
-          const index = statuses.indexOf(filterValue.name);
-          const newValue = statuses.slice(0, index).concat(statuses.slice(index + 1, statuses.length));
+        if (value.includes(filterValue.id) && !filter[key].includes(filterValue.id)) {
+          let currentRoles = filter[key];
+          currentRoles.push(filterValue.id);
+          handleFilterSet(key, currentRoles)
+        } else if (!value.includes(filterValue.id) && filter[key].includes(filterValue.id)) {
+          let roles = filter[key];
+          const index = roles.indexOf(filterValue.id);
+          const newValue = roles.slice(0, index).concat(roles.slice(index + 1, roles.length));
           handleFilterSet(key, newValue)
         }
       }

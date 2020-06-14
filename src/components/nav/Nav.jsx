@@ -70,7 +70,7 @@ const LoginMenu = ({selected, handleNavClick, userId}) => {
       </Menu.Menu>
     )
   } else {
-    const osuLoginUrl = "https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=" + ENV.osu.id +"&redirect_uri=" + ENV.osu.redirect + "&response_type=code";
+    const osuLoginUrl = "https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=" + ENV.osu.id +"&redirect_uri=" + ENV.osu.redirect + "&response_type=code&scope=identify public";
     return (
       <Menu.Menu position='right'>
         <MenuItem
