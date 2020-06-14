@@ -5,7 +5,7 @@ export function getReadableRole(unreadableRole) {
     const keys = Object.keys(USER_ROLES);
     for (const key of keys) {
       let role = USER_ROLES[key];
-      if (role.name === unreadableRole) {
+      if (role.id === unreadableRole) {
         return role
       }
     }
@@ -26,9 +26,9 @@ export function getUserRoles() {
 
 function getOption(status) {
   return {
-    key: status.name,
-    text: status.full,
-    value: status.name,
+    key: status.id,
+    text: status.name,
+    value: status.id,
     className: status.className
   }
 }

@@ -64,9 +64,8 @@ const LoginMenu = ({selected, handleNavClick, userId}) => {
         <MenuItem
           name={profileName}
           active={selected === profileName}
-          onClick={() => handleNavClick(profileName, "/profile/" + userId)}
         >
-          Profile
+          Profile TODO
         </MenuItem>
       </Menu.Menu>
     )

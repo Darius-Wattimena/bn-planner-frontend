@@ -53,28 +53,33 @@ export const BEATMAP_STATUS = {
 
 export const USER_ROLES = {
   Observer: {
-    name: "OBS",
-    full: "Observer",
+    id: "OBS",
+    name: "Other",
+    full: "Other",
     className: "user-role-observer"
   },
   BeatmapNominator: {
-    name: "BN",
+    id: "BN",
+    name: "Full",
     full: "Beatmap Nominator",
     className: "user-role-bn"
   },
   ProbationBeatmapNominator: {
-    name: "PBN",
+    id: "PBN",
+    name: "Probation",
     full: "Probation Beatmap Nominator",
     className: "user-role-pbn"
   },
   NominationAssessmentTeam: {
+    id: "NAT",
     name: "NAT",
     full: "Nomination Assessment Team",
     className: "user-role-nat"
   },
   RetiredCatch: {
-    name: "CA",
-    full: "osu!catch Alumni",
+    id: "CA",
+    name: "Retired",
+    full: "Retired Nominator",
     className: "user-role-ca"
   }
 };
