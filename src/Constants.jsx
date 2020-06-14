@@ -56,30 +56,35 @@ export const USER_ROLES = {
     id: "OBS",
     name: "Other",
     full: "Other",
+    detailed: "Other",
     className: "user-role-observer"
   },
   BeatmapNominator: {
     id: "BN",
     name: "Full",
-    full: "Beatmap Nominator",
+    full: "Full",
+    detailed: "Beatmap Nominator",
     className: "user-role-bn"
   },
   ProbationBeatmapNominator: {
     id: "PBN",
     name: "Probation",
-    full: "Probation Beatmap Nominator",
+    full: "Probation",
+    detailed: "Probation Beatmap Nominator",
     className: "user-role-pbn"
   },
   NominationAssessmentTeam: {
     id: "NAT",
     name: "NAT",
-    full: "Nomination Assessment Team",
+    full: "NAT",
+    detailed: "Nomination Assessment Team",
     className: "user-role-nat"
   },
   RetiredCatch: {
     id: "CA",
     name: "Retired",
-    full: "Retired Nominator",
+    full: "Retired",
+    detailed: "Retired Nominator",
     className: "user-role-ca"
   }
 };
