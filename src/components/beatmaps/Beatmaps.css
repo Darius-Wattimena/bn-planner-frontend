@@ -48,6 +48,10 @@
     color: #242424 !important;
 }
 
+tr.beatmap-row td.beatmap-nominator .nominated {
+    box-shadow: 0 0 5px 1px #40ff2f;
+}
+
 .beatmap-banner {
     max-width: 8vw;
 }

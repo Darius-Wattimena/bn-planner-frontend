@@ -15,13 +15,13 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
     }
   }
 
-  function NominatorDetails({nominators, nominatorNumber}) {
+  function NominatorDetails({nominated, nominators, nominatorNumber}) {
     const nominatorDetails = getNominator(nominators, nominatorNumber);
     if (nominatorDetails && nominatorDetails !== 0) {
-      return (<UserAvatar userDetails={nominatorDetails}/>)
+      return (<UserAvatar nominated={nominated} userDetails={nominatorDetails}/>)
     } else if (nominators.length === 1) {
       if (nominatorNumber === 1) {
-        return (<UserAvatar userDetails={nominatorDetails}/>)
+        return (<UserAvatar nominated={nominated} userDetails={nominatorDetails}/>)
       }
     }
 
@@ -29,7 +29,7 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
   }
 
   return (
-    <Table.Row>
+    <Table.Row className={"beatmap-row"}>
       <Table.Cell className={"beatmap-banner"} width={"2"}>
         <Image fluid label={
           <Label ribbon horizontal className={displayStatus.className}>
@@ -40,11 +40,11 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
       <Table.Cell width={"2"} textAlign={"center"}>{beatmap.artist}</Table.Cell>
       <Table.Cell width={"2"} textAlign={"center"}>{beatmap.title}</Table.Cell>
       <Table.Cell width={"2"} textAlign={"center"}>{beatmap.mapper}</Table.Cell>
-      <Table.Cell width={"2"}>
-        <NominatorDetails nominators={beatmap.nominators} nominatorNumber={1} />
+      <Table.Cell className={"beatmap-nominator"} width={"2"}>
+        <NominatorDetails nominated={beatmap.nominatedByBNOne} nominators={beatmap.nominators} nominatorNumber={1} />
       </Table.Cell>
-      <Table.Cell width={"2"}>
-        <NominatorDetails nominators={beatmap.nominators} nominatorNumber={2} />
+      <Table.Cell className={"beatmap-nominator"} width={"2"}>
+        <NominatorDetails nominated={beatmap.nominatedByBNTwo} nominators={beatmap.nominators} nominatorNumber={2} />
       </Table.Cell>
       <Table.Cell width={"1"} textAlign={"center"}>
         {beatmap.note &&
