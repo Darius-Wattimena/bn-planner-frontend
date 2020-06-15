@@ -17,7 +17,9 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
     note: "",
     status: "",
     nominators: [0, 0],
-    events: []
+    events: [],
+    nominatedByBNOne: false,
+    nominatedByBNTwo: false
   });
   const [showingSameNominatorWarning, setShowingSameNominatorWarning] = useState(false);
   const [cookies] = useCookies(['bnplanner_osu_access_token']);
@@ -60,7 +62,9 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
         note: "",
         status: "",
         nominators: [0, 0],
-        events: []
+        events: [],
+        nominatedByBNOne: false,
+        nominatedByBNTwo: false
       });
       setOpen(false);
       query();
@@ -114,6 +118,13 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                     }}
                     error={showingSameNominatorWarning}
                   />
+                  <Form.Checkbox
+                    toggle
+                    label={"Has Nominated"}
+                    disabled={!canEdit}
+                    checked={formValues.nominatedByBNOne}
+                    onChange={() => setFormValue("nominatedByBNOne", !formValues.nominatedByBNOne)}
+                  />
                   <Form.Dropdown
                     disabled={!canEdit}
                     label={"Nominator #2"}
@@ -126,6 +137,13 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                       verifyNominatorSelected([formValues.nominators[0], data.value]);
                     }}
                     error={showingSameNominatorWarning}
+                  />
+                  <Form.Checkbox
+                    toggle
+                    label={"Has Nominated"}
+                    disabled={!canEdit}
+                    checked={formValues.nominatedByBNTwo}
+                    onChange={() => setFormValue("nominatedByBNTwo", !formValues.nominatedByBNTwo)}
                   />
                   <h3>Metadata</h3>
                   <Form.Input
