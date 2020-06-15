@@ -10,17 +10,17 @@ export const BEATMAP_STATUS = {
     className: "beatmap-status-bubbed"
   },
   Pending: {
-    id: 3,
+    id: 5,
     name: "Pending",
     className: "beatmap-status-pending"
   },
   Disqualified: {
-    id: 4,
+    id: 3,
     name: "Disqualified",
     className: "beatmap-status-dqed"
   },
   Popped: {
-    id: 5,
+    id: 4,
     name: "Popped",
     className: "beatmap-status-popped"
   },
