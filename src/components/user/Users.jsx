@@ -7,7 +7,6 @@ import AddUserModal from "./modals/AddUserModal";
 import Api from "../../resources/Api";
 import {useQuery} from "react-fetching-library";
 import EditUserModal from "./modals/EditUserModal";
-import AddBeatmapModal from "../beatmaps/modals/AddBeatmapModal";
 
 const filterDefaultState = {
   "osuId": null,
