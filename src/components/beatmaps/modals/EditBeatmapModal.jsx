@@ -5,10 +5,12 @@ import {Button, Form, Grid, Header, Icon, Image, Modal} from "semantic-ui-react"
 import {getBeatmapStatusOptions, getNominatorOptions} from "../../../util/BeatmapUtil";
 import BeatmapEventList from "../BeatmapEventList";
 import {useCookies} from "react-cookie";
+import DeleteBeatmapModal from "./DeleteBeatmapModal";
 
 const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, canEdit, userId}) => {
   const {loading, payload, error} = useQuery(Api.getDetailedBeatmap(id));
   const {mutate} = useMutation(Api.updateBeatmap);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [formValues, setFormValues] = useState({
     osuId: "",
     artist: "",
@@ -81,16 +83,17 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
   }
 
   return (
-    <Modal open={open} onClose={() => setOpen(false)}>
-      {!loading && !error && payload.osuId &&
+    <div>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        {!loading && !error && payload.osuId &&
         <div className={"modal-header"}>
           <div className={"modal-header-image"}>
             <Image fluid src={"https://assets.ppy.sh/beatmaps/" + payload.osuId + "/covers/cover.jpg"}/>
           </div>
           <Header content={"Editing Beatmap : " + payload.artist + " - " + payload.title}/>
         </div>
-      }
-      {!loading && !error &&
+        }
+        {!loading && !error &&
         <Modal.Content>
           <Grid>
             <Grid.Row>
@@ -178,12 +181,17 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
               <Grid.Column width={8}>
                 <h3>Events</h3>
                 <BeatmapEventList events={formValues.events} />
+                {canEdit === true &&
+                  <Button color='red' onClick={() => setDeleteModalOpen(true)} inverted>
+                    <Icon name='trash' /> Delete
+                  </Button>
+                }
               </Grid.Column>
             </Grid.Row>
           </Grid>
         </Modal.Content>
-      }
-      {canEdit === true &&
+        }
+        {canEdit === true &&
         <Modal.Actions>
           <Button color='red' onClick={() => setOpen(false)} inverted>
             <Icon name='close' /> Close
@@ -192,16 +200,27 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
             <Icon name='checkmark' /> Save
           </Button>
         </Modal.Actions>
-      }
-      {canEdit === false &&
-      <Modal.Actions>
-        <Button color='green' onClick={() => setOpen(false)} inverted>
-          <Icon name='close' /> Close
-        </Button>
-      </Modal.Actions>
-      }
+        }
+        {canEdit === false &&
+        <Modal.Actions>
+          <Button color='green' onClick={() => setOpen(false)} inverted>
+            <Icon name='close' /> Close
+          </Button>
+        </Modal.Actions>
+        }
 
-    </Modal>
+      </Modal>
+      {payload &&
+        <DeleteBeatmapModal
+          query={query}
+          open={deleteModalOpen}
+          setOpen={setDeleteModalOpen}
+          beatmap={payload}
+          setOpenEditModal={setOpen}
+          userId={userId}
+        />
+      }
+    </div>
   )
 };
 

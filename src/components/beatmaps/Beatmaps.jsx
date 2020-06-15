@@ -56,7 +56,16 @@ const Beatmaps = ({canEdit, isAdmin, userId}) => {
         />
         <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId} />
         {selectedBeatmap !== 0 &&
-          <EditBeatmapModal query={query} open={editModalOpen} setOpen={setEditModalOpen} id={selectedBeatmap} users={userQuery.payload} setSelectedBeatmap={setSelectedBeatmap} canEdit={canEdit} userId={userId} />
+          <EditBeatmapModal
+            id={selectedBeatmap}
+            userId={userId}
+            canEdit={canEdit}
+            query={query}
+            open={editModalOpen}
+            setOpen={setEditModalOpen}
+            users={userQuery.payload}
+            setSelectedBeatmap={setSelectedBeatmap}
+          />
         }
       </Container>
     </div>

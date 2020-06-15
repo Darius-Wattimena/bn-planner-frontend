@@ -73,6 +73,17 @@ const Api = {
       }
     }
   },
+  deleteBeatmap: (beatmapId, token, userId) => {
+    return {
+      method: 'DELETE',
+      endpoint: 'v1/beatmap/' + beatmapId + "/delete",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
   updateUser: (user, token, userId) => {
     return {
       method: 'PUT',
