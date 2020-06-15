@@ -6,10 +6,10 @@ import Users from "./components/user/Users";
 import NotFound from "./components/notFound/NotFound";
 import {useCookies} from "react-cookie";
 import Home from "./components/home/Home";
-import Profile from "./components/profile/Profile";
 import Login from "./components/login/Login";
 import {useQuery} from "react-fetching-library";
 import Api from "./resources/Api";
+import {Dimmer, Loader} from "semantic-ui-react";
 
 export const basePermissions = {
   empty: true
@@ -21,6 +21,14 @@ const Routes = () => {
   const { payload, loading, error } = useQuery(Api.getUserInfo(cookies.bnplanner_osu_access_token));
 
   const [permissions, setPermissions] = useState(basePermissions);
+
+  if (loading) {
+    return (
+      <Dimmer active>
+        <Loader indeterminate className={"header-text"}>Preparing Nomination Planner</Loader>
+      </Dimmer>
+    )
+  }
 
   if (cookies && cookies.bnplanner_osu_access_token && cookies.bnplanner_osu_access_token !== ""
     && !loading && !error && payload && payload !== "" && permissions === basePermissions) {
@@ -60,7 +68,6 @@ const Routes = () => {
         <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} />} />
         <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} userId={userId} />} />
         <Route path={"/login"} component={Login} />
-        <Route path={"/profile/:userId"} component={Profile} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

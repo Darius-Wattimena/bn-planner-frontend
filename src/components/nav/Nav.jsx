@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Menu, MenuItem} from "semantic-ui-react";
+import {Container, Menu, MenuItem} from "semantic-ui-react";
 import {useHistory} from "react-router-dom";
 import catchLogo from "../../assets/catch.svg"
 import "./Nav.css"
@@ -9,23 +9,34 @@ const homeName = "home";
 const beatmapsName = "beatmaps";
 const usersName = "users";
 const loginName = "login";
-const profileName = "profile";
+
+function getSelectedFromHref() {
+  if (window.location.href.endsWith("/beatmaps")) {
+    return beatmapsName
+  } else if (window.location.href.endsWith("/users")) {
+    return usersName
+  } else {
+    return homeName
+  }
+}
 
 const Nav = ({userId}) => {
   let history = useHistory();
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(getSelectedFromHref());
 
   function handleNavClick(itemName, location) {
     setSelected(itemName);
     history.push(location);
   }
 
+  const osuLoginUrl = "https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=" + ENV.osu.id +"&redirect_uri=" + ENV.osu.redirect + "&response_type=code&scope=identify public";
+
   return (
     <nav className={"nav-header"}>
       <Menu secondary inverted>
-        <MenuItem onClick={() => handleNavClick(homeName, "/")}>
+        <div className={"item"} onClick={() => handleNavClick(homeName, "/")}>
           <img src={catchLogo} alt={""}/>
-        </MenuItem>
+        </div>
         <MenuItem
           name={homeName}
           active={selected === homeName}
@@ -47,42 +58,20 @@ const Nav = ({userId}) => {
         >
           Users
         </MenuItem>
-        <LoginMenu
-          selected={selected}
-          handleNavClick={handleNavClick}
-          userId={userId}
-        />
+        {userId === 0 &&
+        <Menu.Menu position='right'>
+          <MenuItem
+            name={loginName}
+            active={selected === loginName}
+            onClick={() => window.location.href = osuLoginUrl}
+          >
+            Login
+          </MenuItem>
+        </Menu.Menu>
+        }
       </Menu>
     </nav>
   )
-};
-
-const LoginMenu = ({selected, handleNavClick, userId}) => {
-  if (userId !== 0) {
-    return (
-      <Menu.Menu position='right'>
-        <MenuItem
-          name={profileName}
-          active={selected === profileName}
-        >
-          Profile TODO
-        </MenuItem>
-      </Menu.Menu>
-    )
-  } else {
-    const osuLoginUrl = "https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=" + ENV.osu.id +"&redirect_uri=" + ENV.osu.redirect + "&response_type=code&scope=identify public";
-    return (
-      <Menu.Menu position='right'>
-        <MenuItem
-          name={loginName}
-          active={selected === loginName}
-          onClick={() => window.location.href = osuLoginUrl}
-        >
-          Login
-        </MenuItem>
-      </Menu.Menu>
-    )
-  }
 };
 
 export default Nav

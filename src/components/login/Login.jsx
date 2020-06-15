@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
 import {ENV} from "../../Settings";
+import {Dimmer, Loader} from "semantic-ui-react";
 
 const queryString = require('query-string');
 
@@ -34,7 +35,11 @@ const Login = (props) => {
       });
   }, []);
 
-  return null;
+  return (
+    <Dimmer active>
+      <Loader indeterminate className={"header-text"}>Preparing Nomination Planner</Loader>
+    </Dimmer>
+  )
 };
 
 export default Login
