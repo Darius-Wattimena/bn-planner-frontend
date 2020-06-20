@@ -18,6 +18,7 @@ const filterDefaultState = {
   "countTotal": true,
   "hideRanked": true,
   "hideGraved": true,
+  "hideWithTwoNominators": false,
   "nominator": []
 };
 

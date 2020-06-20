@@ -37,6 +37,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
             <Table.HeaderCell>Status</Table.HeaderCell>
             <Table.HeaderCell>Show Ranked</Table.HeaderCell>
             <Table.HeaderCell>Show Graved</Table.HeaderCell>
+            <Table.HeaderCell>Hide With 2 BNs</Table.HeaderCell>
             <Table.HeaderCell/>
           </Table.Row>
         </Table.Header>
@@ -105,6 +106,15 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
                   toggle
                   checked={!filter.hideGraved}
                   onChange={() => handleFilterSet("hideGraved", !filter.hideGraved)}
+                />
+              </Form>
+            </Table.Cell>
+            <Table.Cell>
+              <Form>
+                <Form.Checkbox
+                  toggle
+                  checked={filter.hideWithTwoNominators}
+                  onChange={() => handleFilterSet("hideWithTwoNominators", !filter.hideWithTwoNominators)}
                 />
               </Form>
             </Table.Cell>
