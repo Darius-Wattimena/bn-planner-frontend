@@ -35,17 +35,17 @@
     color: #d7d7d7 !important;
 }
 
-.ui.label.user-role-pbn, .item.user-role-pbn, .item.user-role-pbn > span.text {
+.ui.label.user-role-pbn, .ui.form .ui.dropdown div.menu div.item.user-role-pbn, .ui.form .field.error .ui.dropdown div.menu div.item.user-role-pbn, .ui.dropdown div .item.user-role-pbn > span.text {
     background-color: #995ba5 !important;
     color: #d7d7d7 !important;
 }
 
-.ui.label.user-role-nat, .item.user-role-nat, .item.user-role-nat > span.text {
+.ui.label.user-role-nat, .ui.form .ui.dropdown div.menu div.item.user-role-nat, .ui.form .field.error .ui.dropdown div.menu div.item.user-role-nat, .ui.dropdown div .item.user-role-nat > span.text {
     background-color: #a53d3c !important;
     color: #d7d7d7 !important;
 }
 
-.ui.label.user-role-ca, .item.user-role-ca, .item.user-role-ca > span.text {
+.ui.label.user-role-ca, .ui.form .ui.dropdown div.menu div.item.user-role-ca, .ui.form .field.error .ui.dropdown div.menu div.item.user-role-ca, .ui.dropdown div .item.user-role-ca > span.text {
     background-color: #555555 !important;
     color: #d7d7d7 !important;
 }

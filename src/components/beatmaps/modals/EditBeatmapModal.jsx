@@ -180,7 +180,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
               </Grid.Column>
               <Grid.Column width={8}>
                 <h3>Events</h3>
-                <BeatmapEventList events={formValues.events} />
+                <BeatmapEventList events={formValues.events} users={users} />
                 {canEdit === true &&
                   <Button color='red' onClick={() => setDeleteModalOpen(true)} inverted>
                     <Icon name='trash' /> Delete

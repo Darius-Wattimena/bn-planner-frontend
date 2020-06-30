@@ -89,7 +89,8 @@ div div.text {
 }
 
 .scrollable-list {
-    height: 60vh;
+    height: fit-content;
+    max-height: 70vh;
     overflow-y: scroll;
 }
 

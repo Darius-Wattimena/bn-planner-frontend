@@ -62,6 +62,10 @@ tr.beatmap-row td.beatmap-nominator .nominated {
     }
 }
 
+.beatmap-event-list {
+    height: inherit;
+}
+
 .beatmap-event-item {
     margin: 1vh 0;
 }

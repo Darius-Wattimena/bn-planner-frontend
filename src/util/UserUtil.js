@@ -1,5 +1,11 @@
 import {USER_ROLES} from "../Constants";
 
+export function getUserWithId(users, userId) {
+  if (users && userId && Array.isArray(users)) {
+    return users.find(user => user.osuId === userId)
+  }
+}
+
 export function getReadableRole(unreadableRole) {
   if (unreadableRole) {
     const keys = Object.keys(USER_ROLES);
