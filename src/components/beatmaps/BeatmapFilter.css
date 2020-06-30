@@ -1,0 +1,8 @@
+.ui.popup>  .ui.grid.filter-settings-popup {
+    width: 400px;
+}
+
+.ui.popup>  .ui.grid.filter-settings-popup .row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

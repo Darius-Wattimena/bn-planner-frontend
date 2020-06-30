@@ -1,7 +1,8 @@
 import React from "react";
-import {Button, Form, Table} from "semantic-ui-react";
+import {Button, Checkbox, Form, Grid, Icon, Popup, Table} from "semantic-ui-react";
 import {BEATMAP_STATUS} from "../../Constants";
 import {getBeatmapStatusOptions} from "../../util/BeatmapUtil";
+import "./BeatmapFilter.css"
 
 const FilterField = ({id, label, group, handleFilterSet}) => {
   return (
@@ -35,9 +36,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
             <Table.HeaderCell>Title</Table.HeaderCell>
             <Table.HeaderCell>Mapper</Table.HeaderCell>
             <Table.HeaderCell>Status</Table.HeaderCell>
-            <Table.HeaderCell>Show Ranked</Table.HeaderCell>
-            <Table.HeaderCell>Show Graved</Table.HeaderCell>
-            <Table.HeaderCell>Hide With 2 BNs</Table.HeaderCell>
+            <Table.HeaderCell>Extra Filters</Table.HeaderCell>
             <Table.HeaderCell/>
           </Table.Row>
         </Table.Header>
@@ -63,7 +62,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
                 />
               </Form>
             </Table.Cell>
-            <Table.Cell width={"3"}>
+            <Table.Cell width={"2"}>
               <Form inverted>
                 <FilterField
                   id={"title"}
@@ -91,32 +90,69 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
                                }/>
               </Form>
             </Table.Cell>
-            <Table.Cell>
-              <Form>
-                <Form.Checkbox
-                  toggle
-                  checked={!filter.hideRanked}
-                  onChange={() => handleFilterSet("hideRanked", !filter.hideRanked)}
-                />
-              </Form>
-            </Table.Cell>
-            <Table.Cell>
-              <Form>
-                <Form.Checkbox
-                  toggle
-                  checked={!filter.hideGraved}
-                  onChange={() => handleFilterSet("hideGraved", !filter.hideGraved)}
-                />
-              </Form>
-            </Table.Cell>
-            <Table.Cell>
-              <Form>
-                <Form.Checkbox
-                  toggle
-                  checked={filter.hideWithTwoNominators}
-                  onChange={() => handleFilterSet("hideWithTwoNominators", !filter.hideWithTwoNominators)}
-                />
-              </Form>
+            <Table.Cell width={"1"}>
+              <Popup
+                trigger={
+                  <Button primary fluid content={
+                    <div>
+                      <Icon name={"wrench"} />
+                    </div>
+                  } />
+                }
+                content={<Grid className={"filter-settings-popup"} verticalAlign={"middle"}>
+                  <Grid.Row>
+                    <Grid.Column width={"5"} textAlign={"right"}>
+                      Nominators
+                    </Grid.Column>
+                    <Grid.Column width={"2"}>
+                      <Icon name={(filter.hideWithTwoNominators) ? "user" : "group"} color={"green"} size={"large"} />
+                    </Grid.Column>
+                    <Grid.Column width={"9"}>
+                      <Button.Group fluid>
+                        <Button inverted primary={filter.hideWithTwoNominators === true} secondary={filter.hideWithTwoNominators !== true} active={filter.hideWithTwoNominators === true}
+                                onClick={() => handleFilterSet("hideWithTwoNominators", true)}>Missing</Button>
+                        <Button inverted primary={filter.hideWithTwoNominators === false} secondary={filter.hideWithTwoNominators !== false} active={filter.hideWithTwoNominators === false}
+                                onClick={() => handleFilterSet("hideWithTwoNominators", false)}>Any</Button>
+                      </Button.Group>
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column width={"5"} textAlign={"right"}>
+                      Show Ranked
+                    </Grid.Column>
+                    <Grid.Column width={"2"}>
+                      <Icon name={"star"} color={(filter.hideRanked) ? "red" : "green"}  size={"large"} />
+                    </Grid.Column>
+                    <Grid.Column width={"9"}>
+                      <Button.Group fluid>
+                        <Button inverted primary={filter.hideRanked === false} secondary={filter.hideRanked !== false} active={filter.hideRanked === false}
+                                onClick={() => handleFilterSet("hideRanked", false)}>Yes</Button>
+                        <Button inverted primary={filter.hideRanked === true} secondary={filter.hideRanked !== true} active={filter.hideRanked === true}
+                                onClick={() => handleFilterSet("hideRanked", true)}>No</Button>
+                      </Button.Group>
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column width={"5"} textAlign={"right"}>
+                      Show Graved
+                    </Grid.Column>
+                    <Grid.Column width={"2"}>
+                      <Icon Icon name={"archive"} color={(filter.hideGraved) ? "grey" : ""} size={"large"} />
+                    </Grid.Column>
+                    <Grid.Column widescreen={"9"}>
+                      <Button.Group fluid>
+                        <Button inverted primary={filter.hideGraved === false} secondary={filter.hideGraved !== false} active={filter.hideGraved === false}
+                                onClick={() => handleFilterSet("hideGraved", false)}>Yes</Button>
+                        <Button inverted primary={filter.hideGraved === true} secondary={filter.hideGraved !== true} active={filter.hideGraved === true}
+                                onClick={() => handleFilterSet("hideGraved", true)}>No</Button>
+                      </Button.Group>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>}
+                on='click'
+                position='bottom right'
+                inverted
+              />
             </Table.Cell>
             <Table.Cell width={"2"}>
               <Button disabled={!canEdit} fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add Beatmap</Button>
