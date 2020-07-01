@@ -25,7 +25,7 @@ const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, us
   }
 
   return (
-    <Modal open={open} onClose={() => setOpen(false)}>
+    <Modal open={open} onClose={() => setOpen(false)} size={"tiny"}>
       <div className={"modal-header"}>
         <Header content={"Deleting Beatmap : " + beatmap.artist + " - " + beatmap.title}/>
       </div>
