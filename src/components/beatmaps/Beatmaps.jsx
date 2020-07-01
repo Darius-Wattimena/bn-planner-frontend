@@ -22,8 +22,7 @@ const filterDefaultState = {
   "nominator": []
 }
 
-const Beatmaps = ({canEdit, isAdmin, userId}) => {
-  const userQuery = useQuery(Api.getUsers())
+const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
   const [filter, setFilter] = useState(filterDefaultState)
   const [selectedBeatmap, setSelectedBeatmap] = useState(0)
   const [addModalOpen, setAddModalOpen] = useState(false)
@@ -64,7 +63,7 @@ const Beatmaps = ({canEdit, isAdmin, userId}) => {
             query={query}
             open={editModalOpen}
             setOpen={setEditModalOpen}
-            users={userQuery.payload}
+            users={users}
             setSelectedBeatmap={setSelectedBeatmap}
           />
         }

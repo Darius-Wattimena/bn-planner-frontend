@@ -6,7 +6,7 @@ import BeatmapEventList from "../../beatmaps/BeatmapEventList"
 import {getUserRoles} from "../../../util/UserUtil"
 import {useCookies} from "react-cookie"
 
-const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, userId}) => {
+const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, userId, users}) => {
   const {loading, payload, error} = useQuery(Api.getDetailedUser(id))
   const {mutate} = useMutation(Api.updateUser)
   const [formValues, setFormValues] = useState({
@@ -106,7 +106,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
               </Grid.Column>
               <Grid.Column width={8}>
                 <h3>Events</h3>
-                <BeatmapEventList events={formValues.events} />
+                <BeatmapEventList events={formValues.events} users={users} />
               </Grid.Column>
             </Grid.Row>
           </Grid>

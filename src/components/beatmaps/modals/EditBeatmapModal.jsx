@@ -78,7 +78,6 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
   }
 
   function checkIfNewStatusIsPossible() {
-    console.log({payload, formValues})
     if (payload === undefined || (formValues.nominatedByBNOne == null && formValues.nominatedByBNTwo == null)) {
       setPotentialNewStatus(0)
     } else if (formValues.nominatedByBNOne && formValues.nominatedByBNTwo) {

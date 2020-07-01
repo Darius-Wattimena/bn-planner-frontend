@@ -19,10 +19,11 @@ const Routes = () => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
 
   const { payload, loading, error } = useQuery(Api.getUserInfo(cookies.bnplanner_osu_access_token))
+  const userQuery = useQuery(Api.getUsers())
 
   const [permissions, setPermissions] = useState(basePermissions)
 
-  if (loading) {
+  if (loading || userQuery.loading) {
     return (
       <Dimmer active>
         <Loader indeterminate className={"header-text"}>Preparing Nomination Planner</Loader>
@@ -65,8 +66,8 @@ const Routes = () => {
       <Nav userId={userId} />
       <Switch>
         <Route exact path={"/"} component={Home} />
-        <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} />} />
-        <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} userId={userId} />} />
+        <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+        <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route path={"/login"} component={Login} />
         <Route component={NotFound} />
       </Switch>

@@ -17,7 +17,7 @@ const filterDefaultState = {
   "countTotal": true
 }
 
-const Users = ({canEdit, isAdmin, userId}) => {
+const Users = ({canEdit, isAdmin, userId, users}) => {
   const [filter, setFilter] = useState(filterDefaultState)
   const [selectedUser, setSelectedUser] = useState(0)
   const [addModalOpen, setAddModalOpen] = useState(false)
@@ -59,6 +59,7 @@ const Users = ({canEdit, isAdmin, userId}) => {
             setSelectedUser={setSelectedUser}
             isAdmin={isAdmin}
             userId={userId}
+            users={users}
           />
         }
       </Container>
