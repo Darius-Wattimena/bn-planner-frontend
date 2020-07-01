@@ -38,7 +38,7 @@ const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap
         <Header content={"Updating Status : " + beatmap.artist + " - " + beatmap.title}/>
       </div>
       <Modal.Content>
-        Are you sure that you want to update the status from <u className={readableOldStatus.className}>{readableOldStatus.name}</u> to <u className={readableNewStatus.className}>{readableNewStatus.name}</u> for the following beatmap from the planner?
+        Are you sure that you want to update the status from <u className={readableOldStatus.className}>{readableOldStatus.name}</u> to <u className={readableNewStatus.className}>{readableNewStatus.name}</u> for the following beatmap?
         {(status === BEATMAP_STATUS.Popped.id || status === BEATMAP_STATUS.Disqualified.id) &&
           <Message
             info
