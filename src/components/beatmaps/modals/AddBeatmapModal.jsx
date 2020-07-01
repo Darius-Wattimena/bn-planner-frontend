@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Button, Form, Header, Icon, Message, Modal} from "semantic-ui-react";
-import {useMutation} from "react-fetching-library";
-import Api from "../../../resources/Api";
-import {useCookies} from "react-cookie";
+import React, {useState} from "react"
+import {Button, Form, Header, Icon, Message, Modal} from "semantic-ui-react"
+import {useMutation} from "react-fetching-library"
+import Api from "../../../resources/Api"
+import {useCookies} from "react-cookie"
 
 const AddBeatmapModal = ({open, query, setOpen, userId}) => {
   const [formValues, setFormValues] = useState({
@@ -10,59 +10,59 @@ const AddBeatmapModal = ({open, query, setOpen, userId}) => {
     artist: "",
     title: "",
     mapper: ""
-  });
-  const [incorrectUrl, setIncorrectUrl] = useState(false);
-  const [cookies] = useCookies(['bnplanner_osu_access_token']);
+  })
+  const [incorrectUrl, setIncorrectUrl] = useState(false)
+  const [cookies] = useCookies(['bnplanner_osu_access_token'])
 
-  const {mutate} = useMutation(Api.addBeatmap);
+  const {mutate} = useMutation(Api.addBeatmap)
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId)
 
     if (mutateError) {
       console.log(mutateError)
     } else {
       setFormValues({
         beatmapUrl: ""
-      });
-      query();
-      setOpen(false);
+      })
+      query()
+      setOpen(false)
     }
-  };
+  }
 
   function setFormValue(field, value) {
-    let newFormValues = formValues;
-    newFormValues[field] = value;
+    let newFormValues = formValues
+    newFormValues[field] = value
     setFormValues({
       ...newFormValues
-    });
+    })
   }
 
   function verifyData() {
     if (formValues.beatmapUrl.startsWith("https://osu.ppy.sh/beatmapsets/") || formValues.beatmapUrl.startsWith("https://osu.ppy.sh/s/")) {
-      let splitUrl = formValues.beatmapUrl.split("/");
-      let setId;
+      let splitUrl = formValues.beatmapUrl.split("/")
+      let setId
 
       if (formValues.beatmapUrl.startsWith("https://osu.ppy.sh/beatmapsets/")) {
         if (splitUrl[splitUrl.length - 2] === "beatmapsets") {
-          setId = splitUrl[splitUrl.length - 2];
+          setId = splitUrl[splitUrl.length - 2]
         } else {
-          setId = splitUrl[splitUrl.length - 2].split('#')[0];
+          setId = splitUrl[splitUrl.length - 2].split('#')[0]
         }
       } else {
-        setId = splitUrl[splitUrl.length - 1];
+        setId = splitUrl[splitUrl.length - 1]
       }
 
       if (!isNaN(setId)) {
         let preparedValues = {
           "beatmapId": setId
-        };
+        }
 
-        setIncorrectUrl(false);
-        return handleSubmit(preparedValues);
+        setIncorrectUrl(false)
+        return handleSubmit(preparedValues)
       }
     }
 
-    setIncorrectUrl(true);
+    setIncorrectUrl(true)
   }
 
   return (
@@ -97,6 +97,6 @@ const AddBeatmapModal = ({open, query, setOpen, userId}) => {
       </Modal.Actions>
     </Modal>
   )
-};
+}
 
 export default AddBeatmapModal

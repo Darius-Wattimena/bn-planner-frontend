@@ -1,15 +1,15 @@
-import {Button, Form, Table} from "semantic-ui-react";
-import {USER_ROLES} from "../../Constants";
-import React from "react";
+import {Button, Form, Table} from "semantic-ui-react"
+import {USER_ROLES} from "../../Constants"
+import React from "react"
 
 
 
 const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, setPage}) => {
   function handleFilterSet(group, value) {
-    filter[group] = value;
+    filter[group] = value
     setFilter({
       ...filter
-    });
+    })
     setPage(1)
   }
 
@@ -61,7 +61,7 @@ const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, setPage}) => {
       </Table>
     </div>
   )
-};
+}
 
 const options = [
   getOption(USER_ROLES.BeatmapNominator),
@@ -69,7 +69,7 @@ const options = [
   getOption(USER_ROLES.NominationAssessmentTeam),
   getOption(USER_ROLES.RetiredCatch),
   getOption(USER_ROLES.Observer)
-];
+]
 
 function getOption(status) {
   return {
@@ -91,7 +91,7 @@ const FilterField = ({id, label, group, handleFilterSet, value}) => {
       onChange={(event, data) => handleFilterSet(group, data.value)}
     />
   )
-};
+}
 
 function handleMultiSelectFilter(key, value, filter, handleFilterSet, items) {
   if (value) {
@@ -99,15 +99,15 @@ function handleMultiSelectFilter(key, value, filter, handleFilterSet, items) {
       handleFilterSet(key, [])
     } else {
       for (let item in items) {
-        let filterValue = items[item];
+        let filterValue = items[item]
         if (value.includes(filterValue.id) && !filter[key].includes(filterValue.id)) {
-          let currentRoles = filter[key];
-          currentRoles.push(filterValue.id);
+          let currentRoles = filter[key]
+          currentRoles.push(filterValue.id)
           handleFilterSet(key, currentRoles)
         } else if (!value.includes(filterValue.id) && filter[key].includes(filterValue.id)) {
-          let roles = filter[key];
-          const index = roles.indexOf(filterValue.id);
-          const newValue = roles.slice(0, index).concat(roles.slice(index + 1, roles.length));
+          let roles = filter[key]
+          const index = roles.indexOf(filterValue.id)
+          const newValue = roles.slice(0, index).concat(roles.slice(index + 1, roles.length))
           handleFilterSet(key, newValue)
         }
       }

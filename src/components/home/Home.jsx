@@ -1,5 +1,5 @@
-import {Container} from "semantic-ui-react";
-import React from "react";
+import {Container} from "semantic-ui-react"
+import React from "react"
 
 const Home = () => {
   return (
@@ -10,6 +10,6 @@ const Home = () => {
       </Container>
     </div>
   )
-};
+}
 
-export default Home;
+export default Home

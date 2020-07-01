@@ -1,10 +1,10 @@
-import {Button, Icon, Image, Label, Table} from "semantic-ui-react";
-import React from "react";
-import BasicPagination from "../generic/BasicPagination";
-import {getReadableRole} from "../../util/UserUtil";
+import {Button, Icon, Image, Label, Table} from "semantic-ui-react"
+import React from "react"
+import BasicPagination from "../generic/BasicPagination"
+import {getReadableRole} from "../../util/UserUtil"
 
 const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, setSelectedUser, isAdmin}) => {
-  let possibleLastPage = 0;
+  let possibleLastPage = 0
 
   if (!loading && !error) {
     possibleLastPage = Math.ceil(payload.total / filter.limit)
@@ -24,7 +24,7 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
       </Table.Header>
       <Table.Body>
         {payload && payload.response && payload.response.map((user, index) => {
-          let userRole = getReadableRole(user.role);
+          let userRole = getReadableRole(user.role)
           return (
             <Table.Row key={"user-list-" + index} className={"user-row " + userRole.className}>
               <Table.Cell width={"2"}>
@@ -41,7 +41,7 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
               <Table.Cell width={"2"} textAlign={"center"}>
                 <Button.Group fluid>
                   <Button inverted color={"green"} onClick={_ => {
-                    setSelectedUser(user.osuId);
+                    setSelectedUser(user.osuId)
                     setEditModalOpen(true)
                   }}>
                     <Icon fitted name={isAdmin ? "pencil" : "eye"}/>
@@ -70,7 +70,7 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
       </Table.Footer>
     </Table>
   )
-};
+}
 
 function AccessIcon({hasAccess}) {
   if (hasAccess && hasAccess === true) {

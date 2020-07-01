@@ -1,12 +1,12 @@
-import React, {useState} from "react";
-import BeatmapFilter from "./BeatmapFilter";
-import BeatmapList from "./BeatmapList";
+import React, {useState} from "react"
+import BeatmapFilter from "./BeatmapFilter"
+import BeatmapList from "./BeatmapList"
 import "./Beatmaps.css"
-import AddBeatmapModal from "./modals/AddBeatmapModal";
-import EditBeatmapModal from "./modals/EditBeatmapModal";
-import {Container} from "semantic-ui-react";
-import Api from "../../resources/Api";
-import {useQuery} from "react-fetching-library";
+import AddBeatmapModal from "./modals/AddBeatmapModal"
+import EditBeatmapModal from "./modals/EditBeatmapModal"
+import {Container} from "semantic-ui-react"
+import Api from "../../resources/Api"
+import {useQuery} from "react-fetching-library"
 
 const filterDefaultState = {
   "artist": null,
@@ -20,21 +20,21 @@ const filterDefaultState = {
   "hideGraved": true,
   "hideWithTwoNominators": false,
   "nominator": []
-};
+}
 
 const Beatmaps = ({canEdit, isAdmin, userId}) => {
-  const userQuery = useQuery(Api.getUsers());
-  const [filter, setFilter] = useState(filterDefaultState);
-  const [selectedBeatmap, setSelectedBeatmap] = useState(0);
-  const [addModalOpen, setAddModalOpen] = useState(false);
-  const [editModalOpen, setEditModalOpen] = useState(false);
+  const userQuery = useQuery(Api.getUsers())
+  const [filter, setFilter] = useState(filterDefaultState)
+  const [selectedBeatmap, setSelectedBeatmap] = useState(0)
+  const [addModalOpen, setAddModalOpen] = useState(false)
+  const [editModalOpen, setEditModalOpen] = useState(false)
 
-  let request = Api.fetchBeatmapsByFilter(filter);
-  const {loading, payload, error, query} = useQuery(request);
+  let request = Api.fetchBeatmapsByFilter(filter)
+  const {loading, payload, error, query} = useQuery(request)
 
   function handleFilterSetPage(value) {
-    let newFilter = filter;
-    newFilter["page"] = value;
+    let newFilter = filter
+    newFilter["page"] = value
     setFilter({
       ...newFilter
     })
@@ -71,6 +71,6 @@ const Beatmaps = ({canEdit, isAdmin, userId}) => {
       </Container>
     </div>
   )
-};
+}
 
 export default Beatmaps

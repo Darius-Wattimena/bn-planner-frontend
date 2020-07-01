@@ -1,5 +1,5 @@
-import React from "react";
-import {Icon, Menu, MenuItem} from "semantic-ui-react";
+import React from "react"
+import {Icon, Menu, MenuItem} from "semantic-ui-react"
 
 const BasicPagination = ({currentPage, lastPage, setPage}) => {
   return (
@@ -19,6 +19,6 @@ const BasicPagination = ({currentPage, lastPage, setPage}) => {
       </MenuItem>
     </Menu>
   )
-};
+}
 
 export default BasicPagination

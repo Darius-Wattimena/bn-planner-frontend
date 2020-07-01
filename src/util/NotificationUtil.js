@@ -1,4 +1,4 @@
-import { store } from 'react-notifications-component';
+import { store } from 'react-notifications-component'
 
 export function pushNotification(title, message, type) {
   let notification = {
@@ -13,6 +13,6 @@ export function pushNotification(title, message, type) {
       duration: 5000,
       onScreen: true
     }
-  };
-  store.addNotification(notification);
+  }
+  store.addNotification(notification)
 }

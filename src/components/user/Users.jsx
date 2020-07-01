@@ -1,12 +1,12 @@
-import React, {useState} from "react";
-import UserList from "./UserList";
+import React, {useState} from "react"
+import UserList from "./UserList"
 import "./Users.css"
-import UserFilter from "./UserFilter";
-import {Container} from "semantic-ui-react";
-import AddUserModal from "./modals/AddUserModal";
-import Api from "../../resources/Api";
-import {useQuery} from "react-fetching-library";
-import EditUserModal from "./modals/EditUserModal";
+import UserFilter from "./UserFilter"
+import {Container} from "semantic-ui-react"
+import AddUserModal from "./modals/AddUserModal"
+import Api from "../../resources/Api"
+import {useQuery} from "react-fetching-library"
+import EditUserModal from "./modals/EditUserModal"
 
 const filterDefaultState = {
   "osuId": null,
@@ -15,20 +15,20 @@ const filterDefaultState = {
   "limit": 10,
   "page": 1,
   "countTotal": true
-};
+}
 
 const Users = ({canEdit, isAdmin, userId}) => {
-  const [filter, setFilter] = useState(filterDefaultState);
-  const [selectedUser, setSelectedUser] = useState(0);
-  const [addModalOpen, setAddModalOpen] = useState(false);
-  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [filter, setFilter] = useState(filterDefaultState)
+  const [selectedUser, setSelectedUser] = useState(0)
+  const [addModalOpen, setAddModalOpen] = useState(false)
+  const [editModalOpen, setEditModalOpen] = useState(false)
 
-  let request = Api.fetchUsersByFilter(filter);
-  const {loading, payload, error, query} = useQuery(request);
+  let request = Api.fetchUsersByFilter(filter)
+  const {loading, payload, error, query} = useQuery(request)
 
   function handleFilterSetPage(value) {
-    let newFilter = filter;
-    newFilter["page"] = value;
+    let newFilter = filter
+    newFilter["page"] = value
     setFilter({
       ...newFilter
     })
@@ -64,6 +64,6 @@ const Users = ({canEdit, isAdmin, userId}) => {
       </Container>
     </div>
   )
-};
+}
 
 export default Users

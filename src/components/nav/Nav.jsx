@@ -1,14 +1,14 @@
-import React, {useState} from "react";
-import {Menu, MenuItem} from "semantic-ui-react";
-import {useHistory} from "react-router-dom";
+import React, {useState} from "react"
+import {Menu, MenuItem} from "semantic-ui-react"
+import {useHistory} from "react-router-dom"
 import catchLogo from "../../assets/catch.svg"
 import "./Nav.css"
-import {ENV} from "../../Settings";
+import {ENV} from "../../Settings"
 
-const homeName = "home";
-const beatmapsName = "beatmaps";
-const usersName = "users";
-const loginName = "login";
+const homeName = "home"
+const beatmapsName = "beatmaps"
+const usersName = "users"
+const loginName = "login"
 
 function getSelectedFromHref() {
   if (window.location.href.endsWith("/beatmaps")) {
@@ -21,15 +21,15 @@ function getSelectedFromHref() {
 }
 
 const Nav = ({userId}) => {
-  let history = useHistory();
-  const [selected, setSelected] = useState(getSelectedFromHref());
+  let history = useHistory()
+  const [selected, setSelected] = useState(getSelectedFromHref())
 
   function handleNavClick(itemName, location) {
-    setSelected(itemName);
-    history.push(location);
+    setSelected(itemName)
+    history.push(location)
   }
 
-  const osuLoginUrl = "https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=" + ENV.osu.id +"&redirect_uri=" + ENV.osu.redirect + "&response_type=code&scope=identify public";
+  const osuLoginUrl = "https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=" + ENV.osu.id +"&redirect_uri=" + ENV.osu.redirect + "&response_type=code&scope=identify public"
 
   return (
     <nav className={"nav-header"}>
@@ -72,6 +72,6 @@ const Nav = ({userId}) => {
       </Menu>
     </nav>
   )
-};
+}
 
 export default Nav

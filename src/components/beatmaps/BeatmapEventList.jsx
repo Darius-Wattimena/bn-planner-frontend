@@ -1,7 +1,7 @@
-import React from "react";
-import {Image, List} from "semantic-ui-react";
-import {unix} from "dayjs";
-import {getReadableRole, getUserWithId} from "../../util/UserUtil";
+import React from "react"
+import {Image, List} from "semantic-ui-react"
+import {unix} from "dayjs"
+import {getReadableRole, getUserWithId} from "../../util/UserUtil"
 import "./BeatmapEventList.css"
 
 const BeatmapEventList = ({events, users}) => {
@@ -12,7 +12,7 @@ const BeatmapEventList = ({events, users}) => {
           return b.timestamp-a.timestamp
         }).map((event, index) => {
           let eventUser = getUserWithId(users, event.user.osuId)
-          let roleDetails = getReadableRole(eventUser.role);
+          let roleDetails = getReadableRole(eventUser.role)
           return (
             <List.Item key={"event-item-" + index} className={"event-item " + roleDetails.className}>
               <Image avatar src={event.user.profilePictureUri}/>
@@ -34,6 +34,6 @@ const BeatmapEventList = ({events, users}) => {
       </div>
     )
   }
-};
+}
 
 export default BeatmapEventList

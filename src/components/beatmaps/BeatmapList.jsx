@@ -1,11 +1,11 @@
-import React from "react";
-import {Table} from "semantic-ui-react";
-import {BEATMAP_STATUS} from "../../Constants";
-import BasicPagination from "../generic/BasicPagination";
-import BeatmapListItem from "./BeatmapListItem";
+import React from "react"
+import {Table} from "semantic-ui-react"
+import {BEATMAP_STATUS} from "../../Constants"
+import BasicPagination from "../generic/BasicPagination"
+import BeatmapListItem from "./BeatmapListItem"
 
 const BeatmapList = ({loading, error, payload, filter, setEditModalOpen, setSelectedBeatmap, canEdit, setPage}) => {
-  let possibleLastPage = 0;
+  let possibleLastPage = 0
 
   if (!loading && !error) {
     possibleLastPage = Math.ceil(payload.total / filter.limit)
@@ -22,12 +22,12 @@ const BeatmapList = ({loading, error, payload, filter, setEditModalOpen, setSele
           <Table.HeaderCell>Nominator #1</Table.HeaderCell>
           <Table.HeaderCell>Nominator #2</Table.HeaderCell>
           <Table.HeaderCell>Note</Table.HeaderCell>
-          <Table.HeaderCell>Actions</Table.HeaderCell>
+          <Table.HeaderCell/>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {payload && payload.response && payload.response.map((beatmap, index) => {
-          let displayStatus = getReadableStatus(beatmap.status);
+          let displayStatus = getReadableStatus(beatmap.status)
           return <BeatmapListItem
             key={"beatmap-list-item-" + index}
             beatmap={beatmap}
@@ -35,7 +35,7 @@ const BeatmapList = ({loading, error, payload, filter, setEditModalOpen, setSele
             canEdit={canEdit}
             setEditModalOpen={setEditModalOpen}
             setSelectedBeatmap={setSelectedBeatmap}
-          />;
+          />
         })}
       </Table.Body>
       <Table.Footer>
@@ -52,19 +52,19 @@ const BeatmapList = ({loading, error, payload, filter, setEditModalOpen, setSele
       </Table.Footer>
     </Table>
   )
-};
+}
 
 function getReadableStatus(unreadableStatus) {
   if (unreadableStatus) {
-    const keys = Object.keys(BEATMAP_STATUS);
+    const keys = Object.keys(BEATMAP_STATUS)
     for (const key of keys) {
-      let status = BEATMAP_STATUS[key];
+      let status = BEATMAP_STATUS[key]
       if (status.id === unreadableStatus) {
         return status
       }
     }
   } else {
-    return BEATMAP_STATUS["Pending"];
+    return BEATMAP_STATUS["Pending"]
   }
 }
 

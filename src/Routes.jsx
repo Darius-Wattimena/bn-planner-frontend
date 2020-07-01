@@ -1,26 +1,26 @@
-import React, {useState} from "react";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Beatmaps from "./components/beatmaps/Beatmaps";
-import Nav from "./components/nav/Nav";
-import Users from "./components/user/Users";
-import NotFound from "./components/notFound/NotFound";
-import {useCookies} from "react-cookie";
-import Home from "./components/home/Home";
-import Login from "./components/login/Login";
-import {useQuery} from "react-fetching-library";
-import Api from "./resources/Api";
-import {Dimmer, Loader} from "semantic-ui-react";
+import React, {useState} from "react"
+import {BrowserRouter, Route, Switch} from "react-router-dom"
+import Beatmaps from "./components/beatmaps/Beatmaps"
+import Nav from "./components/nav/Nav"
+import Users from "./components/user/Users"
+import NotFound from "./components/notFound/NotFound"
+import {useCookies} from "react-cookie"
+import Home from "./components/home/Home"
+import Login from "./components/login/Login"
+import {useQuery} from "react-fetching-library"
+import Api from "./resources/Api"
+import {Dimmer, Loader} from "semantic-ui-react"
 
 export const basePermissions = {
   empty: true
-};
+}
 
 const Routes = () => {
-  const [cookies] = useCookies(['bnplanner_osu_access_token']);
+  const [cookies] = useCookies(['bnplanner_osu_access_token'])
 
-  const { payload, loading, error } = useQuery(Api.getUserInfo(cookies.bnplanner_osu_access_token));
+  const { payload, loading, error } = useQuery(Api.getUserInfo(cookies.bnplanner_osu_access_token))
 
-  const [permissions, setPermissions] = useState(basePermissions);
+  const [permissions, setPermissions] = useState(basePermissions)
 
   if (loading) {
     return (
@@ -39,21 +39,21 @@ const Routes = () => {
     })
   }
 
-  let canEdit;
+  let canEdit
   if (permissions.canEdit) {
     canEdit = permissions.canEdit
   } else {
     canEdit = false
   }
 
-  let isAdmin;
+  let isAdmin
   if (permissions.isAdmin) {
     isAdmin = permissions.isAdmin
   } else {
     isAdmin = false
   }
 
-  let userId;
+  let userId
   if (permissions.userId) {
     userId = permissions.userId
   } else {
@@ -72,6 +72,6 @@ const Routes = () => {
       </Switch>
     </BrowserRouter>
   )
-};
+}
 
 export default Routes

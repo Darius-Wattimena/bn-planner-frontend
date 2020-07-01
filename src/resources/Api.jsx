@@ -1,6 +1,6 @@
 function filterToUrlParams(filter) {
-  let result = "";
-  let first = true;
+  let result = ""
+  let first = true
 
   for (let item in filter) {
     if (filter.hasOwnProperty(item)) {
@@ -9,15 +9,15 @@ function filterToUrlParams(filter) {
       }
 
       if (first) {
-        result += "?" + item + "=" + filter[item];
+        result += "?" + item + "=" + filter[item]
         first = false
       } else {
-        result += "&" + item + "=" + filter[item];
+        result += "&" + item + "=" + filter[item]
       }
     }
   }
 
-  return result;
+  return result
 }
 
 const Api = {
@@ -41,13 +41,13 @@ const Api = {
     return {
       method: 'GET',
       endpoint: 'v1/beatmap/searchByFilter' + filterToUrlParams(filter)
-    };
+    }
   },
   fetchUsersByFilter: (filter) => {
     return {
       method: 'GET',
       endpoint: 'v1/user/searchByFilter' + filterToUrlParams(filter)
-    };
+    }
   },
   addBeatmap: (beatmap, token, userId) => {
     return {
@@ -66,6 +66,17 @@ const Api = {
       method: 'PUT',
       endpoint: 'v1/beatmap/' + beatmap.osuId + "/update",
       body: beatmap,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
+  updateBeatmapStatus: (beatmapId, status, token, userId) => {
+    return {
+      method: 'PUT',
+      endpoint: 'v1/beatmap/' + beatmapId + "/updateStatus?status=" + status,
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + token,
@@ -135,6 +146,6 @@ const Api = {
       }
     }
 }
-};
+}
 
 export default Api

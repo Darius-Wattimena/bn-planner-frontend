@@ -48,6 +48,46 @@
     color: #242424 !important;
 }
 
+u.beatmap-status-unknown {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #c3c3c3 !important;
+}
+
+u.beatmap-status-pending {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #67b4d0 !important;
+}
+
+u.beatmap-status-bubbed {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #346ccd !important;
+}
+
+u.beatmap-status-qualified {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #37c664 !important;
+}
+
+u.beatmap-status-ranked {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #6bc400 !important;
+}
+
+u.beatmap-status-popped {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #c6956f !important;
+}
+
+u.beatmap-status-dqed {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #cb5e5b !important;
+}
+
+u.beatmap-status-graved {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #bdbdbd !important;
+}
+
 tr.beatmap-row td.beatmap-nominator .nominated {
     box-shadow: 0 0 5px 1px #40ff2f;
 }

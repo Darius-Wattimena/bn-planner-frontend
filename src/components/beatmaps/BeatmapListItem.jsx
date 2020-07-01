@@ -1,6 +1,6 @@
-import React from "react";
-import {Button, Icon, Image, Label, Popup, Table} from "semantic-ui-react";
-import UserAvatar from "../user/UserAvatar";
+import React from "react"
+import {Button, Icon, Image, Label, Popup, Table} from "semantic-ui-react"
+import UserAvatar from "../user/UserAvatar"
 
 const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, setEditModalOpen}) => {
   function getNominator(nominators, nominator) {
@@ -16,7 +16,7 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
   }
 
   function NominatorDetails({nominated, nominators, nominatorNumber}) {
-    const nominatorDetails = getNominator(nominators, nominatorNumber);
+    const nominatorDetails = getNominator(nominators, nominatorNumber)
     if (nominatorDetails && nominatorDetails !== 0) {
       return (<UserAvatar nominated={nominated} userDetails={nominatorDetails}/>)
     } else if (nominators.length === 1) {
@@ -25,7 +25,7 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
       }
     }
 
-    return (<p>none</p>);
+    return (<p>none</p>)
   }
 
   return (
@@ -61,7 +61,7 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
         <Button.Group fluid>
           setEditStatusModalOpen
           <Button inverted color={"green"} onClick={() => {
-            setSelectedBeatmap(beatmap.osuId);
+            setSelectedBeatmap(beatmap.osuId)
             setEditModalOpen(true)
           }}>
             <Icon fitted name={canEdit ? "pencil" : "eye"}/>
@@ -75,6 +75,6 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
       </Table.Cell>
     </Table.Row>
   )
-};
+}
 
 export default BeatmapListItem

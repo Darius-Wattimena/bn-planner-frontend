@@ -1,4 +1,4 @@
-import {USER_ROLES} from "../Constants";
+import {USER_ROLES} from "../Constants"
 
 export function getUserWithId(users, userId) {
   if (users && userId && Array.isArray(users)) {
@@ -8,16 +8,16 @@ export function getUserWithId(users, userId) {
 
 export function getReadableRole(unreadableRole) {
   if (unreadableRole) {
-    const keys = Object.keys(USER_ROLES);
+    const keys = Object.keys(USER_ROLES)
     for (const key of keys) {
-      let role = USER_ROLES[key];
+      let role = USER_ROLES[key]
       if (role.id === unreadableRole) {
         return role
       }
     }
-  } else {
-    return USER_ROLES["Observer"];
   }
+
+  return USER_ROLES.Observer
 }
 
 export function getUserRoles() {

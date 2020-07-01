@@ -1,5 +1,5 @@
-import React from "react";
-import {Statistic} from "semantic-ui-react";
+import React from "react"
+import {Statistic} from "semantic-ui-react"
 
 const NotFound = () => {
   return (
@@ -8,6 +8,6 @@ const NotFound = () => {
       <Statistic.Label>Page not Found</Statistic.Label>
     </Statistic>
   )
-};
+}
 
 export default NotFound

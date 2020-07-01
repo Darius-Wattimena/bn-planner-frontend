@@ -1,14 +1,14 @@
-import React, {useState} from "react";
-import {useMutation, useQuery} from "react-fetching-library";
-import Api from "../../../resources/Api";
-import {Button, Form, Grid, Header, Icon, Modal} from "semantic-ui-react";
-import BeatmapEventList from "../../beatmaps/BeatmapEventList";
-import {getUserRoles} from "../../../util/UserUtil";
-import {useCookies} from "react-cookie";
+import React, {useState} from "react"
+import {useMutation, useQuery} from "react-fetching-library"
+import Api from "../../../resources/Api"
+import {Button, Form, Grid, Header, Icon, Modal} from "semantic-ui-react"
+import BeatmapEventList from "../../beatmaps/BeatmapEventList"
+import {getUserRoles} from "../../../util/UserUtil"
+import {useCookies} from "react-cookie"
 
 const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, userId}) => {
-  const {loading, payload, error} = useQuery(Api.getDetailedUser(id));
-  const {mutate} = useMutation(Api.updateUser);
+  const {loading, payload, error} = useQuery(Api.getDetailedUser(id))
+  const {mutate} = useMutation(Api.updateUser)
   const [formValues, setFormValues] = useState({
     osuId: "",
     osuName: "",
@@ -17,12 +17,12 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
     authId: "",
     role: "",
     events: []
-  });
-  const [cookies] = useCookies(['bnplanner_osu_access_token']);
+  })
+  const [cookies] = useCookies(['bnplanner_osu_access_token'])
 
   if (!loading && !error && id) {
     if (payload !== "" && (formValues.osuName === "" || (formValues.osuId !== "" && formValues.osuId !== payload.osuId))) {
-      setFormValues(payload);
+      setFormValues(payload)
     }
   }
 
@@ -31,7 +31,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
   }
 
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId)
 
     if (mutateError) {
       console.log(mutateError)
@@ -44,19 +44,19 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
         authId: "",
         role: "",
         events: []
-      });
-      setOpen(false);
-      query();
+      })
+      setOpen(false)
+      query()
       setSelectedUser(0)
     }
-  };
+  }
 
   function setFormValue(field, value) {
-    let newFormValues = formValues;
-    newFormValues[field] = value;
+    let newFormValues = formValues
+    newFormValues[field] = value
     setFormValues({
       ...newFormValues
-    });
+    })
   }
 
   return (
@@ -122,6 +122,6 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
       </Modal.Actions>
     </Modal>
   )
-};
+}
 
 export default EditUserModal

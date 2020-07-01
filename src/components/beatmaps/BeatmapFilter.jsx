@@ -1,7 +1,7 @@
-import React from "react";
-import {Button, Checkbox, Form, Grid, Icon, Popup, Table} from "semantic-ui-react";
-import {BEATMAP_STATUS} from "../../Constants";
-import {getBeatmapStatusOptions} from "../../util/BeatmapUtil";
+import React from "react"
+import {Button, Checkbox, Form, Grid, Icon, Popup, Table} from "semantic-ui-react"
+import {BEATMAP_STATUS} from "../../Constants"
+import {getBeatmapStatusOptions} from "../../util/BeatmapUtil"
 import "./BeatmapFilter.css"
 
 const FilterField = ({id, label, group, handleFilterSet}) => {
@@ -14,15 +14,15 @@ const FilterField = ({id, label, group, handleFilterSet}) => {
       onChange={(event, data) => handleFilterSet(group, data.value)}
     />
   )
-};
+}
 
 const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) => {
 
   function handleFilterSet(group, value) {
-    filter[group] = value;
+    filter[group] = value
     setFilter({
       ...filter
-    });
+    })
     setPage(1)
   }
 
@@ -121,7 +121,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
                       Show Ranked
                     </Grid.Column>
                     <Grid.Column width={"2"}>
-                      <Icon name={"star"} color={(filter.hideRanked) ? "red" : "green"}  size={"large"} />
+                      <Icon name={"heart"} color={(filter.hideRanked) ? "red" : "green"}  size={"large"} />
                     </Grid.Column>
                     <Grid.Column width={"9"}>
                       <Button.Group fluid>
@@ -162,25 +162,25 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
       </Table>
     </div>
   )
-};
+}
 
 function handleAddStatusFilter(value, filter, handleFilterSet) {
   if (value) {
-    let filterKey = "status";
+    let filterKey = "status"
 
     if (value.length === 0) {
       handleFilterSet(filterKey, [])
     } else {
       for (let status in BEATMAP_STATUS) {
-        let statusValue = BEATMAP_STATUS[status];
+        let statusValue = BEATMAP_STATUS[status]
         if (value.includes(statusValue.id) && !filter[filterKey].includes(statusValue.id)) {
-          let currentStatuses = filter[filterKey];
-          currentStatuses.push(statusValue.id);
+          let currentStatuses = filter[filterKey]
+          currentStatuses.push(statusValue.id)
           handleFilterSet(filterKey, currentStatuses)
         } else if (!value.includes(statusValue.id) && filter[filterKey].includes(statusValue.id)) {
-          let statuses = filter[filterKey];
-          const index = statuses.indexOf(statusValue.id);
-          const newValue = statuses.slice(0, index).concat(statuses.slice(index + 1, statuses.length));
+          let statuses = filter[filterKey]
+          const index = statuses.indexOf(statusValue.id)
+          const newValue = statuses.slice(0, index).concat(statuses.slice(index + 1, statuses.length))
           handleFilterSet(filterKey, newValue)
         }
       }

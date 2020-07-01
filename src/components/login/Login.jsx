@@ -1,14 +1,14 @@
-import React, {useEffect} from "react";
-import {useCookies} from "react-cookie";
-import {useHistory} from "react-router-dom";
-import {ENV} from "../../Settings";
-import {Dimmer, Loader} from "semantic-ui-react";
+import React, {useEffect} from "react"
+import {useCookies} from "react-cookie"
+import {useHistory} from "react-router-dom"
+import {ENV} from "../../Settings"
+import {Dimmer, Loader} from "semantic-ui-react"
 
-const queryString = require('query-string');
+const queryString = require('query-string')
 
 const Login = (props) => {
-  let history = useHistory();
-  const code = new URLSearchParams(props.location.search).get("code");
+  let history = useHistory()
+  const code = new URLSearchParams(props.location.search).get("code")
 
   const requestOptions = {
     method: 'post',
@@ -20,26 +20,26 @@ const Login = (props) => {
       redirect_uri: ENV.osu.redirect,
       code: code
     })
-  };
+  }
 
-  const [cookies, setCookie] = useCookies(['bnplanner_osu_token']);
+  const [cookies, setCookie] = useCookies(['bnplanner_osu_token'])
 
-  let osuLoginTokenUrl = ENV.proxy + "https://osu.ppy.sh/oauth/token";
+  let osuLoginTokenUrl = ENV.proxy + "https://osu.ppy.sh/oauth/token"
 
   useEffect(() => {
     fetch(osuLoginTokenUrl, requestOptions)
       .then(response => response.json())
       .then(data => {
-        setCookie("bnplanner_osu_access_token", data.access_token, {maxAge: data.expires_in});
+        setCookie("bnplanner_osu_access_token", data.access_token, {maxAge: data.expires_in})
         history.push("/")
-      });
-  }, []);
+      })
+  }, [])
 
   return (
     <Dimmer active>
       <Loader indeterminate className={"header-text"}>Preparing Nomination Planner</Loader>
     </Dimmer>
   )
-};
+}
 
 export default Login

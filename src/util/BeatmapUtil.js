@@ -1,5 +1,5 @@
-import {BEATMAP_STATUS} from "../Constants";
-import {getReadableRole} from "./UserUtil";
+import {BEATMAP_STATUS, USER_ROLES} from "../Constants"
+import {getReadableRole} from "./UserUtil"
 
 export function getNominatorOptions(users) {
   if (users && Array.isArray(users)) {
@@ -8,13 +8,27 @@ export function getNominatorOptions(users) {
       text: user.osuName,
       value: user.osuId,
       className: getReadableRole(user.role).className
-    }));
+    }))
 
     return [
       {key: 0, text: 'none', value: 0},
       ...preparedUsers
     ]
   }
+}
+
+export function getReadableStatus(statusId) {
+  if (statusId) {
+    const keys = Object.keys(BEATMAP_STATUS)
+    for (const key of keys) {
+      let status = BEATMAP_STATUS[key]
+      if (status.id === statusId) {
+        return status
+      }
+    }
+  }
+
+  return BEATMAP_STATUS.Pending
 }
 
 export function getBeatmapStatusOptions() {

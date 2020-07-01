@@ -34,7 +34,7 @@ export const BEATMAP_STATUS = {
     name: "Graved",
     className: "beatmap-status-graved"
   }
-};
+}
 
 export const USER_ROLES = {
   Observer: {
@@ -72,4 +72,4 @@ export const USER_ROLES = {
     detailed: "Retired Nominator",
     className: "user-role-ca"
   }
-};
+}

@@ -1,11 +1,11 @@
-import React from "react";
-import {Image} from "semantic-ui-react";
-import {getReadableRole} from "../../util/UserUtil";
+import React from "react"
+import {Image} from "semantic-ui-react"
+import {getReadableRole} from "../../util/UserUtil"
 
 const UserAvatar = ({nominated, userDetails}) => {
   if (userDetails) {
-    let roleDetails = getReadableRole(userDetails.role);
-    let className;
+    let roleDetails = getReadableRole(userDetails.role)
+    let className
 
     if (nominated) {
       className = "nominated user-avatar " + roleDetails.className + "-text"
@@ -20,6 +20,6 @@ const UserAvatar = ({nominated, userDetails}) => {
       </div>
     )
   }
-};
+}
 
 export default UserAvatar

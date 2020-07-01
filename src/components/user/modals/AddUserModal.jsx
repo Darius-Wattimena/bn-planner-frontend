@@ -1,19 +1,19 @@
-import React, {useState} from "react";
-import {Button, Form, Header, Icon, Message, Modal} from "semantic-ui-react";
-import {useMutation} from "react-fetching-library";
-import Api from "../../../resources/Api";
-import {useCookies} from "react-cookie";
+import React, {useState} from "react"
+import {Button, Form, Header, Icon, Message, Modal} from "semantic-ui-react"
+import {useMutation} from "react-fetching-library"
+import Api from "../../../resources/Api"
+import {useCookies} from "react-cookie"
 
 const AddUserModal = ({open, query, setOpen, userId}) => {
   const [formValues, setFormValues] = useState({
     osuUrl: ""
-  });
-  const [incorrectUrl, setIncorrectUrl] = useState(false);
-  const [cookies] = useCookies(['bnplanner_osu_access_token']);
+  })
+  const [incorrectUrl, setIncorrectUrl] = useState(false)
+  const [cookies] = useCookies(['bnplanner_osu_access_token'])
 
-  const {mutate} = useMutation(Api.addUser);
+  const {mutate} = useMutation(Api.addUser)
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId);
+    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId)
 
     if (mutateError) {
       console.log(mutateError)
@@ -21,38 +21,38 @@ const AddUserModal = ({open, query, setOpen, userId}) => {
       setFormValues({
         osuUrl: "",
         osuName: ""
-      });
-      query();
-      setOpen(false);
+      })
+      query()
+      setOpen(false)
     }
-  };
+  }
 
   function setFormValue(field, value) {
-    let newFormValues = formValues;
-    newFormValues[field] = value;
+    let newFormValues = formValues
+    newFormValues[field] = value
     setFormValues({
       ...newFormValues
-    });
+    })
   }
 
   function verifyData() {
     if (formValues.osuUrl.startsWith("https://osu.ppy.sh/users/") || formValues.osuUrl.startsWith("https://old.ppy.sh/u/")) {
-      let splitUrl = formValues.osuUrl.split("/");
-      let userId;
+      let splitUrl = formValues.osuUrl.split("/")
+      let userId
 
-      userId = splitUrl[splitUrl.length - 1];
+      userId = splitUrl[splitUrl.length - 1]
 
       if (!isNaN(userId)) {
         let preparedValues = {
           "osuId": userId
         }
 
-        setIncorrectUrl(false);
+        setIncorrectUrl(false)
         return handleSubmit(preparedValues)
       }
     }
 
-    setIncorrectUrl(true);
+    setIncorrectUrl(true)
   }
 
   return (
@@ -87,6 +87,6 @@ const AddUserModal = ({open, query, setOpen, userId}) => {
       </Modal.Actions>
     </Modal>
   )
-};
+}
 
 export default AddUserModal
