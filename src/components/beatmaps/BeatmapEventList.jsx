@@ -11,13 +11,13 @@ const BeatmapEventList = ({events, users}) => {
         {events.sort(function(a, b){
           return b.timestamp-a.timestamp
         }).map((event, index) => {
-          let eventUser = getUserWithId(users, event.user.osuId)
+          let eventUser = getUserWithId(users, event.userId)
           let roleDetails = getReadableRole(eventUser.role)
           return (
             <List.Item key={"event-item-" + index} className={"event-item " + roleDetails.className}>
-              <Image avatar src={event.user.profilePictureUri}/>
+              <Image avatar src={eventUser.profilePictureUri}/>
               <List.Content>
-                <List.Header>{event.title}</List.Header>
+                <List.Header>{eventUser.osuName} - {event.title}</List.Header>
                 <List.Description>{event.description}</List.Description>
                 {unix(event.timestamp).format("DD MMMM YYYY HH:mm")}
               </List.Content>
