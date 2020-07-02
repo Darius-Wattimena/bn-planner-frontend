@@ -43,7 +43,13 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
     <div className={"base-container-large"}>
       <Container fluid>
         <h1>Beatmaps</h1>
-        <BeatmapFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} canEdit={canEdit} setPage={handleFilterSetPage}/>
+        <BeatmapFilter
+          users={users}
+          filter={filter}
+          setFilter={setFilter}
+          setAddModalOpen={setAddModalOpen}
+          canEdit={canEdit}
+          setPage={handleFilterSetPage}/>
         <BeatmapList
           loading={loading}
           payload={payload}

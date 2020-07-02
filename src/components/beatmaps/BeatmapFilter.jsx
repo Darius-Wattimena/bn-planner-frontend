@@ -1,7 +1,7 @@
 import React from "react"
 import {Button, Form, Table} from "semantic-ui-react"
 import {BEATMAP_STATUS} from "../../Constants"
-import {getBeatmapStatusOptions} from "../../util/BeatmapUtil"
+import {getBeatmapStatusOptions, getNominatorOptions} from "../../util/BeatmapUtil"
 import "./BeatmapFilter.css"
 import BeatmapExtraFilter from "./BeatmapExtraFilter";
 
@@ -17,7 +17,7 @@ const FilterField = ({id, label, group, handleFilterSet}) => {
   )
 }
 
-const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) => {
+const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage, users}) => {
 
   function handleFilterSet(group, value) {
     filter[group] = value
@@ -27,12 +27,14 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
     setPage(1)
   }
 
+  console.log({filter})
+
   return (
     <div>
       <Table inverted>
         <Table.Header>
           <Table.Row textAlign={"center"}>
-            <Table.HeaderCell>Limit</Table.HeaderCell>
+            <Table.HeaderCell>Nominator</Table.HeaderCell>
             <Table.HeaderCell>Artist</Table.HeaderCell>
             <Table.HeaderCell>Title</Table.HeaderCell>
             <Table.HeaderCell>Mapper</Table.HeaderCell>
@@ -44,7 +46,10 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
         <Table.Body>
           <Table.Row>
             <Table.Cell width={"2"}>
-
+              <Form>
+                <Form.Dropdown placeholder='Nominator' fluid selection options={getNominatorOptions(users)}
+                               onChange={(_, data) => handleFilterSet("nominator", data.value)}/>
+              </Form>
             </Table.Cell>
             <Table.Cell width={"2"}>
               <Form inverted>
@@ -95,6 +100,32 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage}) =
       </Table>
     </div>
   )
+}
+
+function handleAddNominatorFilter(value, filter, handleFilterSet, users) {
+  if (value) {
+    console.log(value)
+
+    let filterKey = "nominator"
+
+    if (value.length === 0) {
+      handleFilterSet(filterKey, [])
+    } else {
+      for (let usersKey in users) {
+        let user = users[usersKey].osuId
+        if (value.includes(user) && !filter[filterKey].includes(user.id)) {
+          let selectedUsers = filter[filterKey]
+          selectedUsers.push(user)
+          handleFilterSet(filterKey, selectedUsers)
+        } else if (!value.includes(user) && filter[filterKey].includes(user)) {
+          let selectedUsers = filter[filterKey]
+          const index = selectedUsers.indexOf(user)
+          const newValue = selectedUsers.slice(0, index).concat(selectedUsers.slice(index + 1, selectedUsers.length))
+          handleFilterSet(filterKey, newValue)
+        }
+      }
+    }
+  }
 }
 
 function handleAddStatusFilter(value, filter, handleFilterSet) {
