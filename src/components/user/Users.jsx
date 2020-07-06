@@ -9,7 +9,6 @@ import {useQuery} from "react-fetching-library"
 import EditUserModal from "./modals/EditUserModal"
 
 const filterDefaultState = {
-  "osuId": null,
   "name": null,
   "roles": [],
   "limit": 10,

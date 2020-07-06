@@ -65,7 +65,7 @@ const Nav = ({userId}) => {
             active={selected === loginName}
             onClick={() => window.location.href = osuLoginUrl}
           >
-            Login
+            Login with osu! account
           </MenuItem>
         </Menu.Menu>
         }

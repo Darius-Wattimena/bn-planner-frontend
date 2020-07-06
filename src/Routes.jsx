@@ -9,7 +9,7 @@ import Home from "./components/home/Home"
 import Login from "./components/login/Login"
 import {useQuery} from "react-fetching-library"
 import Api from "./resources/Api"
-import {Dimmer, Loader} from "semantic-ui-react"
+import {Dimmer, Progress} from "semantic-ui-react"
 
 export const basePermissions = {
   empty: true
@@ -18,15 +18,18 @@ export const basePermissions = {
 const Routes = () => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
 
-  const { payload, loading, error } = useQuery(Api.getUserInfo(cookies.bnplanner_osu_access_token))
   const userQuery = useQuery(Api.getUsers())
+  const { payload, loading, error } = useQuery(Api.getUserInfo(cookies.bnplanner_osu_access_token))
 
   const [permissions, setPermissions] = useState(basePermissions)
 
   if (loading || userQuery.loading) {
     return (
       <Dimmer active>
-        <Loader indeterminate className={"header-text"}>Preparing Nomination Planner</Loader>
+        <Progress active progress="percent" className={"fullOverlay"} indicating percent={ (loading && userQuery.loading)
+          ? 20 : loading
+            ? 60 : userQuery.loading
+              ? 80 : 100}>Preparing Nomination Planner</Progress>
       </Dimmer>
     )
   }

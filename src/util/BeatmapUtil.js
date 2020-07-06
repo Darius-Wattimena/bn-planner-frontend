@@ -11,7 +11,7 @@ export function getNominatorOptions(users) {
     }))
 
     return [
-      {key: 0, text: 'none', value: 0},
+      {key: 0, text: 'None', value: 0},
       ...preparedUsers
     ]
   }
@@ -33,21 +33,23 @@ export function getReadableStatus(statusId) {
 
 export function getBeatmapStatusOptions() {
   return [
-    getOption(BEATMAP_STATUS.Qualified),
-    getOption(BEATMAP_STATUS.Bubbled),
-    getOption(BEATMAP_STATUS.Disqualified),
-    getOption(BEATMAP_STATUS.Popped),
-    getOption(BEATMAP_STATUS.Pending),
-    getOption(BEATMAP_STATUS.Ranked),
-    getOption(BEATMAP_STATUS.Graved)
+    {key: 0, text: 'None', value: 0},
+    getOption(BEATMAP_STATUS.Qualified, "star"),
+    getOption(BEATMAP_STATUS.Bubbled, "cloud"),
+    getOption(BEATMAP_STATUS.Disqualified, "close"),
+    getOption(BEATMAP_STATUS.Popped, "warning"),
+    getOption(BEATMAP_STATUS.Pending, "meh"),
+    getOption(BEATMAP_STATUS.Ranked, "heart"),
+    getOption(BEATMAP_STATUS.Graved, "archive")
   ]
 }
 
-function getOption(status) {
+function getOption(status, icon) {
   return {
     key: status.id,
     text: status.name,
     value: status.id,
-    className: status.className
+    className: status.className,
+    icon: icon
   }
 }
