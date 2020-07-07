@@ -11,7 +11,7 @@ export function getNominatorOptions(users) {
     }))
 
     return [
-      {key: 0, text: 'None', value: 0},
+      {key: 0, text: 'None', value: null},
       ...preparedUsers
     ]
   }
@@ -38,9 +38,7 @@ export function getBeatmapStatusOptions() {
     getOption(BEATMAP_STATUS.Bubbled, "cloud"),
     getOption(BEATMAP_STATUS.Disqualified, "close"),
     getOption(BEATMAP_STATUS.Popped, "warning"),
-    getOption(BEATMAP_STATUS.Pending, "meh"),
-    getOption(BEATMAP_STATUS.Ranked, "heart"),
-    getOption(BEATMAP_STATUS.Graved, "archive")
+    getOption(BEATMAP_STATUS.Pending, "meh")
   ]
 }
 

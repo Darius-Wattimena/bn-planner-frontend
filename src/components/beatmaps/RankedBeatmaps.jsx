@@ -1,28 +1,28 @@
-import React, {useState} from "react"
-import BeatmapFilter from "./BeatmapFilter"
-import BeatmapList from "./BeatmapList"
-import "./Beatmaps.css"
-import AddBeatmapModal from "./modals/AddBeatmapModal"
-import EditBeatmapModal from "./modals/EditBeatmapModal"
-import {Container, Icon} from "semantic-ui-react"
-import Api from "../../resources/Api"
-import {useQuery} from "react-fetching-library"
+import React, {useState} from "react";
+import Api from "../../resources/Api";
+import {useQuery} from "react-fetching-library";
+import {Container, Icon} from "semantic-ui-react";
+import BeatmapList from "./BeatmapList";
+import AddBeatmapModal from "./modals/AddBeatmapModal";
+import EditBeatmapModal from "./modals/EditBeatmapModal";
+import {BEATMAP_STATUS} from "../../Constants";
+import BeatmapFilter from "./BeatmapFilter";
 
 const filterDefaultState = {
   "artist": null,
   "title": null,
   "mapper": null,
-  "status": [],
+  "status": [BEATMAP_STATUS.Ranked.id],
   "limit": 10,
   "page": 1,
   "countTotal": true,
-  "hideRanked": true,
+  "hideRanked": false,
   "hideGraved": true,
   "hideWithTwoNominators": false,
   "nominator": null
 }
 
-const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
+const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
   const [filter, setFilter] = useState(filterDefaultState)
   const [selectedBeatmap, setSelectedBeatmap] = useState(0)
   const [addModalOpen, setAddModalOpen] = useState(false)
@@ -42,15 +42,17 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
   return (
     <div className={"base-container-large"}>
       <Container fluid>
-        <h1><Icon name={"tasks"} />Icons In Progress</h1>
+        <h1><Icon name={"heart"} />Ranked Beatmaps</h1>
         <BeatmapFilter
           users={users}
           filter={filter}
           setFilter={setFilter}
-          setAddModalOpen={setAddModalOpen}
           canEdit={canEdit}
+          setPage={handleFilterSetPage}
+          onRankedPage={true}
           userId={userId}
-          setPage={handleFilterSetPage}/>
+          setAddModalOpen={setAddModalOpen}
+        />
         <BeatmapList
           loading={loading}
           payload={payload}
@@ -63,20 +65,20 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
         />
         <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId} />
         {selectedBeatmap !== 0 &&
-          <EditBeatmapModal
-            id={selectedBeatmap}
-            userId={userId}
-            canEdit={canEdit}
-            query={query}
-            open={editModalOpen}
-            setOpen={setEditModalOpen}
-            users={users}
-            setSelectedBeatmap={setSelectedBeatmap}
-          />
+        <EditBeatmapModal
+          id={selectedBeatmap}
+          userId={userId}
+          canEdit={canEdit}
+          query={query}
+          open={editModalOpen}
+          setOpen={setEditModalOpen}
+          users={users}
+          setSelectedBeatmap={setSelectedBeatmap}
+        />
         }
       </Container>
     </div>
   )
 }
 
-export default Beatmaps
+export default RankedBeatmaps

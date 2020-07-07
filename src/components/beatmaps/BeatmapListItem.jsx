@@ -1,5 +1,5 @@
 import React from "react"
-import {Button, Icon, Image, Label, Popup, Table} from "semantic-ui-react"
+import {Button, Grid, Icon, Image, Label, Popup, Table} from "semantic-ui-react"
 import UserAvatar from "../user/UserAvatar"
 
 const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, setEditModalOpen}) => {
@@ -58,20 +58,28 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
         }
       </Table.Cell>
       <Table.Cell width={"2"} textAlign={"center"}>
-        <Button.Group fluid>
-          setEditStatusModalOpen
-          <Button inverted color={"green"} onClick={() => {
-            setSelectedBeatmap(beatmap.osuId)
-            setEditModalOpen(true)
-          }}>
-            <Icon fitted name={canEdit ? "pencil" : "eye"}/>
-            {/*{canEdit ? "Edit" : "View"}*/}
-          </Button>
-          <Button inverted color={"blue"}
-                  onClick={() => window.open("https://osu.ppy.sh/beatmapsets/" + beatmap.osuId, "_blank")}>
-            <Icon fitted name={"linkify"}/>
-          </Button>
-        </Button.Group>
+        <Grid>
+          <Grid.Row columns={"equal"}>
+            <Grid.Column>
+              <Button fluid color={"green"} onClick={() => {
+                setSelectedBeatmap(beatmap.osuId)
+                setEditModalOpen(true)
+              }}>
+                <Icon fitted name={canEdit ? "pencil" : "eye"}/>
+                {/*{canEdit ? "Edit" : "View"}*/}
+              </Button>
+            </Grid.Column>
+            <Grid.Column>
+              <Button
+                fluid
+                primary
+                onClick={() => window.open("https://osu.ppy.sh/beatmapsets/" + beatmap.osuId, "_blank")}
+              >
+                <Icon fitted name={"linkify"}/>
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Table.Cell>
     </Table.Row>
   )

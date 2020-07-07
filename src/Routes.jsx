@@ -10,6 +10,8 @@ import Login from "./components/login/Login"
 import {useQuery} from "react-fetching-library"
 import Api from "./resources/Api"
 import {Dimmer, Progress} from "semantic-ui-react"
+import RankedBeatmaps from "./components/beatmaps/RankedBeatmaps";
+import GravedBeatmaps from "./components/beatmaps/GravedBeatmaps";
 
 export const basePermissions = {
   empty: true
@@ -70,6 +72,8 @@ const Routes = () => {
       <Switch>
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+        <Route exact path={"/ranked"} component={() => <RankedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+        <Route exact path={"/graved"} component={() => <GravedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route path={"/login"} component={Login} />
         <Route component={NotFound} />

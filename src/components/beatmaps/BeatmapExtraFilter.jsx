@@ -7,7 +7,7 @@ const BeatmapExtraFilter = ({canEdit, filter, handleFilterSet}) => {
       trigger={
         <Button primary fluid content={
           <div>
-            <Icon name={"wrench"} />
+            <Icon name={"filter"} />
           </div>
         } />
       }
@@ -33,54 +33,6 @@ const BeatmapExtraFilter = ({canEdit, filter, handleFilterSet}) => {
                 secondary={filter.hideWithTwoNominators !== false}
                 active={filter.hideWithTwoNominators === false}
                 onClick={() => handleFilterSet("hideWithTwoNominators", false)}>Any</Button>
-            </Button.Group>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={"5"} textAlign={"right"}>
-            Show Ranked
-          </Grid.Column>
-          <Grid.Column width={"2"}>
-            <Icon name={"heart"} color={(filter.hideRanked) ? "red" : "green"}  size={"large"} />
-          </Grid.Column>
-          <Grid.Column width={"9"}>
-            <Button.Group fluid>
-              <Button
-                inverted
-                primary={filter.hideRanked === false}
-                secondary={filter.hideRanked !== false}
-                active={filter.hideRanked === false}
-                onClick={() => handleFilterSet("hideRanked", false)}>Yes</Button>
-              <Button
-                inverted
-                primary={filter.hideRanked === true}
-                secondary={filter.hideRanked !== true}
-                active={filter.hideRanked === true}
-                onClick={() => handleFilterSet("hideRanked", true)}>No</Button>
-            </Button.Group>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={"5"} textAlign={"right"}>
-            Show Graved
-          </Grid.Column>
-          <Grid.Column width={"2"}>
-            <Icon Icon name={"archive"} color={(filter.hideGraved) ? "grey" : ""} size={"large"} />
-          </Grid.Column>
-          <Grid.Column widescreen={"9"}>
-            <Button.Group fluid>
-              <Button
-                inverted
-                primary={filter.hideGraved === false}
-                secondary={filter.hideGraved !== false}
-                active={filter.hideGraved === false}
-                onClick={() => handleFilterSet("hideGraved", false)}>Yes</Button>
-              <Button
-                inverted
-                primary={filter.hideGraved === true}
-                secondary={filter.hideGraved !== true}
-                active={filter.hideGraved === true}
-                onClick={() => handleFilterSet("hideGraved", true)}>No</Button>
             </Button.Group>
           </Grid.Column>
         </Grid.Row>

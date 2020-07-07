@@ -7,6 +7,8 @@ import {ENV} from "../../Settings"
 
 const homeName = "home"
 const beatmapsName = "beatmaps"
+const rankedName = "ranked"
+const gravedName = "graved"
 const usersName = "users"
 const loginName = "login"
 
@@ -15,6 +17,12 @@ function getSelectedFromHref() {
     return beatmapsName
   } else if (window.location.href.endsWith("/users")) {
     return usersName
+  } else if (window.location.href.endsWith("/ranked")) {
+    return rankedName
+  } else if (window.location.href.endsWith("/graved")) {
+    return gravedName
+  } else if (window.location.href.endsWith("/login")) {
+    return loginName
   } else {
     return homeName
   }
@@ -49,7 +57,21 @@ const Nav = ({userId}) => {
           active={selected === beatmapsName}
           onClick={() => handleNavClick(beatmapsName, "/beatmaps")}
         >
-          Beatmaps
+          Icons In Progress
+        </MenuItem>
+        <MenuItem
+          name={rankedName}
+          active={selected === rankedName}
+          onClick={() => handleNavClick(rankedName, "/ranked")}
+        >
+          Ranked
+        </MenuItem>
+        <MenuItem
+          name={gravedName}
+          active={selected === gravedName}
+          onClick={() => handleNavClick(gravedName, "/graved")}
+        >
+          Graved
         </MenuItem>
         <MenuItem
           name={usersName}
