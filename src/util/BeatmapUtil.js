@@ -1,4 +1,4 @@
-import {BEATMAP_STATUS, USER_ROLES} from "../Constants"
+import {BEATMAP_STATUS} from "../Constants"
 import {getReadableRole} from "./UserUtil"
 
 export function getNominatorOptions(users) {

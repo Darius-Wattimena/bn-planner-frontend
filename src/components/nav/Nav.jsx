@@ -57,7 +57,7 @@ const Nav = ({userId}) => {
           active={selected === beatmapsName}
           onClick={() => handleNavClick(beatmapsName, "/beatmaps")}
         >
-          Icons In Progress
+          In Progress
         </MenuItem>
         <MenuItem
           name={rankedName}

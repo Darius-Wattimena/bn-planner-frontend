@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Api from "../../resources/Api";
 import {useQuery} from "react-fetching-library";
-import {Container, Icon} from "semantic-ui-react";
+import {Container} from "semantic-ui-react";
 import BeatmapList from "./BeatmapList";
 import AddBeatmapModal from "./modals/AddBeatmapModal";
 import EditBeatmapModal from "./modals/EditBeatmapModal";
@@ -42,7 +42,7 @@ const GravedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
   return (
     <div className={"base-container-large"}>
       <Container fluid>
-        <h1><Icon name={"archive"} />Graved Beatmaps</h1>
+        <h1>Graved Beatmaps</h1>
         <BeatmapFilter
           users={users}
           filter={filter}
