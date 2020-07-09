@@ -13,7 +13,9 @@ const filterDefaultState = {
   "roles": [],
   "limit": 10,
   "page": 1,
-  "countTotal": true
+  "countTotal": true,
+  "canEdit": null,
+  "isAdmin": null
 }
 
 const Users = ({canEdit, isAdmin, userId, users}) => {
@@ -34,10 +36,10 @@ const Users = ({canEdit, isAdmin, userId, users}) => {
   }
 
   return (
-    <div className={"base-container-small"}>
+    <div className={"base-container"}>
       <Container fluid>
         <h1>Users</h1>
-        <UserFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} isAdmin={isAdmin} setPage={handleFilterSetPage} />
+        <UserFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} isAdmin={isAdmin} canEdit={canEdit} setPage={handleFilterSetPage} />
         <UserList
           filter={filter}
           loading={loading}

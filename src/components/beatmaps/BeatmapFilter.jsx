@@ -40,7 +40,6 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage, us
 
   return (
     <Table inverted>
-
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell width={"2"}>
