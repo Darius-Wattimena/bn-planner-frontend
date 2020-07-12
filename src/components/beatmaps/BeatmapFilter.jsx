@@ -3,37 +3,28 @@ import {Button, Form, Grid, Icon, Popup, Table} from "semantic-ui-react"
 import {getBeatmapStatusOptions, getNominatorOptions} from "../../util/BeatmapUtil"
 import "./BeatmapFilter.css"
 import {getUserWithId} from "../../util/UserUtil";
+import FilterItem from "../generic/FilterItem";
+import FilterButton from "../generic/FilterButton";
+import FilterField from "../generic/FilterField";
+import {debouncingFilter, instantFilter} from "../../util/FilterUtil";
 
-const FilterField = ({id, label, group, handleFilterSet, disabled}) => {
-  return (
-    <Form.Input
-      id={id}
-      placeholder={label}
-      size={"small"}
-      fluid
-      disabled={!disabled}
-      onChange={(event, data) => handleFilterSet(group, data.value)}
-    />
-  )
-}
-
-const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage, users, userId, onRankedPage, onGravedPage}) => {
+const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, userId, onRankedPage, onGravedPage}) => {
   const [selectedNominator, setSelectedNominator] = useState(null)
+  const [formValues, setFormValues] = useState(filter)
+  const [timeoutValue, setTimeoutValue] = useState(0)
 
-  function handleFilterSet(group, value) {
-    filter[group] = value
-    setFilter({
-      ...filter
-    })
-    setPage(1)
+  function instantFilterSet(group, value) {
+    instantFilter(group, value, formValues, setFormValues, timeoutValue, setFilter)
   }
 
-  console.log({filter})
+  function debouncingFilterSet(group, value) {
+    debouncingFilter(group, value, formValues, setFormValues, timeoutValue, setTimeoutValue, setFilter)
+  }
 
   let selectedNominatorInfo
 
-  if (filter.nominator != null && filter.nominator !== userId) {
-    selectedNominatorInfo = getUserWithId(users, filter.nominator)
+  if (formValues.nominator != null && formValues.nominator !== userId) {
+    selectedNominatorInfo = getUserWithId(users, formValues.nominator)
   } else {
     selectedNominatorInfo = null
   }
@@ -58,7 +49,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage, us
                       <Form.Dropdown search placeholder='Nominator' fluid selection clearable options={getNominatorOptions(users)}
                                      value={selectedNominator}
                                      onChange={(_, data) => {
-                                       handleFilterSet("nominator", data.value)
+                                       debouncingFilterSet("nominator", data.value)
                                        setSelectedNominator(data.value)
                                      }}/>
                     </Form>
@@ -67,7 +58,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage, us
                     <Grid.Column computer={8} mobile={16}>
                       <Form>
                         <Form.Dropdown placeholder='Status' fluid selection clearable options={getBeatmapStatusOptions()}
-                                       onChange={(_, data) => handleFilterSet("status", data.value)}/>
+                                       onChange={(_, data) => debouncingFilterSet("status", data.value)}/>
                       </Form>
                     </Grid.Column>
                   }
@@ -75,122 +66,62 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage, us
                 <Grid.Row>
                   <Grid.Column computer={8} mobile={16}>
                     <Grid verticalAlign={"middle"}>
-                      <Grid.Row>
-                        <Grid.Column width={"3"} textAlign={"right"}>
-                          Artist
-                        </Grid.Column>
-                        <Grid.Column width={"2"}>
-                          <Icon name={"pencil"} />
-                        </Grid.Column>
-                        <Grid.Column width={"11"}>
-                          <Form inverted>
-                            <FilterField
-                              id={"artist"}
-                              label={"Artist"}
-                              group={"artist"}
-                              handleFilterSet={handleFilterSet}
-                              disabled={canEdit}
-                            />
-                          </Form>
-                        </Grid.Column>
-                      </Grid.Row>
-                      <Grid.Row>
-                        <Grid.Column width={"3"} textAlign={"right"}>
-                          Title
-                        </Grid.Column>
-                        <Grid.Column width={"2"}>
-                          <Icon name={"heading"} />
-                        </Grid.Column>
-                        <Grid.Column width={"11"}>
-                          <Form inverted>
-                            <FilterField
-                              id={"title"}
-                              label={"Title"}
-                              group={"title"}
-                              handleFilterSet={handleFilterSet}
-                              disabled={canEdit}
-                            />
-                          </Form>
-                        </Grid.Column>
-                      </Grid.Row>
-                      <Grid.Row>
-                        <Grid.Column width={"3"} textAlign={"right"}>
-                          Mapper
-                        </Grid.Column>
-                        <Grid.Column width={"2"}>
-                          <Icon name={"user"} />
-                        </Grid.Column>
-                        <Grid.Column width={"11"}>
-                          <Form inverted>
-                            <FilterField
-                              id={"mapper"}
-                              label={"Mapper"}
-                              group={"mapper"}
-                              handleFilterSet={handleFilterSet}
-                              disabled={canEdit}
-                            />
-                          </Form>
-                        </Grid.Column>
-                      </Grid.Row>
+                      <FilterItem title={"Artist"} icon={"pencil"} titleWidth={3} itemWidth={11} item={
+                        <Form inverted>
+                          <FilterField
+                            id={"artist"}
+                            label={"Artist"}
+                            group={"artist"}
+                            value={formValues.artist}
+                            handleFilterSet={debouncingFilterSet}
+                            enabled={canEdit}
+                          />
+                        </Form>
+                      } />
+                      <FilterItem title={"Title"} icon={"heading"} titleWidth={3} itemWidth={11} item={
+                        <Form inverted>
+                          <FilterField
+                            id={"title"}
+                            label={"Title"}
+                            group={"title"}
+                            value={formValues.title}
+                            handleFilterSet={debouncingFilterSet}
+                            enabled={canEdit}
+                          />
+                        </Form>
+                      } />
+                      <FilterItem title={"Mapper"} icon={"user"} titleWidth={3} itemWidth={11} item={
+                        <Form inverted>
+                          <FilterField
+                            id={"mapper"}
+                            label={"Mapper"}
+                            group={"mapper"}
+                            value={formValues.mapper}
+                            handleFilterSet={debouncingFilterSet}
+                            enabled={canEdit}
+                          />
+                        </Form>
+                      } />
                     </Grid>
                   </Grid.Column>
                   <Grid.Column computer={8} mobile={16}>
                     <Grid verticalAlign={"middle"}>
                       {onRankedPage !== true &&
-                        <Grid.Row>
-                          <Grid.Column width={"5"} textAlign={"right"}>
-                            Nominators
-                          </Grid.Column>
-                          <Grid.Column width={"2"}>
-                            <Icon name={(filter.hideWithTwoNominators) ? "user cancel" : "group"} color={"green"} size={"large"} />
-                          </Grid.Column>
-                          <Grid.Column width={"9"}>
-                            <Button.Group fluid>
-                              <Button
-                                inverted
-                                primary={filter.hideWithTwoNominators === true}
-                                secondary={filter.hideWithTwoNominators !== true}
-                                active={filter.hideWithTwoNominators === true}
-                                onClick={() => handleFilterSet("hideWithTwoNominators", true)}>Missing</Button>
-                              <Button
-                                inverted
-                                primary={filter.hideWithTwoNominators === false}
-                                secondary={filter.hideWithTwoNominators !== false}
-                                active={filter.hideWithTwoNominators === false}
-                                onClick={() => handleFilterSet("hideWithTwoNominators", false)}>Any</Button>
-                            </Button.Group>
-                          </Grid.Column>
-                        </Grid.Row>
+                        <FilterItem icon={(formValues.hideWithTwoNominators) ? "user cancel" : "group"} iconColor={"green"} title={"Nominators"} item={
+                          <Button.Group fluid>
+                            <FilterButton active={formValues.hideWithTwoNominators === true} value={true} field={"hideWithTwoNominators"} name={"Missing"} handleFilterSet={instantFilterSet} />
+                            <FilterButton active={formValues.hideWithTwoNominators === false} value={false} field={"hideWithTwoNominators"} name={"Any"} handleFilterSet={instantFilterSet} />
+                          </Button.Group>
+                        } />
                       }
                       {canEdit &&
-                      <Grid.Row>
-                        <Grid.Column width={"5"} textAlign={"right"}>Page Limit</Grid.Column>
-                        <Grid.Column width={"2"}>
-                          <Icon disabled={!canEdit} Icon name={"list ol"} size={"large"} />
-                        </Grid.Column>
-                        <Grid.Column widescreen={"9"}>
+                        <FilterItem title={"Limit"} icon={"list ol"} item={
                           <Button.Group fluid>
-                            <Button
-                              inverted
-                              primary={filter.limit === 10}
-                              secondary={filter.limit !== 10}
-                              active={filter.limit === 10}
-                              onClick={() => handleFilterSet("limit", 10)}>10</Button>
-                            <Button
-                              inverted
-                              primary={filter.limit === 20}
-                              secondary={filter.limit !== 20}
-                              active={filter.limit === 20}
-                              onClick={() => handleFilterSet("limit", 20)}>20</Button>
-                            <Button
-                              inverted
-                              primary={filter.limit === 50}
-                              secondary={filter.limit !== 50}
-                              active={filter.limit === 50}
-                              onClick={() => handleFilterSet("limit", 50)}>50</Button>
+                            <FilterButton active={formValues.limit === "Ten"} value={"Ten"} field={"limit"} name={"10"} handleFilterSet={instantFilterSet} />
+                            <FilterButton active={formValues.limit === "Twenty"} value={"Twenty"} field={"limit"} name={"20"} handleFilterSet={instantFilterSet} />
+                            <FilterButton active={formValues.limit === "Fifty"} value={"Fifty"} field={"limit"} name={"50"} handleFilterSet={instantFilterSet} />
                           </Button.Group>
-                        </Grid.Column>
-                      </Grid.Row>
+                        } />
                       }
                     </Grid>
                   </Grid.Column>
@@ -203,23 +134,23 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage, us
           </Table.HeaderCell>
           <Table.HeaderCell width={"2"}>
             <Button disabled={!canEdit} fluid color={
-              filter.nominator === userId ? "blue" : selectedNominatorInfo ? "orange": "green"
+              formValues.nominator === userId ? "blue" : selectedNominatorInfo ? "orange": "green"
             } onClick={() => {
-              if (filter.nominator === userId) {
-                handleFilterSet("nominator", null)
+              if (formValues.nominator === userId) {
                 setSelectedNominator(null)
+                instantFilterSet("nominator", null)
               } else {
-                handleFilterSet("nominator", userId)
                 setSelectedNominator(userId)
+                instantFilterSet("nominator", userId)
               }
             }} animated='vertical'>
               <Button.Content hidden>
-                <Icon name={filter.nominator === userId ? "user outline" : "user"} />
-                {filter.nominator === userId ? "Clear my" : selectedNominatorInfo ? "Show my" : "Show my"} icons
+                <Icon name={formValues.nominator === userId ? "user outline" : "user"} />
+                {formValues.nominator === userId ? "Clear my" : selectedNominatorInfo ? "Show my" : "Show my"} icons
               </Button.Content>
               <Button.Content visible>
-                <Icon name={filter.nominator === userId ? "star outline" : "star"} />
-                {filter.nominator === userId ? "Showing my" : selectedNominatorInfo ? selectedNominatorInfo.osuName + " their" : "Showing all"} icons
+                <Icon name={formValues.nominator === userId ? "star outline" : "star"} />
+                {formValues.nominator === userId ? "Showing my" : selectedNominatorInfo ? selectedNominatorInfo.osuName + " their" : "Showing all"} icons
               </Button.Content>
             </Button>
           </Table.HeaderCell>
@@ -239,6 +170,5 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, setPage, us
     </Table>
   )
 }
-
 
 export default BeatmapFilter

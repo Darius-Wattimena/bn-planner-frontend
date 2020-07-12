@@ -4,7 +4,7 @@ import BeatmapList from "./BeatmapList"
 import "./Beatmaps.css"
 import AddBeatmapModal from "./modals/AddBeatmapModal"
 import EditBeatmapModal from "./modals/EditBeatmapModal"
-import {Container, Icon} from "semantic-ui-react"
+import {Container} from "semantic-ui-react"
 import Api from "../../resources/Api"
 import {useQuery} from "react-fetching-library"
 
@@ -13,7 +13,7 @@ const filterDefaultState = {
   "title": null,
   "mapper": null,
   "status": [],
-  "limit": 10,
+  "limit": "Ten",
   "page": 1,
   "countTotal": true,
   "hideRanked": true,

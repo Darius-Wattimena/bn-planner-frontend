@@ -13,7 +13,7 @@ const filterDefaultState = {
   "title": null,
   "mapper": null,
   "status": [BEATMAP_STATUS.Ranked.id],
-  "limit": 10,
+  "limit": "Ten",
   "page": 1,
   "countTotal": true,
   "hideRanked": false,

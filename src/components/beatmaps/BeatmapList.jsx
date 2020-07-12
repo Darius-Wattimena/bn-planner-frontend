@@ -8,8 +8,21 @@ const BeatmapList = ({loading, error, payload, filter, setEditModalOpen, setSele
   let possibleLastPage = 0
 
   if (!loading && !error) {
-    possibleLastPage = Math.ceil(payload.total / filter.limit)
+    let limitValue
+    if (filter.limit === "Ten") {
+      limitValue = 10
+    } else if (filter.limit === "Twenty") {
+      limitValue = 20
+    } else if (filter.limit === "Fifty") {
+      limitValue = 50
+    } else {
+      limitValue = 10
+    }
+
+    possibleLastPage = Math.ceil(payload.total / limitValue)
   }
+
+  console.log({possibleLastPage, payload, filter})
 
   return (
     <Table inverted selectable>

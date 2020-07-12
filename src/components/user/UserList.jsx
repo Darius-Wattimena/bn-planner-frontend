@@ -7,7 +7,16 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
   let possibleLastPage = 0
 
   if (!loading && !error) {
-    possibleLastPage = Math.ceil(payload.total / filter.limit)
+    let limitValue
+    if (filter.limit === "Ten") {
+      limitValue = 10
+    } else if (filter.limit === "Twenty") {
+      limitValue = 20
+    } else {
+      limitValue = 10
+    }
+
+    possibleLastPage = Math.ceil(payload.total / limitValue)
   }
 
   return (

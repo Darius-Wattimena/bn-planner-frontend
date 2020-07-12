@@ -11,7 +11,7 @@ import EditUserModal from "./modals/EditUserModal"
 const filterDefaultState = {
   "name": null,
   "roles": [],
-  "limit": 10,
+  "limit": "Ten",
   "page": 1,
   "countTotal": true,
   "canEdit": null,
