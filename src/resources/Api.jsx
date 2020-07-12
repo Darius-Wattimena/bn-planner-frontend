@@ -60,7 +60,8 @@ const Api = {
   updateBeatmapStatus: (beatmapId, status, token, userId) => {
     return {
       method: 'PUT',
-      endpoint: 'v1/beatmap/' + beatmapId + "/updateStatus?status=" + status,
+      endpoint: 'v1/beatmap/' + beatmapId + "/updateStatus",
+      body: statusFormValues,
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + token,
