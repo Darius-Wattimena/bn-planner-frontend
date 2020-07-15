@@ -6,7 +6,7 @@ import {Button, Form, Header, Icon, Message, Modal} from "semantic-ui-react"
 import {getReadableStatus} from "../../../util/BeatmapUtil"
 import {BEATMAP_STATUS} from "../../../Constants"
 
-const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, userId, status, reset}) => {
+const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, userId, status, onReset}) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
   const [showError, setShowError] = useState(false)
   const [statusFormValues, setStatusFormValues] = useState({
@@ -25,7 +25,7 @@ const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap
       setShowError(false)
       setOpenEditModal(false)
       setOpen(false)
-      reset()
+      onReset()
     }
   }
 
@@ -56,7 +56,11 @@ const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap
                 label={"Reason"}
                 placeholder='Reason'
                 value={statusFormValues.reason}
-                onChange={event => setStatusFormValues("reason", event.target.value)}
+                required={true}
+                onChange={event => setStatusFormValues({
+                  status: status,
+                  reason: event.target.value
+                })}
               />
             </Form>
           </>
@@ -81,7 +85,7 @@ const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap
         <Button color='red' onClick={() => setOpen(false)} inverted>
           <Icon name='close' /> Cancel
         </Button>
-        <Button color='green' onClick={verifyData} inverted>
+        <Button color='green' disabled={statusFormValues.reason === null || statusFormValues.reason.match(/^ *$/) !== null} onClick={verifyData} inverted>
           <Icon name='checkmark' /> Confirm
         </Button>
       </Modal.Actions>

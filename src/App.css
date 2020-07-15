@@ -70,13 +70,26 @@ div div.text {
 }
 
 .ui.modal > .modal-header > .header {
-    background-color: #242424 !important;
+    /*background-color: #242424 !important;*/
     color: #d7d7d7 !important;
-    margin: calc(2rem - 0.142857em);
+    padding: calc(2rem - 0.142857em);
+    margin: 0;
+}
+
+.ui.modal > .modal-header.beatmap-edit-header {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*margin: 1vh 1vw;*/
 }
 
 .ui.modal > .modal-header > .modal-header-image {
-    margin: 1vh 1vw;
+    height: 10vh;
+}
+
+.ui.modal > .modal-header > .modal-header-image > img {
+    opacity: 0;
+    border-radius: 5px;
 }
 
 .ui.modal > .content {
@@ -98,8 +111,7 @@ div div.text {
 }
 
 .scrollable-list {
-    height: fit-content;
-    max-height: 70vh;
+    height: 31.75vh;
     overflow-y: scroll;
 }
 

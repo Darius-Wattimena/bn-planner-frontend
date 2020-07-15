@@ -11,7 +11,7 @@ export function getNominatorOptions(users) {
     }))
 
     return [
-      {key: 0, text: 'None', value: null},
+      {key: 0, text: 'None', value: 0},
       ...preparedUsers
     ]
   }

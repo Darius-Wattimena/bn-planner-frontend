@@ -58,28 +58,20 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
         }
       </Table.Cell>
       <Table.Cell width={"2"} textAlign={"center"}>
-        <Grid>
-          <Grid.Row columns={"equal"}>
-            <Grid.Column>
-              <Button fluid color={"green"} onClick={() => {
-                setSelectedBeatmap(beatmap.osuId)
-                setEditModalOpen(true)
-              }}>
-                <Icon fitted name={canEdit ? "pencil" : "eye"}/>
-                {/*{canEdit ? "Edit" : "View"}*/}
-              </Button>
-            </Grid.Column>
-            <Grid.Column>
-              <Button
-                fluid
-                primary
-                onClick={() => window.open("https://osu.ppy.sh/beatmapsets/" + beatmap.osuId, "_blank")}
-              >
-                <Icon fitted name={"linkify"}/>
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <Button.Group fluid>
+          <Button color={"green"} onClick={() => {
+            setSelectedBeatmap(beatmap.osuId)
+            setEditModalOpen(true)
+          }}>
+            <Icon fitted name={canEdit ? "pencil" : "eye"}/>
+          </Button>
+          <Button
+            primary
+            onClick={() => window.open("https://osu.ppy.sh/beatmapsets/" + beatmap.osuId, "_blank")}
+          >
+            <Icon fitted name={"linkify"}/>
+          </Button>
+        </Button.Group>
       </Table.Cell>
     </Table.Row>
   )

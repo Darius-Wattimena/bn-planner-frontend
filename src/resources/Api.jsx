@@ -57,7 +57,7 @@ const Api = {
       }
     }
   },
-  updateBeatmapStatus: (beatmapId, status, token, userId) => {
+  updateBeatmapStatus: (beatmapId, statusFormValues, token, userId) => {
     return {
       method: 'PUT',
       endpoint: 'v1/beatmap/' + beatmapId + "/updateStatus",

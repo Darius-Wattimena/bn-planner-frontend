@@ -1,4 +1,4 @@
-import {Button, Icon, Image, Label, Table} from "semantic-ui-react"
+import {Button, Grid, Icon, Image, Label, Table} from "semantic-ui-react"
 import React from "react"
 import BasicPagination from "../generic/BasicPagination"
 import {getReadableRole} from "../../util/UserUtil"
@@ -41,21 +41,21 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
               </Table.Cell>
               <Table.Cell width={"2"} textAlign={"center"}>{user.osuName}</Table.Cell>
               <Table.Cell width={"3"} textAlign={"center"}><Label className={userRole.className}>{userRole.full}</Label></Table.Cell>
-              <Table.Cell textAlign={"center"}>
+              <Table.Cell width={"1"} textAlign={"center"}>
                 <AccessIcon hasAccess={user.hasEditPermissions} />
               </Table.Cell>
-              <Table.Cell textAlign={"center"}>
+              <Table.Cell width={"1"} textAlign={"center"}>
                 <AccessIcon hasAccess={user.hasAdminPermissions} />
               </Table.Cell>
               <Table.Cell width={"2"} textAlign={"center"}>
                 <Button.Group fluid>
-                  <Button inverted color={"green"} onClick={_ => {
+                  <Button color={"green"} onClick={_ => {
                     setSelectedUser(user.osuId)
                     setEditModalOpen(true)
                   }}>
                     <Icon fitted name={isAdmin ? "pencil" : "eye"}/>
                   </Button>
-                  <Button inverted color={"blue"}
+                  <Button color={"blue"}
                           onClick={() => window.open("https://osu.ppy.sh/users/" + user.osuId, "_blank")}>
                     <Icon fitted name={"linkify"}/>
                   </Button>

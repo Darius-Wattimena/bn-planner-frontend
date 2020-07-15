@@ -78,6 +78,7 @@
 .user-banner {
     max-width: 64px !important;
     max-height: 64px;
+    border-radius: 5px;
 }
 
 .users-page {

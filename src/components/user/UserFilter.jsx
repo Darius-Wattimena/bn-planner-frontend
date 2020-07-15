@@ -94,9 +94,9 @@ const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, canEdit, setPa
             />
           </Table.HeaderCell>
           <Table.HeaderCell width={"5"}/>
-          <Table.HeaderCell width={"7"}/>
+          <Table.HeaderCell width={"2"}/>
           <Table.HeaderCell width={"2"}>
-            <Button disabled={!isAdmin} fluid inverted color={"green"} onClick={() => setAddModalOpen(true)}>Add User</Button>
+            <Button disabled={!isAdmin} fluid color={"green"} onClick={() => setAddModalOpen(true)}><Icon name={"plus"} /> Add User</Button>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
