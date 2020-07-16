@@ -9,10 +9,16 @@ import {BEATMAP_STATUS} from "../../../Constants"
 const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, userId, status, onReset}) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
   const [showError, setShowError] = useState(false)
-  const [statusFormValues, setStatusFormValues] = useState({
-    status: status,
-    reason: ""
-  })
+  const [statusFormValues, setStatusFormValues] = useState({ status: 0, reason: null })
+
+  if (statusFormValues.status === 0 && open === true) {
+    setStatusFormValues({
+      status: status,
+      reason: null
+    })
+  }
+
+  console.log({statusFormValues, status})
 
   const {mutate} = useMutation(Api.updateBeatmapStatus)
   const handleSubmit = async () => {
@@ -35,6 +41,8 @@ const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap
 
   let readableOldStatus = getReadableStatus(beatmap.status)
   let readableNewStatus = getReadableStatus(status)
+
+  let isRankedOrGraved = status === BEATMAP_STATUS.Ranked.id || status === BEATMAP_STATUS.Graved.id || status === BEATMAP_STATUS.Pending.id
 
   return (
     <Modal open={open} onClose={() => setOpen(false)} size={"tiny"}>
@@ -85,9 +93,21 @@ const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap
         <Button color='red' onClick={() => setOpen(false)}>
           <Icon name='close' /> Cancel
         </Button>
-        <Button color='green' disabled={statusFormValues.reason === null || statusFormValues.reason.match(/^ *$/) !== null} onClick={verifyData} inverted>
+        {!isRankedOrGraved &&
+          <Button
+            color='green'
+            disabled={statusFormValues.reason === null || statusFormValues.reason.match(/^ *$/) !== null}
+            onClick={verifyData}>
+            <Icon name='checkmark' /> Confirm
+          </Button>
+        }
+        {isRankedOrGraved &&
+        <Button
+          color='green'
+          onClick={verifyData}>
           <Icon name='checkmark' /> Confirm
         </Button>
+        }
       </Modal.Actions>
     </Modal>
   )

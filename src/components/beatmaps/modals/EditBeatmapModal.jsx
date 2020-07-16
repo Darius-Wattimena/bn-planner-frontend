@@ -172,12 +172,22 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                   </Grid.Column>
                   <Grid.Column width={"6"}>
                     <Button.Group fluid>
-                      <Button disabled={!canEdit || (payload.status === BEATMAP_STATUS.Graved.id)} color='grey' onClick={() => {
-                        setNewStatus(BEATMAP_STATUS.Graved.id)
+                      {payload.status !== BEATMAP_STATUS.Graved.id &&
+                        <Button disabled={!canEdit} color='grey' onClick={() => {
+                          setNewStatus(BEATMAP_STATUS.Graved.id)
+                          setEditStatusModalOpen(true)
+                        }}>
+                          <Icon name='archive' /> Grave
+                        </Button>
+                      }
+                      {payload.status === BEATMAP_STATUS.Graved.id &&
+                      <Button disabled={!canEdit} color='grey' onClick={() => {
+                        setNewStatus(BEATMAP_STATUS.Pending.id)
                         setEditStatusModalOpen(true)
                       }}>
-                        <Icon name='archive' /> Grave
+                        <Icon name='archive' /> Un-Grave
                       </Button>
+                      }
                       <Button disabled={!canEdit} color='red' onClick={() => setDeleteModalOpen(true)}>
                         <Icon name='trash' /> Delete
                       </Button>
