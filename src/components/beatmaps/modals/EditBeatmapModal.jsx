@@ -142,7 +142,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                   <Grid.Column width={"10"} textAlign={"center"} verticalAlign={"middle"  }>
                     <Button.Group fluid>
                       <Button
-                        disabled={payload.status === BEATMAP_STATUS.Ranked.id || payload.nominators[0] === 0 || payload.nominators[1] === 0}
+                        disabled={!canEdit || (payload.status === BEATMAP_STATUS.Ranked.id || payload.nominators[0] === 0 || payload.nominators[1] === 0)}
                         color='green'
                         onClick={() => {
                           setNewStatus(BEATMAP_STATUS.Ranked.id)
@@ -151,7 +151,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                         <Icon name='heart' /> Rank
                       </Button>
                       <Button
-                        disabled={payload.status === BEATMAP_STATUS.Popped.id}
+                        disabled={!canEdit || (payload.status === BEATMAP_STATUS.Popped.id)}
                         color='orange'
                         onClick={() => {
                           setNewStatus(BEATMAP_STATUS.Popped.id)
@@ -160,7 +160,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                         <Icon name='warning' /> Pop
                       </Button>
                       <Button
-                        disabled={payload.status === BEATMAP_STATUS.Disqualified.id}
+                        disabled={!canEdit || (payload.status === BEATMAP_STATUS.Disqualified.id)}
                         color='red'
                         onClick={() => {
                           setNewStatus(BEATMAP_STATUS.Disqualified.id)
@@ -172,13 +172,13 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                   </Grid.Column>
                   <Grid.Column width={"6"}>
                     <Button.Group fluid>
-                      <Button disabled={payload.status === BEATMAP_STATUS.Graved.id} color='grey' onClick={() => {
+                      <Button disabled={!canEdit || (payload.status === BEATMAP_STATUS.Graved.id)} color='grey' onClick={() => {
                         setNewStatus(BEATMAP_STATUS.Graved.id)
                         setEditStatusModalOpen(true)
                       }}>
                         <Icon name='archive' /> Grave
                       </Button>
-                      <Button color='red' onClick={() => setDeleteModalOpen(true)}>
+                      <Button disabled={!canEdit} color='red' onClick={() => setDeleteModalOpen(true)}>
                         <Icon name='trash' /> Delete
                       </Button>
                     </Button.Group>
@@ -285,17 +285,17 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
 
             {canEdit === true &&
             <Modal.Actions>
-              <Button color='red' onClick={() => onModalReset()} inverted>
+              <Button color='red' onClick={() => onModalReset()}>
                 <Icon name='close' /> Close
               </Button>
-              <Button color='green' disabled={showSameNominatorWarning} onClick={verifyData} inverted>
+              <Button color='green' disabled={showSameNominatorWarning} onClick={verifyData}>
                 <Icon name='checkmark' /> Save
               </Button>
             </Modal.Actions>
             }
             {canEdit === false &&
             <Modal.Actions>
-              <Button color='green' onClick={() => onModalReset()} inverted>
+              <Button color='green' onClick={() => onModalReset()}>
                 <Icon name='close' /> Close
               </Button>
             </Modal.Actions>

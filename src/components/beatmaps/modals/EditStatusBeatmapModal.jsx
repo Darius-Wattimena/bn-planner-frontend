@@ -82,7 +82,7 @@ const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap
         }
       </Modal.Content>
       <Modal.Actions>
-        <Button color='red' onClick={() => setOpen(false)} inverted>
+        <Button color='red' onClick={() => setOpen(false)}>
           <Icon name='close' /> Cancel
         </Button>
         <Button color='green' disabled={statusFormValues.reason === null || statusFormValues.reason.match(/^ *$/) !== null} onClick={verifyData} inverted>

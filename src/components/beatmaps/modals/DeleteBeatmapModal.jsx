@@ -33,10 +33,10 @@ const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, us
         Are you sure that you want to delete the following beatmap from the planner?
       </Modal.Content>
       <Modal.Actions>
-        <Button color='red' onClick={() => setOpen(false)} inverted>
+        <Button color='red' onClick={() => setOpen(false)}>
           <Icon name='close' /> Cancel
         </Button>
-        <Button color='green' onClick={verifyData} inverted>
+        <Button color='green' onClick={verifyData}>
           <Icon name='checkmark' /> Confirm
         </Button>
       </Modal.Actions>

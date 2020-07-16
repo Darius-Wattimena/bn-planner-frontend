@@ -113,10 +113,10 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
         </Modal.Content>
       }
       <Modal.Actions>
-        <Button color='red' onClick={() => setOpen(false)} inverted>
+        <Button color='red' onClick={() => setOpen(false)}>
           <Icon name='close' /> Close
         </Button>
-        <Button color='green' onClick={verifyData} inverted>
+        <Button color='green' onClick={verifyData}>
           <Icon name='checkmark' /> Save
         </Button>
       </Modal.Actions>

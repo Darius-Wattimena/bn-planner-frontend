@@ -88,10 +88,10 @@ const AddBeatmapModal = ({open, query, setOpen, userId}) => {
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='red' onClick={() => setOpen(false)} inverted>
+        <Button color='red' onClick={() => setOpen(false)}>
           <Icon name='close' /> Cancel
         </Button>
-        <Button color='green' onClick={verifyData} inverted>
+        <Button color='green' onClick={verifyData}>
           <Icon name='checkmark' /> Add
         </Button>
       </Modal.Actions>
