@@ -142,7 +142,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                   <Grid.Column width={"10"} textAlign={"center"} verticalAlign={"middle"  }>
                     <Button.Group fluid>
                       <Button
-                        disabled={payload.status === BEATMAP_STATUS.Ranked.id || payload.nominators[0] !== 0 || payload.nominators[1] !== 0}
+                        disabled={payload.status === BEATMAP_STATUS.Ranked.id || payload.nominators[0] === 0 || payload.nominators[1] === 0}
                         color='green'
                         onClick={() => {
                           setNewStatus(BEATMAP_STATUS.Ranked.id)
