@@ -12,6 +12,9 @@ import Api from "./resources/Api"
 import {Dimmer, Progress} from "semantic-ui-react"
 import RankedBeatmaps from "./components/beatmaps/RankedBeatmaps";
 import GravedBeatmaps from "./components/beatmaps/GravedBeatmaps";
+import Contest from "./components/tournament/contest/Contest";
+import ModdingMap from "./components/tournament/moddingMap/ModdingMap";
+import ModdingDiscussion from "./components/tournament/moddingDiscussion/ModdingDiscussion";
 
 export const basePermissions = {
   empty: true
@@ -75,6 +78,9 @@ const Routes = () => {
         <Route exact path={"/ranked"} component={() => <RankedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route exact path={"/graved"} component={() => <GravedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+        <Route path={"/contests"} component={() => <Contest canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+        <Route exact path={"/modding/maps"} component={() => <ModdingMap canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+        <Route path={"/modding/maps/discussion/:id"} component={() => <ModdingDiscussion canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route path={"/login"} component={Login} />
         <Route component={NotFound} />
       </Switch>

@@ -33,6 +33,72 @@ const Api = {
       endpoint: 'v1/user/searchByFilter' + filterToUrlParams(filter)
     }
   },
+  fetchContests: (token, userId) => {
+    return {
+      method: 'GET',
+      endpoint: 'v1/contest/findAll',
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
+  addContest: (contest, token, userId) => {
+    return {
+      method: 'POST',
+      endpoint: 'v1/contest/add',
+      body: contest,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
+  fetchModdingMaps: (token, userId) => {
+    return {
+      method: 'GET',
+      endpoint: 'v1/modding/map/findAll',
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
+  fetchModdingMapDiscussion: (mapId, token, userId) => {
+    return {
+      method: 'GET',
+      endpoint: `v1/modding/map/${mapId}/findDiscussion`,
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
+  addModdingMap: (moddingMap, token, userId) => {
+    return {
+      method: 'POST',
+      endpoint: 'v1/modding/map/add',
+      body: moddingMap,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
+  addModdingComment: (moddingComment, token, userId) => {
+    return {
+      method: 'POST',
+      endpoint: 'v1/modding/comment/add',
+      body: moddingComment,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
   addBeatmap: (beatmap, token, userId) => {
     return {
       method: 'POST',

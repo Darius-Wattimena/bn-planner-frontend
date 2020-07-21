@@ -2,7 +2,7 @@ import React from "react"
 import {Image} from "semantic-ui-react"
 import {getReadableRole} from "../../util/UserUtil"
 
-const UserAvatar = ({nominated, userDetails}) => {
+const UserAvatar = ({nominated, userDetails, onlyPicture}) => {
   if (userDetails) {
     let roleDetails = getReadableRole(userDetails.role)
     let className
@@ -11,6 +11,14 @@ const UserAvatar = ({nominated, userDetails}) => {
       className = "nominated user-avatar " + roleDetails.className + "-text"
     } else {
       className = "user-avatar " + roleDetails.className + "-text"
+    }
+
+    if (onlyPicture && onlyPicture === true) {
+      return (
+        <div className={className}>
+          <Image avatar src={userDetails.profilePictureUri}/>
+        </div>
+      )
     }
 
     return (
