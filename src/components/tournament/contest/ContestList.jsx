@@ -3,7 +3,7 @@ import React from "react"
 import UserAvatar from "../../user/UserAvatar";
 import {getUserWithId} from "../../../util/UserUtil";
 
-const ContestList = ({payload, setAddModalOpen, setEditModalOpen, setSelectedContest, users}) => {
+const ContestList = ({isAdmin, payload, setAddModalOpen, setEditModalOpen, setSelectedContest, users}) => {
   return (
     <Table inverted selectable>
       <Table.Header>
@@ -30,7 +30,7 @@ const ContestList = ({payload, setAddModalOpen, setEditModalOpen, setSelectedCon
               })}</Grid></Table.Cell>
               <Table.Cell width={"2"} textAlign={"center"}>
                 <Button.Group fluid>
-                  <Button color={"green"} onClick={_ => {
+                  <Button disabled={true} color={"grey"} onClick={_ => {
                     setSelectedContest(contest._id)
                     setEditModalOpen(true)
                   }}>
@@ -52,7 +52,7 @@ const ContestList = ({payload, setAddModalOpen, setEditModalOpen, setSelectedCon
           <Table.HeaderCell width={"4"} />
           <Table.HeaderCell width={"8"} />
           <Table.HeaderCell width={"2"}>
-            <Button fluid color={"green"} onClick={() => setAddModalOpen(true)}><Icon name={"plus"} /> Add Contest</Button>
+            <Button fluid disabled={!isAdmin} color={isAdmin ? "green" : "grey"} onClick={() => setAddModalOpen(true)}><Icon name={"plus"} /> Add Contest</Button>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>

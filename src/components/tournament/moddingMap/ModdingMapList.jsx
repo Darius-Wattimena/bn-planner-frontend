@@ -2,7 +2,7 @@ import {Button, Icon, Table} from "semantic-ui-react"
 import React from "react"
 import {useHistory} from "react-router-dom";
 
-const ModdingMapList = ({payload, setAddModalOpen}) => {
+const ModdingMapList = ({isAdmin, payload, setAddModalOpen}) => {
   let history = useHistory()
   return (
     <Table inverted selectable>
@@ -62,7 +62,7 @@ const ModdingMapList = ({payload, setAddModalOpen}) => {
           <Table.HeaderCell width={"3"} />
           <Table.HeaderCell width={"3"} />
           <Table.HeaderCell width={"2"}>
-            <Button fluid color={"green"} onClick={() => setAddModalOpen(true)}><Icon name={"plus"} /> Add Map</Button>
+            <Button disabled={!isAdmin} fluid color={isAdmin ? "green" : "grey"} onClick={() => setAddModalOpen(true)}><Icon name={"plus"} /> Add Map</Button>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>

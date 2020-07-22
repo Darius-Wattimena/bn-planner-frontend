@@ -111,11 +111,57 @@ const Api = {
       }
     }
   },
+  editModdingComment: (moddingComment, token, userId) => {
+    return {
+      method: 'PUT',
+      endpoint: `v1/modding/comment/edit`,
+      body: moddingComment,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
+  deleteModdingComment: (commentId, token, userId) => {
+    return {
+      method: 'DELETE',
+      endpoint: `v1/modding/comment/${commentId}/delete`,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
   addModdingResponse: (moddingResponse, token, userId) => {
     return {
       method: 'POST',
       endpoint: 'v1/modding/response/add',
       body: moddingResponse,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
+  editModdingResponse: (moddingResponse, token, userId) => {
+    return {
+      method: 'PUT',
+      endpoint: `v1/modding/response/edit`,
+      body: moddingResponse,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
+  deleteModdingResponse: (responseId, token, userId) => {
+    return {
+      method: 'DELETE',
+      endpoint: `v1/modding/response/${responseId}/delete`,
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + token,

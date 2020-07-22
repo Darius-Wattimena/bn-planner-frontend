@@ -4,7 +4,6 @@ import {useMutation} from "react-fetching-library";
 import {getReadableRole, getUserWithId} from "../../../util/UserUtil";
 import {Button, Icon} from "semantic-ui-react";
 import DiscussionAuthor from "./DiscussionAuthor";
-import {timestampRegex} from "../../../util/DiscussionUtil";
 
 const DiscussionItemResponseTextArea = ({users, userId, moddingCommentId, setIsWriting, request, query}) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
@@ -51,7 +50,6 @@ const DiscussionItemResponseTextArea = ({users, userId, moddingCommentId, setIsW
   let authorDetails = getUserWithId(users, userId)
   let authorRole = getReadableRole(authorDetails.role)
   let submitIsActive = /\S/.test(formValues.content)
-
 
   return (
     <>
