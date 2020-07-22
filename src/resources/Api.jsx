@@ -99,6 +99,18 @@ const Api = {
       }
     }
   },
+  addModdingResponse: (moddingResponse, token, userId) => {
+    return {
+      method: 'POST',
+      endpoint: 'v1/modding/response/add',
+      body: moddingResponse,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
   addBeatmap: (beatmap, token, userId) => {
     return {
       method: 'POST',

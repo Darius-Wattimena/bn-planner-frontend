@@ -40,9 +40,9 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
   }
 
   return (
-    <div className={"base-container-large"}>
+    <div className={"base-container base-container-large"}>
       <Container fluid>
-        <h1>Icons In Progress</h1>
+        <h2>Icons In Progress</h2>
         <BeatmapFilter
           users={users}
           filter={filter}

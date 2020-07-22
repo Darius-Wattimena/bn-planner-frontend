@@ -40,9 +40,9 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
   }
 
   return (
-    <div className={"base-container-large"}>
+    <div className={"base-container base-container-large"}>
       <Container fluid>
-        <h1>Ranked Beatmaps</h1>
+        <h2>Ranked Beatmaps</h2>
         <BeatmapFilter
           users={users}
           filter={filter}

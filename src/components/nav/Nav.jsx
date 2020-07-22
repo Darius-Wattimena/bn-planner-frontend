@@ -10,6 +10,8 @@ const beatmapsName = "beatmaps"
 const rankedName = "ranked"
 const gravedName = "graved"
 const usersName = "users"
+const contestName = "contest"
+const moddingMapName = "moddingMap"
 const loginName = "login"
 
 function getSelectedFromHref() {
@@ -21,6 +23,10 @@ function getSelectedFromHref() {
     return rankedName
   } else if (window.location.href.endsWith("/graved")) {
     return gravedName
+  } else if (window.location.href.endsWith("/contests")) {
+    return contestName
+  } else if (window.location.href.includes("/modding/maps")) {
+    return moddingMapName
   } else if (window.location.href.endsWith("/login")) {
     return loginName
   } else {
@@ -79,6 +85,20 @@ const Nav = ({userId}) => {
           onClick={() => handleNavClick(usersName, "/users")}
         >
           Users
+        </MenuItem>
+        <MenuItem
+          name={contestName}
+          active={selected === contestName}
+          onClick={() => handleNavClick(contestName, "/contests")}
+        >
+          Contests
+        </MenuItem>
+        <MenuItem
+          name={moddingMapName}
+          active={selected === moddingMapName}
+          onClick={() => handleNavClick(moddingMapName, "/modding/maps")}
+        >
+          Modding
         </MenuItem>
         {userId === 0 &&
         <Menu.Menu position='right'>

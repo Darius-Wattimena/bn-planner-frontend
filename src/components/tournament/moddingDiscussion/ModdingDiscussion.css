@@ -1,0 +1,147 @@
+.beatmap-discussion-title {
+    color: #d7d7d7;
+    background-color: #323232;
+    font-size: 20px;
+    padding: 20px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.beatmap-discussion-container {
+    background-color: #2b2b2b;
+    padding: 10px 20px;
+}
+
+.beatmap-discussion-status {
+    width: max-content;
+    margin-right: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: #d7d7d7;
+}
+
+.beatmap-discussion-author {
+    width: max-content;
+    display: flex;
+    margin-right: 10px;
+}
+
+.beatmap-discussion-username-profile {
+    min-width: 100px;
+    font-weight: bold;
+}
+
+.beatmap-discussion-username {
+    margin-bottom: 2px;
+}
+
+.beatmap-discussion-label {
+    height: fit-content;
+    padding: 5px !important;
+    font-size: 10px !important;
+}
+
+.beatmap-discussion-username.user-role-nat {
+    color: #a53d3c;
+}
+
+.beatmap-discussion-username.user-role-bn {
+    color: #7249a5;
+}
+
+.beatmap-discussion-username.user-role-pbn {
+    color: #995ba5;
+}
+
+.beatmap-discussion-username.user-role-ca  {
+    color: #a0a0a0;
+}
+
+.beatmap-discussion-stripe.user-role-nat {
+    width: 2px;
+    background-color: #a53d3c;
+}
+
+.beatmap-discussion-stripe {
+    width: 2px;
+    background-color: #d7d7d7;
+}
+
+.beatmap-discussion-content {
+    width: 70%;
+}
+
+.beatmap-discussion-content-full {
+    width: 100%;
+}
+
+.beatmap-discussion-avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.beatmap-discussion-avatar-image {
+    border-radius: 5px;
+}
+
+.beatmap-disussion-osulink {
+    background-color: #2b2b2b;
+    padding: 2px;
+    border-radius: 5px;
+    color: #8e95a8;
+}
+
+.beatmap-discussion-group {
+    display: flex;
+}
+
+.beatmap-discussion-item-group {
+    width: 100%;
+    color: #d7d7d7;
+}
+
+.beatmap-discussion-item-top {
+    padding: 10px 15px;
+    display: flex;
+    background-color: #323232;
+    text-align: left;
+    font-size: 15px;
+}
+
+.beatmap-discussion-main-actions {
+    background-color: #393939;
+    text-align: right;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+
+.beatmap-discussion-item {
+    padding: 10px 15px 10px 60px;
+    display: flex;
+    background-color: #393939;
+    text-align: left;
+    font-size: 15px;
+}
+
+.beatmap-discussion-item-reply {
+    padding-right: .25em;
+}
+
+.beatmap-discussion-response-textarea {
+    width: 100%;
+    min-height: 100px;
+    background-color: #2b2b2b;
+    color: #d7d7d7;
+
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    resize: none;
+}

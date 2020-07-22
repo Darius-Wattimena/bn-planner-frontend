@@ -38,26 +38,25 @@ div.dropdown .menu .item .text {
     color: rgba(28, 28, 28, 0.95) !important;
 }
 
-div div.text {
+/*div div.text {
     color: rgba(0,0,0,.87) !important
-}
+}*/
 
 .base-container-large {
-    margin: 2vh 2vw;
-    padding: 1vh 1vw;
-    background-color: #242424;
+    max-width: 1600px !important;
 }
 
 .base-container {
-    margin: 2vh 10vw;
+    max-width: 1400px;
+    width: calc(100% - 80px);
+    align-self: center;
+    margin: 2vh auto;
     padding: 1vh 1vw;
     background-color: #242424;
 }
 
 .base-container-small {
-    margin: 2vh 20vw;
-    padding: 1vh 1vw;
-    background-color: #242424;
+    max-width: 1000px !important;
 }
 
 .filter {

@@ -18,7 +18,7 @@ const Contest = ({canEdit, isAdmin, userId, users}) => {
   return (
     <div className={"base-container"}>
       <Container fluid>
-        <h1>Contests</h1>
+        <h2>Contests</h2>
         <ContestList payload={payload} setAddModalOpen={setAddModalOpen} setEditModalOpen={setEditModalOpen} setSelectedContest={setSelectedContest} users={users} />
         <AddContestModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId} users={users} />
       </Container>

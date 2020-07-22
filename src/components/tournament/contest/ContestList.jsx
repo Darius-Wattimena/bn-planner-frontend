@@ -10,7 +10,7 @@ const ContestList = ({payload, setAddModalOpen, setEditModalOpen, setSelectedCon
       <Table.Header>
         <Table.Row key={"user-list-header"} textAlign={"center"}>
           <Table.HeaderCell width={"2"} />
-          <Table.HeaderCell width={"4"}>Contest</Table.HeaderCell>
+          <Table.HeaderCell width={"4"}>Name</Table.HeaderCell>
           <Table.HeaderCell width={"8"}>Has Access</Table.HeaderCell>
           <Table.HeaderCell width={"2"} />
         </Table.Row>

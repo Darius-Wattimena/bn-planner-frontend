@@ -3,9 +3,9 @@ import React from "react"
 
 const Home = () => {
   return (
-    <div className={"base-container-small"}>
+    <div className={"base-container base-container-small"}>
       <Container fluid>
-        <h1>Home</h1>
+        <h2>Home</h2>
         <p>TODO : SOME FANCY EXPLANATION COMES HERE</p>
       </Container>
     </div>
