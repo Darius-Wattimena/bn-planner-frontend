@@ -1,3 +1,5 @@
+@import "src/Colours";
+
 .ui.selectable.table tbody tr.user-row.user-role-bn:hover {
     background: linear-gradient(to left, transparent, transparent 50%, rgba(114, 73, 165, 0.8) 100%, transparent 75%) !important;
 }
@@ -31,22 +33,22 @@
 }
 
 .ui.label.user-role-bn, .ui.form .ui.dropdown div.menu div.item.user-role-bn, .ui.form .field.error .ui.dropdown div.menu div.item.user-role-bn, .ui.dropdown div .item.user-role-bn > span.text {
-    background-color: #7249a5 !important;
+    background-color: $bn-colour !important;
     color: #d7d7d7 !important;
 }
 
 .ui.label.user-role-pbn, .ui.form .ui.dropdown div.menu div.item.user-role-pbn, .ui.form .field.error .ui.dropdown div.menu div.item.user-role-pbn, .ui.dropdown div .item.user-role-pbn > span.text {
-    background-color: #995ba5 !important;
+    background-color: $pbn-colour !important;
     color: #d7d7d7 !important;
 }
 
 .ui.label.user-role-nat, .ui.form .ui.dropdown div.menu div.item.user-role-nat, .ui.form .field.error .ui.dropdown div.menu div.item.user-role-nat, .ui.dropdown div .item.user-role-nat > span.text {
-    background-color: #a53d3c !important;
+    background-color: $nat-colour !important;
     color: #d7d7d7 !important;
 }
 
 .ui.label.user-role-ca, .ui.form .ui.dropdown div.menu div.item.user-role-ca, .ui.form .field.error .ui.dropdown div.menu div.item.user-role-ca, .ui.dropdown div .item.user-role-ca > span.text {
-    background-color: #555555 !important;
+    background-color: $rc-colour !important;
     color: #d7d7d7 !important;
 }
 
@@ -60,7 +62,7 @@
 }
 
 .user-role-bn-text {
-    background-color: #7249a5 !important;
+    background-color: $bn-colour !important;
 }
 
 .user-role-pbn-text {

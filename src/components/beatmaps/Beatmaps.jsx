@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import BeatmapFilter from "./BeatmapFilter"
 import BeatmapList from "./BeatmapList"
-import "./Beatmaps.css"
+import "./Beatmaps.scss"
 import AddBeatmapModal from "./modals/AddBeatmapModal"
 import EditBeatmapModal from "./modals/EditBeatmapModal"
 import {Container} from "semantic-ui-react"

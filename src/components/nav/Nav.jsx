@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import {Menu, MenuItem} from "semantic-ui-react"
 import {useHistory} from "react-router-dom"
 import catchLogo from "../../assets/catch.svg"
-import "./Nav.css"
+import "./Nav.scss"
 import {ENV} from "../../Settings"
 
 const homeName = "home"

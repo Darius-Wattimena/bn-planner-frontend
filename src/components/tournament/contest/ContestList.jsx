@@ -4,7 +4,6 @@ import UserAvatar from "../../user/UserAvatar";
 import {getUserWithId} from "../../../util/UserUtil";
 
 const ContestList = ({payload, setAddModalOpen, setEditModalOpen, setSelectedContest, users}) => {
-  console.log(payload)
   return (
     <Table inverted selectable>
       <Table.Header>

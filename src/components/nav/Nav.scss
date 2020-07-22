@@ -1,5 +1,7 @@
+@import "src/Colours";
+
 .nav-header {
-    background-color: #242424;
+    background-color: $background-colour-darker;
     margin-bottom: 1vh;
     padding-left: 2vw;
     padding-right: 2vw;

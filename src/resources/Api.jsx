@@ -99,6 +99,18 @@ const Api = {
       }
     }
   },
+  resolveModdingComment: (commentId, status, token, userId) => {
+    return {
+      method: 'PUT',
+      endpoint: `v1/modding/comment/${commentId}/resolve`,
+      body: status,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
   addModdingResponse: (moddingResponse, token, userId) => {
     return {
       method: 'POST',

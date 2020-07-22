@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import UserList from "./UserList"
-import "./Users.css"
+import "./Users.scss"
 import UserFilter from "./UserFilter"
 import {Container} from "semantic-ui-react"
 import AddUserModal from "./modals/AddUserModal"

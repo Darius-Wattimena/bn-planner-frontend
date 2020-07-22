@@ -1,3 +1,5 @@
+@import "./src/Colours";
+
 .beatmap-status-unknown {
     background-color: #c3c3c3 !important;
     color: #242424 !important;
@@ -5,16 +7,6 @@
 
 .beatmap-status-pending {
     background-color: #538ea5 !important;
-    color: #d7d7d7 !important;
-}
-
-.beatmap-status-wip {
-    background-color: #a0a525 !important;
-    color: #d7d7d7 !important;
-}
-
-.beatmap-status-ar {
-    background-color: #7249a5 !important;
     color: #d7d7d7 !important;
 }
 
@@ -89,7 +81,7 @@ u.beatmap-status-graved {
 }
 
 tr.beatmap-row td.beatmap-nominator .nominated {
-    box-shadow: 0 0 5px 1px #40ff2f;
+    box-shadow: 0 0 5px 1px $confirm-colour;
 }
 
 .beatmap-banner {

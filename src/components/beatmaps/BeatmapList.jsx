@@ -22,8 +22,6 @@ const BeatmapList = ({loading, error, payload, filter, setEditModalOpen, setSele
     possibleLastPage = Math.ceil(payload.total / limitValue)
   }
 
-  console.log({possibleLastPage, payload, filter})
-
   return (
     <Table inverted selectable>
       <Table.Header>

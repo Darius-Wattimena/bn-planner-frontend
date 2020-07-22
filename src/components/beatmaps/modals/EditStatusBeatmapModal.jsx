@@ -18,8 +18,6 @@ const EditStatusBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap
     })
   }
 
-  console.log({statusFormValues, status})
-
   const {mutate} = useMutation(Api.updateBeatmapStatus)
   const handleSubmit = async () => {
     const {error: mutateError, payload} = await mutate(beatmap.osuId, statusFormValues, cookies.bnplanner_osu_access_token, userId)
