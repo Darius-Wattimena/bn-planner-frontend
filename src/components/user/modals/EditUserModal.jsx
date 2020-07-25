@@ -70,7 +70,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
         <Modal.Content>
           <Grid>
             <Grid.Row>
-              <Grid.Column width={8}>
+              <Grid.Column computer={8} mobile={16}>
                 <Form>
                   <h3>Information</h3>
                   <Form.Input
@@ -104,7 +104,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
                   />
                 </Form>
               </Grid.Column>
-              <Grid.Column width={8}>
+              <Grid.Column computer={8} mobile={16}>
                 <h3>Events</h3>
                 <BeatmapEventList events={formValues.events} users={users} />
               </Grid.Column>

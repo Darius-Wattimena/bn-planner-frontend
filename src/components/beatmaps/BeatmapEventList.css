@@ -10,7 +10,7 @@
     background: linear-gradient(to left, transparent, transparent 50%, rgba(165, 61, 60, 0.5) 100%, transparent 75%);
 }
 
-.event-list .event-item.user-role-ca {
+.event-list .event-item.user-role-rc {
     background: linear-gradient(to left, transparent, transparent 50%, rgba(105, 105, 105, 0.5) 100%, transparent 75%);
 }
 

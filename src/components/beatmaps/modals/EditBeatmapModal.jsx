@@ -139,7 +139,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
             <Modal.Content>
               <Grid>
                 <Grid.Row>
-                  <Grid.Column width={"10"} textAlign={"center"} verticalAlign={"middle"  }>
+                  <Grid.Column computer={10} mobile={16} textAlign={"center"} verticalAlign={"middle"  }>
                     <Button.Group fluid>
                       <Button
                         disabled={!canEdit || (payload.status === BEATMAP_STATUS.Ranked.id || payload.nominators[0] === 0 || payload.nominators[1] === 0)}
@@ -170,7 +170,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                       </Button>
                     </Button.Group>
                   </Grid.Column>
-                  <Grid.Column width={"6"}>
+                  <Grid.Column computer={6} mobile={16}>
                     <Button.Group fluid>
                       {payload.status !== BEATMAP_STATUS.Graved.id &&
                         <Button disabled={!canEdit} color='grey' onClick={() => {
@@ -195,7 +195,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                  <Grid.Column width={8}>
+                  <Grid.Column computer={8} mobile={16}>
                     <Form>
                       <h3>Settings</h3>
                       <Form.Dropdown
@@ -283,7 +283,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                         onChange={event => setFormValue("note", event.target.value)} />
                     </Form>
                   </Grid.Column>
-                  <Grid.Column width={8}>
+                  <Grid.Column computer={8} mobile={16}>
                     <h3>Status Events</h3>
                     <BeatmapEventList events={formValues.osuEvents} users={users} />
                     <h3>Planner Events</h3>

@@ -28,7 +28,7 @@
     background: linear-gradient(to left, transparent, transparent 50%, rgba(165, 61, 60, 0.5) 100%, transparent 75%);
 }
 
-.user-row.user-role-ca {
+.user-row.user-role-rc {
     background: linear-gradient(to left, transparent, transparent 50%, rgba(105, 105, 105, 0.5) 100%, transparent 75%);
 }
 
@@ -47,7 +47,7 @@
     color: #d7d7d7 !important;
 }
 
-.ui.label.user-role-ca, .ui.form .ui.dropdown div.menu div.item.user-role-ca, .ui.form .field.error .ui.dropdown div.menu div.item.user-role-ca, .ui.dropdown div .item.user-role-ca > span.text {
+.ui.label.user-role-rc, .ui.form .ui.dropdown div.menu div.item.user-role-rc, .ui.form .field.error .ui.dropdown div.menu div.item.user-role-rc, .ui.dropdown div .item.user-role-rc > span.text {
     background-color: $rc-colour !important;
     color: #d7d7d7 !important;
 }
@@ -73,7 +73,7 @@
     background-color: #a53d3c !important;
 }
 
-.user-role-ca-text  {
+.user-role-rc-text  {
     background-color: #696969 !important;
 }
 

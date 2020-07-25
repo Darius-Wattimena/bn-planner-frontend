@@ -9,7 +9,7 @@ import Home from "./components/home/Home"
 import Login from "./components/login/Login"
 import {useQuery} from "react-fetching-library"
 import Api from "./resources/Api"
-import {Dimmer, Progress} from "semantic-ui-react"
+import {Dimmer, Progress, Sidebar} from "semantic-ui-react"
 import RankedBeatmaps from "./components/beatmaps/RankedBeatmaps";
 import GravedBeatmaps from "./components/beatmaps/GravedBeatmaps";
 import Contest from "./components/tournament/contest/Contest";

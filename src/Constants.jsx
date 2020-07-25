@@ -70,6 +70,6 @@ export const USER_ROLES = {
     name: "Retired",
     full: "Retired",
     detailed: "Retired Nominator",
-    className: "user-role-ca"
+    className: "user-role-rc"
   }
 }

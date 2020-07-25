@@ -6,15 +6,18 @@ import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import './Colours.scss'
 import './App.scss'
+import {Sidebar} from "semantic-ui-react";
 
 function App() {
   return (
-    <div className="App">
-      <ReactNotification />
-      <Suspense fallback={SpinnerCircular}>
-        <Routes />
-      </Suspense>
-    </div>
+    <Sidebar.Pushable>
+      <div className="App">
+        <ReactNotification />
+        <Suspense fallback={SpinnerCircular}>
+            <Routes />
+        </Suspense>
+      </div>
+    </Sidebar.Pushable>
   )
 }
 

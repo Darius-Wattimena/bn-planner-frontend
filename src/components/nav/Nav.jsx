@@ -1,9 +1,11 @@
 import React, {useState} from "react"
-import {Menu, MenuItem} from "semantic-ui-react"
+import {Icon, Menu, MenuItem, Segment, Sidebar, Sticky} from "semantic-ui-react"
 import {useHistory} from "react-router-dom"
 import catchLogo from "../../assets/catch.svg"
 import "./Nav.scss"
 import {ENV} from "../../Settings"
+import NavMenuItems from "./NavMenuItems";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const homeName = "home"
 const beatmapsName = "beatmaps"
@@ -36,7 +38,9 @@ function getSelectedFromHref() {
 
 const Nav = ({userId}) => {
   let history = useHistory()
+  const { height, width } = useWindowDimensions();
   const [selected, setSelected] = useState(getSelectedFromHref())
+  const [visible, setVisible] = useState(false)
 
   function handleNavClick(itemName, location) {
     setSelected(itemName)
@@ -45,75 +49,82 @@ const Nav = ({userId}) => {
 
   const osuLoginUrl = "https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=" + ENV.osu.id +"&redirect_uri=" + ENV.osu.redirect + "&response_type=code&scope=identify public"
 
-  return (
-    <nav className={"nav-header"}>
-      <Menu secondary inverted>
-        <div className={"item"} onClick={() => handleNavClick(homeName, "/")}>
-          <img src={catchLogo} alt={""}/>
-        </div>
-        <MenuItem
-          name={homeName}
-          active={selected === homeName}
-          onClick={() => handleNavClick(homeName, "/")}
+  if (width > 767) {
+    return (
+      <nav className={"nav-header"}>
+        <Menu secondary inverted>
+          <div className={"item"} onClick={() => handleNavClick(homeName, "/")}>
+            <img src={catchLogo} alt={""}/>
+          </div>
+          <NavMenuItems
+            beatmapsName={beatmapsName}
+            contestName={contestName}
+            gravedName={gravedName}
+            homeName={homeName}
+            loginName={loginName}
+            moddingMapName={moddingMapName}
+            rankedName={rankedName}
+            usersName={usersName}
+
+            selected={selected}
+            userId={userId}
+            osuLoginUrl={osuLoginUrl}
+            handleNavClick={handleNavClick}
+          />
+        </Menu>
+      </nav>
+    )
+  } else {
+    return (
+      <>
+        <Sidebar
+          as={Menu}
+          animation='overlay'
+          icon='labeled'
+          inverted
+          onHide={() => setVisible(false)}
+          vertical
+          visible={visible}
+          width='thin'
+          className={"mobile-menu-sidebar"}
         >
-          Home
-        </MenuItem>
-        <MenuItem
-          name={beatmapsName}
-          active={selected === beatmapsName}
-          onClick={() => handleNavClick(beatmapsName, "/beatmaps")}
-        >
-          In Progress
-        </MenuItem>
-        <MenuItem
-          name={rankedName}
-          active={selected === rankedName}
-          onClick={() => handleNavClick(rankedName, "/ranked")}
-        >
-          Ranked
-        </MenuItem>
-        <MenuItem
-          name={gravedName}
-          active={selected === gravedName}
-          onClick={() => handleNavClick(gravedName, "/graved")}
-        >
-          Graved
-        </MenuItem>
-        <MenuItem
-          name={usersName}
-          active={selected === usersName}
-          onClick={() => handleNavClick(usersName, "/users")}
-        >
-          Users
-        </MenuItem>
-        <MenuItem
-          name={contestName}
-          active={selected === contestName}
-          onClick={() => handleNavClick(contestName, "/contests")}
-        >
-          Contests
-        </MenuItem>
-        <MenuItem
-          name={moddingMapName}
-          active={selected === moddingMapName}
-          onClick={() => handleNavClick(moddingMapName, "/modding/maps")}
-        >
-          Modding
-        </MenuItem>
-        {userId === 0 &&
-        <Menu.Menu position='right'>
-          <MenuItem
-            name={loginName}
-            active={selected === loginName}
-            onClick={() => window.location.href = osuLoginUrl}
-          >
-            Login with osu! account
-          </MenuItem>
-        </Menu.Menu>
-        }
-      </Menu>
-    </nav>
-  )
+            <div className={"item"} onClick={() => handleNavClick(homeName, "/")}>
+              <img src={catchLogo} alt={""}/>
+            </div>
+            <NavMenuItems
+              beatmapsName={beatmapsName}
+              contestName={contestName}
+              gravedName={gravedName}
+              homeName={homeName}
+              loginName={loginName}
+              moddingMapName={moddingMapName}
+              rankedName={rankedName}
+              usersName={usersName}
+
+              selected={selected}
+              userId={userId}
+              osuLoginUrl={osuLoginUrl}
+              handleNavClick={handleNavClick}
+            />
+        </Sidebar>
+
+        <Sidebar.Pusher>
+          <nav className={"nav-header"}>
+            <Menu secondary inverted>
+              <div className={"item"} onClick={() => handleNavClick(homeName, "/")}>
+                <img src={catchLogo} alt={""}/>
+              </div>
+              <Menu.Menu className={"mobile-menu-right"} position='right'>
+                <MenuItem onClick={() => setVisible(true)}>
+                  <Icon name={"bars"}/> Menu
+                </MenuItem>
+              </Menu.Menu>
+            </Menu>
+          </nav>
+        </Sidebar.Pusher>
+      </>
+    )
+  }
 }
 
 export default Nav

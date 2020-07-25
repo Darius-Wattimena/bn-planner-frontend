@@ -10,7 +10,7 @@ const DiscussionAuthor = ({authorDetails, authorRole}) => {
       <div className={"beatmap-discussion-username-profile"}>
         <div className={"beatmap-discussion-username " + authorRole.className}>{authorDetails.osuName}</div>
         {authorRole.id !== "OBS" &&
-        <Label className={"beatmap-discussion-label " + authorRole.className}>{authorRole.full}</Label>
+          <Label className={"beatmap-discussion-label " + authorRole.className}>{authorRole.full}</Label>
         }
       </div>
       <div className={"beatmap-discussion-stripe " + authorRole.className} />

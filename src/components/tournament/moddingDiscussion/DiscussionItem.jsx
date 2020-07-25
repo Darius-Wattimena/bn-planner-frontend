@@ -76,7 +76,7 @@ const DiscussionItem = ({discussion, users, userId, query}) => {
         <Icon name={moddingComment.resolved ? "check" : "close"} color={moddingComment.resolved ? "green" : "red"} />
         {moddingComment.osuTimestamp}
       </div>
-      <div className={moddingComment.resolved ? "beatmap-discussion-item-group beatmap-discussion-resolved" : "beatmap-discussion-item-group"}>
+      <div className={moddingComment.resolved ? "beatmap-discussion-group-item beatmap-discussion-resolved" : "beatmap-discussion-group-item"}>
         <div className={"beatmap-discussion-item-top"}>
           <DiscussionAuthor authorDetails={authorDetails} authorRole={authorRole} />
           <div className={"beatmap-discussion-content-full"}>

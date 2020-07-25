@@ -68,15 +68,15 @@ const DiscussionItemResponse = ({response, users, userId, query}) => {
       <DiscussionAuthor authorDetails={authorDetails} authorRole={authorRole} />
       <div className={"beatmap-discussion-content-full"}>
         {isEditingComment === true &&
-        <div className={"beatmap-discussion-main-edit"}>
-          <textarea
-            className={"beatmap-discussion-response-textarea"}
-            value={formValues.content}
-            onChange={event => setFormValue("content", event.target.value)}
-          />
-          <Button disabled={!submitIsActive} color={submitIsActive ? "green" : "grey"} onClick={() => verifyData()}><Icon name={"check"}/>Submit</Button>
-          <Button color={"red"} onClick={() => resetEdit()}><Icon name={"close"}/>Close</Button>
-        </div>
+          <div className={"beatmap-discussion-main-edit"}>
+            <textarea
+              className={"beatmap-discussion-response-textarea"}
+              value={formValues.content}
+              onChange={event => setFormValue("content", event.target.value)}
+            />
+            <Button disabled={!submitIsActive} color={submitIsActive ? "green" : "grey"} onClick={() => verifyData()}><Icon name={"check"}/>Submit</Button>
+            <Button color={"red"} onClick={() => resetEdit()}><Icon name={"close"}/>Close</Button>
+          </div>
         }
         {isEditingComment === false &&
           <>
