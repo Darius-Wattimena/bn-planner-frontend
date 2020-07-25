@@ -82,10 +82,10 @@ const DiscussionItemResponse = ({response, users, userId, query}) => {
           <>
             {formattedText}
             <div className={"beatmap-discussion-content-actions"}>
-              <a className={"beatmap-discussion-content-action"} onClick={() => setIsEditingComment(true)}>Edit</a>
-              <a className={"beatmap-discussion-content-action"} onClick={() => {
+              <div className={"link beatmap-discussion-content-action"} onClick={() => setIsEditingComment(true)}>Edit</div>
+              <div className={"link beatmap-discussion-content-action"} onClick={() => {
                 if (window.confirm('Are you sure you wish to delete this discussion?')) handleDeleteSubmit()
-              }}>Delete</a>
+              }}>Delete</div>
             </div>
           </>
         }

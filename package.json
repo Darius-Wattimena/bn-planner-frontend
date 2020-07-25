@@ -8,8 +8,8 @@
     "@testing-library/user-event": "7.2.1",
     "dayjs": "1.8.25",
     "jwt-decode": "2.2.0",
-    "node-sass": "^4.14.1",
-    "query-string": "^6.12.1",
+    "node-sass": "4.14.1",
+    "query-string": "6.12.1",
     "react": "16.13.1",
     "react-cookie": "4.0.3",
     "react-dom": "16.13.1",
@@ -17,7 +17,6 @@
     "react-notifications-component": "2.4.0",
     "react-router-dom": "5.1.2",
     "react-scripts": "3.4.1",
-    "react-string-replace": "^0.4.4",
     "semantic-ui-css": "2.4.1",
     "semantic-ui-react": "0.88.2",
     "spinners-react": "1.0.3"

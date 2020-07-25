@@ -27,6 +27,10 @@ body {
     justify-content: center;
 }
 
+a, .link {
+    color: $text-colour-link
+}
+
 p, h1, h2, h3, h4, h5, h6, .text, div.text,
 div.field .ui.toggle.checkbox input:checked~label, label, div div div.header-text,
 .ui.indicating .label, .ui.indicating .label {

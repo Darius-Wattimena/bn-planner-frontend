@@ -74,13 +74,15 @@
     width: 70%;
 }
 
+
 .beatmap-discussion-content-actions {
     height: max-content;
-}
+    display: flex;
 
-.beatmap-discussion-content-action {
-    margin: 0 5px;
-    font-size: 13px;
+    .beatmap-discussion-content-action {
+        margin: 0 5px;
+        font-size: 13px;
+    }
 }
 
 .beatmap-discussion-content-full {
