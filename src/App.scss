@@ -140,7 +140,16 @@ div.ui.selection.dropdown div.text {
     background-color: $background-colour;
 }
 
+.pushable {
+    overflow-x: unset;
+}
+
 @media (max-width: 767px) {
+
+    .pushable {
+        overflow-x: hidden;
+    }
+
     .modal {
         .content {
             .ui.grid {
