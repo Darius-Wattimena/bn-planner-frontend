@@ -9,7 +9,7 @@ import Home from "./components/home/Home"
 import Login from "./components/login/Login"
 import {useQuery} from "react-fetching-library"
 import Api from "./resources/Api"
-import {Dimmer, Progress, Sidebar} from "semantic-ui-react"
+import {Dimmer, Progress} from "semantic-ui-react"
 import RankedBeatmaps from "./components/beatmaps/RankedBeatmaps";
 import GravedBeatmaps from "./components/beatmaps/GravedBeatmaps";
 import Contest from "./components/tournament/contest/Contest";
@@ -44,7 +44,8 @@ const Routes = () => {
     setPermissions({
       canEdit: payload.canEdit,
       isAdmin: payload.isAdmin,
-      userId: payload.id
+      userId: payload.id,
+      hasHiddenPerms: payload.hasHiddenPerms
     })
   }
 
@@ -69,18 +70,29 @@ const Routes = () => {
     userId = 0
   }
 
+  let hasHiddenPerms
+  if (permissions.hasHiddenPerms) {
+    hasHiddenPerms = permissions.hasHiddenPerms
+  } else {
+    hasHiddenPerms = false
+  }
+
   return (
     <BrowserRouter>
-      <Nav userId={userId} />
+      <Nav userId={userId} hasHiddenPerms={hasHiddenPerms} />
       <Switch>
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route exact path={"/ranked"} component={() => <RankedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route exact path={"/graved"} component={() => <GravedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
-        <Route path={"/contests"} component={() => <Contest canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
-        <Route exact path={"/modding/maps"} component={() => <ModdingMap canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
-        <Route path={"/modding/maps/discussion/:id"} component={() => <ModdingDiscussion canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+        {hasHiddenPerms &&
+          <>
+            <Route path={"/contests"} component={() => <Contest canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+            <Route exact path={"/modding/maps"} component={() => <ModdingMap canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+            <Route path={"/modding/maps/discussion/:id"} component={() => <ModdingDiscussion canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+          </>
+        }
         <Route path={"/login"} component={Login} />
         <Route component={NotFound} />
       </Switch>

@@ -1,7 +1,7 @@
 import React from "react";
 import {Menu, MenuItem} from "semantic-ui-react";
 
-const NavMenuItems = ({handleNavClick, selected, homeName, beatmapsName, rankedName, gravedName, usersName, contestName, moddingMapName, userId, loginName, osuLoginUrl}) => {
+const NavMenuItems = ({hasHiddenPerms, handleNavClick, selected, homeName, beatmapsName, rankedName, gravedName, usersName, contestName, moddingMapName, userId, loginName, osuLoginUrl}) => {
 
   return (
     <>
@@ -40,20 +40,24 @@ const NavMenuItems = ({handleNavClick, selected, homeName, beatmapsName, rankedN
       >
         Users
       </MenuItem>
-      <MenuItem
-        name={contestName}
-        active={selected === contestName}
-        onClick={() => handleNavClick(contestName, "/contests")}
-      >
-        Contests
-      </MenuItem>
-      <MenuItem
-        name={moddingMapName}
-        active={selected === moddingMapName}
-        onClick={() => handleNavClick(moddingMapName, "/modding/maps")}
-      >
-        Modding
-      </MenuItem>
+      {hasHiddenPerms &&
+        <>
+          <MenuItem
+            name={contestName}
+            active={selected === contestName}
+            onClick={() => handleNavClick(contestName, "/contests")}
+          >
+            Contests
+          </MenuItem>
+          <MenuItem
+            name={moddingMapName}
+            active={selected === moddingMapName}
+            onClick={() => handleNavClick(moddingMapName, "/modding/maps")}
+          >
+            Modding
+          </MenuItem>
+        </>
+      }
       {userId === 0 &&
         <Menu.Menu position='right'>
           <MenuItem

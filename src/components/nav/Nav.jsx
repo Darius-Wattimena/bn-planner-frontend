@@ -36,7 +36,7 @@ function getSelectedFromHref() {
   }
 }
 
-const Nav = ({userId}) => {
+const Nav = ({userId, hasHiddenPerms}) => {
   let history = useHistory()
   const { height, width } = useWindowDimensions();
   const [selected, setSelected] = useState(getSelectedFromHref())
@@ -66,6 +66,7 @@ const Nav = ({userId}) => {
             rankedName={rankedName}
             usersName={usersName}
 
+            hasHiddenPerms={hasHiddenPerms}
             selected={selected}
             userId={userId}
             osuLoginUrl={osuLoginUrl}
@@ -101,6 +102,7 @@ const Nav = ({userId}) => {
               rankedName={rankedName}
               usersName={usersName}
 
+              hasHiddenPerms={hasHiddenPerms}
               selected={selected}
               userId={userId}
               osuLoginUrl={osuLoginUrl}
