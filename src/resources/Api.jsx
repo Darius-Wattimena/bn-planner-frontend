@@ -21,6 +21,12 @@ function filterToUrlParams(filter) {
 }
 
 const Api = {
+  fetchLatestStatistics: () => {
+    return {
+      method: 'GET',
+      endpoint: 'v1/statistics/latest'
+    }
+  },
   fetchBeatmapsByFilter: (filter) => {
     return {
       method: 'GET',

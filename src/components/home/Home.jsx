@@ -1,12 +1,25 @@
 import {Container} from "semantic-ui-react"
 import React from "react"
+import HomeStatistics from "./HomeStatistics"
+import "./Home.scss"
 
-const Home = () => {
+const Home = ({users}) => {
   return (
-    <div className={"base-container base-container-small"}>
+    <div className={"base-container"}>
       <Container fluid>
-        <h2>Home</h2>
-        <p>TODO : SOME FANCY EXPLANATION COMES HERE</p>
+        <div className={"section"}>
+          <div className={"section-title"}>Home</div>
+          <div className={"section-container"}>
+            <div className={"text"}>TODO : SOME FANCY EXPLANATION COMES HERE</div>
+          </div>
+        </div>
+
+        <div className={"section"}>
+          <div className={"section-title"}>Statistics</div>
+          <div className={"section-container"}>
+            <HomeStatistics users={users} />
+          </div>
+        </div>
       </Container>
     </div>
   )

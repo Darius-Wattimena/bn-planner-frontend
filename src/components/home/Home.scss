@@ -1,0 +1,96 @@
+@import "../../Colours";
+
+.leaderboard {
+  background-color: $background-colour-lighter;
+  padding-bottom: 5px;
+
+  .leaderboard-name {
+    font-weight: bold;
+    background-color: $background-colour-darker;
+    font-size: 1.2em;
+    padding: 10px;
+  }
+
+  .leaderboard-items {
+    padding-top: 5px;
+    margin: 0 20px;
+
+    .leaderboard-items-group {
+      margin: 5px 0;
+      padding-bottom: 10px;
+
+      .leaderboard-item {
+        margin: 2px 0;
+      }
+
+      .leaderboard-items-group-header {
+        display: flex;
+        font-size: 1.1em;
+        padding: 5.5px;
+        background-color: $background-colour-darker;
+      }
+    }
+
+    .leaderboard-item.leader {
+      box-shadow: 0 0 2px 1px $leader-colour;
+    }
+
+    .leaderboard-item {
+      display: flex;
+      margin: 5px 0;
+      background-color: $background-colour-dark;
+      height: 32px;
+
+      .leaderboard-item-user-info, .leaderboard-item-label {
+        display: flex;
+        width: 80%;
+      }
+
+      .leaderboard-item-label-icon {
+        width: 32px;
+        height: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      .leaderboard-item-label-text {
+        margin: auto auto auto 10px;
+      }
+
+      .leaderboard-item-picture {
+        height: 32px;
+        width: auto;
+      }
+
+      .leaderboard-item-stripe {
+        width: 2px;
+        background-color: $text-colour;
+      }
+
+      .leaderboard-item-stripe.user-role-nat {
+        background-color: $nat-colour;
+      }
+
+      .leaderboard-item-stripe.user-role-bn {
+        background-color: $bn-colour;
+      }
+
+      .leaderboard-item-stripe.user-role-pbn {
+        background-color: $pbn-colour;
+      }
+
+      .leaderboard-item-stripe.user-role-rc {
+        background-color: $rc-colour;
+      }
+
+      .leaderboard-item-user {
+        margin: auto auto auto 10px;
+      }
+
+      .leaderboard-item-amount {
+        width: 20%;
+        margin: auto;
+      }
+    }
+  }
+}

@@ -144,6 +144,24 @@ div.ui.selection.dropdown div.text {
     overflow-x: unset;
 }
 
+.section {
+    margin-bottom: 10px;
+
+    .section-title {
+        color: $text-colour;
+        background-color: $background-colour-dark;
+        font-size: 20px;
+        padding: 20px;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .section-container {
+        background-color: $background-colour;
+        padding: 10px 20px;
+    }
+}
+
 @media (max-width: 767px) {
 
     .pushable {

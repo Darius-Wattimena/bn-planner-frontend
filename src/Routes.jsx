@@ -81,7 +81,7 @@ const Routes = () => {
     <BrowserRouter>
       <Nav userId={userId} hasHiddenPerms={hasHiddenPerms} />
       <Switch>
-        <Route exact path={"/"} component={Home} />
+        <Route exact path={"/"} component={() => <Home users={userQuery.payload} />} />
         <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route exact path={"/ranked"} component={() => <RankedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
         <Route exact path={"/graved"} component={() => <GravedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
