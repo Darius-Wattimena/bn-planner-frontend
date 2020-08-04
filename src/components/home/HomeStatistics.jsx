@@ -89,7 +89,7 @@ const HomeStatistics = ({users}) => {
     )
   } else {
     return (
-      <div>No Data</div>
+      <div className={"text"}>No Data</div>
     )
   }
 }
