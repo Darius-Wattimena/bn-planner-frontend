@@ -3,7 +3,9 @@ import {getReadableRole} from "./UserUtil"
 
 export function getNominatorOptions(users) {
   if (users && Array.isArray(users)) {
-    let preparedUsers = users.map(user => ({
+    let preparedUsers = users.filter(user => (
+      user.role !== "GST"
+    )).map(user => ({
       key: user.osuId,
       text: user.osuName,
       value: user.osuId,

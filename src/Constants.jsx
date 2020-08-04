@@ -37,13 +37,6 @@ export const BEATMAP_STATUS = {
 }
 
 export const USER_ROLES = {
-  Observer: {
-    id: "OBS",
-    name: "Other",
-    full: "Other",
-    detailed: "Other",
-    className: "user-role-observer"
-  },
   BeatmapNominator: {
     id: "BN",
     name: "Full",
@@ -71,5 +64,19 @@ export const USER_ROLES = {
     full: "Retired",
     detailed: "Retired Nominator",
     className: "user-role-rc"
+  },
+  Observer: {
+    id: "OBS",
+    name: "Other",
+    full: "Other",
+    detailed: "Other",
+    className: "user-role-observer"
+  },
+  Guest: {
+    id: "GST",
+    name: "Guest",
+    full: "Guest",
+    detailed: "Guest",
+    className: "user-role-observer"
   }
 }

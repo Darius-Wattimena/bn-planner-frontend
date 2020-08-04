@@ -59,7 +59,7 @@ const HomeStatistics = ({users}) => {
                             Beatmap Status
                           </div>
                           <StatisticsItem title={"Pending"} amount={payload.activePending}/>
-                          <StatisticsItem title={"Nominated"} amount={payload.activeNominated}/>
+                          <StatisticsItem title={"Qualified"} amount={payload.activeNominated}/>
                           <StatisticsItem title={"Bubbled"} amount={payload.activeBubbled} />
                           <StatisticsItem title={"Disqualified"} amount={payload.activeDisqualified} />
                           <StatisticsItem title={"Popped"} amount={payload.activePopped} />

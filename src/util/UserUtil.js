@@ -26,7 +26,8 @@ export function getUserRoles() {
     getOption(USER_ROLES.ProbationBeatmapNominator),
     getOption(USER_ROLES.NominationAssessmentTeam),
     getOption(USER_ROLES.RetiredCatch),
-    getOption(USER_ROLES.Observer)
+    getOption(USER_ROLES.Observer),
+    getOption(USER_ROLES.Guest)
   ]
 }
 
