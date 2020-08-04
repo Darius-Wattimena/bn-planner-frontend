@@ -1,5 +1,5 @@
 import React from "react"
-import {Button, Grid, Icon, Image, Label, Popup, Table} from "semantic-ui-react"
+import {Button, Icon, Image, Label, Popup, Table} from "semantic-ui-react"
 import UserAvatar from "../user/UserAvatar"
 
 const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, setEditModalOpen}) => {

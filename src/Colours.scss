@@ -20,7 +20,14 @@ $background-colour-dark: #1b1b24;
 $background-colour-darker: #161621;
 $background-colour-bg: #101018;
 
-/*$background-colour-lighter: #424253;
+/*$background-colour-lighter: #4c4253;
+$background-colour-light: #3c2f3d;
+$background-colour: #2e2632;
+$background-colour-dark: #231b24;
+$background-colour-darker: #1f1621;
+$background-colour-bg: #161018;*/
+
+/*$background-colour-lighter: #393953;
 $background-colour-light: #313148;
 $background-colour: #232334;
 $background-colour-dark: #1B1C29;
@@ -34,3 +41,11 @@ $rc-colour: #696969;
 
 $confirm-colour: #21ba45;
 $leader-colour: #cdab1f;
+
+$status-pending-colour: #538ea5;
+$status-bubbed-colour: #2b56a5;
+$status-qualified-colour: #2da554;
+$status-ranked-colour: #5aa500;
+$status-popped-colour: #a57d5d;
+$status-dqed-colour: #a54e4b;
+$status-graved-colour: #a5a5a5

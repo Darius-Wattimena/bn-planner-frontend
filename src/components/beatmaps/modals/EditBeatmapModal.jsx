@@ -130,7 +130,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
         {!loading && !error && payload &&
           <>
             <div className={"modal-header beatmap-edit-header"} style={{
-              backgroundImage: "linear-gradient(to top, #2b2b2b, transparent, rgba(0,0,0,.8)), url(https://assets.ppy.sh/beatmaps/" + payload.osuId + "/covers/cover.jpg)"
+              backgroundImage: "linear-gradient(to top, rgb(38 38 50), transparent, rgba(0,0,0,.8)), url(https://assets.ppy.sh/beatmaps/" + payload.osuId + "/covers/cover.jpg)"
             }}>
               <div className={"modal-header-image"} />
               <Header content={"Editing Beatmap : " + showingArtist + " - " + payload.title}/>
@@ -139,7 +139,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
             <Modal.Content>
               <Grid>
                 <Grid.Row>
-                  <Grid.Column computer={10} mobile={16} textAlign={"center"} verticalAlign={"middle"  }>
+                  <Grid.Column computer={10} tablet={10} mobile={16} textAlign={"center"} verticalAlign={"middle"  }>
                     <Button.Group fluid>
                       <Button
                         disabled={!canEdit || (payload.status === BEATMAP_STATUS.Ranked.id || payload.nominators[0] === 0 || payload.nominators[1] === 0)}
@@ -170,7 +170,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                       </Button>
                     </Button.Group>
                   </Grid.Column>
-                  <Grid.Column computer={6} mobile={16}>
+                  <Grid.Column computer={6} tablet={6} mobile={16}>
                     <Button.Group fluid>
                       {payload.status !== BEATMAP_STATUS.Graved.id &&
                         <Button disabled={!canEdit} color='grey' onClick={() => {
@@ -195,7 +195,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                  <Grid.Column computer={8} mobile={16}>
+                  <Grid.Column computer={8} tablet={16} mobile={16}>
                     <Form>
                       <h3>Settings</h3>
                       <Form.Dropdown

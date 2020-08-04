@@ -1,8 +1,82 @@
 @import "../../Colours";
 
+.user-role-nat {
+  background-color: $nat-colour;
+}
+
+.user-role-bn {
+  background-color: $bn-colour;
+}
+
+.user-role-pbn {
+  background-color: $pbn-colour;
+}
+
+.user-role-rc {
+  background-color: $rc-colour;
+}
+
+.text-group {
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+
+  .text-group-name {
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px;
+  }
+
+  .text-group-name-main {
+    font-size: 1.5em;
+    margin-bottom: -8px;
+  }
+
+  .text-group-items {
+    text-align: left;
+    padding-top: 5px;
+    margin: 0 20px;
+  }
+
+  ul.text-group-items {
+    padding-left: 10px;
+  }
+
+  .text-group-item {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: $background-colour-dark;
+
+    .text-group-item-badge {
+      width: fit-content;
+      padding: 3px 7px;
+      font-size: 1.1em;
+      border-radius: 5px;
+    }
+
+    .text-group-item-explanation {
+      margin-left: 3px;
+    }
+
+    .text-group-item-badge.user-role-observer {
+      background-color: $background-colour-light
+    }
+  }
+}
+
+.text-group-table {
+  background-color: $background-colour-lighter;
+
+  .text-group-name {
+    background-color: $background-colour-darker;
+  }
+}
+
 .leaderboard {
+  text-align: left;
   background-color: $background-colour-lighter;
   padding-bottom: 5px;
+  margin-bottom: 10px;
 
   .leaderboard-name {
     font-weight: bold;
@@ -44,6 +118,11 @@
       .leaderboard-item-user-info, .leaderboard-item-label {
         display: flex;
         width: 80%;
+      }
+
+      .leaderboard-item-label-popup-icon {
+        padding-left: 5px;
+        margin: auto;
       }
 
       .leaderboard-item-label-icon {

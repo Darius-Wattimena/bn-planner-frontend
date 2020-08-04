@@ -2,6 +2,8 @@ import {Container} from "semantic-ui-react"
 import React from "react"
 import HomeStatistics from "./HomeStatistics"
 import "./Home.scss"
+import HomeExplanation from "./HomeExplanation";
+import HomeListExplanation from "./HomeListExplanation";
 
 const Home = ({users}) => {
   return (
@@ -9,8 +11,14 @@ const Home = ({users}) => {
       <Container fluid>
         <div className={"section"}>
           <div className={"section-title"}>Home</div>
-          <div className={"section-container"}>
-            <div className={"text"}>TODO : SOME FANCY EXPLANATION COMES HERE</div>
+          <div className={"text section-container"}>
+            <HomeExplanation />
+          </div>
+        </div>
+
+        <div className={"section"}>
+          <div className={"text section-container"}>
+            <HomeListExplanation />
           </div>
         </div>
 

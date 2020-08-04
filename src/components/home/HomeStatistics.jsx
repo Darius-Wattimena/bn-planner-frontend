@@ -1,7 +1,7 @@
 import React from "react"
 import Api from "../../resources/Api"
 import {useQuery} from "react-fetching-library"
-import {Grid, Icon, Image} from "semantic-ui-react"
+import {Grid, Icon, Image, Popup} from "semantic-ui-react"
 import {getReadableRole, getUserWithId} from "../../util/UserUtil"
 
 const HomeStatistics = ({users}) => {
@@ -30,18 +30,18 @@ const HomeStatistics = ({users}) => {
       <div>
         <Grid>
           <Grid.Row>
-            <Grid.Column width={4}>
+            <Grid.Column mobile={16} tablet={8} computer={4}>
               <Leaderboard sortedValues={sortedUserPendingIcons} users={users} title={"Total Icons"} />
             </Grid.Column>
-            <Grid.Column width={4}>
+            <Grid.Column mobile={16} tablet={8} computer={4}>
               <Leaderboard sortedValues={sortedUserNominatedIcons} users={users} title={"Total Nominated Icons"} />
             </Grid.Column>
-            <Grid.Column width={8}>
+            <Grid.Column mobile={16} tablet={16} computer={8}>
               <div className={"text leaderboard"}>
                 <div className={"leaderboard-name"}>General</div>
                 <Grid>
                   <Grid.Row>
-                    <Grid.Column width={8}>
+                    <Grid.Column mobile={16} tablet={16} computer={8}>
                       <div className={"leaderboard-items"}>
                         <div className={"leaderboard-items-group"}>
                           <div className={"leaderboard-items-group-header"}>
@@ -55,7 +55,7 @@ const HomeStatistics = ({users}) => {
 
                         <div className={"leaderboard-items-group"}>
                           <div className={"leaderboard-items-group-header"}>
-                            <Icon name={"question circle"} />
+                            <Icon name={"exclamation circle"} />
                             Beatmap Status
                           </div>
                           <StatisticsItem title={"Pending"} amount={payload.activePending}/>
@@ -66,7 +66,7 @@ const HomeStatistics = ({users}) => {
                         </div>
                       </div>
                     </Grid.Column>
-                    <Grid.Column width={8}>
+                    <Grid.Column mobile={16} tablet={16} computer={8}>
                       <div className={"leaderboard-items"}>
                         <div className={"leaderboard-items-group"}>
                           <div className={"leaderboard-items-group-header"}>
@@ -75,7 +75,13 @@ const HomeStatistics = ({users}) => {
                           </div>
                           <StatisticsItem title={"Total"} amount={payload.totalUser} />
                           <StatisticsItem title={"Nominators"} amount={payload.totalNominators} />
+                          <StatisticsItem title={"Full"} amount={payload.totalFullNominators} />
                           <StatisticsItem title={"Probation"} amount={payload.totalProbation} />
+                          <StatisticsItem title={"NAT's"} amount={payload.totalNATs} />
+                          <StatisticsItem
+                            title={"Other"} amount={payload.totalOtherNominators}
+                            popupText={"Other gamemode nominators"} />
+                          <StatisticsItem title={"Guests"} amount={payload.totalGuests} />
                         </div>
                       </div>
                     </Grid.Column>
@@ -94,11 +100,16 @@ const HomeStatistics = ({users}) => {
   }
 }
 
-const StatisticsItem = ({title, amount}) => {
+const StatisticsItem = ({title, amount, popupText}) => {
   return (
     <div className={"leaderboard-item"}>
       <div className={"leaderboard-item-label"}>
-        <div className={"leaderboard-item-label-text"}>{title}</div>
+        <div className={"leaderboard-item-label-text"}>
+          {title}
+          {popupText &&
+            <Popup trigger={<Icon className={"leaderboard-item-label-popup-icon"} name={"question circle"} />} content={<div className={"popup-text leaderboard-item-label-popup"}>{popupText}</div>}/>
+          }
+        </div>
       </div>
       <div className={"leaderboard-item-amount"}>{amount}</div>
     </div>
@@ -115,7 +126,7 @@ const Leaderboard = ({sortedValues, users, title}) => {
           let userRole = getReadableRole(userDetails.role)
           let leaderboardItemClassName = index === 0 ? "leader " : ""
           return (
-            <div className={"leaderboard-item " + leaderboardItemClassName + userRole.className}>
+            <div key={index} className={"leaderboard-item " + leaderboardItemClassName + userRole.className}>
               <div className={"leaderboard-item-user-info"}>
                 <Image className={"leaderboard-item-picture"} src={userDetails.profilePictureUri}/>
                 <div className={"leaderboard-item-stripe " + userRole.className }/>
