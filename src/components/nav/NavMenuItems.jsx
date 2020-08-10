@@ -1,5 +1,6 @@
 import React from "react";
 import {Menu, MenuItem} from "semantic-ui-react";
+import {ENV} from "../../Settings";
 
 const NavMenuItems = ({hasHiddenPerms, handleNavClick, selected, homeName, beatmapsName, rankedName, gravedName, usersName, contestName, moddingMapName, userId, loginName, osuLoginUrl}) => {
 
@@ -58,17 +59,22 @@ const NavMenuItems = ({hasHiddenPerms, handleNavClick, selected, homeName, beatm
           </MenuItem>
         </>
       }
-      {userId === 0 &&
         <Menu.Menu position='right'>
-          <MenuItem
-            name={loginName}
-            active={selected === loginName}
-            onClick={() => window.location.href = osuLoginUrl}
-          >
-            Login with osu! account
-          </MenuItem>
+          {ENV.is_dev && ENV.is_dev === true &&
+            <MenuItem>
+              DEVELOP BACK-END!
+            </MenuItem>
+          }
+          {userId === 0 &&
+            <MenuItem
+              name={loginName}
+              active={selected === loginName}
+              onClick={() => window.location.href = osuLoginUrl}
+            >
+              Login with osu! account
+            </MenuItem>
+          }
         </Menu.Menu>
-      }
     </>
   )
 }
