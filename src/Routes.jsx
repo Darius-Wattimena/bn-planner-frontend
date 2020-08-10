@@ -79,7 +79,7 @@ const Routes = () => {
 
   return (
     <BrowserRouter>
-      <Nav userId={userId} hasHiddenPerms={hasHiddenPerms} />
+      <Nav users={userQuery.payload} userId={userId} hasHiddenPerms={hasHiddenPerms} />
       <Switch>
         <Route exact path={"/"} component={() => <Home users={userQuery.payload} />} />
         <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />

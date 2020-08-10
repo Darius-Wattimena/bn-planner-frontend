@@ -36,7 +36,7 @@ function getSelectedFromHref() {
   }
 }
 
-const Nav = ({userId, hasHiddenPerms}) => {
+const Nav = ({users, userId, hasHiddenPerms}) => {
   let history = useHistory()
   const { height, width } = useWindowDimensions();
   const [selected, setSelected] = useState(getSelectedFromHref())
@@ -57,6 +57,7 @@ const Nav = ({userId, hasHiddenPerms}) => {
             <img src={catchLogo} alt={""}/>
           </div>
           <NavMenuItems
+            users={users}
             beatmapsName={beatmapsName}
             contestName={contestName}
             gravedName={gravedName}
@@ -93,6 +94,7 @@ const Nav = ({userId, hasHiddenPerms}) => {
               <img src={catchLogo} alt={""}/>
             </div>
             <NavMenuItems
+              users={users}
               beatmapsName={beatmapsName}
               contestName={contestName}
               gravedName={gravedName}
@@ -106,7 +108,11 @@ const Nav = ({userId, hasHiddenPerms}) => {
               selected={selected}
               userId={userId}
               osuLoginUrl={osuLoginUrl}
-              handleNavClick={handleNavClick}
+              handleNavClick={(name, location) => {
+                setVisible(false)
+                handleNavClick(name, location)
+              }}
+              isSidebar={true}
             />
         </Sidebar>
 

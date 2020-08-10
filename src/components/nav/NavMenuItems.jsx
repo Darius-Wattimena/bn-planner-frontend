@@ -1,8 +1,10 @@
 import React from "react";
-import {Menu, MenuItem} from "semantic-ui-react";
+import {Image, Menu, MenuItem} from "semantic-ui-react";
 import {ENV} from "../../Settings";
+import {getUserWithId} from "../../util/UserUtil";
+import UserAvatar from "../user/UserAvatar";
 
-const NavMenuItems = ({hasHiddenPerms, handleNavClick, selected, homeName, beatmapsName, rankedName, gravedName, usersName, contestName, moddingMapName, userId, loginName, osuLoginUrl}) => {
+const NavMenuItems = ({users, isSidebar, hasHiddenPerms, handleNavClick, selected, homeName, beatmapsName, rankedName, gravedName, usersName, contestName, moddingMapName, userId, loginName, osuLoginUrl}) => {
 
   return (
     <>
@@ -59,24 +61,71 @@ const NavMenuItems = ({hasHiddenPerms, handleNavClick, selected, homeName, beatm
           </MenuItem>
         </>
       }
-        <Menu.Menu position='right'>
-          {ENV.is_dev && ENV.is_dev === true &&
-            <MenuItem>
-              DEVELOP BACK-END!
-            </MenuItem>
-          }
-          {userId === 0 &&
-            <MenuItem
-              name={loginName}
-              active={selected === loginName}
-              onClick={() => window.location.href = osuLoginUrl}
-            >
-              Login with osu! account
-            </MenuItem>
-          }
-        </Menu.Menu>
+      <RightMenu users={users} userId={userId} selected={selected} osuLoginUrl={osuLoginUrl} loginName={loginName} isSidebar={isSidebar} />
     </>
   )
+}
+
+const RightMenu = ({isSidebar, userId, users, selected, loginName, osuLoginUrl}) => {
+  let userDetails
+
+  if (userId === 0) {
+    userDetails = null
+  } else {
+    userDetails = getUserWithId(users, userId)
+  }
+
+  if (isSidebar && isSidebar === true) {
+    return (
+      <>
+        {ENV.is_dev && ENV.is_dev === true &&
+          <MenuItem>
+            DEVELOP BACK-END!
+          </MenuItem>
+        }
+        {userId === 0 &&
+          <MenuItem
+            name={loginName}
+            active={selected === loginName}
+            onClick={() => window.location.href = osuLoginUrl}
+          >
+            Login with osu! account
+          </MenuItem>
+        }
+        {userDetails &&
+        <MenuItem>
+          <Image avatar src={userDetails.profilePictureUri}/>
+          Welcome {getUserWithId(users, userId).osuName}!
+        </MenuItem>
+        }
+      </>
+    )
+  } else {
+    return (
+      <Menu.Menu position='right'>
+        {ENV.is_dev && ENV.is_dev === true &&
+          <MenuItem>
+            DEVELOP BACK-END!
+          </MenuItem>
+        }
+        {userId === 0 &&
+          <MenuItem
+            name={loginName}
+            active={selected === loginName}
+            onClick={() => window.location.href = osuLoginUrl}
+          >
+            Login with osu! account
+          </MenuItem>
+        }
+        {userDetails &&
+          <MenuItem>
+            <Image avatar src={userDetails.profilePictureUri}/>
+            Welcome {getUserWithId(users, userId).osuName}!
+          </MenuItem>
+        }
+      </Menu.Menu>
+    )
+  }
 }
 
 export default NavMenuItems
