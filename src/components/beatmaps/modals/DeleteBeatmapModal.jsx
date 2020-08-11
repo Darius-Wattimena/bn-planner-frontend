@@ -37,7 +37,7 @@ const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, us
         <br/>
         <div>
           Deleting a map from the planner should only be used when you accidentally added a wrong set to the planner.
-          It's recommended to <u>remove yourself from the set</u> and move it to graved if the mapsets is graved!
+          If this is not the case then it's recommended to <u>remove yourself from the set</u> and move it to graved if the mapsets is graved!
         </div>
         <br/>
         <Checkbox
