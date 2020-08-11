@@ -4,7 +4,7 @@ import {BEATMAP_STATUS} from "../../Constants"
 import BasicPagination from "../generic/BasicPagination"
 import BeatmapListItem from "./BeatmapListItem"
 
-const BeatmapList = ({loading, error, payload, filter, setEditModalOpen, setSelectedBeatmap, canEdit, setPage}) => {
+const BeatmapList = ({users, loading, error, payload, filter, setEditModalOpen, setSelectedBeatmap, canEdit, setPage}) => {
   let possibleLastPage = 0
 
   if (!loading && !error) {
@@ -46,6 +46,7 @@ const BeatmapList = ({loading, error, payload, filter, setEditModalOpen, setSele
             canEdit={canEdit}
             setEditModalOpen={setEditModalOpen}
             setSelectedBeatmap={setSelectedBeatmap}
+            users={users}
           />
         })}
       </Table.Body>

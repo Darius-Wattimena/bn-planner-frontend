@@ -52,6 +52,7 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
           userId={userId}
           setPage={handleFilterSetPage}/>
         <BeatmapList
+          users={users}
           loading={loading}
           payload={payload}
           error={error}
