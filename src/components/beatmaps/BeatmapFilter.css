@@ -1,9 +1,9 @@
-.ui.popup>  .ui.grid.filter-settings-popup {
+.ui.popup > .ui.grid.filter-settings-popup {
     width: max-content;
     max-width: 700px;
 }
 
-.ui.popup>  .ui.grid.filter-settings-popup .row {
+.ui.popup > .ui.grid.filter-settings-popup .row {
     padding-top: 10px;
     padding-bottom: 10px;
 }

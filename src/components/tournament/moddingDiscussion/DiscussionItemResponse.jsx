@@ -1,5 +1,5 @@
 import {getReadableRole, getUserWithId} from "../../../util/UserUtil";
-import {formatOsuLinks, timestampRegex} from "../../../util/DiscussionUtil";
+import {formatOsuLinks} from "../../../util/DiscussionUtil";
 import React, {useState} from "react";
 import DiscussionAuthor from "./DiscussionAuthor";
 import {useMutation} from "react-fetching-library";
@@ -65,29 +65,32 @@ const DiscussionItemResponse = ({response, users, userId, query}) => {
 
   return (
     <div className={"beatmap-discussion-item"}>
-      <DiscussionAuthor authorDetails={authorDetails} authorRole={authorRole} />
+      <DiscussionAuthor authorDetails={authorDetails} authorRole={authorRole}/>
       <div className={"beatmap-discussion-content-full"}>
         {isEditingComment === true &&
-          <div className={"beatmap-discussion-main-edit"}>
+        <div className={"beatmap-discussion-main-edit"}>
             <textarea
               className={"beatmap-discussion-response-textarea"}
               value={formValues.content}
               onChange={event => setFormValue("content", event.target.value)}
             />
-            <Button disabled={!submitIsActive} color={submitIsActive ? "green" : "grey"} onClick={() => verifyData()}><Icon name={"check"}/>Submit</Button>
-            <Button color={"red"} onClick={() => resetEdit()}><Icon name={"close"}/>Close</Button>
-          </div>
+          <Button disabled={!submitIsActive} color={submitIsActive ? "green" : "grey"}
+                  onClick={() => verifyData()}><Icon name={"check"}/>Submit</Button>
+          <Button color={"red"} onClick={() => resetEdit()}><Icon name={"close"}/>Close</Button>
+        </div>
         }
         {isEditingComment === false &&
-          <>
-            {formattedText}
-            <div className={"beatmap-discussion-content-actions"}>
-              <div className={"link beatmap-discussion-content-action"} onClick={() => setIsEditingComment(true)}>Edit</div>
-              <div className={"link beatmap-discussion-content-action"} onClick={() => {
-                if (window.confirm('Are you sure you wish to delete this discussion?')) handleDeleteSubmit()
-              }}>Delete</div>
+        <>
+          {formattedText}
+          <div className={"beatmap-discussion-content-actions"}>
+            <div className={"link beatmap-discussion-content-action"} onClick={() => setIsEditingComment(true)}>Edit
             </div>
-          </>
+            <div className={"link beatmap-discussion-content-action"} onClick={() => {
+              if (window.confirm('Are you sure you wish to delete this discussion?')) handleDeleteSubmit()
+            }}>Delete
+            </div>
+          </div>
+        </>
         }
       </div>
     </div>

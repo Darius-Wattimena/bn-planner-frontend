@@ -39,7 +39,8 @@ const Users = ({canEdit, isAdmin, userId, users}) => {
     <div className={"base-container"}>
       <Container fluid>
         <h2>Users</h2>
-        <UserFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} isAdmin={isAdmin} canEdit={canEdit} setPage={handleFilterSetPage} />
+        <UserFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} isAdmin={isAdmin}
+                    canEdit={canEdit} setPage={handleFilterSetPage}/>
         <UserList
           filter={filter}
           loading={loading}
@@ -50,18 +51,18 @@ const Users = ({canEdit, isAdmin, userId, users}) => {
           isAdmin={isAdmin}
           setPage={handleFilterSetPage}
         />
-        <AddUserModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId} />
+        <AddUserModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId}/>
         {selectedUser !== 0 &&
-          <EditUserModal
-            id={selectedUser}
-            open={editModalOpen}
-            setOpen={setEditModalOpen}
-            query={query}
-            setSelectedUser={setSelectedUser}
-            isAdmin={isAdmin}
-            userId={userId}
-            users={users}
-          />
+        <EditUserModal
+          id={selectedUser}
+          open={editModalOpen}
+          setOpen={setEditModalOpen}
+          query={query}
+          setSelectedUser={setSelectedUser}
+          isAdmin={isAdmin}
+          userId={userId}
+          users={users}
+        />
         }
       </Container>
     </div>

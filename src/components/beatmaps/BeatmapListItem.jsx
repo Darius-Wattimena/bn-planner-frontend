@@ -41,20 +41,20 @@ const BeatmapListItem = ({displayStatus, beatmap, canEdit, setSelectedBeatmap, s
       <Table.Cell width={"2"} textAlign={"center"}>{beatmap.title}</Table.Cell>
       <Table.Cell width={"2"} textAlign={"center"}>{beatmap.mapper}</Table.Cell>
       <Table.Cell className={"beatmap-nominator"} width={"2"}>
-        <NominatorDetails nominated={beatmap.nominatedByBNOne} nominators={beatmap.nominators} nominatorNumber={1} />
+        <NominatorDetails nominated={beatmap.nominatedByBNOne} nominators={beatmap.nominators} nominatorNumber={1}/>
       </Table.Cell>
       <Table.Cell className={"beatmap-nominator"} width={"2"}>
-        <NominatorDetails nominated={beatmap.nominatedByBNTwo} nominators={beatmap.nominators} nominatorNumber={2} />
+        <NominatorDetails nominated={beatmap.nominatedByBNTwo} nominators={beatmap.nominators} nominatorNumber={2}/>
       </Table.Cell>
       <Table.Cell width={"1"} textAlign={"center"}>
         {beatmap.note &&
-          <Popup trigger={
-            <Icon size={"large"} name={"sticky note"} />
-          }>
-            <Popup.Content>
-              {beatmap.note}
-            </Popup.Content>
-          </Popup>
+        <Popup trigger={
+          <Icon size={"large"} name={"sticky note"}/>
+        }>
+          <Popup.Content>
+            {beatmap.note}
+          </Popup.Content>
+        </Popup>
         }
       </Table.Cell>
       <Table.Cell width={"2"} textAlign={"center"}>

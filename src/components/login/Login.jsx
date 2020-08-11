@@ -12,7 +12,7 @@ const Login = (props) => {
 
   const requestOptions = {
     method: 'post',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: queryString.stringify({
       grant_type: "authorization_code",
       client_id: ENV.osu.id,

@@ -12,7 +12,7 @@ const HomeListExplanation = () => {
             <div className={"text-group text-group-table"}>
               <div className={"text-group-name"}>Beatmap status</div>
               <div className={"text-group-items"}>
-                <ItemsExplanation items={BEATMAP_STATUS} />
+                <ItemsExplanation items={BEATMAP_STATUS}/>
               </div>
             </div>
           </Grid.Column>
@@ -20,7 +20,7 @@ const HomeListExplanation = () => {
             <div className={"text-group text-group-table"}>
               <div className={"text-group-name"}>User roles</div>
               <div className={"text-group-items"}>
-                <ItemsExplanation items={USER_ROLES} />
+                <ItemsExplanation items={USER_ROLES}/>
               </div>
             </div>
           </Grid.Column>
@@ -36,7 +36,7 @@ const ItemsExplanation = ({items}) => {
   return (
     <>
       {preparedItems.map((item, index) => {
-        return <ItemExplanation item={item} key={index} />
+        return <ItemExplanation item={item} key={index}/>
       })}
     </>
   )

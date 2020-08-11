@@ -73,42 +73,48 @@ const DiscussionItem = ({discussion, users, userId, query}) => {
   return (
     <div className={"beatmap-discussion-group"}>
       <div className={"beatmap-discussion-status"}>
-        <Icon name={moddingComment.resolved ? "check" : "close"} color={moddingComment.resolved ? "green" : "red"} />
+        <Icon name={moddingComment.resolved ? "check" : "close"} color={moddingComment.resolved ? "green" : "red"}/>
         {moddingComment.osuTimestamp}
       </div>
-      <div className={moddingComment.resolved ? "beatmap-discussion-group-item beatmap-discussion-resolved" : "beatmap-discussion-group-item"}>
+      <div
+        className={moddingComment.resolved ? "beatmap-discussion-group-item beatmap-discussion-resolved" : "beatmap-discussion-group-item"}>
         <div className={"beatmap-discussion-item-top"}>
-          <DiscussionAuthor authorDetails={authorDetails} authorRole={authorRole} />
+          <DiscussionAuthor authorDetails={authorDetails} authorRole={authorRole}/>
           <div className={"beatmap-discussion-content-full"}>
             {isEditingComment === true &&
-              <div className={"beatmap-discussion-main-edit"}>
+            <div className={"beatmap-discussion-main-edit"}>
                 <textarea
                   className={"beatmap-discussion-response-textarea"}
                   value={formValues.content}
                   onChange={event => setFormValue("content", event.target.value)}
                 />
-                <Button disabled={!submitIsActive} color={submitIsActive ? "green" : "grey"} onClick={() => verifyData()}><Icon name={"check"}/>Submit</Button>
-                <Button color={"red"} onClick={() => resetEdit()}><Icon name={"close"}/>Close</Button>
-              </div>
+              <Button disabled={!submitIsActive} color={submitIsActive ? "green" : "grey"} onClick={() => verifyData()}><Icon
+                name={"check"}/>Submit</Button>
+              <Button color={"red"} onClick={() => resetEdit()}><Icon name={"close"}/>Close</Button>
+            </div>
             }
             {isEditingComment === false &&
-              <>
-                {formattedText}
-                <div className={"beatmap-discussion-content-actions"}>
-                  <div className={"link beatmap-discussion-content-action"} onClick={() => setIsEditingComment(true)}>Edit</div>
-                  <div className={"link beatmap-discussion-content-action"} onClick={() => {
-                    if (window.confirm('Are you sure you wish to delete this discussion?')) handleDeleteSubmit()
-                  }}>Delete</div>
+            <>
+              {formattedText}
+              <div className={"beatmap-discussion-content-actions"}>
+                <div className={"link beatmap-discussion-content-action"}
+                     onClick={() => setIsEditingComment(true)}>Edit
                 </div>
-              </>
+                <div className={"link beatmap-discussion-content-action"} onClick={() => {
+                  if (window.confirm('Are you sure you wish to delete this discussion?')) handleDeleteSubmit()
+                }}>Delete
+                </div>
+              </div>
+            </>
             }
 
           </div>
         </div>
         {discussion.moddingResponses && discussion.moddingResponses.map((response, index) => {
-          return <DiscussionItemResponse key={index} response={response} userId={userId} users={users} query={query} />
+          return <DiscussionItemResponse key={index} response={response} userId={userId} users={users} query={query}/>
         })}
-        <DiscussionItemResponseBox moddingComment={moddingComment} isWriting={isWritingReply} setIsWriting={setIsWritingReply} userId={userId} users={users} query={query} />
+        <DiscussionItemResponseBox moddingComment={moddingComment} isWriting={isWritingReply}
+                                   setIsWriting={setIsWritingReply} userId={userId} users={users} query={query}/>
       </div>
     </div>
   )

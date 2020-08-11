@@ -41,33 +41,33 @@ const NavMenuItems = ({hasHiddenPerms, handleNavClick, selected, homeName, beatm
         Users
       </MenuItem>
       {hasHiddenPerms &&
-        <>
-          <MenuItem
-            name={contestName}
-            active={selected === contestName}
-            onClick={() => handleNavClick(contestName, "/contests")}
-          >
-            Contests
-          </MenuItem>
-          <MenuItem
-            name={moddingMapName}
-            active={selected === moddingMapName}
-            onClick={() => handleNavClick(moddingMapName, "/modding/maps")}
-          >
-            Modding
-          </MenuItem>
-        </>
+      <>
+        <MenuItem
+          name={contestName}
+          active={selected === contestName}
+          onClick={() => handleNavClick(contestName, "/contests")}
+        >
+          Contests
+        </MenuItem>
+        <MenuItem
+          name={moddingMapName}
+          active={selected === moddingMapName}
+          onClick={() => handleNavClick(moddingMapName, "/modding/maps")}
+        >
+          Modding
+        </MenuItem>
+      </>
       }
       {userId === 0 &&
-        <Menu.Menu position='right'>
-          <MenuItem
-            name={loginName}
-            active={selected === loginName}
-            onClick={() => window.location.href = osuLoginUrl}
-          >
-            Login with osu! account
-          </MenuItem>
-        </Menu.Menu>
+      <Menu.Menu position='right'>
+        <MenuItem
+          name={loginName}
+          active={selected === loginName}
+          onClick={() => window.location.href = osuLoginUrl}
+        >
+          Login with osu! account
+        </MenuItem>
+      </Menu.Menu>
       }
     </>
   )

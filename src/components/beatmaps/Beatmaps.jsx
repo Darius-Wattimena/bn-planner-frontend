@@ -61,18 +61,18 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
           canEdit={canEdit}
           setPage={handleFilterSetPage}
         />
-        <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId} />
+        <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId}/>
         {selectedBeatmap !== 0 &&
-          <EditBeatmapModal
-            id={selectedBeatmap}
-            userId={userId}
-            canEdit={canEdit}
-            query={query}
-            open={editModalOpen}
-            setOpen={setEditModalOpen}
-            users={users}
-            setSelectedBeatmap={setSelectedBeatmap}
-          />
+        <EditBeatmapModal
+          id={selectedBeatmap}
+          userId={userId}
+          canEdit={canEdit}
+          query={query}
+          open={editModalOpen}
+          setOpen={setEditModalOpen}
+          users={users}
+          setSelectedBeatmap={setSelectedBeatmap}
+        />
         }
       </Container>
     </div>

@@ -46,7 +46,7 @@ const AddContestModal = ({open, query, setOpen, userId, users}) => {
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       <div className={"modal-header"}>
-        <Header content='Add New Contest' />
+        <Header content='Add New Contest'/>
       </div>
       <Modal.Content>
         <Form>
@@ -72,10 +72,10 @@ const AddContestModal = ({open, query, setOpen, userId, users}) => {
       </Modal.Content>
       <Modal.Actions>
         <Button color='red' onClick={() => setOpen(false)}>
-          <Icon name='close' /> Cancel
+          <Icon name='close'/> Cancel
         </Button>
         <Button color='green' onClick={verifyData}>
-          <Icon name='checkmark' /> Add
+          <Icon name='checkmark'/> Add
         </Button>
       </Modal.Actions>
     </Modal>

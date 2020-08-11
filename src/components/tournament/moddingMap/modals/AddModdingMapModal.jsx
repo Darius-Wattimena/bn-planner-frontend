@@ -49,7 +49,7 @@ const AddModdingMapModal = ({open, query, setOpen, userId}) => {
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       <div className={"modal-header"}>
-        <Header content='Add New Modding Map' />
+        <Header content='Add New Modding Map'/>
       </div>
       <Modal.Content>
         <Form>
@@ -77,10 +77,10 @@ const AddModdingMapModal = ({open, query, setOpen, userId}) => {
       </Modal.Content>
       <Modal.Actions>
         <Button color='red' onClick={() => setOpen(false)}>
-          <Icon name='close' /> Cancel
+          <Icon name='close'/> Cancel
         </Button>
         <Button color='green' onClick={verifyData}>
-          <Icon name='checkmark' /> Add
+          <Icon name='checkmark'/> Add
         </Button>
       </Modal.Actions>
     </Modal>

@@ -8,10 +8,10 @@ const ContestList = ({isAdmin, payload, setAddModalOpen, setEditModalOpen, setSe
     <Table inverted selectable>
       <Table.Header>
         <Table.Row key={"user-list-header"} textAlign={"center"}>
-          <Table.HeaderCell width={"2"} />
+          <Table.HeaderCell width={"2"}/>
           <Table.HeaderCell width={"4"}>Name</Table.HeaderCell>
           <Table.HeaderCell width={"8"}>Has Access</Table.HeaderCell>
-          <Table.HeaderCell width={"2"} />
+          <Table.HeaderCell width={"2"}/>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -24,7 +24,7 @@ const ContestList = ({isAdmin, payload, setAddModalOpen, setEditModalOpen, setSe
                 let userDetails = getUserWithId(users, userId)
                 return (
                   <Grid.Column width={4}>
-                    <UserAvatar userDetails={userDetails} />
+                    <UserAvatar userDetails={userDetails}/>
                   </Grid.Column>
                 )
               })}</Grid></Table.Cell>
@@ -46,13 +46,14 @@ const ContestList = ({isAdmin, payload, setAddModalOpen, setEditModalOpen, setSe
         <Table.Row key={"user-list-footer"}>
           <Table.HeaderCell width={"2"} textAlign={"center"}>
             {payload &&
-              <p>{payload.length} Contests Found</p>
+            <p>{payload.length} Contests Found</p>
             }
           </Table.HeaderCell>
-          <Table.HeaderCell width={"4"} />
-          <Table.HeaderCell width={"8"} />
+          <Table.HeaderCell width={"4"}/>
+          <Table.HeaderCell width={"8"}/>
           <Table.HeaderCell width={"2"}>
-            <Button fluid disabled={!isAdmin} color={isAdmin ? "green" : "grey"} onClick={() => setAddModalOpen(true)}><Icon name={"plus"} /> Add Contest</Button>
+            <Button fluid disabled={!isAdmin} color={isAdmin ? "green" : "grey"}
+                    onClick={() => setAddModalOpen(true)}><Icon name={"plus"}/> Add Contest</Button>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>

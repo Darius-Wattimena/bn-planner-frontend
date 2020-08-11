@@ -34,10 +34,10 @@ const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, us
       </Modal.Content>
       <Modal.Actions>
         <Button color='red' onClick={() => setOpen(false)}>
-          <Icon name='close' /> Cancel
+          <Icon name='close'/> Cancel
         </Button>
         <Button color='green' onClick={verifyData}>
-          <Icon name='checkmark' /> Confirm
+          <Icon name='checkmark'/> Confirm
         </Button>
       </Modal.Actions>
     </Modal>

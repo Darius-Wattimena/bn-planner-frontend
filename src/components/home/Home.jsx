@@ -12,20 +12,20 @@ const Home = ({users}) => {
         <div className={"section"}>
           <div className={"section-title"}>Home</div>
           <div className={"text section-container"}>
-            <HomeExplanation />
+            <HomeExplanation/>
           </div>
         </div>
 
         <div className={"section"}>
           <div className={"text section-container"}>
-            <HomeListExplanation />
+            <HomeListExplanation/>
           </div>
         </div>
 
         <div className={"section"}>
           <div className={"section-title"}>Statistics</div>
           <div className={"section-container"}>
-            <HomeStatistics users={users} />
+            <HomeStatistics users={users}/>
           </div>
         </div>
       </Container>

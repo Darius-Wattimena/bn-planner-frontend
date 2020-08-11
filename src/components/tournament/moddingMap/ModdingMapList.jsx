@@ -8,12 +8,12 @@ const ModdingMapList = ({isAdmin, payload, setAddModalOpen}) => {
     <Table inverted selectable>
       <Table.Header>
         <Table.Row key={"user-list-header"} textAlign={"center"}>
-          <Table.HeaderCell width={"2"} />
+          <Table.HeaderCell width={"2"}/>
           <Table.HeaderCell width={"3"}>Contest</Table.HeaderCell>
           <Table.HeaderCell width={"3"}>Artist</Table.HeaderCell>
           <Table.HeaderCell width={"3"}>Title</Table.HeaderCell>
-          <Table.HeaderCell width={"3"} />
-          <Table.HeaderCell width={"2"} />
+          <Table.HeaderCell width={"3"}/>
+          <Table.HeaderCell width={"2"}/>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -54,15 +54,16 @@ const ModdingMapList = ({isAdmin, payload, setAddModalOpen}) => {
         <Table.Row key={"user-list-footer"}>
           <Table.HeaderCell width={"2"} textAlign={"center"}>
             {payload &&
-              <p>{payload.length} Modding Map Found</p>
+            <p>{payload.length} Modding Map Found</p>
             }
           </Table.HeaderCell>
-          <Table.HeaderCell width={"3"} />
-          <Table.HeaderCell width={"3"} />
-          <Table.HeaderCell width={"3"} />
-          <Table.HeaderCell width={"3"} />
+          <Table.HeaderCell width={"3"}/>
+          <Table.HeaderCell width={"3"}/>
+          <Table.HeaderCell width={"3"}/>
+          <Table.HeaderCell width={"3"}/>
           <Table.HeaderCell width={"2"}>
-            <Button disabled={!isAdmin} fluid color={isAdmin ? "green" : "grey"} onClick={() => setAddModalOpen(true)}><Icon name={"plus"} /> Add Map</Button>
+            <Button disabled={!isAdmin} fluid color={isAdmin ? "green" : "grey"}
+                    onClick={() => setAddModalOpen(true)}><Icon name={"plus"}/> Add Map</Button>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>

@@ -1,203 +1,203 @@
 @import "./src/Colours";
 
 .beatmap-discussion-section {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 
-    .beatmap-discussion-title {
-        color: $text-colour;
-        background-color: $background-colour-dark;
-        font-size: 20px;
-        padding: 20px;
-        text-align: left;
-        font-weight: bold;
-    }
+  .beatmap-discussion-title {
+    color: $text-colour;
+    background-color: $background-colour-dark;
+    font-size: 20px;
+    padding: 20px;
+    text-align: left;
+    font-weight: bold;
+  }
 
-    .beatmap-discussion-container {
-        background-color: $background-colour;
-        padding: 10px 20px;
+  .beatmap-discussion-container {
+    background-color: $background-colour;
+    padding: 10px 20px;
 
-        .beatmap-info {
-            .beatmap-info-item {
-                display: flex;
+    .beatmap-info {
+      .beatmap-info-item {
+        display: flex;
 
-                .label {
-                    color: $text-colour;
-                    text-align: right;
-                    font-weight: bold;
-                    font-size: 15px;
-                    width: 90px;
-                    padding-right: 10px;
-                }
-
-                .text {
-                    padding-left: 15px;
-                }
-            }
+        .label {
+          color: $text-colour;
+          text-align: right;
+          font-weight: bold;
+          font-size: 15px;
+          width: 90px;
+          padding-right: 10px;
         }
+
+        .text {
+          padding-left: 15px;
+        }
+      }
     }
+  }
 }
 
 .beatmap-discussion-author {
-    width: max-content;
-    display: flex;
+  width: max-content;
+  display: flex;
+  margin-right: 10px;
+
+
+  .beatmap-discussion-avatar {
+    width: 40px;
+    height: 40px;
     margin-right: 10px;
 
+    .beatmap-discussion-avatar-image {
+      border-radius: 5px;
+    }
+  }
 
-    .beatmap-discussion-avatar {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
+  .beatmap-discussion-username-profile {
+    min-width: 100px;
+    font-weight: bold;
 
-        .beatmap-discussion-avatar-image {
-            border-radius: 5px;
-        }
+    .beatmap-discussion-username {
+      margin-bottom: 2px;
     }
 
-    .beatmap-discussion-username-profile {
-        min-width: 100px;
-        font-weight: bold;
-
-        .beatmap-discussion-username {
-            margin-bottom: 2px;
-        }
-
-        .beatmap-discussion-username.user-role-nat {
-            color: #a53d3c;
-        }
-
-        .beatmap-discussion-username.user-role-bn {
-            color: $bn-colour;
-        }
-
-        .beatmap-discussion-username.user-role-pbn {
-            color: #995ba5;
-        }
-
-        .beatmap-discussion-username.user-role-rc  {
-            color: #a0a0a0;
-        }
-
-        .beatmap-discussion-label {
-            height: fit-content;
-            padding: 5px !important;
-            font-size: 10px !important;
-        }
+    .beatmap-discussion-username.user-role-nat {
+      color: #a53d3c;
     }
 
-    .beatmap-discussion-stripe {
-        width: 2px;
-        background-color: $text-colour;
+    .beatmap-discussion-username.user-role-bn {
+      color: $bn-colour;
     }
 
-    .beatmap-discussion-stripe.user-role-nat {
-        background-color: $nat-colour;
+    .beatmap-discussion-username.user-role-pbn {
+      color: #995ba5;
     }
 
-    .beatmap-discussion-stripe.user-role-bn {
-        background-color: $bn-colour;
+    .beatmap-discussion-username.user-role-rc {
+      color: #a0a0a0;
     }
 
-    .beatmap-discussion-stripe.user-role-pbn {
-        background-color: $pbn-colour;
+    .beatmap-discussion-label {
+      height: fit-content;
+      padding: 5px !important;
+      font-size: 10px !important;
     }
+  }
 
-    .beatmap-discussion-stripe.user-role-rc {
-        background-color: $rc-colour;
-    }
+  .beatmap-discussion-stripe {
+    width: 2px;
+    background-color: $text-colour;
+  }
+
+  .beatmap-discussion-stripe.user-role-nat {
+    background-color: $nat-colour;
+  }
+
+  .beatmap-discussion-stripe.user-role-bn {
+    background-color: $bn-colour;
+  }
+
+  .beatmap-discussion-stripe.user-role-pbn {
+    background-color: $pbn-colour;
+  }
+
+  .beatmap-discussion-stripe.user-role-rc {
+    background-color: $rc-colour;
+  }
 }
 
 .beatmap-discussion-content {
-    width: 70%;
+  width: 70%;
 }
 
 .beatmap-discussion-content-actions {
-    height: max-content;
-    display: flex;
+  height: max-content;
+  display: flex;
 
-    .beatmap-discussion-content-action {
-        margin: 0 5px;
-        font-size: 13px;
-    }
+  .beatmap-discussion-content-action {
+    margin: 0 5px;
+    font-size: 13px;
+  }
 }
 
 .beatmap-discussion-content-full {
-    width: 100%;
+  width: 100%;
 }
 
 .beatmap-disussion-osulink {
-    background-color: $background-colour-darker;
-    padding: 2px;
-    border-radius: 5px;
-    color: $text-colour-link;
+  background-color: $background-colour-darker;
+  padding: 2px;
+  border-radius: 5px;
+  color: $text-colour-link;
 }
 
 .beatmap-discussion-group {
-    display: flex;
-    margin-bottom: 10px;
+  display: flex;
+  margin-bottom: 10px;
 
-    .beatmap-discussion-status {
-        width: 90px;
-        margin-right: 10px;
-        margin-top: auto;
-        margin-bottom: auto;
-        color: $text-colour;
+  .beatmap-discussion-status {
+    width: 90px;
+    margin-right: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: $text-colour;
+  }
+
+  .beatmap-discussion-resolved {
+    box-shadow: -5px 0 0 0 $confirm-colour;
+  }
+
+  .beatmap-discussion-group-item {
+    width: 100%;
+    color: $text-colour;
+
+    .beatmap-discussion-item-top {
+      padding: 10px 15px;
+      display: flex;
+      background-color: $background-colour-dark;
+      text-align: left;
+      font-size: 16px;
     }
 
-    .beatmap-discussion-resolved {
-        box-shadow: -5px 0 0 0 $confirm-colour;
+    .beatmap-discussion-main-edit {
+      text-align: right;
     }
-
-    .beatmap-discussion-group-item {
-        width: 100%;
-        color: $text-colour;
-
-        .beatmap-discussion-item-top {
-            padding: 10px 15px;
-            display: flex;
-            background-color: $background-colour-dark;
-            text-align: left;
-            font-size: 16px;
-        }
-
-        .beatmap-discussion-main-edit {
-            text-align: right;
-        }
-    }
+  }
 }
 
 .beatmap-discussion-response-textarea {
-    width: 100%;
-    min-height: 100px;
-    background-color: $background-colour-dark;
-    color: $text-colour;
+  width: 100%;
+  min-height: 100px;
+  background-color: $background-colour-dark;
+  color: $text-colour;
 
-    border: none;
-    overflow: auto;
-    outline: none;
+  border: none;
+  overflow: auto;
+  outline: none;
 
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 
-    resize: none;
+  resize: none;
 }
 
 .beatmap-discussion-main-actions {
-    background-color: $background-colour-light;
-    text-align: right;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    padding-top: 5px;
+  background-color: $background-colour-light;
+  text-align: right;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 5px;
 }
 
 .beatmap-discussion-item {
-    padding: 10px 15px 10px 60px;
-    display: flex;
-    background-color: $background-colour-light;
-    text-align: left;
-    font-size: 16px;
+  padding: 10px 15px 10px 60px;
+  display: flex;
+  background-color: $background-colour-light;
+  text-align: left;
+  font-size: 16px;
 }
 
 .beatmap-discussion-item-reply {
-    padding-right: .25em;
+  padding-right: .25em;
 }

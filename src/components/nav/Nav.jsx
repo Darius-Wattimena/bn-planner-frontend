@@ -1,11 +1,11 @@
 import React, {useState} from "react"
-import {Icon, Menu, MenuItem, Segment, Sidebar, Sticky} from "semantic-ui-react"
+import {Icon, Menu, MenuItem, Sidebar} from "semantic-ui-react"
 import {useHistory} from "react-router-dom"
 import catchLogo from "../../assets/catch.svg"
 import "./Nav.scss"
 import {ENV} from "../../Settings"
 import NavMenuItems from "./NavMenuItems";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import useWindowDimensions from "../../hooks/useWindowDimensions"
 
 const homeName = "home"
 const beatmapsName = "beatmaps"
@@ -38,7 +38,7 @@ function getSelectedFromHref() {
 
 const Nav = ({userId, hasHiddenPerms}) => {
   let history = useHistory()
-  const { height, width } = useWindowDimensions();
+  const {height, width} = useWindowDimensions();
   const [selected, setSelected] = useState(getSelectedFromHref())
   const [visible, setVisible] = useState(false)
 
@@ -47,7 +47,7 @@ const Nav = ({userId, hasHiddenPerms}) => {
     history.push(location)
   }
 
-  const osuLoginUrl = "https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=" + ENV.osu.id +"&redirect_uri=" + ENV.osu.redirect + "&response_type=code&scope=identify public"
+  const osuLoginUrl = "https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=" + ENV.osu.id + "&redirect_uri=" + ENV.osu.redirect + "&response_type=code&scope=identify public"
 
   if (width > 767) {
     return (
@@ -89,25 +89,25 @@ const Nav = ({userId, hasHiddenPerms}) => {
           width='thin'
           className={"mobile-menu-sidebar"}
         >
-            <div className={"item"} onClick={() => handleNavClick(homeName, "/")}>
-              <img src={catchLogo} alt={""}/>
-            </div>
-            <NavMenuItems
-              beatmapsName={beatmapsName}
-              contestName={contestName}
-              gravedName={gravedName}
-              homeName={homeName}
-              loginName={loginName}
-              moddingMapName={moddingMapName}
-              rankedName={rankedName}
-              usersName={usersName}
+          <div className={"item"} onClick={() => handleNavClick(homeName, "/")}>
+            <img src={catchLogo} alt={""}/>
+          </div>
+          <NavMenuItems
+            beatmapsName={beatmapsName}
+            contestName={contestName}
+            gravedName={gravedName}
+            homeName={homeName}
+            loginName={loginName}
+            moddingMapName={moddingMapName}
+            rankedName={rankedName}
+            usersName={usersName}
 
-              hasHiddenPerms={hasHiddenPerms}
-              selected={selected}
-              userId={userId}
-              osuLoginUrl={osuLoginUrl}
-              handleNavClick={handleNavClick}
-            />
+            hasHiddenPerms={hasHiddenPerms}
+            selected={selected}
+            userId={userId}
+            osuLoginUrl={osuLoginUrl}
+            handleNavClick={handleNavClick}
+          />
         </Sidebar>
 
         <Sidebar.Pusher>

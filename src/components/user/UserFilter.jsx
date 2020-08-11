@@ -27,9 +27,9 @@ const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, canEdit, setPa
               trigger={
                 <Button fluid color={"black"} content={
                   <div>
-                    <Icon name={"cog"} /> Filters
+                    <Icon name={"cog"}/> Filters
                   </div>
-                } />
+                }/>
               }
               content={<Grid className={"filter-settings-popup"} textAlign={"center"}>
                 <Grid.Row>
@@ -57,32 +57,40 @@ const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, canEdit, setPa
                             enabled={canEdit}
                           />
                         </Form>
-                      } />
+                      }/>
                     </Grid>
                   </Grid.Column>
                   <Grid.Column computer={9} mobile={16}>
                     <Grid verticalAlign={"middle"} textAlign={"center"}>
                       <FilterItem icon={"cog"} title={"Can Edit"} item={
                         <Button.Group fluid>
-                          <FilterButton active={formValues.canEdit === true} value={true} field={"canEdit"} name={"Yes"} handleFilterSet={instantFilterSet} />
-                          <FilterButton active={formValues.canEdit === false} value={false} field={"canEdit"} name={"No"} handleFilterSet={instantFilterSet} />
-                          <FilterButton active={formValues.canEdit === null} value={null} field={"canEdit"} name={"Any"} handleFilterSet={instantFilterSet} />
+                          <FilterButton active={formValues.canEdit === true} value={true} field={"canEdit"} name={"Yes"}
+                                        handleFilterSet={instantFilterSet}/>
+                          <FilterButton active={formValues.canEdit === false} value={false} field={"canEdit"}
+                                        name={"No"} handleFilterSet={instantFilterSet}/>
+                          <FilterButton active={formValues.canEdit === null} value={null} field={"canEdit"} name={"Any"}
+                                        handleFilterSet={instantFilterSet}/>
                         </Button.Group>
-                      } />
+                      }/>
                       <FilterItem icon={"user secret"} title={"Is Admin"} item={
                         <Button.Group fluid>
-                          <FilterButton active={formValues.isAdmin === true} value={true} field={"isAdmin"} name={"Yes"} handleFilterSet={instantFilterSet} />
-                          <FilterButton active={formValues.isAdmin === false} value={false} field={"isAdmin"} name={"No"} handleFilterSet={instantFilterSet} />
-                          <FilterButton active={formValues.isAdmin === null} value={null} field={"isAdmin"} name={"Any"} handleFilterSet={instantFilterSet} />
+                          <FilterButton active={formValues.isAdmin === true} value={true} field={"isAdmin"} name={"Yes"}
+                                        handleFilterSet={instantFilterSet}/>
+                          <FilterButton active={formValues.isAdmin === false} value={false} field={"isAdmin"}
+                                        name={"No"} handleFilterSet={instantFilterSet}/>
+                          <FilterButton active={formValues.isAdmin === null} value={null} field={"isAdmin"} name={"Any"}
+                                        handleFilterSet={instantFilterSet}/>
                         </Button.Group>
-                      } />
+                      }/>
                       {canEdit &&
-                        <FilterItem title={"Limit"} icon={"list ol"} item={
-                          <Button.Group fluid>
-                            <FilterButton active={formValues.limit === "Ten"} value={"Ten"} field={"limit"} name={"10"} handleFilterSet={instantFilterSet} />
-                            <FilterButton active={formValues.limit === "Twenty"} value={"Twenty"} field={"limit"} name={"20"} handleFilterSet={instantFilterSet} />
-                          </Button.Group>
-                        } />
+                      <FilterItem title={"Limit"} icon={"list ol"} item={
+                        <Button.Group fluid>
+                          <FilterButton active={formValues.limit === "Ten"} value={"Ten"} field={"limit"} name={"10"}
+                                        handleFilterSet={instantFilterSet}/>
+                          <FilterButton active={formValues.limit === "Twenty"} value={"Twenty"} field={"limit"}
+                                        name={"20"} handleFilterSet={instantFilterSet}/>
+                        </Button.Group>
+                      }/>
                       }
                     </Grid>
                   </Grid.Column>
@@ -96,7 +104,8 @@ const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, canEdit, setPa
           <Table.HeaderCell width={"5"}/>
           <Table.HeaderCell width={"2"}/>
           <Table.HeaderCell width={"2"}>
-            <Button disabled={!isAdmin} fluid color={"green"} onClick={() => setAddModalOpen(true)}><Icon name={"plus"} /> Add User</Button>
+            <Button disabled={!isAdmin} fluid color={"green"} onClick={() => setAddModalOpen(true)}><Icon
+              name={"plus"}/> Add User</Button>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>

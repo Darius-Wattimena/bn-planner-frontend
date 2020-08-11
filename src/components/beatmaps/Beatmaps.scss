@@ -1,98 +1,98 @@
 @import "./src/Colours";
 
 .beatmap-status-pending {
-    background-color: #538ea5 !important;
-    color: #d7d7d7 !important;
+  background-color: #538ea5 !important;
+  color: #d7d7d7 !important;
 }
 
 .beatmap-status-bubbed {
-    background-color: #2b56a5 !important;
-    color: #d7d7d7 !important;
+  background-color: #2b56a5 !important;
+  color: #d7d7d7 !important;
 }
 
 .beatmap-status-qualified {
-    background-color: #2da554 !important;
-    color: #d7d7d7 !important;
+  background-color: #2da554 !important;
+  color: #d7d7d7 !important;
 }
 
 .beatmap-status-ranked {
-    background-color: #5aa500 !important;
-    color: #d7d7d7 !important;
+  background-color: #5aa500 !important;
+  color: #d7d7d7 !important;
 }
 
 .beatmap-status-popped {
-    background-color: #a57d5d !important;
-    color: #d7d7d7 !important;
+  background-color: #a57d5d !important;
+  color: #d7d7d7 !important;
 }
 
 .beatmap-status-dqed {
-    background-color: #a54e4b !important;
-    color: #d7d7d7 !important;
+  background-color: #a54e4b !important;
+  color: #d7d7d7 !important;
 }
 
 .beatmap-status-graved {
-    background-color: #a5a5a5 !important;
-    color: #242424 !important;
+  background-color: #a5a5a5 !important;
+  color: #242424 !important;
 }
 
 u.beatmap-status-unknown {
-    background-color: rgba(0, 0, 0, 0) !important;
-    color: #c3c3c3 !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: #c3c3c3 !important;
 }
 
 u.beatmap-status-pending {
-    background-color: rgba(0, 0, 0, 0) !important;
-    color: #67b4d0 !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: #67b4d0 !important;
 }
 
 u.beatmap-status-bubbed {
-    background-color: rgba(0, 0, 0, 0) !important;
-    color: #346ccd !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: #346ccd !important;
 }
 
 u.beatmap-status-qualified {
-    background-color: rgba(0, 0, 0, 0) !important;
-    color: #37c664 !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: #37c664 !important;
 }
 
 u.beatmap-status-ranked {
-    background-color: rgba(0, 0, 0, 0) !important;
-    color: #6bc400 !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: #6bc400 !important;
 }
 
 u.beatmap-status-popped {
-    background-color: rgba(0, 0, 0, 0) !important;
-    color: #c6956f !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: #c6956f !important;
 }
 
 u.beatmap-status-dqed {
-    background-color: rgba(0, 0, 0, 0) !important;
-    color: #cb5e5b !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: #cb5e5b !important;
 }
 
 u.beatmap-status-graved {
-    background-color: rgba(0, 0, 0, 0) !important;
-    color: #bdbdbd !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: #bdbdbd !important;
 }
 
 tr.beatmap-row td.beatmap-nominator .nominated {
-    box-shadow: 0 0 5px 1px $confirm-colour;
+  box-shadow: 0 0 5px 1px $confirm-colour;
 }
 
 .beatmap-banner {
-    max-width: 8vw;
+  max-width: 8vw;
 }
 
 @media (max-width: 767px) {
-    .beatmap-banner {
-        min-width: 100%;
-    }
+  .beatmap-banner {
+    min-width: 100%;
+  }
 }
 
 .beatmap-event-list {
-    height: inherit;
+  height: inherit;
 }
 
 .beatmap-event-item {
-    margin: 1vh 0;
+  margin: 1vh 0;
 }

@@ -62,62 +62,62 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       {!loading && !error && payload.osuId &&
-        <div className={"modal-header"}>
-          <Header content={"Editing User : " + payload.osuName}/>
-        </div>
+      <div className={"modal-header"}>
+        <Header content={"Editing User : " + payload.osuName}/>
+      </div>
       }
       {!loading && !error &&
-        <Modal.Content>
-          <Grid>
-            <Grid.Row>
-              <Grid.Column computer={8} mobile={16}>
-                <Form>
-                  <h3>Information</h3>
-                  <Form.Input
-                    disabled={!isAdmin}
-                    label={"Name"}
-                    placeholder='Name'
-                    value={formValues.osuName}
-                    onChange={event => setFormValue("osuName", event.target.value)}
-                  />
-                  <Form.Dropdown
-                    disabled={!isAdmin}
-                    label={"Role"}
-                    selection
-                    value={formValues.role}
-                    options={getUserRoles()}
-                    onChange={(_, data) => setFormValue("role", data.value)}
-                  />
-                  <Form.Checkbox
-                    disabled={!isAdmin}
-                    toggle
-                    label={"Is Admin"}
-                    checked={formValues.hasAdminPermissions}
-                    onChange={() => setFormValue("hasAdminPermissions", !formValues.hasAdminPermissions)}
-                  />
-                  <Form.Checkbox
-                    disabled={!isAdmin}
-                    toggle
-                    label={"Can Edit"}
-                    checked={formValues.hasEditPermissions}
-                    onChange={() => setFormValue("hasEditPermissions", !formValues.hasEditPermissions)}
-                  />
-                </Form>
-              </Grid.Column>
-              <Grid.Column computer={8} mobile={16}>
-                <h3>Events</h3>
-                <BeatmapEventList events={formValues.events} users={users} />
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Modal.Content>
+      <Modal.Content>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column computer={8} mobile={16}>
+              <Form>
+                <h3>Information</h3>
+                <Form.Input
+                  disabled={!isAdmin}
+                  label={"Name"}
+                  placeholder='Name'
+                  value={formValues.osuName}
+                  onChange={event => setFormValue("osuName", event.target.value)}
+                />
+                <Form.Dropdown
+                  disabled={!isAdmin}
+                  label={"Role"}
+                  selection
+                  value={formValues.role}
+                  options={getUserRoles()}
+                  onChange={(_, data) => setFormValue("role", data.value)}
+                />
+                <Form.Checkbox
+                  disabled={!isAdmin}
+                  toggle
+                  label={"Is Admin"}
+                  checked={formValues.hasAdminPermissions}
+                  onChange={() => setFormValue("hasAdminPermissions", !formValues.hasAdminPermissions)}
+                />
+                <Form.Checkbox
+                  disabled={!isAdmin}
+                  toggle
+                  label={"Can Edit"}
+                  checked={formValues.hasEditPermissions}
+                  onChange={() => setFormValue("hasEditPermissions", !formValues.hasEditPermissions)}
+                />
+              </Form>
+            </Grid.Column>
+            <Grid.Column computer={8} mobile={16}>
+              <h3>Events</h3>
+              <BeatmapEventList events={formValues.events} users={users}/>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Modal.Content>
       }
       <Modal.Actions>
         <Button color='red' onClick={() => setOpen(false)}>
-          <Icon name='close' /> Close
+          <Icon name='close'/> Close
         </Button>
         <Button color='green' onClick={verifyData}>
-          <Icon name='checkmark' /> Save
+          <Icon name='checkmark'/> Save
         </Button>
       </Modal.Actions>
     </Modal>

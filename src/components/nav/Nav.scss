@@ -1,17 +1,17 @@
 @import "src/Colours";
 
 .nav-header {
-    background-color: $background-colour-darker;
-    margin-bottom: 1vh;
-    padding-left: 2vw;
-    padding-right: 2vw;
+  background-color: $background-colour-darker;
+  margin-bottom: 1vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
 }
 
 .mobile-menu-right {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .mobile-menu-sidebar.menu {
-    background-color: $background-colour !important;
-    box-shadow: 1px 0 0 0 rgba(255,255,255,.08) !important;
+  background-color: $background-colour !important;
+  box-shadow: 1px 0 0 0 rgba(255, 255, 255, .08) !important;
 }

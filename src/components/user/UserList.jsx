@@ -23,7 +23,7 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
     <Table inverted selectable>
       <Table.Header>
         <Table.Row key={"user-list-header"} textAlign={"center"}>
-          <Table.HeaderCell />
+          <Table.HeaderCell/>
           <Table.HeaderCell>Username</Table.HeaderCell>
           <Table.HeaderCell>Nominator Role</Table.HeaderCell>
           <Table.HeaderCell>Can Edit</Table.HeaderCell>
@@ -37,15 +37,15 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
           return (
             <Table.Row key={"user-list-" + index} className={"user-row " + userRole.className}>
               <Table.Cell width={"2"}>
-                <Image  className={"user-banner"} fluid src={user.profilePictureUri}/>
+                <Image className={"user-banner"} fluid src={user.profilePictureUri}/>
               </Table.Cell>
               <Table.Cell width={"2"} textAlign={"center"}>{user.osuName}</Table.Cell>
               <Table.Cell width={"3"} textAlign={"center"}><Label className={userRole.className}>{userRole.full}</Label></Table.Cell>
               <Table.Cell width={"1"} textAlign={"center"}>
-                <AccessIcon hasAccess={user.hasEditPermissions} />
+                <AccessIcon hasAccess={user.hasEditPermissions}/>
               </Table.Cell>
               <Table.Cell width={"1"} textAlign={"center"}>
-                <AccessIcon hasAccess={user.hasAdminPermissions} />
+                <AccessIcon hasAccess={user.hasAdminPermissions}/>
               </Table.Cell>
               <Table.Cell width={"2"} textAlign={"center"}>
                 <Button.Group fluid>
@@ -85,13 +85,13 @@ function AccessIcon({hasAccess}) {
   if (hasAccess && hasAccess === true) {
     return (
       <div>
-        <Icon fitted size={"large"} name={"check"} color={"green"} />
+        <Icon fitted size={"large"} name={"check"} color={"green"}/>
       </div>
     )
   } else {
     return (
       <div>
-        <Icon fitted size={"large"}  name={"cancel"} color={"red"} />
+        <Icon fitted size={"large"} name={"cancel"} color={"red"}/>
       </div>
     )
   }

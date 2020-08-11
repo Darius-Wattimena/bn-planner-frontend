@@ -12,9 +12,9 @@ function App() {
   return (
     <Sidebar.Pushable>
       <div className="App">
-        <ReactNotification />
+        <ReactNotification/>
         <Suspense fallback={SpinnerCircular}>
-            <Routes />
+          <Routes/>
         </Suspense>
       </div>
     </Sidebar.Pushable>

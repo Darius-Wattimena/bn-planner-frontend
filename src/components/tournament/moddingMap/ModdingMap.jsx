@@ -19,8 +19,10 @@ const ModdingMap = ({canEdit, isAdmin, userId, users}) => {
     <div className={"base-container"}>
       <Container fluid>
         <h2>Modding Maps</h2>
-        <ModdingMapList isAdmin={isAdmin} payload={payload} setAddModalOpen={setAddModalOpen} setEditModalOpen={setEditModalOpen} setSelectedModdingMap={setSelectedModdingMap} users={users} />
-        <AddModdingMapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId} users={users} />
+        <ModdingMapList isAdmin={isAdmin} payload={payload} setAddModalOpen={setAddModalOpen}
+                        setEditModalOpen={setEditModalOpen} setSelectedModdingMap={setSelectedModdingMap}
+                        users={users}/>
+        <AddModdingMapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId} users={users}/>
       </Container>
     </div>
   )

@@ -21,7 +21,8 @@ const DiscussionItemResponseBox = ({moddingComment, isWriting, setIsWriting, use
   } else {
     return (
       <div className={"beatmap-discussion-main-actions"}>
-        <DiscussionItemResolveButton query={query} commentId={moddingComment._id} resolved={moddingComment.resolved} userId={userId} />
+        <DiscussionItemResolveButton query={query} commentId={moddingComment._id} resolved={moddingComment.resolved}
+                                     userId={userId}/>
         <Button color={"green"} onClick={() => setIsWriting(true)}><Icon name={"reply"}/>Respond</Button>
       </div>
     )

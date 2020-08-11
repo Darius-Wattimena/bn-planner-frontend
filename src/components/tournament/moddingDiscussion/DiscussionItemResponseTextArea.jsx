@@ -54,7 +54,7 @@ const DiscussionItemResponseTextArea = ({users, userId, moddingCommentId, setIsW
   return (
     <>
       <div className={"beatmap-discussion-item beatmap-discussion-item-reply"}>
-        <DiscussionAuthor authorDetails={authorDetails} authorRole={authorRole} />
+        <DiscussionAuthor authorDetails={authorDetails} authorRole={authorRole}/>
         <div className={"beatmap-discussion-content-full"}>
           <textarea
             className={"beatmap-discussion-response-textarea"}
@@ -63,7 +63,8 @@ const DiscussionItemResponseTextArea = ({users, userId, moddingCommentId, setIsW
           />
         </div>
       </div>
-      <Button disabled={!submitIsActive} color={submitIsActive ? "green" : "grey"} onClick={() => verifyData()}><Icon name={"check"}/>Submit</Button>
+      <Button disabled={!submitIsActive} color={submitIsActive ? "green" : "grey"} onClick={() => verifyData()}><Icon
+        name={"check"}/>Submit</Button>
       <Button color={"red"} onClick={() => setIsWriting(false)}><Icon name={"close"}/>Close</Button>
     </>
   )

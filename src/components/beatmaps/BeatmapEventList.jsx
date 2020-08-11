@@ -8,8 +8,8 @@ const BeatmapEventList = ({events, users}) => {
   if (events && events.length !== 0) {
     return (
       <List divided relaxed inverted celled className={"scrollable-list event-list"}>
-        {events.sort(function(a, b){
-          return b.timestamp-a.timestamp
+        {events.sort(function (a, b) {
+          return b.timestamp - a.timestamp
         }).map((event, index) => {
           let eventUser = getUserWithId(users, event.userId)
           let roleDetails = getReadableRole(eventUser.role)

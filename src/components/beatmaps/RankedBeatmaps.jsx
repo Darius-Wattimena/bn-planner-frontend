@@ -63,7 +63,7 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
           canEdit={canEdit}
           setPage={handleFilterSetPage}
         />
-        <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId} />
+        <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId}/>
         {selectedBeatmap !== 0 &&
         <EditBeatmapModal
           id={selectedBeatmap}

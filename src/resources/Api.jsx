@@ -272,7 +272,7 @@ const Api = {
         "Authorization": "Bearer " + token
       }
     }
-}
+  }
 }
 
 export default Api
