@@ -1,11 +1,12 @@
-import React from "react"
+import React, {useState} from "react"
 import {useCookies} from "react-cookie"
 import {useMutation} from "react-fetching-library"
 import Api from "../../../resources/Api"
-import {Button, Header, Icon, Modal} from "semantic-ui-react"
+import {Button, Checkbox, Form, Header, Icon, Modal} from "semantic-ui-react"
 
 const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, userId}) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
+  const [read, setRead] = useState(false)
 
   const {mutate} = useMutation(Api.deleteBeatmap)
   const handleSubmit = async (beatmapId) => {
@@ -30,13 +31,26 @@ const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, us
         <Header content={"Deleting Beatmap : " + beatmap.artist + " - " + beatmap.title}/>
       </div>
       <Modal.Content>
-        Are you sure that you want to delete the following beatmap from the planner?
+        <div>
+          Are you sure that you want to delete the following beatmap from the planner?
+        </div>
+        <br/>
+        <div>
+          Deleting a map from the planner should only be used when you accidentally added a wrong set to the planner.
+          It's recommended to <u>remove yourself from the set</u> and move it to graved if the mapsets is graved!
+        </div>
+        <br/>
+        <Checkbox
+          label={"I've read the above"}
+          checked={read}
+          onChange={() => setRead(!read)}
+        />
       </Modal.Content>
       <Modal.Actions>
         <Button color='red' onClick={() => setOpen(false)}>
           <Icon name='close'/> Cancel
         </Button>
-        <Button color='green' onClick={verifyData}>
+        <Button disabled={!read} color='green' onClick={verifyData}>
           <Icon name='checkmark'/> Confirm
         </Button>
       </Modal.Actions>

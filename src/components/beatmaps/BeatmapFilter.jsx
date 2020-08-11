@@ -2,16 +2,18 @@ import React, {useState} from "react"
 import {Button, Form, Grid, Icon, Popup, Table} from "semantic-ui-react"
 import {getBeatmapStatusOptions, getNominatorOptions} from "../../util/BeatmapUtil"
 import "./BeatmapFilter.css"
-import {getUserWithId} from "../../util/UserUtil";
-import FilterItem from "../generic/FilterItem";
-import FilterButton from "../generic/FilterButton";
-import FilterField from "../generic/FilterField";
-import {debouncingFilter, instantFilter} from "../../util/FilterUtil";
+import {getUserWithId} from "../../util/UserUtil"
+import FilterItem from "../generic/FilterItem"
+import FilterButton from "../generic/FilterButton"
+import FilterField from "../generic/FilterField"
+import {debouncingFilter, instantFilter} from "../../util/FilterUtil"
+import useWindowDimensions from "../../hooks/useWindowDimensions"
 
 const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, userId, onRankedPage, onGravedPage}) => {
   const [selectedNominator, setSelectedNominator] = useState(null)
   const [formValues, setFormValues] = useState(filter)
   const [timeoutValue, setTimeoutValue] = useState(0)
+  const { height, width } = useWindowDimensions();
 
   function instantFilterSet(group, value) {
     instantFilter(group, value, formValues, setFormValues, timeoutValue, setFilter)
@@ -29,6 +31,8 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
     selectedNominatorInfo = null
   }
 
+  let isMobile = width <= 767
+
   return (
     <Table inverted>
       <Table.Header>
@@ -44,7 +48,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
               }
               content={<Grid className={"filter-settings-popup"}>
                 <Grid.Row>
-                  <Grid.Column computer={(onRankedPage !== true && onGravedPage !== true) ? 8 : 16} mobile={16}>
+                  <Grid.Column tablet={(onRankedPage !== true && onGravedPage !== true) ? 8 : 16} computer={(onRankedPage !== true && onGravedPage !== true) ? 8 : 16} mobile={16}>
                     <Form>
                       <Form.Dropdown search placeholder='Nominator' fluid selection clearable
                                      options={getNominatorOptions(users)}
@@ -56,7 +60,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
                     </Form>
                   </Grid.Column>
                   {onRankedPage !== true && onGravedPage !== true &&
-                  <Grid.Column computer={8} mobile={16}>
+                  <Grid.Column tablet={8} computer={8} mobile={16}>
                     <Form>
                       <Form.Dropdown placeholder='Status' fluid selection clearable options={getBeatmapStatusOptions()}
                                      onChange={(_, data) => debouncingFilterSet("status", data.value)}/>
@@ -65,9 +69,9 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
                   }
                 </Grid.Row>
                 <Grid.Row>
-                  <Grid.Column computer={8} mobile={16}>
+                  <Grid.Column tablet={8} computer={8} mobile={16}>
                     <Grid verticalAlign={"middle"}>
-                      <FilterItem title={"Artist"} icon={"pencil"} titleWidth={3} itemWidth={11} item={
+                      <FilterItem title={"Artist"} icon={"pencil"} titleWidth={3} itemWidth={11} isMobile={isMobile} item={
                         <Form inverted>
                           <FilterField
                             id={"artist"}
@@ -79,7 +83,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
                           />
                         </Form>
                       }/>
-                      <FilterItem title={"Title"} icon={"heading"} titleWidth={3} itemWidth={11} item={
+                      <FilterItem title={"Title"} icon={"heading"} titleWidth={3} itemWidth={11} isMobile={isMobile} item={
                         <Form inverted>
                           <FilterField
                             id={"title"}
@@ -91,7 +95,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
                           />
                         </Form>
                       }/>
-                      <FilterItem title={"Mapper"} icon={"user"} titleWidth={3} itemWidth={11} item={
+                      <FilterItem title={"Mapper"} icon={"user"} titleWidth={3} itemWidth={11} isMobile={isMobile} item={
                         <Form inverted>
                           <FilterField
                             id={"mapper"}
@@ -105,11 +109,11 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
                       }/>
                     </Grid>
                   </Grid.Column>
-                  <Grid.Column computer={8} mobile={16}>
+                  <Grid.Column className={"filter-buttons"} tablet={8} computer={8} mobile={16}>
                     <Grid verticalAlign={"middle"}>
                       {onRankedPage !== true &&
                       <FilterItem icon={(formValues.hideWithTwoNominators) ? "user cancel" : "group"}
-                                  iconColor={"green"} title={"Nominators"} item={
+                                  iconColor={"green"} title={"Nominators"} isMobile={isMobile} item={
                         <Button.Group fluid>
                           <FilterButton active={formValues.hideWithTwoNominators === true} value={true}
                                         field={"hideWithTwoNominators"} name={"Missing"}
@@ -121,7 +125,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
                       }/>
                       }
                       {canEdit &&
-                      <FilterItem title={"Limit"} icon={"list ol"} item={
+                      <FilterItem title={"Limit"} icon={"list ol"} isMobile={isMobile} item={
                         <Button.Group fluid>
                           <FilterButton active={formValues.limit === "Ten"} value={"Ten"} field={"limit"} name={"10"}
                                         handleFilterSet={instantFilterSet}/>

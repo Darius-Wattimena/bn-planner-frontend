@@ -54,6 +54,7 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
           setAddModalOpen={setAddModalOpen}
         />
         <BeatmapList
+          users={users}
           loading={loading}
           payload={payload}
           error={error}

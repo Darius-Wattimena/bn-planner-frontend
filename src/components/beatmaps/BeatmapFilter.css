@@ -7,3 +7,13 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+@media (max-width: 767px) {
+    .ui.popup > .ui.grid.filter-settings-popup .row .column.filter-buttons {
+        margin-top: 20px;
+    }
+
+    .ui.popup > .ui.grid.filter-settings-popup .row {
+        padding-bottom: 10px !important;
+    }
+}
