@@ -1,7 +1,7 @@
 import {Button, Grid, Icon, Table} from "semantic-ui-react"
 import React from "react"
-import UserAvatar from "../../user/UserAvatar";
-import {getUserWithId} from "../../../util/UserUtil";
+import UserAvatar from "../../user/UserAvatar"
+import {getUserWithId} from "../../../util/UserUtil"
 
 const ContestList = ({isAdmin, payload, setAddModalOpen, setEditModalOpen, setSelectedContest, users}) => {
   return (

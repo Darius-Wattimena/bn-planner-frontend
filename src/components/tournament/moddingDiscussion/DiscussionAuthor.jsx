@@ -1,5 +1,5 @@
-import {Image, Label} from "semantic-ui-react";
-import React from "react";
+import {Image, Label} from "semantic-ui-react"
+import React from "react"
 
 const DiscussionAuthor = ({authorDetails, authorRole}) => {
   return (

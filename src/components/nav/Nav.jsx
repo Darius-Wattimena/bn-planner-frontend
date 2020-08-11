@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {Icon, Menu, MenuItem, Segment, Sidebar, Sticky} from "semantic-ui-react"
+import {Icon, Menu, MenuItem, Sidebar} from "semantic-ui-react"
 import {useHistory} from "react-router-dom"
 import catchLogo from "../../assets/catch.svg"
 import "./Nav.scss"

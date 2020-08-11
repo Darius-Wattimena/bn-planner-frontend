@@ -1,11 +1,11 @@
-import {useCookies} from "react-cookie";
-import React, {useState} from "react";
-import {useMutation} from "react-fetching-library";
-import {getReadableRole, getUserWithId} from "../../../util/UserUtil";
-import DiscussionAuthor from "./DiscussionAuthor";
-import {Button, Icon} from "semantic-ui-react";
-import Api from "../../../resources/Api";
-import {timestampRegex} from "../../../util/DiscussionUtil";
+import {useCookies} from "react-cookie"
+import React, {useState} from "react"
+import {useMutation} from "react-fetching-library"
+import {getReadableRole, getUserWithId} from "../../../util/UserUtil"
+import DiscussionAuthor from "./DiscussionAuthor"
+import {Button, Icon} from "semantic-ui-react"
+import Api from "../../../resources/Api"
+import {timestampRegex} from "../../../util/DiscussionUtil"
 
 const DiscussionItemForm = ({moddingMapId, users, userId, query}) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])

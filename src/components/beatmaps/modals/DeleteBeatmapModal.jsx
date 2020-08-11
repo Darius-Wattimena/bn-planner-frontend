@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import {useCookies} from "react-cookie"
 import {useMutation} from "react-fetching-library"
 import Api from "../../../resources/Api"
-import {Button, Checkbox, Form, Header, Icon, Modal} from "semantic-ui-react"
+import {Button, Checkbox, Header, Icon, Modal} from "semantic-ui-react"
 
 const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, userId}) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])

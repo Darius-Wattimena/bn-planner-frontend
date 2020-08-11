@@ -1,8 +1,7 @@
-import React from "react";
-import {Image, Menu, MenuItem} from "semantic-ui-react";
-import {ENV} from "../../Settings";
-import {getUserWithId} from "../../util/UserUtil";
-import UserAvatar from "../user/UserAvatar";
+import React from "react"
+import {Image, Menu, MenuItem} from "semantic-ui-react"
+import {ENV} from "../../Settings"
+import {getUserWithId} from "../../util/UserUtil"
 
 const NavMenuItems = ({users, isSidebar, hasHiddenPerms, handleNavClick, selected, homeName, beatmapsName, rankedName, gravedName, usersName, contestName, moddingMapName, userId, loginName, osuLoginUrl}) => {
 
@@ -93,10 +92,14 @@ const RightMenu = ({isSidebar, userId, users, selected, loginName, osuLoginUrl})
           </MenuItem>
         }
         {userDetails &&
-        <MenuItem>
-          <Image avatar src={userDetails.profilePictureUri}/>
-          Welcome {getUserWithId(users, userId).osuName}!
-        </MenuItem>
+          <>
+            <MenuItem>
+              {!isSidebar &&
+                <Image avatar src={userDetails.profilePictureUri}/>
+              }
+              Welcome {getUserWithId(users, userId).osuName}!
+            </MenuItem>
+          </>
         }
       </>
     )

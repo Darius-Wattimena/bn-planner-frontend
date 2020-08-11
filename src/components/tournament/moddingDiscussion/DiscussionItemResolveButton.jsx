@@ -1,8 +1,8 @@
-import {Button, Icon} from "semantic-ui-react";
-import React from "react";
-import {useMutation} from "react-fetching-library";
-import Api from "../../../resources/Api";
-import {useCookies} from "react-cookie";
+import {Button, Icon} from "semantic-ui-react"
+import React from "react"
+import {useMutation} from "react-fetching-library"
+import Api from "../../../resources/Api"
+import {useCookies} from "react-cookie"
 
 const DiscussionItemResolveButton = ({resolved, commentId, query, userId}) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])

@@ -1,6 +1,6 @@
 import {Button, Icon, Table} from "semantic-ui-react"
 import React from "react"
-import {useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom"
 
 const ModdingMapList = ({isAdmin, payload, setAddModalOpen}) => {
   let history = useHistory()

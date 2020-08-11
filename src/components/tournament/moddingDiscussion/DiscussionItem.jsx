@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import {getReadableRole, getUserWithId} from "../../../util/UserUtil";
-import {formatOsuLinks, timestampRegex} from "../../../util/DiscussionUtil";
-import {Button, Icon} from "semantic-ui-react";
-import DiscussionAuthor from "./DiscussionAuthor";
-import DiscussionItemResponse from "./DiscussionItemResponse";
-import DiscussionItemResponseBox from "./DiscussionItemResponseBox";
-import {useMutation} from "react-fetching-library";
-import Api from "../../../resources/Api";
-import {useCookies} from "react-cookie";
+import React, {useState} from "react"
+import {getReadableRole, getUserWithId} from "../../../util/UserUtil"
+import {formatOsuLinks, timestampRegex} from "../../../util/DiscussionUtil"
+import {Button, Icon} from "semantic-ui-react"
+import DiscussionAuthor from "./DiscussionAuthor"
+import DiscussionItemResponse from "./DiscussionItemResponse"
+import DiscussionItemResponseBox from "./DiscussionItemResponseBox"
+import {useMutation} from "react-fetching-library"
+import Api from "../../../resources/Api"
+import {useCookies} from "react-cookie"
 
 const DiscussionItem = ({discussion, users, userId, query}) => {
   let moddingComment = discussion.moddingComment

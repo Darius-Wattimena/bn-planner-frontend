@@ -1,12 +1,12 @@
-import {Container} from "semantic-ui-react";
-import React from "react";
-import {useParams} from 'react-router-dom';
-import Api from "../../../resources/Api";
-import {useQuery} from "react-fetching-library";
-import {useCookies} from "react-cookie";
+import {Container} from "semantic-ui-react"
+import React from "react"
+import {useParams} from 'react-router-dom'
+import Api from "../../../resources/Api"
+import {useQuery} from "react-fetching-library"
+import {useCookies} from "react-cookie"
 import "./ModdingDiscussion.scss"
-import DiscussionItem from "./DiscussionItem";
-import DiscussionItemForm from "./DiscussionItemForm";
+import DiscussionItem from "./DiscussionItem"
+import DiscussionItemForm from "./DiscussionItemForm"
 
 const ModdingDiscussion = ({canEdit, isAdmin, userId, users}) => {
   const {id} = useParams();

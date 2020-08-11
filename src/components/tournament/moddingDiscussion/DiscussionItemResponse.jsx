@@ -1,11 +1,11 @@
-import {getReadableRole, getUserWithId} from "../../../util/UserUtil";
-import {formatOsuLinks} from "../../../util/DiscussionUtil";
-import React, {useState} from "react";
-import DiscussionAuthor from "./DiscussionAuthor";
-import {useMutation} from "react-fetching-library";
-import Api from "../../../resources/Api";
-import {useCookies} from "react-cookie";
-import {Button, Icon} from "semantic-ui-react";
+import {getReadableRole, getUserWithId} from "../../../util/UserUtil"
+import {formatOsuLinks} from "../../../util/DiscussionUtil"
+import React, {useState} from "react"
+import DiscussionAuthor from "./DiscussionAuthor"
+import {useMutation} from "react-fetching-library"
+import Api from "../../../resources/Api"
+import {useCookies} from "react-cookie"
+import {Button, Icon} from "semantic-ui-react"
 
 const DiscussionItemResponse = ({response, users, userId, query}) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])

@@ -3,7 +3,7 @@ import {Button, Form, Header, Icon, Modal} from "semantic-ui-react"
 import {useMutation} from "react-fetching-library"
 import Api from "../../../../resources/Api"
 import {useCookies} from "react-cookie"
-import {getNominatorOptions} from "../../../../util/BeatmapUtil";
+import {getNominatorOptions} from "../../../../util/BeatmapUtil"
 
 const AddContestModal = ({open, query, setOpen, userId, users}) => {
   const [formValues, setFormValues] = useState({

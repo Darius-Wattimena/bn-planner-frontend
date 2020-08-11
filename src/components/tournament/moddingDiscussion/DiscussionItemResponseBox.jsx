@@ -1,8 +1,8 @@
-import Api from "../../../resources/Api";
-import {Button, Icon} from "semantic-ui-react";
-import React from "react";
-import DiscussionItemResponseTextArea from "./DiscussionItemResponseTextArea";
-import DiscussionItemResolveButton from "./DiscussionItemResolveButton";
+import Api from "../../../resources/Api"
+import {Button, Icon} from "semantic-ui-react"
+import React from "react"
+import DiscussionItemResponseTextArea from "./DiscussionItemResponseTextArea"
+import DiscussionItemResolveButton from "./DiscussionItemResolveButton"
 
 const DiscussionItemResponseBox = ({moddingComment, isWriting, setIsWriting, userId, users, query}) => {
   if (isWriting && isWriting === true) {

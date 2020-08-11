@@ -1,9 +1,9 @@
-import {useCookies} from "react-cookie";
-import React, {useState} from "react";
-import {useMutation} from "react-fetching-library";
-import {getReadableRole, getUserWithId} from "../../../util/UserUtil";
-import {Button, Icon} from "semantic-ui-react";
-import DiscussionAuthor from "./DiscussionAuthor";
+import {useCookies} from "react-cookie"
+import React, {useState} from "react"
+import {useMutation} from "react-fetching-library"
+import {getReadableRole, getUserWithId} from "../../../util/UserUtil"
+import {Button, Icon} from "semantic-ui-react"
+import DiscussionAuthor from "./DiscussionAuthor"
 
 const DiscussionItemResponseTextArea = ({users, userId, moddingCommentId, setIsWriting, request, query}) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])

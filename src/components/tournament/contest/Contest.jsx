@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import Api from "../../../resources/Api";
-import {useQuery} from "react-fetching-library";
-import {Container} from "semantic-ui-react";
-import ContestList from "./ContestList";
-import {useCookies} from "react-cookie";
-import AddContestModal from "./modals/AddContestModal";
+import React, {useState} from "react"
+import Api from "../../../resources/Api"
+import {useQuery} from "react-fetching-library"
+import {Container} from "semantic-ui-react"
+import ContestList from "./ContestList"
+import {useCookies} from "react-cookie"
+import AddContestModal from "./modals/AddContestModal"
 
 const Contest = ({canEdit, isAdmin, userId, users}) => {
   const [selectedContest, setSelectedContest] = useState(0)

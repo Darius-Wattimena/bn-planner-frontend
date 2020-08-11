@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import Api from "../../../resources/Api";
-import {useQuery} from "react-fetching-library";
-import {Container} from "semantic-ui-react";
-import ModdingMapList from "./ModdingMapList";
-import {useCookies} from "react-cookie";
-import AddModdingMapModal from "./modals/AddModdingMapModal";
+import React, {useState} from "react"
+import Api from "../../../resources/Api"
+import {useQuery} from "react-fetching-library"
+import {Container} from "semantic-ui-react"
+import ModdingMapList from "./ModdingMapList"
+import {useCookies} from "react-cookie"
+import AddModdingMapModal from "./modals/AddModdingMapModal"
 
 const ModdingMap = ({canEdit, isAdmin, userId, users}) => {
   const [selectedModdingMap, setSelectedModdingMap] = useState(0)
