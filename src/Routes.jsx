@@ -23,17 +23,17 @@ export const basePermissions = {
 const Routes = () => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
 
-  const userQuery = useQuery(Api.getUsers())
+  const { payload: userPayload, loading: userLoading } = useQuery(Api.getUsers())
   const { payload, loading, error } = useQuery(Api.getUserInfo(cookies.bnplanner_osu_access_token))
 
   const [permissions, setPermissions] = useState(basePermissions)
 
-  if (loading || userQuery.loading) {
+  if (loading || userLoading) {
     return (
       <Dimmer active>
-        <Progress active progress="percent" className={"fullOverlay"} indicating percent={ (loading && userQuery.loading)
+        <Progress active progress="percent" className={"fullOverlay"} indicating percent={ (loading && userLoading)
           ? 20 : loading
-            ? 60 : userQuery.loading
+            ? 60 : userLoading
               ? 80 : 100}>Preparing Nomination Planner</Progress>
       </Dimmer>
     )
@@ -79,18 +79,18 @@ const Routes = () => {
 
   return (
     <BrowserRouter>
-      <Nav users={userQuery.payload} userId={userId} hasHiddenPerms={hasHiddenPerms} />
+      <Nav users={userPayload} userId={userId} hasHiddenPerms={hasHiddenPerms} />
       <Switch>
-        <Route exact path={"/"} component={() => <Home users={userQuery.payload} />} />
-        <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
-        <Route exact path={"/ranked"} component={() => <RankedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
-        <Route exact path={"/graved"} component={() => <GravedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
-        <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+        <Route exact path={"/"} component={() => <Home users={userPayload} />} />
+        <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
+        <Route exact path={"/ranked"} component={() => <RankedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
+        <Route exact path={"/graved"} component={() => <GravedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
+        <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
         {hasHiddenPerms &&
           <>
-            <Route path={"/contests"} component={() => <Contest canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
-            <Route exact path={"/modding/maps"} component={() => <ModdingMap canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
-            <Route path={"/modding/maps/discussion/:id"} component={() => <ModdingDiscussion canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userQuery.payload} />} />
+            <Route path={"/contests"} component={() => <Contest canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
+            <Route exact path={"/modding/maps"} component={() => <ModdingMap canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
+            <Route path={"/modding/maps/discussion/:id"} component={() => <ModdingDiscussion canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
           </>
         }
         <Route path={"/login"} component={Login} />

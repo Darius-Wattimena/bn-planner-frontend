@@ -6,7 +6,7 @@ import {getReadableRole, getUserWithId} from "../../util/UserUtil"
 
 const HomeStatistics = ({users}) => {
   let request = Api.fetchLatestStatistics()
-  const {loading, payload, error, query} = useQuery(request)
+  const {payload} = useQuery(request)
 
   if (payload) {
     const sortedUserPendingIcons = []
@@ -124,22 +124,28 @@ const Leaderboard = ({sortedValues, users, title}) => {
       <div className={"leaderboard-items"}>
         {sortedValues.map((userValue, index) => {
           let userDetails = getUserWithId(users, userValue[0])
-          let userRole = getReadableRole(userDetails.role)
-          let leaderboardItemClassName = index === 0 ? "leader " : ""
-          return (
-            <div key={index} className={"leaderboard-item " + leaderboardItemClassName + userRole.className}>
-              <div className={"leaderboard-item-user-info"}>
-                <Image className={"leaderboard-item-picture"} src={userDetails.profilePictureUri}/>
-                <div className={"leaderboard-item-stripe " + userRole.className}/>
-                <div className={"leaderboard-item-user"}>
-                  {userDetails.osuName}
+          if (userDetails) {
+            let userRole = getReadableRole(userDetails.role)
+            let leaderboardItemClassName = index === 0 ? "leader " : ""
+            return (
+              <div key={index} className={"leaderboard-item " + leaderboardItemClassName + userRole.className}>
+                <div className={"leaderboard-item-user-info"}>
+                  <Image className={"leaderboard-item-picture"} src={userDetails.profilePictureUri}/>
+                  <div className={"leaderboard-item-stripe " + userRole.className}/>
+                  <div className={"leaderboard-item-user"}>
+                    {userDetails.osuName}
+                  </div>
+                </div>
+                <div className={"leaderboard-item-amount"}>
+                  {userValue[1]}
                 </div>
               </div>
-              <div className={"leaderboard-item-amount"}>
-                {userValue[1]}
-              </div>
-            </div>
-          )
+            )
+          } else {
+            return (
+              <div />
+            )
+          }
         })}
       </div>
     </div>
