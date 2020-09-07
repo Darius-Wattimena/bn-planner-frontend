@@ -11,9 +11,10 @@ const Login = (props) => {
   const [cookies, setCookie] = useCookies(['bnplanner_osu_token'])
 
   const code = new URLSearchParams(props.location.search).get("code")
+  const state = new URLSearchParams(props.location.search).get("state")
 
   if (new URLSearchParams(props.location.search).has("error")) {
-    history.push("/")
+    history.push(state)
   }
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const Login = (props) => {
       .then(response => response.json())
       .then(data => {
         setCookie("bnplanner_osu_access_token", data.access_token, {maxAge: data.expires_in})
-        history.push("/")
+        history.push(state)
       })
   }, [])
 

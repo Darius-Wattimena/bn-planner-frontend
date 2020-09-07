@@ -18,7 +18,9 @@ const ModdingDiscussion = ({canEdit, isAdmin, userId, users}) => {
   return (
     <div className={"base-container base-container-small"}>
       <Container fluid>
-        <h2 className={"text header-title"}>Modding Maps</h2>
+        <div className={"section"}>
+          <div className={"section-title"}>Modding Maps</div>
+        </div>
         {payload &&
         <>
           <div className={"beatmap-discussion-section"}>

@@ -86,7 +86,7 @@ const RightMenu = ({isSidebar, userId, users, selected, loginName, osuLoginUrl})
           <MenuItem
             name={loginName}
             active={selected === loginName}
-            onClick={() => window.location.href = osuLoginUrl}
+            onClick={() => window.location.href = `${osuLoginUrl}&state=${window.location.pathname}`}
           >
             Login with osu! account
           </MenuItem>
@@ -115,7 +115,7 @@ const RightMenu = ({isSidebar, userId, users, selected, loginName, osuLoginUrl})
           <MenuItem
             name={loginName}
             active={selected === loginName}
-            onClick={() => window.location.href = osuLoginUrl}
+            onClick={() => window.location.href = `${osuLoginUrl}&state=${window.location.pathname}`}
           >
             Login with osu! account
           </MenuItem>

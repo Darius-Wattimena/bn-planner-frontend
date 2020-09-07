@@ -7,6 +7,7 @@ import EditBeatmapModal from "./modals/EditBeatmapModal"
 import {Container} from "semantic-ui-react"
 import Api from "../../resources/Api"
 import {useQuery} from "react-fetching-library"
+import HomeExplanation from "../home/HomeExplanation";
 
 const filterDefaultState = {
   "artist": null,
@@ -42,7 +43,9 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
   return (
     <div className={"base-container base-container-large"}>
       <Container fluid>
-        <h2>Icons In Progress</h2>
+        <div className={"section"}>
+          <div className={"section-title"}>Icons In Progress</div>
+        </div>
         <BeatmapFilter
           users={users}
           filter={filter}

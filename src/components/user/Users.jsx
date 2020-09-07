@@ -38,7 +38,9 @@ const Users = ({canEdit, isAdmin, userId, users}) => {
   return (
     <div className={"base-container"}>
       <Container fluid>
-        <h2>Users</h2>
+        <div className={"section"}>
+          <div className={"section-title"}>Users</div>
+        </div>
         <UserFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} isAdmin={isAdmin}
                     canEdit={canEdit} setPage={handleFilterSetPage}/>
         <UserList

@@ -18,7 +18,9 @@ const ModdingMap = ({canEdit, isAdmin, userId, users}) => {
   return (
     <div className={"base-container"}>
       <Container fluid>
-        <h2>Modding Maps</h2>
+        <div className={"section"}>
+          <div className={"section-title"}>Modding Maps</div>
+        </div>
         <ModdingMapList isAdmin={isAdmin} payload={payload} setAddModalOpen={setAddModalOpen}
                         setEditModalOpen={setEditModalOpen} setSelectedModdingMap={setSelectedModdingMap}
                         users={users}/>

@@ -167,11 +167,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
               </Button.Content>
             </Button>
           </Table.HeaderCell>
-          <Table.HeaderCell width={"2"}/>
-          <Table.HeaderCell width={"2"}/>
-          <Table.HeaderCell width={"2"}/>
-          <Table.HeaderCell width={"2"}/>
-          <Table.HeaderCell width={"1"}/>
+          <Table.HeaderCell width={"9"}/>
           <Table.HeaderCell width={"2"}>
             {onRankedPage !== true && onGravedPage !== true &&
             <Button disabled={!canEdit} fluid color={"green"} onClick={() => setAddModalOpen(true)}><Icon

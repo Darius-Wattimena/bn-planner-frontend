@@ -42,7 +42,9 @@ const GravedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
   return (
     <div className={"base-container base-container-large"}>
       <Container fluid>
-        <h2>Graved Beatmaps</h2>
+        <div className={"section"}>
+          <div className={"section-title"}>Graved Beatmaps</div>
+        </div>
         <BeatmapFilter
           users={users}
           filter={filter}

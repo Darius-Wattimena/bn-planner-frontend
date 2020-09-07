@@ -27,7 +27,7 @@ const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBea
       }
     }
 
-    return (<p>none</p>)
+    return (<div/>)
   }
 
   return (
