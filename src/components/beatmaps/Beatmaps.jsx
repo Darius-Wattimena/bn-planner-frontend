@@ -4,7 +4,7 @@ import BeatmapList from "./BeatmapList"
 import "./Beatmaps.scss"
 import AddBeatmapModal from "./modals/AddBeatmapModal"
 import EditBeatmapModal from "./modals/EditBeatmapModal"
-import {Container} from "semantic-ui-react"
+import {Container, Grid} from "semantic-ui-react"
 import Api from "../../resources/Api"
 import {useQuery} from "react-fetching-library"
 import HomeExplanation from "../home/HomeExplanation";
@@ -43,28 +43,36 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
   return (
     <div className={"base-container base-container-large"}>
       <Container fluid>
-        <div className={"section"}>
+        <div className={"section beatmap-filter"}>
           <div className={"section-title"}>Icons In Progress</div>
+          <div className={"section-container"}>
+            <BeatmapFilter
+              users={users}
+              filter={filter}
+              setFilter={setFilter}
+              setAddModalOpen={setAddModalOpen}
+              canEdit={canEdit}
+              userId={userId}
+              setPage={handleFilterSetPage}/>
+          </div>
         </div>
-        <BeatmapFilter
-          users={users}
-          filter={filter}
-          setFilter={setFilter}
-          setAddModalOpen={setAddModalOpen}
-          canEdit={canEdit}
-          userId={userId}
-          setPage={handleFilterSetPage}/>
-        <BeatmapList
-          users={users}
-          loading={loading}
-          payload={payload}
-          error={error}
-          filter={filter}
-          setEditModalOpen={setEditModalOpen}
-          setSelectedBeatmap={setSelectedBeatmap}
-          canEdit={canEdit}
-          setPage={handleFilterSetPage}
-        />
+
+        <div className={"beatmap-section"}>
+          <div className={"beatmap-list-container"}>
+            <BeatmapList
+              users={users}
+              loading={loading}
+              payload={payload}
+              error={error}
+              filter={filter}
+              setEditModalOpen={setEditModalOpen}
+              setSelectedBeatmap={setSelectedBeatmap}
+              canEdit={canEdit}
+              setPage={handleFilterSetPage}
+            />
+          </div>
+        </div>
+
         <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId}/>
         {selectedBeatmap !== 0 &&
         <EditBeatmapModal

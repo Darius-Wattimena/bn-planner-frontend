@@ -75,8 +75,57 @@ u.beatmap-status-graved {
   color: #bdbdbd !important;
 }
 
-tr.beatmap-row td.beatmap-nominator .nominated {
-  box-shadow: 0 0 5px 1px $confirm-colour;
+.section.beatmap-filter {
+  margin-bottom: 20px;
+}
+
+.beatmap-section {
+  margin-bottom: 10px;
+
+  .beatmap-list-container {
+    .grid {
+      margin: 0;
+      color: $text-colour;
+
+      .beatmap-header-row {
+        background-color: $background-colour-dark;
+      }
+
+      .beatmap-row {
+        background-color: darken($background-colour-light, 3%);
+        border-top: $background-colour-dark 1px solid;
+
+        .nominated {
+          box-shadow: 0 0 5px 1px $confirm-colour;
+        }
+      }
+
+      @media (max-width: 991px) {
+        .beatmap-row {
+          font-size: 1.1em;
+
+          .ribbon {
+            font-size: 1.2em;
+          }
+        }
+      }
+
+      @media (min-width: 992px) {
+        .beatmap-row {
+          transition: background .1s ease,box-shadow .1s ease,color .1s ease;
+        }
+
+        .beatmap-row:hover {
+          background-color: $background-colour-light;
+        }
+      }
+
+      .beatmap-footer-row {
+        border-top: $background-colour-dark 1px solid;
+        background-color: $background-colour-dark;
+      }
+    }
+  }
 }
 
 .beatmap-banner {

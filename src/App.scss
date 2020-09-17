@@ -154,6 +154,16 @@ div.ui.selection.dropdown div.text {
     font-weight: bold;
   }
 
+  .section-divider {
+    background-color: $background-colour;
+    padding: 0 20px;
+
+    div.divider {
+      background-color: $background-colour-lighter;
+      height: 1px;
+    }
+  }
+
   .section-container {
     background-color: $background-colour;
     padding: 10px 20px;
@@ -175,6 +185,16 @@ div.ui.selection.dropdown div.text {
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: $background-colour;
+}
+
+@media (max-width: 991px) {
+  .ui.grid.multi-row-content {
+    .row {
+      .column {
+        margin: 4px 0;
+      }
+    }
+  }
 }
 
 @media (max-width: 767px) {

@@ -1,5 +1,5 @@
 import React from "react"
-import {Table} from "semantic-ui-react"
+import {Grid} from "semantic-ui-react"
 import {BEATMAP_STATUS} from "../../Constants"
 import BasicPagination from "../generic/BasicPagination"
 import BeatmapListItem from "./BeatmapListItem"
@@ -23,46 +23,41 @@ const BeatmapList = ({users, loading, error, payload, filter, setEditModalOpen, 
   }
 
   return (
-    <Table inverted selectable>
-      <Table.Header>
-        <Table.Row key={"beatmap-list-header"} textAlign={"center"}>
-          <Table.HeaderCell>#</Table.HeaderCell>
-          <Table.HeaderCell>Artist</Table.HeaderCell>
-          <Table.HeaderCell>Title</Table.HeaderCell>
-          <Table.HeaderCell>Mapper</Table.HeaderCell>
-          <Table.HeaderCell>Nominator #1</Table.HeaderCell>
-          <Table.HeaderCell>Nominator #2</Table.HeaderCell>
-          <Table.HeaderCell>Note</Table.HeaderCell>
-          <Table.HeaderCell/>
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        {payload && payload.response && payload.response.map((beatmap, index) => {
-          let displayStatus = getReadableStatus(beatmap.status)
-          return <BeatmapListItem
-            key={"beatmap-list-item-" + index}
-            beatmap={beatmap}
-            displayStatus={displayStatus}
-            canEdit={canEdit}
-            setEditModalOpen={setEditModalOpen}
-            setSelectedBeatmap={setSelectedBeatmap}
-            users={users}
-          />
-        })}
-      </Table.Body>
-      <Table.Footer>
-        <Table.Row key={"beatmap-list-footer"}>
-          <Table.HeaderCell textAlign={"center"}>
-            {payload &&
+    <Grid className={"multi-row-content"} textAlign={"center"} verticalAlign={"middle"}>
+      <Grid.Row only={"computer"} className={"beatmap-header-row"}>
+        <Grid.Column computer={2}>#</Grid.Column>
+        <Grid.Column computer={2}>Artist</Grid.Column>
+        <Grid.Column computer={3}>Title</Grid.Column>
+        <Grid.Column computer={2}>Mapper</Grid.Column>
+        <Grid.Column computer={2}>Nominator #1</Grid.Column>
+        <Grid.Column computer={2}>Nominator #2</Grid.Column>
+        <Grid.Column computer={1}>Note</Grid.Column>
+        <Grid.Column computer={2}>Actions</Grid.Column>
+      </Grid.Row>
+      {payload && payload.response && payload.response.map((beatmap, index) => {
+        let displayStatus = getReadableStatus(beatmap.status)
+        return <BeatmapListItem
+          key={"beatmap-list-item-" + index}
+          beatmap={beatmap}
+          displayStatus={displayStatus}
+          canEdit={canEdit}
+          setEditModalOpen={setEditModalOpen}
+          setSelectedBeatmap={setSelectedBeatmap}
+          users={users}
+        />
+      })}
+      <Grid.Row className={"beatmap-footer-row"}>
+        <Grid.Column width={2}>
+          {payload &&
             <p>{payload.total} Beatmap(s) Found</p>
-            }
-          </Table.HeaderCell>
-          <Table.HeaderCell colSpan={"8"}>
-            <BasicPagination currentPage={filter.page} lastPage={possibleLastPage} setPage={setPage}/>
-          </Table.HeaderCell>
-        </Table.Row>
-      </Table.Footer>
-    </Table>
+          }
+        </Grid.Column>
+        <Grid.Column width={12} />
+        <Grid.Column width={2}>
+          <BasicPagination currentPage={filter.page} lastPage={possibleLastPage} setPage={setPage}/>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   )
 }
 
