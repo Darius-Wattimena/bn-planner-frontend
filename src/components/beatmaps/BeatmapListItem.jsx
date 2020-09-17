@@ -39,9 +39,9 @@ const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBea
           </Label>
         } src={"https://assets.ppy.sh/beatmaps/" + beatmap.osuId + "/covers/cover.jpg"}/>
       </Grid.Column>
-      <Grid.Column mobile={6} tablet={6} computer={2}>{beatmap.artist}</Grid.Column>
-      <Grid.Column mobile={6} tablet={6} computer={3}>{beatmap.title}</Grid.Column>
-      <Grid.Column mobile={4} tablet={4} computer={2}>{beatmap.mapper}</Grid.Column>
+      <Grid.Column mobile={8} tablet={8} computer={2}>{beatmap.artist}</Grid.Column>
+      <Grid.Column mobile={8} tablet={8} computer={3}>{beatmap.title}</Grid.Column>
+      <Grid.Column computer={2} only={"computer"}>{beatmap.mapper}</Grid.Column>
       <Grid.Column textAlign={"left"} mobile={8} tablet={8} computer={2}>
         <NominatorDetails users={users} nominated={beatmap.nominatedByBNOne} nominators={beatmap.nominators} nominatorNumber={1} />
       </Grid.Column>
