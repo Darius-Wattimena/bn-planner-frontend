@@ -44,28 +44,36 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
       <Container fluid>
         <div className={"section"}>
           <div className={"section-title"}>Ranked Beatmaps</div>
+          <div className={"section-container"}>
+            <BeatmapFilter
+              users={users}
+              filter={filter}
+              setFilter={setFilter}
+              canEdit={canEdit}
+              setPage={handleFilterSetPage}
+              onRankedPage={true}
+              userId={userId}
+              setAddModalOpen={setAddModalOpen}
+            />
+          </div>
         </div>
-        <BeatmapFilter
-          users={users}
-          filter={filter}
-          setFilter={setFilter}
-          canEdit={canEdit}
-          setPage={handleFilterSetPage}
-          onRankedPage={true}
-          userId={userId}
-          setAddModalOpen={setAddModalOpen}
-        />
-        <BeatmapList
-          users={users}
-          loading={loading}
-          payload={payload}
-          error={error}
-          filter={filter}
-          setEditModalOpen={setEditModalOpen}
-          setSelectedBeatmap={setSelectedBeatmap}
-          canEdit={canEdit}
-          setPage={handleFilterSetPage}
-        />
+        
+        <div className={"beatmap-section"}>
+          <div className={"beatmap-list-container"}>
+            <BeatmapList
+              users={users}
+              loading={loading}
+              payload={payload}
+              error={error}
+              filter={filter}
+              setEditModalOpen={setEditModalOpen}
+              setSelectedBeatmap={setSelectedBeatmap}
+              canEdit={canEdit}
+              setPage={handleFilterSetPage}
+            />
+          </div>
+        </div>
+
         <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId}/>
         {selectedBeatmap !== 0 &&
         <EditBeatmapModal
