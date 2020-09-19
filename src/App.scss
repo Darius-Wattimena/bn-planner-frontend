@@ -187,6 +187,80 @@ div.ui.selection.dropdown div.text {
   background-color: $background-colour;
 }
 
+.table-section {
+  margin-bottom: 10px;
+
+  .table-list-container {
+    .grid {
+      margin: 0;
+      color: $text-colour;
+
+      .table-header-row {
+        font-weight: bold;
+        background-color: $background-colour-dark;
+      }
+
+      .table-row {
+        background-color: darken($background-colour-light, 3%);
+        border-top: $background-colour-dark 1px solid;
+
+        .nominated {
+          box-shadow: 0 0 5px 1px $confirm-colour;
+        }
+      }
+
+      @media (max-width: 991px) {
+        .table-row {
+          font-size: 1.1em;
+
+          .ribbon {
+            font-size: 1em;
+          }
+        }
+      }
+
+      @media (min-width: 992px) {
+        .table-row {
+          transition: background .1s ease,box-shadow .1s ease,color .1s ease;
+        }
+
+        .table-row:hover {
+          background-color: $background-colour-light;
+        }
+      }
+
+      .table-footer-row {
+        border-top: $background-colour-dark 1px solid;
+        background-color: $background-colour-dark;
+      }
+    }
+  }
+}
+
+.ui.popup > .ui.grid.filter-settings-popup {
+  width: max-content;
+  max-width: 700px;
+}
+
+.ui.popup > .ui.grid.filter-settings-popup .row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  .ui.popup > .ui.grid.filter-settings-popup .row .column.filter-buttons {
+    margin-top: 20px;
+  }
+
+  .ui.popup > .ui.grid.filter-settings-popup .row {
+    padding-top: 5px;
+  }
+
+  .ui.popup > .ui.grid.filter-settings-popup .first-row {
+    padding-top: 25px !important;
+  }
+}
+
 @media (max-width: 991px) {
   .ui.grid.multi-row-content {
     .row {

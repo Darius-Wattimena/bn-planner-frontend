@@ -31,7 +31,7 @@ const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBea
   }
 
   return (
-    <Grid.Row className={"beatmap-row"}>
+    <Grid.Row className={"table-row"}>
       <Grid.Column mobile={16} tablet={16} computer={2} >
         <Image fluid label={
           <Label ribbon horizontal className={displayStatus.className}>

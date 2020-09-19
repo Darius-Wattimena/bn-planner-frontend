@@ -57,8 +57,8 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
           </div>
         </div>
 
-        <div className={"beatmap-section"}>
-          <div className={"beatmap-list-container"}>
+        <div className={"table-section"}>
+          <div className={"table-list-container"}>
             <BeatmapList
               users={users}
               loading={loading}

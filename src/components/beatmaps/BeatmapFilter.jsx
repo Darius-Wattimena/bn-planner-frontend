@@ -1,7 +1,6 @@
 import React, {useState} from "react"
 import {Button, Form, Grid, Icon, Popup} from "semantic-ui-react"
 import {getBeatmapStatusOptions, getNominatorOptions} from "../../util/BeatmapUtil"
-import "./BeatmapFilter.css"
 import {getUserWithId} from "../../util/UserUtil"
 import FilterItem from "../generic/FilterItem"
 import FilterButton from "../generic/FilterButton"

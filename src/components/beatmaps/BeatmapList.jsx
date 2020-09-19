@@ -24,7 +24,7 @@ const BeatmapList = ({users, loading, error, payload, filter, setEditModalOpen, 
 
   return (
     <Grid className={"multi-row-content"} textAlign={"center"} verticalAlign={"middle"}>
-      <Grid.Row only={"computer"} className={"beatmap-header-row"}>
+      <Grid.Row only={"computer"} className={"table-header-row"}>
         <Grid.Column computer={2}>#</Grid.Column>
         <Grid.Column computer={2}>Artist</Grid.Column>
         <Grid.Column computer={3}>Title</Grid.Column>
@@ -46,7 +46,7 @@ const BeatmapList = ({users, loading, error, payload, filter, setEditModalOpen, 
           users={users}
         />
       })}
-      <Grid.Row className={"beatmap-footer-row"}>
+      <Grid.Row className={"table-footer-row"}>
         <Grid.Column width={2}>
           {payload &&
             <p>{payload.total} Beatmap(s) Found</p>

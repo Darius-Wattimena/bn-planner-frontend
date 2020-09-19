@@ -1,14 +1,16 @@
-import {Button, Form, Grid, Icon, Popup, Table} from "semantic-ui-react"
+import {Button, Form, Grid, Icon, Popup} from "semantic-ui-react"
 import {USER_ROLES} from "../../Constants"
 import React, {useState} from "react"
 import FilterItem from "../generic/FilterItem";
 import FilterButton from "../generic/FilterButton";
 import FilterField from "../generic/FilterField";
 import {debouncingFilter, instantFilter} from "../../util/FilterUtil";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, canEdit, setPage}) => {
   const [formValues, setFormValues] = useState(filter)
   const [timeoutValue, setTimeoutValue] = useState(0)
+  const { height, width } = useWindowDimensions();
 
   function instantFilterSet(group, value) {
     instantFilter(group, value, formValues, setFormValues, timeoutValue, setFilter)
@@ -18,98 +20,98 @@ const UserFilter = ({filter, setFilter, setAddModalOpen, isAdmin, canEdit, setPa
     debouncingFilter(group, value, formValues, setFormValues, timeoutValue, setTimeoutValue, setFilter)
   }
 
+  let isMobile = width <= 767
+
   return (
-    <Table inverted>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell width={"2"}>
-            <Popup
-              trigger={
-                <Button fluid color={"black"} content={
-                  <div>
-                    <Icon name={"cog"}/> Filters
-                  </div>
-                }/>
-              }
-              content={<Grid className={"filter-settings-popup"} textAlign={"center"}>
-                <Grid.Row>
-                  <Grid.Column width={16}>
-                    <Form>
-                      <Form.Dropdown
-                        placeholder='Roles' fluid multiple selection options={options} value={formValues.roles}
-                        onChange={(event, data) =>
-                          handleMultiSelectFilter("roles", data.value, formValues, debouncingFilterSet, USER_ROLES)
-                        }/>
-                    </Form>
-                  </Grid.Column>
-                </Grid.Row>
-                <Grid.Row>
-                  <Grid.Column computer={7} mobile={16}>
-                    <Grid verticalAlign={"middle"} textAlign={"center"}>
-                      <FilterItem titleWidth={"3"} itemWidth={"11"} icon={"user"} title={"Name"} item={
-                        <Form inverted>
-                          <FilterField
-                            id={"name"}
-                            label={"Name"}
-                            group={"name"}
-                            value={formValues.name}
-                            handleFilterSet={debouncingFilterSet}
-                            enabled={canEdit}
-                          />
-                        </Form>
+    <Grid className={"multi-row-content"}>
+      <Grid.Row>
+        <Grid.Column tablet={4} computer={2} mobile={8}>
+          <Popup
+            trigger={
+              <Button fluid color={"black"} content={
+                <div>
+                  <Icon name={"cog"}/> Filters
+                </div>
+              }/>
+            }
+            content={<Grid className={"filter-settings-popup"}>
+              <Grid.Row>
+                <Grid.Column computer={16} tablet={16} mobile={16}>
+                  <Form>
+                    <Form.Dropdown
+                      placeholder='Roles' fluid multiple selection options={options} value={formValues.roles}
+                      onChange={(event, data) =>
+                        handleMultiSelectFilter("roles", data.value, formValues, debouncingFilterSet, USER_ROLES)
                       }/>
-                    </Grid>
-                  </Grid.Column>
-                  <Grid.Column computer={9} mobile={16}>
-                    <Grid verticalAlign={"middle"} textAlign={"center"}>
-                      <FilterItem icon={"cog"} title={"Can Edit"} item={
-                        <Button.Group fluid>
-                          <FilterButton active={formValues.canEdit === true} value={true} field={"canEdit"} name={"Yes"}
-                                        handleFilterSet={instantFilterSet}/>
-                          <FilterButton active={formValues.canEdit === false} value={false} field={"canEdit"}
-                                        name={"No"} handleFilterSet={instantFilterSet}/>
-                          <FilterButton active={formValues.canEdit === null} value={null} field={"canEdit"} name={"Any"}
-                                        handleFilterSet={instantFilterSet}/>
-                        </Button.Group>
-                      }/>
-                      <FilterItem icon={"user secret"} title={"Is Admin"} item={
-                        <Button.Group fluid>
-                          <FilterButton active={formValues.isAdmin === true} value={true} field={"isAdmin"} name={"Yes"}
-                                        handleFilterSet={instantFilterSet}/>
-                          <FilterButton active={formValues.isAdmin === false} value={false} field={"isAdmin"}
-                                        name={"No"} handleFilterSet={instantFilterSet}/>
-                          <FilterButton active={formValues.isAdmin === null} value={null} field={"isAdmin"} name={"Any"}
-                                        handleFilterSet={instantFilterSet}/>
-                        </Button.Group>
-                      }/>
-                      {canEdit &&
-                      <FilterItem title={"Limit"} icon={"list ol"} item={
-                        <Button.Group fluid>
-                          <FilterButton active={formValues.limit === "Ten"} value={"Ten"} field={"limit"} name={"10"}
-                                        handleFilterSet={instantFilterSet}/>
-                          <FilterButton active={formValues.limit === "Twenty"} value={"Twenty"} field={"limit"}
-                                        name={"20"} handleFilterSet={instantFilterSet}/>
-                        </Button.Group>
-                      }/>
-                      }
-                    </Grid>
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>}
-              on='click'
-              position='bottom left'
-              inverted
-            />
-          </Table.HeaderCell>
-          <Table.HeaderCell width={"5"}/>
-          <Table.HeaderCell width={"2"}/>
-          <Table.HeaderCell width={"2"}>
-            <Button disabled={!isAdmin} fluid color={"green"} onClick={() => setAddModalOpen(true)}><Icon
-              name={"plus"}/> Add User</Button>
-          </Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
-    </Table>
+                  </Form>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column tablet={8} computer={8} mobile={16}>
+                  <Grid verticalAlign={"middle"}>
+                    <FilterItem title={"Name"} icon={"user"} titleWidth={3} itemWidth={11} isMobile={isMobile} item={
+                      <Form inverted>
+                        <FilterField
+                          id={"name"}
+                          label={"Name"}
+                          group={"name"}
+                          value={formValues.name}
+                          handleFilterSet={debouncingFilterSet}
+                          enabled={canEdit}
+                        />
+                      </Form>
+                    }/>
+                  </Grid>
+                </Grid.Column>
+                <Grid.Column tablet={8} computer={8} mobile={16}>
+                  <Grid verticalAlign={"middle"}>
+                    <FilterItem isMobile={isMobile} icon={"cog"} title={"Can Edit"} className={"first-row"} item={
+                      <Button.Group fluid>
+                        <FilterButton active={formValues.canEdit === true} value={true} field={"canEdit"} name={"Yes"}
+                                      handleFilterSet={instantFilterSet}/>
+                        <FilterButton active={formValues.canEdit === false} value={false} field={"canEdit"}
+                                      name={"No"} handleFilterSet={instantFilterSet}/>
+                        <FilterButton active={formValues.canEdit === null} value={null} field={"canEdit"} name={"Any"}
+                                      handleFilterSet={instantFilterSet}/>
+                      </Button.Group>
+                    }/>
+                    <FilterItem isMobile={isMobile} icon={"user secret"} title={"Is Admin"} item={
+                      <Button.Group fluid>
+                        <FilterButton active={formValues.isAdmin === true} value={true} field={"isAdmin"} name={"Yes"}
+                                      handleFilterSet={instantFilterSet}/>
+                        <FilterButton active={formValues.isAdmin === false} value={false} field={"isAdmin"}
+                                      name={"No"} handleFilterSet={instantFilterSet}/>
+                        <FilterButton active={formValues.isAdmin === null} value={null} field={"isAdmin"} name={"Any"}
+                                      handleFilterSet={instantFilterSet}/>
+                      </Button.Group>
+                    }/>
+                    {canEdit &&
+                    <FilterItem isMobile={isMobile} title={"Limit"} icon={"list ol"} item={
+                      <Button.Group fluid>
+                        <FilterButton active={formValues.limit === "Ten"} value={"Ten"} field={"limit"} name={"10"}
+                                      handleFilterSet={instantFilterSet}/>
+                        <FilterButton active={formValues.limit === "Twenty"} value={"Twenty"} field={"limit"}
+                                      name={"20"} handleFilterSet={instantFilterSet}/>
+                      </Button.Group>
+                    }/>
+                    }
+                  </Grid>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>}
+            on='click'
+            position='bottom left'
+            inverted
+          />
+        </Grid.Column>
+        <Grid.Column only={"computer tablet"} tablet={4} computer={10} />
+        <Grid.Column only={"computer tablet"} tablet={4} computer={1} />
+        <Grid.Column tablet={4} computer={3} mobile={8}>
+          <Button disabled={!isAdmin} fluid color={"green"} onClick={() => setAddModalOpen(true)}><Icon
+            name={"plus"}/> Add User</Button>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   )
 }
 

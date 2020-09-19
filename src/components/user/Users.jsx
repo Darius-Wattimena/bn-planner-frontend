@@ -40,19 +40,30 @@ const Users = ({canEdit, isAdmin, userId, users}) => {
       <Container fluid>
         <div className={"section"}>
           <div className={"section-title"}>Users</div>
+          <div className={"section-container"}>
+            <UserFilter
+              filter={filter}
+              setFilter={setFilter}
+              setAddModalOpen={setAddModalOpen}
+              isAdmin={isAdmin}
+              canEdit={canEdit}
+              setPage={handleFilterSetPage}/>
+          </div>
         </div>
-        <UserFilter filter={filter} setFilter={setFilter} setAddModalOpen={setAddModalOpen} isAdmin={isAdmin}
-                    canEdit={canEdit} setPage={handleFilterSetPage}/>
-        <UserList
-          filter={filter}
-          loading={loading}
-          payload={payload}
-          error={error}
-          setEditModalOpen={setEditModalOpen}
-          setSelectedUser={setSelectedUser}
-          isAdmin={isAdmin}
-          setPage={handleFilterSetPage}
-        />
+        <div className={"table-section"}>
+          <div className={"table-list-container"}>
+            <UserList
+              filter={filter}
+              loading={loading}
+              payload={payload}
+              error={error}
+              setEditModalOpen={setEditModalOpen}
+              setSelectedUser={setSelectedUser}
+              isAdmin={isAdmin}
+              setPage={handleFilterSetPage}
+            />
+          </div>
+        </div>
         <AddUserModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId}/>
         {selectedUser !== 0 &&
         <EditUserModal
