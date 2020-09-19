@@ -17,7 +17,6 @@ const HomeStatistics = ({users}) => {
       return b[1] - a[1]
     })
 
-
     const sortedUserNominatedIcons = []
     for (const userNominatedIcon in payload.userNominatedIcons) {
       sortedUserNominatedIcons.push([parseInt(userNominatedIcon), payload.userNominatedIcons[userNominatedIcon]])
@@ -49,7 +48,7 @@ const HomeStatistics = ({users}) => {
                             Beatmaps
                           </div>
                           <StatisticsItem title={"Total"} amount={payload.totalBeatmaps}/>
-                          <StatisticsItem title={"Pending"} amount={payload.totalInProgress}/>
+                          <StatisticsItem title={"In Progress"} amount={payload.totalInProgress}/>
                           <StatisticsItem title={"Missing BN"} amount={payload.totalMissingSecondBN}/>
                         </div>
 
