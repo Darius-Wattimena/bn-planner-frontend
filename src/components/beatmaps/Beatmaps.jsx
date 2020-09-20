@@ -43,7 +43,7 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
   return (
     <div className={"base-container base-container-large"}>
       <Container fluid>
-        <div className={"section beatmap-filter"}>
+        <div className={"section"}>
           <div className={"section-title"}>Icons In Progress</div>
           <div className={"section-container"}>
             <BeatmapFilter
