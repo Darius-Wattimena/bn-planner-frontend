@@ -40,7 +40,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
             trigger={
               <Button fluid color={"black"} content={
                 <div>
-                  <Icon name={"cog"} />
+                  <Icon name={"cog"} /> Filters
                 </div>
               }/>
             }
@@ -164,8 +164,8 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
               </Button.Content>
             </Button>
           } content={
-            <> {formValues.nominator === userId ? "Clear my" : selectedNominatorInfo ? "Show my" : "Show my"} icons </>
-          } />
+            <> {formValues.nominator === userId ? "Clear my" : "Show my"} icons </>
+          } position={"top center"} />
         </Grid.Column>
         <Grid.Column computer={10} only={'computer'} />
         <Grid.Column tablet={8} computer={2} mobile={16}>
