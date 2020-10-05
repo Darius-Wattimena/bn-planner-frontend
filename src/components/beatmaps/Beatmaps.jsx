@@ -4,10 +4,9 @@ import BeatmapList from "./BeatmapList"
 import "./Beatmaps.scss"
 import AddBeatmapModal from "./modals/AddBeatmapModal"
 import EditBeatmapModal from "./modals/EditBeatmapModal"
-import {Container, Grid} from "semantic-ui-react"
+import {Container} from "semantic-ui-react"
 import Api from "../../resources/Api"
 import {useQuery} from "react-fetching-library"
-import HomeExplanation from "../home/HomeExplanation";
 
 const filterDefaultState = {
   "artist": null,

@@ -175,6 +175,16 @@ const Api = {
       }
     }
   },
+  refreshMetadata: (mapId, token, userId) => {
+    return {
+      method: 'GET',
+      endpoint: `v1/beatmap/${mapId}/refreshMetadata`,
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Osu-Id": userId
+      }
+    }
+  },
   addBeatmap: (beatmap, token, userId) => {
     return {
       method: 'POST',

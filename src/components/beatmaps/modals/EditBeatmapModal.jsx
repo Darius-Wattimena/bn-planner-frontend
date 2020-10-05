@@ -8,6 +8,8 @@ import {useCookies} from "react-cookie"
 import DeleteBeatmapModal from "./DeleteBeatmapModal"
 import EditStatusBeatmapModal from "./EditStatusBeatmapModal"
 import {BEATMAP_STATUS} from "../../../Constants"
+import {unix} from "dayjs";
+import RefreshMetadataButton from "../RefreshMetadataButton";
 
 const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, canEdit, userId}) => {
   const {loading, payload, error, reset, query: beatmapQuery} = useQuery(Api.getDetailedBeatmap(id))
@@ -252,35 +254,18 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
                     </p>
                     }
 
-                    <h3>Metadata</h3>
-                    <Form.Input
-                      disabled={!canEdit}
-                      label={"Artist"}
-                      placeholder='Artist'
-                      value={formValues.artist}
-                      onChange={event => setFormValue("artist", event.target.value)}
-                    />
-                    <Form.Input
-                      disabled={!canEdit}
-                      label={"Title"}
-                      placeholder='Title'
-                      value={formValues.title}
-                      onChange={event => setFormValue("title", event.target.value)}
-                    />
-                    <Form.Input
-                      disabled={!canEdit}
-                      label={"Mapper"}
-                      placeholder='Mapper'
-                      value={formValues.mapper}
-                      onChange={event => setFormValue("mapper", event.target.value)}
-                    />
-                    <Form.TextArea
-                      disabled={!canEdit}
-                      style={{minHeight: 145, maxHeight: 145}}
-                      label={"Notes"}
-                      placeholder='Notes'
-                      value={formValues.note}
-                      onChange={event => setFormValue("note", event.target.value)}/>
+                    <Grid verticalAlign={"middle"}>
+                      <Grid.Row>
+                        <Grid.Column mobile={16} computer={8}>
+                          <h3>Metadata</h3>
+                        </Grid.Column>
+                        <Grid.Column mobile={16} computer={8}>
+                          <RefreshMetadataButton canEdit={canEdit} beatmap={payload} userId={userId} onModalReset={onModalReset} />
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
+
+                    <MetadataFields formValues={formValues} canEdit={canEdit} setFormValue={setFormValue} />
                   </Form>
                 </Grid.Column>
                 <Grid.Column computer={8} mobile={16}>
@@ -333,6 +318,53 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
         }
       </Modal>
     </div>
+  )
+}
+
+const MetadataFields = ({formValues, canEdit, setFormValue}) => {
+  return (
+    <div>
+      <Grid verticalAlign={"middle"}>
+        <Grid.Row>
+          <Grid.Column computer={8} mobile={16}>
+            <MetadataFieldItem value={formValues.artist} label={"Artist"} />
+          </Grid.Column>
+          <Grid.Column computer={8} mobile={16}>
+            <MetadataFieldItem value={formValues.title} label={"Title"} />
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid.Column computer={8} mobile={16}>
+            <MetadataFieldItem value={formValues.mapper} label={"Mapper"} />
+          </Grid.Column>
+          <Grid.Column computer={8} mobile={16}>
+            <MetadataFieldItem value={unix(formValues.dateUpdated).format("DD MMMM YYYY HH:mm")} label={"Last Updated"} />
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <Form.TextArea
+              disabled={!canEdit}
+              style={{minHeight: 145, maxHeight: 145}}
+              label={"Notes"}
+              placeholder='Notes'
+              value={formValues.note}
+              onChange={event => setFormValue("note", event.target.value)}/>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </div>
+  )
+}
+
+const MetadataFieldItem = ({value, label}) => {
+  return (
+    <Grid.Row>
+      <Grid.Column computer={16} mobile={16}><b>{label}</b></Grid.Column>
+      <Grid.Column computer={16} mobile={16}><div className={"metadata-value"}>{value}</div></Grid.Column>
+    </Grid.Row>
   )
 }
 
