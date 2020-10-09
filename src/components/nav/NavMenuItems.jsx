@@ -78,17 +78,18 @@ const RightMenu = ({isSidebar, userId, users, selected, loginName, osuLoginUrl})
     return (
       <>
         {ENV.is_dev && ENV.is_dev === true &&
-          <MenuItem>
+          <MenuItem className={"develop-environment"}>
             DEVELOP BACK-END!
           </MenuItem>
         }
         {userId === 0 &&
           <MenuItem
+            className={"login-button"}
             name={loginName}
             active={selected === loginName}
             onClick={() => window.location.href = `${osuLoginUrl}&state=${window.location.pathname}`}
           >
-            Login with osu! account
+            Login with osu!
           </MenuItem>
         }
         {userDetails &&
@@ -107,17 +108,18 @@ const RightMenu = ({isSidebar, userId, users, selected, loginName, osuLoginUrl})
     return (
       <Menu.Menu position='right'>
         {ENV.is_dev && ENV.is_dev === true &&
-          <MenuItem>
+          <MenuItem className={"develop-environment"}>
             DEVELOP BACK-END!
           </MenuItem>
         }
         {userId === 0 &&
           <MenuItem
+            className={"login-button"}
             name={loginName}
             active={selected === loginName}
             onClick={() => window.location.href = `${osuLoginUrl}&state=${window.location.pathname}`}
           >
-            Login with osu! account
+            Login with osu!
           </MenuItem>
         }
         {userDetails &&

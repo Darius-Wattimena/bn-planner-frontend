@@ -7,6 +7,21 @@
   padding-right: 2vw;
 }
 
+.ui.inverted.menu {
+  .item.develop-environment {
+    background-color: $error-colour;
+  }
+
+  a.item.login-button {
+    background-color: $osu-colour-dark;
+    color: $text-colour-light !important;
+
+    &:hover {
+      background-color: $osu-colour-darker;
+    }
+  }
+}
+
 .mobile-menu-right {
   margin-right: 5px;
 }
