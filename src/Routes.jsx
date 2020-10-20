@@ -82,9 +82,9 @@ const Routes = () => {
       <Nav users={userPayload} userId={userId} hasHiddenPerms={hasHiddenPerms} />
       <Switch>
         <Route exact path={"/"} component={() => <Home users={userPayload} />} />
-        <Route exact path={"/beatmaps"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
-        <Route exact path={"/ranked"} component={() => <RankedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
-        <Route exact path={"/graved"} component={() => <GravedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
+        <Route path={"/beatmaps/:beatmapId?"} component={() => <Beatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
+        <Route path={"/ranked/:beatmapId?"} component={() => <RankedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
+        <Route path={"/graved/:beatmapId?"} component={() => <GravedBeatmaps canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
         <Route exact path={"/users"} component={() => <Users canEdit={canEdit} isAdmin={isAdmin} userId={userId} users={userPayload} />} />
         {hasHiddenPerms &&
           <>

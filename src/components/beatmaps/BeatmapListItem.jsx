@@ -1,9 +1,12 @@
 import React from "react"
 import {Button, Grid, Icon, Image, Label, Popup} from "semantic-ui-react"
 import UserAvatar from "../user/UserAvatar"
-import {getUserWithId} from "../../util/UserUtil";
+import {getUserWithId} from "../../util/UserUtil"
+import {useHistory} from "react-router-dom"
 
-const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBeatmap, setEditModalOpen}) => {
+const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBeatmap, setEditModalOpen, location}) => {
+  const history = useHistory()
+
   function getNominator(nominators, nominator) {
     if (nominators.length === 2) {
       return nominators[nominator - 1]
@@ -62,6 +65,9 @@ const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBea
       <Grid.Column mobile={16} tablet={16} computer={2}>
         <Button.Group fluid>
           <Button color={"green"} onClick={() => {
+            history.push({
+              pathname: '/' + location + '/' + beatmap.osuId
+            })
             setSelectedBeatmap(beatmap.osuId)
             setEditModalOpen(true)
           }}>

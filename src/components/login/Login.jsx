@@ -7,7 +7,7 @@ import {Dimmer, Loader} from "semantic-ui-react"
 const queryString = require('query-string')
 
 const Login = (props) => {
-  let history = useHistory()
+  const history = useHistory()
   const [cookies, setCookie] = useCookies(['bnplanner_osu_token'])
 
   const code = new URLSearchParams(props.location.search).get("code")

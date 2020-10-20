@@ -10,8 +10,9 @@ import EditStatusBeatmapModal from "./EditStatusBeatmapModal"
 import {BEATMAP_STATUS} from "../../../Constants"
 import {unix} from "dayjs";
 import RefreshMetadataButton from "../RefreshMetadataButton";
+import {useHistory} from "react-router-dom"
 
-const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, canEdit, userId}) => {
+const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, canEdit, userId, location}) => {
   const {loading, payload, error, reset, query: beatmapQuery} = useQuery(Api.getDetailedBeatmap(id))
   const {mutate} = useMutation(Api.updateBeatmap)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -33,6 +34,7 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
   const [showingArtist, setShowingArtist] = useState("")
   const [showSameNominatorWarning, setShowSameNominatorWarning] = useState(false)
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
+  const history = useHistory()
 
   if (!loading && !error && id) {
     if (payload && payload !== "" && (formValues.artist === null || (formValues.osuId !== "" && formValues.osuId !== payload.osuId))) {
@@ -106,6 +108,9 @@ const EditBeatmapModal = ({id, open, query, setOpen, users, setSelectedBeatmap, 
   }
 
   function onModalReset() {
+    history.push({
+      pathname: '/' + location
+    })
     setPotentialNewStatus(0)
     setFormValues({
       osuId: "",
