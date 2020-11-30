@@ -1,43 +1,38 @@
 import React, {useEffect} from "react"
 import {useCookies} from "react-cookie"
 import {useHistory} from "react-router-dom"
-import {ENV} from "../../Settings"
 import {Dimmer, Loader} from "semantic-ui-react"
-
-const queryString = require('query-string')
+import {useMutation} from "react-fetching-library";
+import Api from "../../resources/Api";
+import {pushNotification} from "../../util/NotificationUtil";
 
 const Login = (props) => {
   const history = useHistory()
+  const {mutate} = useMutation(Api.loginWithToken)
   const [cookies, setCookie] = useCookies(['bnplanner_osu_token'])
 
   const code = new URLSearchParams(props.location.search).get("code")
   const state = new URLSearchParams(props.location.search).get("state")
+
+  const handleSubmit = async (code) => {
+    const {payload} = await mutate(code)
+    if (payload === "") {
+      pushNotification("Login Error", "Could not login, please try again later or contact Greaper if this keeps occurring", "danger")
+    } else {
+      let data = JSON.parse(payload)
+
+      setCookie("bnplanner_osu_access_token", data.access_token, {maxAge: data.expires_in})
+    }
+  }
 
   if (new URLSearchParams(props.location.search).has("error")) {
     history.push(state)
   }
 
   useEffect(() => {
-    const requestOptions = {
-      method: 'post',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: queryString.stringify({
-        grant_type: "authorization_code",
-        client_id: ENV.osu.id,
-        client_secret: ENV.osu.secret,
-        redirect_uri: ENV.osu.redirect,
-        code: code
-      })
-    }
-
-    let osuLoginTokenUrl = ENV.proxy + "https://osu.ppy.sh/oauth/token"
-
-    fetch(osuLoginTokenUrl, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        setCookie("bnplanner_osu_access_token", data.access_token, {maxAge: data.expires_in})
-        history.push(state)
-      })
+    handleSubmit(code).then(() => {
+      history.push(state)
+    })
   }, [])
 
   return (

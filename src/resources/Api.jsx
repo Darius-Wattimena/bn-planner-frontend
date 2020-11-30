@@ -21,6 +21,13 @@ function filterToUrlParams(filter) {
 }
 
 const Api = {
+  loginWithToken: (code) => {
+    return {
+      method: 'POST',
+      endpoint: 'v1/login/withToken',
+      body: code
+    }
+  },
   fetchLatestStatistics: () => {
     return {
       method: 'GET',
