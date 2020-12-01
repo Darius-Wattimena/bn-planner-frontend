@@ -9,9 +9,7 @@ export const ENV = {
   api_url: "http://localhost:8080/",
   osu: {
     id: 0, // osu! OAuth client ID
-    secret: "", // osu! OAuth secret
     redirect: "http://localhost:3000/login"
-  },
-  proxy: ""
+  }
 };
 ```
