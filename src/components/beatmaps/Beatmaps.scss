@@ -100,3 +100,52 @@ u.beatmap-status-graved {
 .beatmap-event-item {
   margin: 1vh 0;
 }
+
+.modal-beatmap {
+  .modal-beatmap-content-all {
+    .modal-beatmap-content-header {
+      //background-color: $background-colour-dark;
+      padding-bottom: 0;
+    }
+
+    .modal-beatmap-content {
+      //background-color: $background-colour-dark;
+
+      .metadata-row {
+        padding: 6.5px;
+        .metadata-label {
+          padding-left: 20px;
+        }
+
+        .metadata-value {
+          padding-top: 2px;
+          padding-bottom: 2px;
+        }
+      }
+
+      .nominator-row {
+        //background-color: $background-colour-light;
+        margin: 5px;
+
+        .nominator-avatar {
+          img {
+            border-radius: 25%;
+            background-color: $background-colour-light;
+          }
+
+          .nominated img {
+            box-shadow: 0 0 5px 1px $confirm-colour;
+          }
+        }
+
+        .nominator-details {
+
+          div.row div.field {
+            padding-top: 5px;
+            padding-bottom: 5px;
+          }
+        }
+      }
+    }
+  }
+}

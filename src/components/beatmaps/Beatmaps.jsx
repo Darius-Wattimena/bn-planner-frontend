@@ -8,6 +8,7 @@ import {Container} from "semantic-ui-react"
 import Api from "../../resources/Api"
 import {useQuery} from "react-fetching-library"
 import {useParams} from "react-router-dom"
+import EditBeatmapV2Modal from "./modals/EditBeatmapV2Modal";
 
 const filterDefaultState = {
   "artist": null,
@@ -83,7 +84,7 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
 
         <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId}/>
         {selectedBeatmap !== 0 &&
-        <EditBeatmapModal
+        <EditBeatmapV2Modal
           id={selectedBeatmap}
           userId={userId}
           canEdit={canEdit}

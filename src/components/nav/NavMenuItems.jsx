@@ -124,7 +124,7 @@ const RightMenu = ({isSidebar, userId, users, selected, loginName, osuLoginUrl})
         }
         {userDetails &&
           <MenuItem>
-            <Image avatar src={userDetails.profilePictureUri}/>
+            <Image avatar src={userDetails.profilePictureUri} />
             Welcome {getUserWithId(users, userId).osuName}!
           </MenuItem>
         }

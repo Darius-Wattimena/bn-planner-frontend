@@ -1,35 +1,27 @@
 import {Button, Icon} from "semantic-ui-react";
 import React, {useState} from "react";
-import {useQuery} from "react-fetching-library";
-import Api from "../../resources/Api";
-import {useCookies} from "react-cookie";
+import RefreshBeatmapModal from "./modals/RefreshBeatmapModal";
 
 const RefreshMetadataButton = ({canEdit, beatmap, userId, onModalReset}) => {
-  const [cookies] = useCookies(['bnplanner_osu_access_token'])
-  const [showError, setShowError] = useState(false)
-  const {query, loading} = useQuery(Api.refreshMetadata(beatmap.osuId, cookies.bnplanner_osu_access_token, userId), false)
-
-  function refreshMetadata() {
-    return asyncRefreshMetadata()
-  }
-
-  const asyncRefreshMetadata = async () => {
-    const {payload, error} = await query()
-
-    if (payload === false || error) {
-      setShowError(true)
-    } else if (payload === true) {
-      onModalReset()
-    }
-  }
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false)
 
   return (
-    <Button
-      disabled={!canEdit || loading}
-      color={showError ? "red" : "green"}
-      onClick={refreshMetadata}>
-      <Icon name={"refresh"} rotated={loading ? "clockwise" : null} /> Sync with osu!
-    </Button>
+    <>
+      <Button
+        fluid
+        disabled={!canEdit}
+        color={"green"}
+        onClick={() => {setConfirmModalOpen(true)}}>
+        <Icon name={"refresh"} /> Sync
+      </Button>
+      <RefreshBeatmapModal
+        open={confirmModalOpen}
+        setOpen={setConfirmModalOpen}
+        userId={userId}
+        beatmap={beatmap}
+        onModalReset={onModalReset}
+      />
+    </>
   )
 }
 

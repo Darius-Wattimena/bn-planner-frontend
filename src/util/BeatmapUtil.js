@@ -1,10 +1,16 @@
 import {BEATMAP_STATUS} from "../Constants"
 import {getReadableRole} from "./UserUtil"
 
+let nominatorOptions = []
+
 export function getNominatorOptions(users) {
+  if (nominatorOptions.length > 0) {
+    return nominatorOptions
+  }
+
   if (users && Array.isArray(users)) {
     let preparedUsers = users.filter(user => (
-      user.role !== "GST"
+      user.role !== "GST" && user.role !== "OBS"
     )).map(user => ({
       key: user.osuId,
       text: user.osuName,
@@ -12,10 +18,11 @@ export function getNominatorOptions(users) {
       className: getReadableRole(user.role).className
     }))
 
-    return [
+    nominatorOptions = [
       {key: 0, text: 'None', value: 0},
       ...preparedUsers
     ]
+    return nominatorOptions
   }
 }
 
