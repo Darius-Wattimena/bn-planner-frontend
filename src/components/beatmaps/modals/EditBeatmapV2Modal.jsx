@@ -284,11 +284,13 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
                               {readableCurrentStatus.name}
                             </Label>
                           } label={"Current"} />
-                          <MetadataFieldItem value={
-                            <Label horizontal className={readablePotentialStatus.className}>
-                              {readablePotentialStatus.name}
-                            </Label>
-                          } label={"New"} />
+                          {potentialNewStatus !== formValues.status &&
+                            <MetadataFieldItem value={
+                              <Label horizontal className={readablePotentialStatus.className}>
+                                {readablePotentialStatus.name}
+                              </Label>
+                            } label={"New"} />
+                          }
                         </Grid.Row>
                       </Grid>
                     </Grid.Column>

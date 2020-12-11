@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import Api from "../../resources/Api";
-import {useQuery} from "react-fetching-library";
-import {Container} from "semantic-ui-react";
-import BeatmapList from "./BeatmapList";
-import AddBeatmapModal from "./modals/AddBeatmapModal";
-import EditBeatmapModal from "./modals/EditBeatmapModal";
-import {BEATMAP_STATUS} from "../../Constants";
-import BeatmapFilter from "./BeatmapFilter";
-import {useParams} from "react-router-dom";
+import React, {useState} from "react"
+import Api from "../../resources/Api"
+import {useQuery} from "react-fetching-library"
+import {Container} from "semantic-ui-react"
+import BeatmapList from "./BeatmapList"
+import AddBeatmapModal from "./modals/AddBeatmapModal"
+import {BEATMAP_STATUS} from "../../Constants"
+import BeatmapFilter from "./BeatmapFilter"
+import {useParams} from "react-router-dom"
+import EditBeatmapV2Modal from "./modals/EditBeatmapV2Modal"
 
 const filterDefaultState = {
   "artist": null,
@@ -85,7 +85,7 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
 
         <AddBeatmapModal query={query} open={addModalOpen} setOpen={setAddModalOpen} userId={userId}/>
         {selectedBeatmap !== 0 &&
-        <EditBeatmapModal
+        <EditBeatmapV2Modal
           id={selectedBeatmap}
           userId={userId}
           canEdit={canEdit}
