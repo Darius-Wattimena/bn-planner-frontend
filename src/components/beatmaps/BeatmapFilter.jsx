@@ -144,7 +144,7 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
           />
         </Grid.Column>
         <Grid.Column tablet={4} computer={2} mobile={8}>
-          <Popup trigger={
+          {canEdit &&
             <Button disabled={!canEdit} fluid color={
               formValues.nominator === userId ? "blue" : selectedNominatorInfo ? "orange" : "green"
             } onClick={() => {
@@ -155,17 +155,12 @@ const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, user
                 setSelectedNominator(userId)
                 instantFilterSet("nominator", userId)
               }
-            }} animated='vertical'>
-              <Button.Content hidden>
-                <Icon name={formValues.nominator === userId ? "user outline" : "user"}/>
-              </Button.Content>
-              <Button.Content visible>
-                <Icon name={formValues.nominator === userId ? "star outline" : "star"}/>
+            }}>
+              <Button.Content>
+                <Icon name={formValues.nominator === userId ? "users" : "user"} />{formValues.nominator === userId ? "All" : "My"} Icons
               </Button.Content>
             </Button>
-          } content={
-            <> {formValues.nominator === userId ? "Clear my" : "Show my"} icons </>
-          } position={"top center"} />
+          }
         </Grid.Column>
         <Grid.Column computer={10} only={'computer'} />
         <Grid.Column tablet={8} computer={2} mobile={16}>
