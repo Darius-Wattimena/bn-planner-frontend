@@ -32,7 +32,8 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
     plannerEvents: [],
     osuEvents: [],
     nominatedByBNOne: null,
-    nominatedByBNTwo: null
+    nominatedByBNTwo: null,
+    unfinished: null
   })
   const [showingArtist, setShowingArtist] = useState("")
   const [showSameNominatorWarning, setShowSameNominatorWarning] = useState(false)
@@ -104,7 +105,11 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
     } else if (formValues.nominatedByBNOne || formValues.nominatedByBNTwo) {
       setPotentialNewStatus(BEATMAP_STATUS.Bubbled.id)
     } else if (formValues.status !== BEATMAP_STATUS.Popped.id && formValues.status !== BEATMAP_STATUS.Disqualified.id) {
-      setPotentialNewStatus(BEATMAP_STATUS.Pending.id)
+      if (formValues.unfinished) {
+        setPotentialNewStatus(BEATMAP_STATUS.Unfinished.id)
+      } else {
+        setPotentialNewStatus(BEATMAP_STATUS.Pending.id)
+      }
     } else {
       setPotentialNewStatus(payload.status)
     }
@@ -223,6 +228,7 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
                     <Grid.Column computer={7} tablet={16} mobile={16}>
                       <NominatorField
                         isFirst
+                        unfinished={formValues.unfinished}
                         canEdit={canEdit}
                         nominatorId={formValues.nominators[0]}
                         hasNominated={formValues.nominatedByBNOne}
@@ -257,6 +263,7 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
                   <Grid.Row className={"modal-beatmap-content"}>
                     <Grid.Column computer={7} tablet={16} mobile={16}>
                       <NominatorField
+                        unfinished={formValues.unfinished}
                         canEdit={canEdit}
                         nominatorId={formValues.nominators[1]}
                         hasNominated={formValues.nominatedByBNTwo}
@@ -279,6 +286,21 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
                       <h3>Status</h3>
                       <Grid verticalAlign={"middle"}>
                         <Grid.Row>
+                          <MetadataFieldItem value={
+                            <Checkbox
+                              checked={formValues.unfinished}
+                              onChange={() => {
+                                if (!formValues.unfinished) {
+                                  setFormValue("nominatedByBNOne", false)
+                                  setFormValue("nominatedByBNTwo", false)
+                                }
+
+                                setFormValue("unfinished", !formValues.unfinished)
+                                checkIfNewStatusIsPossible()
+
+                              }}
+                            />
+                          } label={"Unfinished"} />
                           <MetadataFieldItem value={
                             <Label horizontal className={readableCurrentStatus.className}>
                               {readableCurrentStatus.name}
@@ -386,7 +408,7 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
   )
 }
 
-const NominatorField = ({isFirst, canEdit, nominatorId, hasNominated, users, onDropdownChange, onCheckboxChange, error}) => {
+const NominatorField = ({isFirst, unfinished, canEdit, nominatorId, hasNominated, users, onDropdownChange, onCheckboxChange, error}) => {
   let avatarUri
   let userDetails
   let userRole
@@ -433,7 +455,7 @@ const NominatorField = ({isFirst, canEdit, nominatorId, hasNominated, users, onD
                 <Grid.Column computer={16} tablet={16} mobile={16}>
                   <Form.Checkbox
                     label={"Nominated"}
-                    disabled={!canEdit || nominatorId === 0}
+                    disabled={!canEdit || unfinished || nominatorId === 0}
                     checked={hasNominated}
                     onChange={onCheckboxChange}
                   />

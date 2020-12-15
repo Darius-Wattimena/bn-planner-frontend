@@ -40,6 +40,12 @@ export const BEATMAP_STATUS = {
     name: "Graved",
     explanation: "Beatmaps which are not being worked on by the mapper/nominators.",
     className: "beatmap-status-graved"
+  },
+  Unfinished: {
+    id: 8,
+    name: "Unfinished",
+    explanation: "Beatmaps which are still work in progress.",
+    className: "beatmap-status-unfinished"
   }
 }
 
