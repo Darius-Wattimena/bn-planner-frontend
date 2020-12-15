@@ -3,6 +3,7 @@ import {Button, Form, Header, Icon, Message, Modal} from "semantic-ui-react"
 import {useMutation} from "react-fetching-library"
 import Api from "../../../resources/Api"
 import {useCookies} from "react-cookie"
+import {useHistory} from "react-router-dom"
 
 const AddBeatmapModal = ({open, query, setOpen, userId}) => {
   const [formValues, setFormValues] = useState({
@@ -13,6 +14,7 @@ const AddBeatmapModal = ({open, query, setOpen, userId}) => {
   })
   const [incorrectUrl, setIncorrectUrl] = useState(false)
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
+  const history = useHistory()
 
   const {mutate} = useMutation(Api.addBeatmap)
   const handleSubmit = async (formValues) => {
@@ -26,6 +28,9 @@ const AddBeatmapModal = ({open, query, setOpen, userId}) => {
       })
       query()
       setOpen(false)
+      history.push({
+        pathname: '/beatmaps/' + formValues.beatmapId
+      })
     }
   }
 
