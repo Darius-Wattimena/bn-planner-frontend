@@ -31,8 +31,18 @@ a, .link {
 
 p, h1, h2, h3, h4, h5, h6, .text, div.text,
 div.field .ui.toggle.checkbox input:checked ~ label, label, div div div.header-text,
-.ui.indicating .label, .ui.indicating .label {
+.ui.indicating .label, .ui.indicating .label, .ui.form .field label {
   color: $text-colour;
+}
+
+div.content {
+  .ui.toggle.checkbox input:focus:checked~label {
+    color: $text-colour !important;
+  }
+
+  .ui.toggle.checkbox label {
+    color: $text-colour !important;
+  }
 }
 
 div.dropdown .menu .item .icon {
