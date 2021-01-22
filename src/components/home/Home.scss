@@ -133,7 +133,7 @@
         margin-bottom: auto;
       }
 
-      .leaderboard-item-label-text {
+      .leaderboard-item-label-text, .leaderboard-item-label-special {
         margin: auto auto auto 10px;
       }
 
@@ -167,9 +167,16 @@
         margin: auto auto auto 10px;
       }
 
+      .leaderboard-item-amount, .leaderboard-item-amount-special {
+        margin: auto 10px auto auto;
+      }
+
+      .leaderboard-item-amount-special {
+        text-align: right;
+      }
+
       .leaderboard-item-amount {
         width: 20%;
-        margin: auto;
         text-align: center;
       }
     }

@@ -1,10 +1,19 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import Api from "../../resources/Api"
 import {useQuery} from "react-fetching-library"
 import {Grid, Icon, Image, Popup} from "semantic-ui-react"
 import {getReadableRole, getUserWithId} from "../../util/UserUtil"
+import dayjs, {unix} from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
 
 const HomeStatistics = ({users}) => {
+  const [dayjsLoaded, setDayjsLoaded] = useState(false)
+
+  useEffect(() => {
+    dayjs.extend(relativeTime)
+    setDayjsLoaded(true)
+  }, [])
+
   let request = Api.fetchLatestStatistics()
   const {payload} = useQuery(request)
 
@@ -67,6 +76,21 @@ const HomeStatistics = ({users}) => {
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={16} computer={8}>
                       <div className={"leaderboard-items"}>
+                        <div className={"leaderboard-items-group"}>
+                          <div className={"leaderboard-items-group-header"}>
+                            <Icon name={"info"}/>
+                            Info
+                          </div>
+                          <div className={"leaderboard-item"}>
+                            <div className={"leaderboard-item-label-special"}>Last Updated</div>
+                            <Popup trigger={
+                              <div className={"leaderboard-item-amount-special"}>
+                                {(dayjsLoaded) ? dayjs(payload.timestamp * 1000).fromNow() : "-"}
+                              </div>
+                            } content={<div className={"popup-text leaderboard-item-label-popup"}>{unix(payload.timestamp).format("DD MMMM YYYY HH:mm")}</div>}/>
+                          </div>
+                        </div>
+
                         <div className={"leaderboard-items-group"}>
                           <div className={"leaderboard-items-group-header"}>
                             <Icon name={"users"}/>
