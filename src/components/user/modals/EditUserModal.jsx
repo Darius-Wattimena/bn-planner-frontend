@@ -86,7 +86,20 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
                   selection
                   value={formValues.role}
                   options={getUserRoles()}
-                  onChange={(_, data) => setFormValue("role", data.value)}
+                  onChange={(_, data) => {
+                    if (data.value === "NAT") {
+                      setFormValue("hasAdminPermissions", true)
+                      setFormValue("hasEditPermissions", true)
+                    } else if (data.value === "PBN" || data.value === "BN") {
+                      setFormValue("hasAdminPermissions", false)
+                      setFormValue("hasEditPermissions", true)
+                    } else {
+                      setFormValue("hasAdminPermissions", false)
+                      setFormValue("hasEditPermissions", false)
+                    }
+                    
+                    setFormValue("role", data.value)
+                  }}
                 />
                 <Form.Checkbox
                   disabled={!isAdmin}
