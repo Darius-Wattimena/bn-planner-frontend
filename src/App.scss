@@ -32,15 +32,15 @@ a, .link {
 p, h1, h2, h3, h4, h5, h6, .text, div.text,
 div.field .ui.toggle.checkbox input:checked ~ label, label, div div div.header-text,
 .ui.indicating .label, .ui.indicating .label {
-  color: $text-colour !important;
+  color: $text-colour;
 }
 
 div.dropdown .menu .item .icon {
-  color: $text-colour-dark !important
+  color: $text-colour-dark
 }
 
 div.dropdown .menu .item .text {
-  color: $text-colour-dark !important;
+  color: $text-colour-dark;
 }
 
 div.ui.selection.dropdown div.text {

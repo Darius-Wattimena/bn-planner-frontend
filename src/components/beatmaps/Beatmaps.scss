@@ -111,6 +111,12 @@ u.beatmap-status-graved {
   margin: 1vh 0;
 }
 
+div.dropdown .menu {
+  .item.beatmap-status-item .text {
+    color: $text-colour-light;
+  }
+}
+
 .modal-beatmap {
   .modal-beatmap-content-all {
     .modal-beatmap-content-header {
