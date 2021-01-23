@@ -86,3 +86,46 @@
 .users-page {
   max-width: 80vw;
 }
+
+.modal-user {
+  .content-all {
+    .content-header {
+      padding-bottom: 0;
+    }
+
+    .content {
+      div.row {
+        .info-label {
+          padding-left: 20px;
+        }
+
+        .info-value {
+          padding-top: 5px;
+          padding-bottom: 5px;
+
+          .checkbox {
+            display: flex;
+            vertical-align: middle;
+          }
+        }
+      }
+
+      .profile-row {
+        //background-color: $background-colour-light;
+        margin: 5px;
+
+        .avatar {
+          img {
+            border-radius: 25%;
+            background-color: $background-colour-light;
+          }
+        }
+      }
+
+      .settings-row {
+        margin: 5px;
+
+      }
+    }
+  }
+}
