@@ -5,7 +5,7 @@
   color: #d7d7d7 !important;
 }
 
-.beatmap-status-pending {
+.beatmap-status-pending, .pending-color {
   background-color: #538ea5 !important;
   color: #d7d7d7 !important;
 }
@@ -20,7 +20,7 @@
   color: #d7d7d7 !important;
 }
 
-.beatmap-status-ranked {
+.beatmap-status-ranked, .ranked-color {
   background-color: #5aa500 !important;
   color: #d7d7d7 !important;
 }
@@ -35,7 +35,7 @@
   color: #d7d7d7 !important;
 }
 
-.beatmap-status-graved {
+.beatmap-status-graved, .graved-color {
   background-color: #a5a5a5 !important;
   color: #242424 !important;
 }

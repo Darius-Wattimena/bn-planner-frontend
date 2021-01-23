@@ -4,7 +4,9 @@ import Api from "../../../resources/Api"
 import {Button, Form, Grid, Header, Icon, Image, Label, Modal} from "semantic-ui-react"
 import {getReadableRole, getUserRoles} from "../../../util/UserUtil"
 import {useCookies} from "react-cookie"
-import BeatmapEventList from "../../beatmaps/BeatmapEventList";
+import { useHistory } from "react-router-dom"
+import BeatmapEventList from "../../beatmaps/BeatmapEventList"
+import Nav from "../../nav/Nav";
 
 const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, userId, users}) => {
   const {loading, payload, error} = useQuery(Api.getDetailedUser(id))
@@ -20,6 +22,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
     events: []
   })
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
+  let history = useHistory();
 
   if (!loading && !error && id) {
     if (payload !== "" && (formValues.osuName === "" || (formValues.osuId !== "" && formValues.osuId !== payload.osuId))) {
@@ -77,7 +80,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
         <Form>
           <Grid className={"content-all"}>
             <Grid.Row className={"content-header"}>
-              <Grid.Column computer={9} tablet={16} mobile={16}>
+              <Grid.Column computer={10} tablet={16} mobile={16}>
                 <h3>{formValues.osuName} <a href={"https://osu.ppy.sh/users/" + formValues.osuId}><Icon name={"linkify"} /></a></h3>
               </Grid.Column>
               <Grid.Column computer={6} tablet={16} mobile={16}>
@@ -85,12 +88,12 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
               </Grid.Column>
             </Grid.Row>
             <Grid.Row className={"content"}>
-              <Grid.Column computer={9} tablet={16} mobile={16}>
+              <Grid.Column computer={10} tablet={16} mobile={16}>
                 <UserProfile formValues={formValues} />
               </Grid.Column>
-              <Grid.Column computer={6} tablet={16} mobile={16} className={"settings-row"}>
+              <Grid.Column computer={6} tablet={16} mobile={16}>
                 <Grid verticalAlign={"middle"}>
-                  <Grid.Row>
+                  <Grid.Row className={"settings-row"}>
                     <FieldItemDropdown
                       label={"Role"}
                       value={formValues.role}
@@ -127,16 +130,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
             </Grid.Row>
 
             <Grid.Row>
-              <Grid.Column computer={3} tablet={16} mobile={16}>
-                <Button
-                  fluid
-                  disabled={true}
-                  color='grey'
-                  onClick={() => {setShowEvents(!showEvents)}}>
-                  User Icons
-                </Button>
-              </Grid.Column>
-              <Grid.Column computer={3} tablet={16} mobile={16}>
+              <Grid.Column computer={4} tablet={16} mobile={16}>
                 <Button
                   fluid
                   disabled={true}
@@ -145,7 +139,36 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
                   Show Statistics
                 </Button>
               </Grid.Column>
-              <Grid.Column computer={6} only={"computer"} />
+              <Grid.Column computer={3} tablet={16} mobile={16}>
+                <Button
+                  fluid
+                  className={"pending-color"}
+                  onClick={() => {
+                    history.push({pathname: '/beatmaps', state: { nominator: formValues.osuId }})
+                  }}>
+                  Pending Icons
+                </Button>
+              </Grid.Column>
+              <Grid.Column computer={3} tablet={16} mobile={16}>
+                <Button
+                  fluid
+                  className={"ranked-color"}
+                  onClick={() => {
+                    history.push({pathname: '/ranked', state: { nominator: formValues.osuId }})
+                  }}>
+                  Ranked Icons
+                </Button>
+              </Grid.Column>
+              <Grid.Column computer={3} tablet={16} mobile={16}>
+                <Button
+                  fluid
+                  className={"graved-color"}
+                  onClick={() => {
+                    history.push({pathname: '/graved', state: { nominator: formValues.osuId }})
+                  }}>
+                  Graved Icons
+                </Button>
+              </Grid.Column>
               <Grid.Column computer={3} tablet={16} mobile={16}>
                 <Button
                   fluid

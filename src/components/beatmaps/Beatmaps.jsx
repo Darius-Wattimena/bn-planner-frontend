@@ -6,7 +6,7 @@ import AddBeatmapModal from "./modals/AddBeatmapModal"
 import {Container} from "semantic-ui-react"
 import Api from "../../resources/Api"
 import {useQuery} from "react-fetching-library"
-import {useParams} from "react-router-dom"
+import {useParams, useLocation} from "react-router-dom"
 import EditBeatmapV2Modal from "./modals/EditBeatmapV2Modal"
 
 const filterDefaultState = {
@@ -29,6 +29,13 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
   const [addModalOpen, setAddModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
   const {beatmapId} = useParams();
+  const location = useLocation();
+
+  let selectedNominator
+
+  if (location.state) {
+    selectedNominator = location.state.nominator
+  }
 
   // Check if a beatmap id is provided so we can already open the modal with the provided map
   if (beatmapId && !isNaN(beatmapId) && selectedBeatmap === 0) {
@@ -60,7 +67,8 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
               setAddModalOpen={setAddModalOpen}
               canEdit={canEdit}
               userId={userId}
-              setPage={handleFilterSetPage}/>
+              setPage={handleFilterSetPage}
+              initialNominator={selectedNominator}/>
           </div>
         </div>
 

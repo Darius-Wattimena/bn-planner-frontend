@@ -6,7 +6,7 @@ import BeatmapList from "./BeatmapList"
 import AddBeatmapModal from "./modals/AddBeatmapModal"
 import {BEATMAP_STATUS} from "../../Constants"
 import BeatmapFilter from "./BeatmapFilter"
-import {useParams} from "react-router-dom"
+import {useParams, useLocation} from "react-router-dom"
 import EditBeatmapV2Modal from "./modals/EditBeatmapV2Modal"
 
 const filterDefaultState = {
@@ -29,6 +29,13 @@ const GravedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
   const [addModalOpen, setAddModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
   const {beatmapId} = useParams();
+  const location = useLocation();
+
+  let selectedNominator
+
+  if (location.state) {
+    selectedNominator = location.state.nominator
+  }
 
   // Check if a beatmap id is provided so we can already open the modal with the provided map
   if (beatmapId && !isNaN(beatmapId) && selectedBeatmap === 0) {
@@ -62,6 +69,7 @@ const GravedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
               onGravedPage={true}
               userId={userId}
               setAddModalOpen={setAddModalOpen}
+              initialNominator={selectedNominator}
             />
           </div>
         </div>

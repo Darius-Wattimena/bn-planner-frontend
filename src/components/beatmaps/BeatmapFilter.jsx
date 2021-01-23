@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {Button, Form, Grid, Icon, Popup} from "semantic-ui-react"
 import {getBeatmapStatusOptions, getNominatorOptions} from "../../util/BeatmapUtil"
 import {getUserWithId} from "../../util/UserUtil"
@@ -8,11 +8,18 @@ import FilterField from "../generic/FilterField"
 import {debouncingFilter, instantFilter} from "../../util/FilterUtil"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 
-const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, userId, onRankedPage, onGravedPage}) => {
+const BeatmapFilter = ({filter, setAddModalOpen, setFilter, canEdit, users, userId, onRankedPage, onGravedPage, initialNominator}) => {
   const [selectedNominator, setSelectedNominator] = useState(null)
   const [formValues, setFormValues] = useState(filter)
   const [timeoutValue, setTimeoutValue] = useState(0)
   const { height, width } = useWindowDimensions();
+
+  useEffect(() => {
+    if (initialNominator != null) {
+      setSelectedNominator(initialNominator)
+      instantFilterSet("nominator", initialNominator)
+    }
+  }, [initialNominator])
 
   function instantFilterSet(group, value) {
     instantFilter(group, value, formValues, setFormValues, timeoutValue, setFilter)

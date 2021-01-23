@@ -17,19 +17,19 @@ const moddingMapName = "moddingMap"
 const loginName = "login"
 
 function getSelectedFromHref() {
-  if (window.location.href.endsWith("/beatmaps")) {
+  if (window.location.href.includes("/beatmaps")) {
     return beatmapsName
-  } else if (window.location.href.endsWith("/users")) {
+  } else if (window.location.href.includes("/users")) {
     return usersName
-  } else if (window.location.href.endsWith("/ranked")) {
+  } else if (window.location.href.includes("/ranked")) {
     return rankedName
-  } else if (window.location.href.endsWith("/graved")) {
+  } else if (window.location.href.includes("/graved")) {
     return gravedName
-  } else if (window.location.href.endsWith("/contests")) {
+  } else if (window.location.href.includes("/contests")) {
     return contestName
   } else if (window.location.href.includes("/modding/maps")) {
     return moddingMapName
-  } else if (window.location.href.endsWith("/login")) {
+  } else if (window.location.href.includes("/login")) {
     return loginName
   } else {
     return homeName
@@ -42,8 +42,11 @@ const Nav = ({users, userId, hasHiddenPerms}) => {
   const [selected, setSelected] = useState(getSelectedFromHref())
   const [visible, setVisible] = useState(false)
 
+  history.listen((location, action) => {
+    setSelected(getSelectedFromHref())
+  })
+
   function handleNavClick(itemName, location) {
-    setSelected(itemName)
     history.push(location)
   }
 
