@@ -46,6 +46,12 @@ const Api = {
       endpoint: 'v1/user/searchByFilter' + filterToUrlParams(filter)
     }
   },
+  fetchUserStatisticsByFilter: (filter) => {
+    return {
+      method: 'GET',
+      endpoint: 'v1/user/statistics/find' + filterToUrlParams(filter)
+    }
+  },
   fetchContests: (token, userId) => {
     return {
       method: 'GET',

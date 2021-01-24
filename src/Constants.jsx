@@ -56,7 +56,8 @@ export const USER_ROLES = {
     full: "Full",
     detailed: "Beatmap Nominator",
     explanation: "A full beatmap nominator capable of nominating catch.",
-    className: "user-role-bn"
+    className: "user-role-bn",
+    cellColor: "#7249A5"
   },
   ProbationBeatmapNominator: {
     id: "PBN",
@@ -64,7 +65,8 @@ export const USER_ROLES = {
     full: "Probation",
     detailed: "Probation Beatmap Nominator",
     explanation: "A probation beatmap nominator capable of nominating catch.",
-    className: "user-role-pbn"
+    className: "user-role-pbn",
+    cellColor: "#995BA5"
   },
   NominationAssessmentTeam: {
     id: "NAT",
@@ -72,7 +74,8 @@ export const USER_ROLES = {
     full: "NAT",
     detailed: "Nomination Assessment Team",
     explanation: "A member of the nomination assessment team which main focus is catch.",
-    className: "user-role-nat"
+    className: "user-role-nat",
+    cellColor: "#A53D3C"
   },
   RetiredCatch: {
     id: "CA",
@@ -80,7 +83,8 @@ export const USER_ROLES = {
     full: "Retired",
     detailed: "Retired Nominator",
     explanation: "A catch nominator who retired.",
-    className: "user-role-rc"
+    className: "user-role-rc",
+    cellColor: "#696969"
   },
   Observer: {
     id: "OBS",

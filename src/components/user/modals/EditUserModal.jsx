@@ -6,7 +6,7 @@ import {getReadableRole, getUserRoles} from "../../../util/UserUtil"
 import {useCookies} from "react-cookie"
 import { useHistory } from "react-router-dom"
 import BeatmapEventList from "../../beatmaps/BeatmapEventList"
-import Nav from "../../nav/Nav";
+import UserStatistics from "../statistics/UserStatistics"
 
 const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, userId, users}) => {
   const {loading, payload, error} = useQuery(Api.getDetailedUser(id))
@@ -128,6 +128,17 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
                 </Grid>
               </Grid.Column>
             </Grid.Row>
+            <Grid.Row className={"content-header"}>
+              <Grid.Column computer={10} tablet={16} mobile={16}>
+                <h3>Monthly Activity</h3>
+              </Grid.Column>
+              <Grid.Column computer={6} tablet={16} mobile={16}>
+                <h3>Last Month Ranked Pairings</h3>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <UserStatistics userId={formValues.osuId} users={users} />
+            </Grid.Row>
 
             <Grid.Row>
               <Grid.Column computer={4} tablet={16} mobile={16}>
@@ -136,7 +147,7 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
                   disabled={true}
                   color='grey'
                   onClick={() => {setShowEvents(!showEvents)}}>
-                  Show Statistics
+                  Detailed Statistics
                 </Button>
               </Grid.Column>
               <Grid.Column computer={3} tablet={16} mobile={16}>
@@ -189,56 +200,6 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
                 </Grid.Column>
               </Grid.Row>
             }
-            {/*<Form.Input
-                  disabled={!isAdmin}
-                  label={"Name"}
-                  placeholder='Name'
-                  value={formValues.osuName}
-                  onChange={event => setFormValue("osuName", event.target.value)}
-                />
-                <Form.Dropdown
-                  disabled={!isAdmin}
-                  label={"Role"}
-                  selection
-                  value={formValues.role}
-                  options={getUserRoles()}
-                  onChange={(_, data) => {
-                    if (data.value === "NAT") {
-                      setFormValue("hasAdminPermissions", true)
-                      setFormValue("hasEditPermissions", true)
-                    } else if (data.value === "PBN" || data.value === "BN") {
-                      setFormValue("hasAdminPermissions", false)
-                      setFormValue("hasEditPermissions", true)
-                    } else {
-                      setFormValue("hasAdminPermissions", false)
-                      setFormValue("hasEditPermissions", false)
-                    }
-
-                    setFormValue("role", data.value)
-                  }}
-                />
-                <Form.Checkbox
-                  disabled={!isAdmin}
-                  toggle
-                  label={"Is Admin"}
-                  checked={formValues.hasAdminPermissions}
-                  onChange={() => setFormValue("hasAdminPermissions", !formValues.hasAdminPermissions)}
-                />
-                <Form.Checkbox
-                  disabled={!isAdmin}
-                  toggle
-                  label={"Can Edit"}
-                  checked={formValues.hasEditPermissions}
-                  onChange={() => setFormValue("hasEditPermissions", !formValues.hasEditPermissions)}
-                />
-              </Form>
-            </Grid.Column>
-            <Grid.Column computer={8} mobile={16}>
-              <h3>Events</h3>
-              <BeatmapEventList events={formValues.events} users={users}/>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>*/}
           </Grid>
         </Form>
       </Modal.Content>
