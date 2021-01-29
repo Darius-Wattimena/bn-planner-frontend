@@ -11,6 +11,7 @@ import UserStatistics from "../statistics/UserStatistics"
 const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, userId, users}) => {
   const {loading, payload, error} = useQuery(Api.getDetailedUser(id))
   const {mutate} = useMutation(Api.updateUser)
+  const [hasStatistics, setHasStatistics] = useState(false)
   const [showEvents, setShowEvents] = useState(false)
   const [formValues, setFormValues] = useState({
     osuId: "",
@@ -128,16 +129,22 @@ const EditUserModal = ({id, open, query, setOpen, setSelectedUser, isAdmin, user
                 </Grid>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row className={"content-header"}>
-              <Grid.Column computer={10} tablet={16} mobile={16}>
-                <h3>Monthly Activity</h3>
-              </Grid.Column>
-              <Grid.Column computer={6} tablet={16} mobile={16}>
-                <h3>Last Month Ranked Pairings</h3>
-              </Grid.Column>
-            </Grid.Row>
+            {hasStatistics === true &&
+              <Grid.Row className={"content-header"}>
+                <Grid.Column computer={10} tablet={16} mobile={16}>
+                  <h3>Monthly Activity</h3>
+                </Grid.Column>
+                <Grid.Column computer={6} tablet={16} mobile={16}>
+                  <h3>Last Month Ranked Pairings</h3>
+                </Grid.Column>
+              </Grid.Row>
+            }
             <Grid.Row>
-              <UserStatistics userId={formValues.osuId} users={users} />
+              <UserStatistics
+                userId={formValues.osuId}
+                users={users}
+                hasStatistics={hasStatistics}
+                setHasStatistics={setHasStatistics} />
             </Grid.Row>
 
             <Grid.Row>
