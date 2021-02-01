@@ -446,6 +446,7 @@ const NominatorField = ({isFirst, unfinished, canEdit, nominatorId, hasNominated
                     <Form.Dropdown
                       disabled={!canEdit}
                       selection
+                      search
                       options={getNominatorOptions(users)}
                       value={nominatorId}
                       onChange={onDropdownChange}

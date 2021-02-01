@@ -1,7 +1,7 @@
 import React from "react"
 import {Button, Grid, Icon, Image, Label, Popup} from "semantic-ui-react"
 import UserAvatar from "../user/UserAvatar"
-import {getUserWithId} from "../../util/UserUtil"
+import {getReadableRole, getUserWithId} from "../../util/UserUtil"
 import {useHistory} from "react-router-dom"
 
 const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBeatmap, setEditModalOpen, location}) => {
@@ -17,6 +17,26 @@ const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBea
 
       return null
     }
+  }
+
+  function MapperDetails({users, mapper, mapperId}) {
+    let userDetails = getUserWithId(users, mapperId)
+    let profilePictureUri = "https://a.ppy.sh/" + mapperId
+    let className
+
+    if (userDetails) {
+      let roleDetails = getReadableRole(userDetails.role)
+      className = "user-avatar mapper-avatar " + roleDetails.className + "-text"
+    } else {
+      className = "user-avatar mapper-avatar"
+    }
+
+    return (
+      <div className={className}>
+        <Image avatar src={profilePictureUri}/>
+        {mapper}
+      </div>
+    )
   }
 
   function NominatorDetails({users, nominated, nominators, nominatorNumber}) {
@@ -44,7 +64,9 @@ const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBea
       </Grid.Column>
       <Grid.Column mobile={8} tablet={8} computer={2}>{beatmap.artist}</Grid.Column>
       <Grid.Column mobile={8} tablet={8} computer={3}>{beatmap.title}</Grid.Column>
-      <Grid.Column computer={2} only={"computer"}>{beatmap.mapper}</Grid.Column>
+      <Grid.Column textAlign={"left"} computer={2} only={"computer"}>
+        <MapperDetails users={users} mapper={beatmap.mapper} mapperId={beatmap.mapperId}/>
+      </Grid.Column>
       <Grid.Column textAlign={"left"} mobile={8} tablet={8} computer={2}>
         <NominatorDetails users={users} nominated={beatmap.nominatedByBNOne} nominators={beatmap.nominators} nominatorNumber={1} />
       </Grid.Column>
