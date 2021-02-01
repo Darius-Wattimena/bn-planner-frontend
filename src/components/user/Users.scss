@@ -81,6 +81,22 @@
   background-color: #696969 !important;
 }
 
+.user-role-bn-only-text {
+  color: lighten($bn-colour, 5%);
+}
+
+.user-role-pbn-only-text {
+  color: $pbn-colour;
+}
+
+.user-role-nat-only-text {
+  color: lighten($nat-colour, 5%);
+}
+
+.user-role-rc-only-text {
+  color: lighten($rc-colour, 5%);
+}
+
 .user-banner {
   max-width: 64px !important;
   max-height: 64px;
