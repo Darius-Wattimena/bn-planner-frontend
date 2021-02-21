@@ -141,8 +141,6 @@ const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatma
   const readablePotentialStatus = getReadableStatus(potentialNewStatus)
   const readableCurrentStatus = getReadableStatus(formValues.status)
 
-  console.log({ formValues })
-
   return (
     <div>
       <Modal open={open} onClose={() => onModalReset()} className={'modal-beatmap'}>
