@@ -1,18 +1,18 @@
-import React, {useState} from "react"
-import {useCookies} from "react-cookie"
-import {useMutation} from "react-fetching-library"
-import Api from "../../../resources/Api"
-import {Button, Checkbox, Header, Icon, Modal} from "semantic-ui-react"
-import {useHistory} from "react-router-dom";
+import React, { useState } from 'react'
+import { useCookies } from 'react-cookie'
+import { useMutation } from 'react-fetching-library'
+import Api from '../../../resources/Api'
+import { Button, Checkbox, Header, Icon, Modal } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom'
 
-const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, userId, redirectLocation}) => {
+const DeleteBeatmapModal = ({ open, query, setOpenEditModal, setOpen, beatmap, userId, redirectLocation }) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
   const [read, setRead] = useState(false)
   const history = useHistory()
 
-  const {mutate} = useMutation(Api.deleteBeatmap)
+  const { mutate } = useMutation(Api.deleteBeatmap)
   const handleSubmit = async (beatmapId) => {
-    const {error: mutateError} = await mutate(beatmapId, cookies.bnplanner_osu_access_token, userId)
+    const { error: mutateError } = await mutate(beatmapId, cookies.bnplanner_osu_access_token, userId)
 
     if (mutateError) {
       console.log(mutateError)
@@ -26,14 +26,14 @@ const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, us
     }
   }
 
-  function verifyData() {
+  function verifyData () {
     return handleSubmit(beatmap.osuId)
   }
 
   return (
-    <Modal open={open} onClose={() => setOpen(false)} size={"tiny"}>
-      <div className={"modal-header"}>
-        <Header content={"Deleting Beatmap : " + beatmap.artist + " - " + beatmap.title}/>
+    <Modal open={open} onClose={() => setOpen(false)} size={'tiny'}>
+      <div className={'modal-header'}>
+        <Header content={'Deleting Beatmap : ' + beatmap.artist + ' - ' + beatmap.title}/>
       </div>
       <Modal.Content>
         <div>
@@ -46,7 +46,7 @@ const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, us
         </div>
         <br/>
         <Checkbox
-          label={"I've read the above"}
+          label={'I\'ve read the above'}
           checked={read}
           onChange={() => setRead(!read)}
         />

@@ -1,8 +1,8 @@
-import {Button, Icon} from "semantic-ui-react";
-import React, {useState} from "react";
-import RefreshBeatmapModal from "./modals/RefreshBeatmapModal";
+import { Button, Icon } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import RefreshBeatmapModal from './modals/RefreshBeatmapModal'
 
-const RefreshMetadataButton = ({canEdit, beatmap, userId, onModalReset}) => {
+const RefreshMetadataButton = ({ canEdit, beatmap, userId, onModalReset }) => {
   const [confirmModalOpen, setConfirmModalOpen] = useState(false)
 
   return (
@@ -10,9 +10,9 @@ const RefreshMetadataButton = ({canEdit, beatmap, userId, onModalReset}) => {
       <Button
         fluid
         disabled={!canEdit}
-        color={"green"}
-        onClick={() => {setConfirmModalOpen(true)}}>
-        <Icon name={"refresh"} /> Sync
+        color={'green'}
+        onClick={() => { setConfirmModalOpen(true) }}>
+        <Icon name={'refresh'} /> Sync
       </Button>
       <RefreshBeatmapModal
         open={confirmModalOpen}

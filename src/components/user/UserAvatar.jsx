@@ -1,16 +1,16 @@
-import React from "react"
-import {Image} from "semantic-ui-react"
-import {getReadableRole} from "../../util/UserUtil"
+import React from 'react'
+import { Image } from 'semantic-ui-react'
+import { getReadableRole } from '../../util/UserUtil'
 
-const UserAvatar = ({nominated, userDetails, onlyPicture}) => {
+const UserAvatar = ({ nominated, userDetails, onlyPicture }) => {
   if (userDetails) {
-    let roleDetails = getReadableRole(userDetails.role)
+    const roleDetails = getReadableRole(userDetails.role)
     let className
 
     if (nominated) {
-      className = "nominated user-avatar " + roleDetails.className + "-text"
+      className = 'nominated user-avatar ' + roleDetails.className + '-text'
     } else {
-      className = "user-avatar " + roleDetails.className + "-text"
+      className = 'user-avatar ' + roleDetails.className + '-text'
     }
 
     if (onlyPicture && onlyPicture === true) {

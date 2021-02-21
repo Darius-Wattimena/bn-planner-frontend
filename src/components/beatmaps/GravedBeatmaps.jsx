@@ -1,33 +1,33 @@
-import React, {useState} from "react"
-import Api from "../../resources/Api"
-import {useQuery} from "react-fetching-library"
-import {Container} from "semantic-ui-react"
-import BeatmapList from "./BeatmapList"
-import {BEATMAP_STATUS} from "../../Constants"
-import BeatmapFilter from "./BeatmapFilter"
-import {useParams, useLocation} from "react-router-dom"
-import EditBeatmapV2Modal from "./modals/EditBeatmapV2Modal"
+import React, { useState } from 'react'
+import Api from '../../resources/Api'
+import { useQuery } from 'react-fetching-library'
+import { Container } from 'semantic-ui-react'
+import BeatmapList from './BeatmapList'
+import { BEATMAP_STATUS } from '../../Constants'
+import BeatmapFilter from './BeatmapFilter'
+import { useParams, useLocation } from 'react-router-dom'
+import EditBeatmapV2Modal from './modals/EditBeatmapV2Modal'
 
 const filterDefaultState = {
-  "artist": null,
-  "title": null,
-  "mapper": null,
-  "status": [BEATMAP_STATUS.Graved.id],
-  "limit": "Ten",
-  "page": 1,
-  "countTotal": true,
-  "hideRanked": true,
-  "hideGraved": false,
-  "hideWithTwoNominators": false,
-  "nominator": null
+  artist: null,
+  title: null,
+  mapper: null,
+  status: [BEATMAP_STATUS.Graved.id],
+  limit: 'Ten',
+  page: 1,
+  countTotal: true,
+  hideRanked: true,
+  hideGraved: false,
+  hideWithTwoNominators: false,
+  nominator: null
 }
 
-const GravedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
+const GravedBeatmaps = ({ canEdit, isAdmin, userId, users }) => {
   const [filter, setFilter] = useState(filterDefaultState)
   const [selectedBeatmap, setSelectedBeatmap] = useState(0)
   const [editModalOpen, setEditModalOpen] = useState(false)
-  const {beatmapId} = useParams();
-  const location = useLocation();
+  const { beatmapId } = useParams()
+  const location = useLocation()
 
   let selectedNominator
 
@@ -41,23 +41,23 @@ const GravedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
     setEditModalOpen(true)
   }
 
-  let request = Api.fetchBeatmapsByFilter(filter)
-  const {loading, payload, error, query} = useQuery(request)
+  const request = Api.fetchBeatmapsByFilter(filter)
+  const { loading, payload, error, query } = useQuery(request)
 
-  function handleFilterSetPage(value) {
-    let newFilter = filter
-    newFilter["page"] = value
+  function handleFilterSetPage (value) {
+    const newFilter = filter
+    newFilter.page = value
     setFilter({
       ...newFilter
     })
   }
 
   return (
-    <div className={"base-container base-container-large"}>
+    <div className={'base-container base-container-large'}>
       <Container fluid>
-        <div className={"section"}>
-          <div className={"section-title"}>Graved Beatmaps</div>
-          <div className={"section-container"}>
+        <div className={'section'}>
+          <div className={'section-title'}>Graved Beatmaps</div>
+          <div className={'section-container'}>
             <BeatmapFilter
               users={users}
               filter={filter}
@@ -71,8 +71,8 @@ const GravedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
           </div>
         </div>
 
-        <div className={"table-section"}>
-          <div className={"table-list-container"}>
+        <div className={'table-section'}>
+          <div className={'table-list-container'}>
             <BeatmapList
               users={users}
               loading={loading}
@@ -83,7 +83,7 @@ const GravedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
               setSelectedBeatmap={setSelectedBeatmap}
               canEdit={canEdit}
               setPage={handleFilterSetPage}
-              redirectLocation={"graved"}
+              redirectLocation={'graved'}
             />
           </div>
         </div>
@@ -97,7 +97,7 @@ const GravedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
           setOpen={setEditModalOpen}
           users={users}
           setSelectedBeatmap={setSelectedBeatmap}
-          redirectLocation={"graved"}
+          redirectLocation={'graved'}
         />
         }
       </Container>

@@ -1,11 +1,11 @@
-import {Button} from "semantic-ui-react";
-import React from "react";
+import { Button } from 'semantic-ui-react'
+import React from 'react'
 
-const FilterButton = ({name, active, handleFilterSet, field, value}) => {
+const FilterButton = ({ name, active, handleFilterSet, field, value }) => {
   return (
     <Button
       primary={active}
-      color={!active ? "grey" : ""}
+      color={!active ? 'grey' : ''}
       active={active}
       onClick={() => handleFilterSet(field, value)}>{name}</Button>
   )

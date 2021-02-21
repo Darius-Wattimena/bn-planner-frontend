@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-import {ClientContextProvider} from "react-fetching-library"
-import {Client} from "./resources/Client"
-import {CookiesProvider} from "react-cookie"
+import { ClientContextProvider } from 'react-fetching-library'
+import { Client } from './resources/Client'
+import { CookiesProvider } from 'react-cookie'
 
 ReactDOM.render(
   <React.StrictMode>

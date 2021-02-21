@@ -1,13 +1,13 @@
-import Api from "../../../resources/Api"
-import {Button, Icon} from "semantic-ui-react"
-import React from "react"
-import DiscussionItemResponseTextArea from "./DiscussionItemResponseTextArea"
-import DiscussionItemResolveButton from "./DiscussionItemResolveButton"
+import Api from '../../../resources/Api'
+import { Button, Icon } from 'semantic-ui-react'
+import React from 'react'
+import DiscussionItemResponseTextArea from './DiscussionItemResponseTextArea'
+import DiscussionItemResolveButton from './DiscussionItemResolveButton'
 
-const DiscussionItemResponseBox = ({moddingComment, isWriting, setIsWriting, userId, users, query}) => {
+const DiscussionItemResponseBox = ({ moddingComment, isWriting, setIsWriting, userId, users, query }) => {
   if (isWriting && isWriting === true) {
     return (
-      <div className={"beatmap-discussion-main-actions"}>
+      <div className={'beatmap-discussion-main-actions'}>
         <DiscussionItemResponseTextArea
           users={users}
           userId={userId}
@@ -20,10 +20,10 @@ const DiscussionItemResponseBox = ({moddingComment, isWriting, setIsWriting, use
     )
   } else {
     return (
-      <div className={"beatmap-discussion-main-actions"}>
+      <div className={'beatmap-discussion-main-actions'}>
         <DiscussionItemResolveButton query={query} commentId={moddingComment._id} resolved={moddingComment.resolved}
-                                     userId={userId}/>
-        <Button color={"green"} onClick={() => setIsWriting(true)}><Icon name={"reply"}/>Respond</Button>
+          userId={userId}/>
+        <Button color={'green'} onClick={() => setIsWriting(true)}><Icon name={'reply'}/>Respond</Button>
       </div>
     )
   }

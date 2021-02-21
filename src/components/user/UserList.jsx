@@ -1,16 +1,16 @@
-import {Button, Grid, Icon, Image, Label} from "semantic-ui-react"
-import React from "react"
-import BasicPagination from "../generic/BasicPagination"
-import {getReadableRole} from "../../util/UserUtil"
+import { Button, Grid, Icon, Image, Label } from 'semantic-ui-react'
+import React from 'react'
+import BasicPagination from '../generic/BasicPagination'
+import { getReadableRole } from '../../util/UserUtil'
 
-const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, setSelectedUser, isAdmin}) => {
+const UserList = ({ loading, error, filter, setPage, payload, setEditModalOpen, setSelectedUser, isAdmin }) => {
   let possibleLastPage = 0
 
   if (!loading && !error) {
     let limitValue
-    if (filter.limit === "Ten") {
+    if (filter.limit === 'Ten') {
       limitValue = 10
-    } else if (filter.limit === "Twenty") {
+    } else if (filter.limit === 'Twenty') {
       limitValue = 20
     } else {
       limitValue = 10
@@ -20,8 +20,8 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
   }
 
   return (
-    <Grid className={"multi-row-content"} textAlign={"center"} verticalAlign={"middle"}>
-      <Grid.Row only={"computer"} className={"table-header-row"}>
+    <Grid className={'multi-row-content'} textAlign={'center'} verticalAlign={'middle'}>
+      <Grid.Row only={'computer'} className={'table-header-row'}>
         <Grid.Column computer={3}>#</Grid.Column>
         <Grid.Column computer={3}>Username</Grid.Column>
         <Grid.Column computer={3}>Nominator Role</Grid.Column>
@@ -30,39 +30,39 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
         <Grid.Column computer={3}>Actions</Grid.Column>
       </Grid.Row>
       {payload && payload.response && payload.response.map((user, index) => {
-        let userRole = getReadableRole(user.role)
+        const userRole = getReadableRole(user.role)
         return (
-          <Grid.Row key={"user-list-" + index} className={"table-row user-row " + userRole.className}>
+          <Grid.Row key={'user-list-' + index} className={'table-row user-row ' + userRole.className}>
             <Grid.Column mobile={4} tablet={4} computer={3}>
-              <Image className={"user-banner"} fluid src={user.profilePictureUri}/>
+              <Image className={'user-banner'} fluid src={user.profilePictureUri}/>
             </Grid.Column>
-            <Grid.Column mobile={8} tablet={6} computer={3} textAlign={"center"}>{user.osuName}</Grid.Column>
-            <Grid.Column mobile={4} tablet={6} computer={3} textAlign={"center"}><Label className={userRole.className}>{userRole.full}</Label></Grid.Column>
-            <Grid.Column only={"computer"} computer={2} textAlign={"center"}>
+            <Grid.Column mobile={8} tablet={6} computer={3} textAlign={'center'}>{user.osuName}</Grid.Column>
+            <Grid.Column mobile={4} tablet={6} computer={3} textAlign={'center'}><Label className={userRole.className}>{userRole.full}</Label></Grid.Column>
+            <Grid.Column only={'computer'} computer={2} textAlign={'center'}>
               <AccessIcon hasAccess={user.hasEditPermissions}/>
             </Grid.Column>
-            <Grid.Column only={"computer"} computer={2} textAlign={"center"}>
+            <Grid.Column only={'computer'} computer={2} textAlign={'center'}>
               <AccessIcon hasAccess={user.hasAdminPermissions}/>
             </Grid.Column>
-            <Grid.Column mobile={16} tablet={16} computer={3} textAlign={"center"}>
+            <Grid.Column mobile={16} tablet={16} computer={3} textAlign={'center'}>
               <Button.Group fluid>
-                <Button color={"green"} onClick={_ => {
+                <Button color={'green'} onClick={_ => {
                   setSelectedUser(user.osuId)
                   setEditModalOpen(true)
                 }}>
-                  <Icon fitted name={isAdmin ? "pencil" : "eye"}/>
+                  <Icon fitted name={isAdmin ? 'pencil' : 'eye'}/>
                 </Button>
-                <Button color={"blue"}
-                        onClick={() => window.open("https://osu.ppy.sh/users/" + user.osuId, "_blank")}>
-                  <Icon fitted name={"linkify"}/>
+                <Button color={'blue'}
+                  onClick={() => window.open('https://osu.ppy.sh/users/' + user.osuId, '_blank')}>
+                  <Icon fitted name={'linkify'}/>
                 </Button>
               </Button.Group>
             </Grid.Column>
           </Grid.Row>
         )
       })}
-      <Grid.Row className={"table-footer-row"}>
-        <Grid.Column width={14} textAlign={"left"}>
+      <Grid.Row className={'table-footer-row'}>
+        <Grid.Column width={14} textAlign={'left'}>
           {payload &&
           <p>{payload.total} User Found</p>
           }
@@ -75,17 +75,17 @@ const UserList = ({loading, error, filter, setPage, payload, setEditModalOpen, s
   )
 }
 
-function AccessIcon({hasAccess}) {
+function AccessIcon ({ hasAccess }) {
   if (hasAccess && hasAccess === true) {
     return (
       <div>
-        <Icon fitted size={"large"} name={"check"} color={"green"}/>
+        <Icon fitted size={'large'} name={'check'} color={'green'}/>
       </div>
     )
   } else {
     return (
       <div>
-        <Icon fitted size={"large"} name={"cancel"} color={"red"}/>
+        <Icon fitted size={'large'} name={'cancel'} color={'red'}/>
       </div>
     )
   }

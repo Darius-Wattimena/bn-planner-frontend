@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+        - image: circleci/node:15.9.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v2-npm-deps-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: npm ci
+      - save_cache:
+          paths:
+            - /home/circleci/.npm
+          key: v2-npm-deps-{{ checksum "package-lock.json" }}
+      - run: npm run lint
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - build
+            - package.json
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          context: common-builds-context

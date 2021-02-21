@@ -1,21 +1,21 @@
-import {useMutation, useQuery} from "react-fetching-library";
-import Api from "../../../resources/Api";
-import React, {useState} from "react";
-import {useCookies} from "react-cookie";
-import {useHistory} from "react-router-dom";
-import {BEATMAP_STATUS} from "../../../Constants";
-import {getNominatorOptions, getReadableStatus} from "../../../util/BeatmapUtil";
-import {Button, Checkbox, Form, Grid, Header, Icon, Image, Label, Modal} from "semantic-ui-react";
-import DeleteBeatmapModal from "./DeleteBeatmapModal";
-import EditStatusBeatmapModal from "./EditStatusBeatmapModal";
-import {unix} from "dayjs";
-import {getReadableRole, getUserWithId} from "../../../util/UserUtil";
-import RefreshMetadataButton from "../RefreshMetadataButton";
-import BeatmapEventList from "../BeatmapEventList";
+import { useMutation, useQuery } from 'react-fetching-library'
+import Api from '../../../resources/Api'
+import React, { useState } from 'react'
+import { useCookies } from 'react-cookie'
+import { useHistory } from 'react-router-dom'
+import { BEATMAP_STATUS } from '../../../Constants'
+import { getNominatorOptions, getReadableStatus } from '../../../util/BeatmapUtil'
+import { Button, Checkbox, Form, Grid, Header, Icon, Image, Label, Modal } from 'semantic-ui-react'
+import DeleteBeatmapModal from './DeleteBeatmapModal'
+import EditStatusBeatmapModal from './EditStatusBeatmapModal'
+import { unix } from 'dayjs'
+import { getReadableRole, getUserWithId } from '../../../util/UserUtil'
+import RefreshMetadataButton from '../RefreshMetadataButton'
+import BeatmapEventList from '../BeatmapEventList'
 
-const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap, canEdit, userId, redirectLocation, asNewlyCreated}) => {
-  const {loading, payload, error, reset, query: beatmapQuery} = useQuery(Api.getDetailedBeatmap(id))
-  const {mutate} = useMutation(Api.updateBeatmap)
+const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatmap, canEdit, userId, redirectLocation, asNewlyCreated }) => {
+  const { loading, payload, error, reset, query: beatmapQuery } = useQuery(Api.getDetailedBeatmap(id))
+  const { mutate } = useMutation(Api.updateBeatmap)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [editStatusModalOpen, setEditStatusModalOpen] = useState(false)
   const [potentialNewStatus, setPotentialNewStatus] = useState(0)
@@ -23,27 +23,27 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
   const [showEvents, setShowEvents] = useState(false)
   const [newStatus, setNewStatus] = useState(0)
   const [formValues, setFormValues] = useState({
-    osuId: "",
+    osuId: '',
     artist: null,
-    title: "",
-    mapper: "",
-    note: "",
+    title: '',
+    mapper: '',
+    note: '',
     nominators: [0, 0],
     plannerEvents: [],
     osuEvents: [],
     nominatedByBNOne: null,
     nominatedByBNTwo: null,
     unfinished: null,
-    asNewlyCreated: null,
+    asNewlyCreated: null
   })
-  const [showingArtist, setShowingArtist] = useState("")
+  const [showingArtist, setShowingArtist] = useState('')
   const [showSameNominatorWarning, setShowSameNominatorWarning] = useState(false)
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
   const history = useHistory()
 
   if (!loading && !error && id) {
-    if (payload && payload !== "" && (formValues.artist === null || (formValues.osuId !== "" && formValues.osuId !== payload.osuId))) {
-      payload["asNewlyCreated"] = asNewlyCreated
+    if (payload && payload !== '' && (formValues.artist === null || (formValues.osuId !== '' && formValues.osuId !== payload.osuId))) {
+      payload.asNewlyCreated = asNewlyCreated
       setFormValues(payload)
       setPotentialNewStatus(payload.status)
       setShowingArtist(payload.artist)
@@ -53,7 +53,7 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
     }
   }
 
-  function verifyNominatorSelected(nominators) {
+  function verifyNominatorSelected (nominators) {
     if (nominators[0] !== 0 || nominators[1] !== 0) {
       if (nominators[0] === nominators[1]) {
         setShowSameNominatorWarning(true)
@@ -62,15 +62,14 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
       }
     } else if (nominators[0] !== nominators[1]) {
       if (nominators[0] === 0) {
-        setFormValue("nominatedByBNOne", false)
+        setFormValue('nominatedByBNOne', false)
       } else if (nominators[1] === 0) {
-        setFormValue("nominatedByBNTwo", false)
+        setFormValue('nominatedByBNTwo', false)
       }
-
     }
   }
 
-  function verifyData() {
+  function verifyData () {
     verifyNominatorSelected(formValues.nominators)
     if (!showSameNominatorWarning) {
       return handleSubmit(formValues)
@@ -78,7 +77,7 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
   }
 
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId)
+    const { error: mutateError } = await mutate(formValues, cookies.bnplanner_osu_access_token, userId)
 
     if (mutateError) {
       console.log(mutateError)
@@ -87,15 +86,15 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
     }
   }
 
-  function setFormValue(field, value) {
-    let newFormValues = formValues
+  function setFormValue (field, value) {
+    const newFormValues = formValues
     newFormValues[field] = value
     setFormValues({
       ...newFormValues
     })
   }
 
-  function checkIfNewStatusIsPossible() {
+  function checkIfNewStatusIsPossible () {
     if (payload === undefined || (formValues.nominatedByBNOne == null && formValues.nominatedByBNTwo == null)) {
       setPotentialNewStatus(0)
     } else if (formValues.nominatedByBNOne && formValues.nominatedByBNTwo) {
@@ -117,17 +116,17 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
     }
   }
 
-  function onModalReset() {
+  function onModalReset () {
     history.push({
       pathname: '/' + redirectLocation
     })
     setPotentialNewStatus(0)
     setFormValues({
-      osuId: "",
+      osuId: '',
       artist: null,
-      title: "",
-      mapper: "",
-      note: "",
+      title: '',
+      mapper: '',
+      note: '',
       nominators: [0, 0],
       events: [],
       nominatedByBNOne: null,
@@ -139,27 +138,27 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
     setSelectedBeatmap(0)
   }
 
-  let readablePotentialStatus = getReadableStatus(potentialNewStatus)
-  let readableCurrentStatus = getReadableStatus(formValues.status)
+  const readablePotentialStatus = getReadableStatus(potentialNewStatus)
+  const readableCurrentStatus = getReadableStatus(formValues.status)
 
-  console.log({formValues})
+  console.log({ formValues })
 
   return (
     <div>
-      <Modal open={open} onClose={() => onModalReset()} className={"modal-beatmap"}>
+      <Modal open={open} onClose={() => onModalReset()} className={'modal-beatmap'}>
         {!loading && !error && payload &&
           <>
-            <div className={"modal-header beatmap-edit-header"} style={{
-              backgroundImage: "linear-gradient(to top, rgb(38 38 50), transparent, rgba(0,0,0,.8)), url(https://assets.ppy.sh/beatmaps/" + payload.osuId + "/covers/cover.jpg)"
+            <div className={'modal-header beatmap-edit-header'} style={{
+              backgroundImage: 'linear-gradient(to top, rgb(38 38 50), transparent, rgba(0,0,0,.8)), url(https://assets.ppy.sh/beatmaps/' + payload.osuId + '/covers/cover.jpg)'
             }}>
-              <div className={"modal-header-image"}/>
-              <Header content={showingArtist + " - " + payload.title}/>
+              <div className={'modal-header-image'}/>
+              <Header content={showingArtist + ' - ' + payload.title}/>
             </div>
 
             <Modal.Content>
               <Form>
-                <Grid className={"modal-beatmap-content-all"}>
-                  <Grid.Row className={"modal-beatmap-buttons"}>
+                <Grid className={'modal-beatmap-content-all'}>
+                  <Grid.Row className={'modal-beatmap-buttons'}>
                     <Grid.Column computer={4} tablet={4} mobile={16}>
                       <Button
                         fluid
@@ -220,7 +219,7 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
                       </Button>
                     </Grid.Column>
                   </Grid.Row>
-                  <Grid.Row className={"modal-beatmap-content-header"}>
+                  <Grid.Row className={'modal-beatmap-content-header'}>
                     <Grid.Column computer={7} tablet={16} mobile={16}>
                       <h3>Settings</h3>
                     </Grid.Column>
@@ -228,7 +227,7 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
                       <h3>Metadata</h3>
                     </Grid.Column>
                   </Grid.Row>
-                  <Grid.Row className={"modal-beatmap-content"}>
+                  <Grid.Row className={'modal-beatmap-content'}>
                     <Grid.Column computer={7} tablet={16} mobile={16}>
                       <NominatorField
                         isFirst
@@ -239,32 +238,32 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
                         users={users}
                         onDropdownChange={(_, data) => {
                           verifyNominatorSelected([data.value, formValues.nominators[1]])
-                          setFormValue("nominators", [data.value, formValues.nominators[1]])
+                          setFormValue('nominators', [data.value, formValues.nominators[1]])
                           if (data.value === 0) {
-                            setFormValue("nominatedByBNOne", false)
+                            setFormValue('nominatedByBNOne', false)
                             checkIfNewStatusIsPossible()
                           }
                         }}
                         onCheckboxChange={() => {
-                          setFormValue("nominatedByBNOne", !formValues.nominatedByBNOne)
+                          setFormValue('nominatedByBNOne', !formValues.nominatedByBNOne)
                           checkIfNewStatusIsPossible()
                         }}
                         error={showSameNominatorWarning} />
                     </Grid.Column>
-                    <Grid.Column computer={9} tablet={16} mobile={16} className={"metadata-row"}>
+                    <Grid.Column computer={9} tablet={16} mobile={16} className={'metadata-row'}>
                       <div>
-                        <Grid verticalAlign={"middle"}>
+                        <Grid verticalAlign={'middle'}>
                           <Grid.Row>
-                            <MetadataFieldItem value={formValues.artist} label={"Artist"} />
-                            <MetadataFieldItem value={formValues.title} label={"Title"} />
-                            <MetadataFieldItem value={formValues.mapper} label={"Mapper"} />
-                            <MetadataFieldItem value={unix(formValues.dateUpdated).format("DD MMMM YYYY HH:mm")} label={"Last Updated"} />
+                            <MetadataFieldItem value={formValues.artist} label={'Artist'} />
+                            <MetadataFieldItem value={formValues.title} label={'Title'} />
+                            <MetadataFieldItem value={formValues.mapper} label={'Mapper'} />
+                            <MetadataFieldItem value={unix(formValues.dateUpdated).format('DD MMMM YYYY HH:mm')} label={'Last Updated'} />
                           </Grid.Row>
                         </Grid>
                       </div>
                     </Grid.Column>
                   </Grid.Row>
-                  <Grid.Row className={"modal-beatmap-content"}>
+                  <Grid.Row className={'modal-beatmap-content'}>
                     <Grid.Column computer={7} tablet={16} mobile={16}>
                       <NominatorField
                         unfinished={formValues.unfinished}
@@ -274,81 +273,80 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
                         users={users}
                         onDropdownChange={(_, data) => {
                           verifyNominatorSelected([formValues.nominators[0], data.value])
-                          setFormValue("nominators", [formValues.nominators[0], data.value])
+                          setFormValue('nominators', [formValues.nominators[0], data.value])
                           if (data.value === 0) {
-                            setFormValue("nominatedByBNTwo", false)
+                            setFormValue('nominatedByBNTwo', false)
                             checkIfNewStatusIsPossible()
                           }
                         }}
                         onCheckboxChange={() => {
-                          setFormValue("nominatedByBNTwo", !formValues.nominatedByBNTwo)
+                          setFormValue('nominatedByBNTwo', !formValues.nominatedByBNTwo)
                           checkIfNewStatusIsPossible()
                         }}
                         error={showSameNominatorWarning} />
                     </Grid.Column>
                     <Grid.Column computer={9} tablet={16} mobile={16}>
                       <h3>Status</h3>
-                      <Grid verticalAlign={"middle"}>
+                      <Grid verticalAlign={'middle'}>
                         <Grid.Row>
                           <MetadataFieldItem value={
                             <Checkbox
                               checked={formValues.unfinished}
                               onChange={() => {
                                 if (!formValues.unfinished) {
-                                  setFormValue("nominatedByBNOne", false)
-                                  setFormValue("nominatedByBNTwo", false)
+                                  setFormValue('nominatedByBNOne', false)
+                                  setFormValue('nominatedByBNTwo', false)
                                 }
 
-                                setFormValue("unfinished", !formValues.unfinished)
+                                setFormValue('unfinished', !formValues.unfinished)
                                 checkIfNewStatusIsPossible()
-
                               }}
                             />
-                          } label={"Unfinished"} />
+                          } label={'Unfinished'} />
                           <MetadataFieldItem value={
                             <Label horizontal className={readableCurrentStatus.className}>
                               {readableCurrentStatus.name}
                             </Label>
-                          } label={"Current"} />
+                          } label={'Current'} />
                           {potentialNewStatus !== formValues.status &&
                             <MetadataFieldItem value={
                               <Label horizontal className={readablePotentialStatus.className}>
                                 {readablePotentialStatus.name}
                               </Label>
-                            } label={"New"} />
+                            } label={'New'} />
                           }
                         </Grid.Row>
                       </Grid>
                     </Grid.Column>
                   </Grid.Row>
                   <Grid.Row>
-                    <Grid.Column computer={7} only={"computer"} />
+                    <Grid.Column computer={7} only={'computer'} />
                     <Grid.Column computer={3} tablet={16} mobile={16}>
-                        <RefreshMetadataButton canEdit={canEdit} beatmap={payload} userId={userId} onModalReset={onModalReset} />
-                      </Grid.Column>
+                      <RefreshMetadataButton canEdit={canEdit} beatmap={payload} userId={userId} onModalReset={onModalReset} />
+                    </Grid.Column>
                     <Grid.Column computer={3} tablet={16} mobile={16}>
-                        <Button fluid disabled={!canEdit} color='grey' onClick={() => {setEditNote(!editNote)}}>
-                          {(editNote) ? "Hide" : "Edit" } Note
-                        </Button>
-                      </Grid.Column>
-                    <Grid.Column computer={3} tablet={16} mobile={16}>
-                      <Button fluid disabled={!canEdit} color='grey' onClick={() => {setShowEvents(!showEvents)}}>
-                        {(showEvents) ? "Hide" : "Show" } Events
+                      <Button fluid disabled={!canEdit} color='grey' onClick={() => { setEditNote(!editNote) }}>
+                        {(editNote) ? 'Hide' : 'Edit' } Note
                       </Button>
-                      </Grid.Column>
+                    </Grid.Column>
+                    <Grid.Column computer={3} tablet={16} mobile={16}>
+                      <Button fluid disabled={!canEdit} color='grey' onClick={() => { setShowEvents(!showEvents) }}>
+                        {(showEvents) ? 'Hide' : 'Show' } Events
+                      </Button>
+                    </Grid.Column>
                   </Grid.Row>
                   {editNote === true &&
                     <Grid.Row>
-                      <Grid.Column computer={7} only={"computer"} />
+                      <Grid.Column computer={7} only={'computer'} />
                       <Grid.Column computer={9} tablet={16} mobile={16}>
                         <h3>Note</h3>
                         <Form.TextArea
                           width={16}
                           disabled={!canEdit}
-                          style={{minHeight: 145, maxHeight: 145}}
+                          style={{ minHeight: 145, maxHeight: 145 }}
                           placeholder='Notes'
                           value={formValues.note}
-                          onChange={event => setFormValue("note", event.target.value)}/>
+                          onChange={event => setFormValue('note', event.target.value)}/>
                       </Grid.Column>
                     </Grid.Row>
                   }
@@ -413,13 +411,13 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
   )
 }
 
-const NominatorField = ({isFirst, unfinished, canEdit, nominatorId, hasNominated, users, onDropdownChange, onCheckboxChange, error}) => {
+const NominatorField = ({ isFirst, unfinished, canEdit, nominatorId, hasNominated, users, onDropdownChange, onCheckboxChange, error }) => {
   let avatarUri
   let userDetails
   let userRole
 
   if (nominatorId === 0) {
-    avatarUri = "https://osu.ppy.sh/images/layout/avatar-guest@2x.png"
+    avatarUri = 'https://osu.ppy.sh/images/layout/avatar-guest@2x.png'
     userDetails = null
     userRole = null
   } else {
@@ -431,36 +429,38 @@ const NominatorField = ({isFirst, unfinished, canEdit, nominatorId, hasNominated
   return (
     <div>
       <Grid>
-        <Grid.Row className={"nominator-row"}>
-          <Grid.Column computer={5} tablet={4} mobile={6} className={"nominator-avatar"}>
-            <Image fluid src={avatarUri} className={(hasNominated ? "nominated" : "")} label={
-              (userRole !== null) ? (
-                <Label ribbon horizontal className={userRole.className}>
-                  {userRole.name}
-                </Label>
-              ) : null
+        <Grid.Row className={'nominator-row'}>
+          <Grid.Column computer={5} tablet={4} mobile={6} className={'nominator-avatar'}>
+            <Image fluid src={avatarUri} className={(hasNominated ? 'nominated' : '')} label={
+              (userRole !== null)
+                ? (
+                  <Label ribbon horizontal className={userRole.className}>
+                    {userRole.name}
+                  </Label>
+                )
+                : null
             } />
           </Grid.Column>
-          <Grid.Column computer={11} tablet={12} mobile={10} className={"nominator-details"}>
+          <Grid.Column computer={11} tablet={12} mobile={10} className={'nominator-details'}>
             <Grid>
               <Grid.Row>
                 <Grid.Column computer={16} tablet={16} mobile={16}>
-                  <h4>{(isFirst) ? "Nominator #1" : "Nominator #2"}</h4>
+                  <h4>{(isFirst) ? 'Nominator #1' : 'Nominator #2'}</h4>
                 </Grid.Column>
                 <Grid.Column computer={16} tablet={16} mobile={16}>
-                    <Form.Dropdown
-                      disabled={!canEdit}
-                      selection
-                      search
-                      options={getNominatorOptions(users)}
-                      value={nominatorId}
-                      onChange={onDropdownChange}
-                      error={error}
-                    />
+                  <Form.Dropdown
+                    disabled={!canEdit}
+                    selection
+                    search
+                    options={getNominatorOptions(users)}
+                    value={nominatorId}
+                    onChange={onDropdownChange}
+                    error={error}
+                  />
                 </Grid.Column>
                 <Grid.Column computer={16} tablet={16} mobile={16}>
                   <Form.Checkbox
-                    label={"Nominated"}
+                    label={'Nominated'}
                     disabled={!canEdit || unfinished || nominatorId === 0}
                     checked={hasNominated}
                     onChange={onCheckboxChange}
@@ -475,11 +475,11 @@ const NominatorField = ({isFirst, unfinished, canEdit, nominatorId, hasNominated
   )
 }
 
-const MetadataFieldItem = ({value, label}) => {
+const MetadataFieldItem = ({ value, label }) => {
   return (
     <>
-      <Grid.Column computer={5} mobile={5} className={"metadata-label"}><h4>{label}</h4></Grid.Column>
-      <Grid.Column computer={11} mobile={11}><div className={"metadata-value"}>{value}</div></Grid.Column>
+      <Grid.Column computer={5} mobile={5} className={'metadata-label'}><h4>{label}</h4></Grid.Column>
+      <Grid.Column computer={11} mobile={11}><div className={'metadata-value'}>{value}</div></Grid.Column>
     </>
   )
 }
