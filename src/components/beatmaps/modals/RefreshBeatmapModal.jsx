@@ -1,20 +1,20 @@
-import React, {useState} from "react"
-import {useCookies} from "react-cookie"
-import {useQuery} from "react-fetching-library"
-import Api from "../../../resources/Api"
-import {Button, Checkbox, Header, Icon, Modal} from "semantic-ui-react"
-import {pushNotification} from "../../../util/NotificationUtil";
+import React, { useState } from 'react'
+import { useCookies } from 'react-cookie'
+import { useQuery } from 'react-fetching-library'
+import Api from '../../../resources/Api'
+import { Button, Checkbox, Header, Icon, Modal } from 'semantic-ui-react'
+import { pushNotification } from '../../../util/NotificationUtil'
 
-const RefreshBeatmapModal = ({open, onModalReset, setOpen, beatmap, userId}) => {
+const RefreshBeatmapModal = ({ open, onModalReset, setOpen, beatmap, userId }) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
   const [read, setRead] = useState(false)
-  const {query, loading} = useQuery(Api.refreshMetadata(beatmap.osuId, cookies.bnplanner_osu_access_token, userId), false)
+  const { query } = useQuery(Api.refreshMetadata(beatmap.osuId, cookies.bnplanner_osu_access_token, userId), false)
 
-  function refreshMetadata() {
+  function refreshMetadata () {
     const asyncRefreshMetadata = async () => {
       await query().then(value => {
         if (value.error || value.payload === false) {
-          pushNotification("Error syncing metadata", "Could not sync metadata of the set", "danger")
+          pushNotification('Error syncing metadata', 'Could not sync metadata of the set', 'danger')
         } else {
           onModalReset()
         }
@@ -25,9 +25,9 @@ const RefreshBeatmapModal = ({open, onModalReset, setOpen, beatmap, userId}) => 
   }
 
   return (
-    <Modal open={open} onClose={() => setOpen(false)} size={"tiny"}>
-      <div className={"modal-header"}>
-        <Header content={"Syncing metadata : " + beatmap.artist + " - " + beatmap.title}/>
+    <Modal open={open} onClose={() => setOpen(false)} size={'tiny'}>
+      <div className={'modal-header'}>
+        <Header content={'Syncing metadata : ' + beatmap.artist + ' - ' + beatmap.title}/>
       </div>
       <Modal.Content>
         <div>
@@ -39,7 +39,7 @@ const RefreshBeatmapModal = ({open, onModalReset, setOpen, beatmap, userId}) => 
         </div>
         <br/>
         <Checkbox
-          label={"I've read the above"}
+          label={'I\'ve read the above'}
           checked={read}
           onChange={() => setRead(!read)}
         />

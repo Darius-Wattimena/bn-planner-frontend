@@ -1,19 +1,19 @@
-import React from "react"
-import {Grid} from "semantic-ui-react"
-import {BEATMAP_STATUS} from "../../Constants"
-import BasicPagination from "../generic/BasicPagination"
-import BeatmapListItem from "./BeatmapListItem"
+import React from 'react'
+import { Grid } from 'semantic-ui-react'
+import { BEATMAP_STATUS } from '../../Constants'
+import BasicPagination from '../generic/BasicPagination'
+import BeatmapListItem from './BeatmapListItem'
 
-const BeatmapList = ({users, loading, error, payload, filter, setEditModalOpen, setSelectedBeatmap, canEdit, setPage, redirectLocation}) => {
+const BeatmapList = ({ users, loading, error, payload, filter, setEditModalOpen, setSelectedBeatmap, canEdit, setPage, redirectLocation }) => {
   let possibleLastPage = 0
 
   if (!loading && !error) {
     let limitValue
-    if (filter.limit === "Ten") {
+    if (filter.limit === 'Ten') {
       limitValue = 10
-    } else if (filter.limit === "Twenty") {
+    } else if (filter.limit === 'Twenty') {
       limitValue = 20
-    } else if (filter.limit === "Fifty") {
+    } else if (filter.limit === 'Fifty') {
       limitValue = 50
     } else {
       limitValue = 10
@@ -23,8 +23,8 @@ const BeatmapList = ({users, loading, error, payload, filter, setEditModalOpen, 
   }
 
   return (
-    <Grid className={"multi-row-content"} textAlign={"center"} verticalAlign={"middle"}>
-      <Grid.Row only={"computer"} className={"table-header-row"}>
+    <Grid className={'multi-row-content'} textAlign={'center'} verticalAlign={'middle'}>
+      <Grid.Row only={'computer'} className={'table-header-row'}>
         <Grid.Column computer={2}>#</Grid.Column>
         <Grid.Column computer={2}>Artist</Grid.Column>
         <Grid.Column computer={3}>Title</Grid.Column>
@@ -35,9 +35,9 @@ const BeatmapList = ({users, loading, error, payload, filter, setEditModalOpen, 
         <Grid.Column computer={2}>Actions</Grid.Column>
       </Grid.Row>
       {payload && payload.response && payload.response.map((beatmap, index) => {
-        let displayStatus = getReadableStatus(beatmap.status)
+        const displayStatus = getReadableStatus(beatmap.status)
         return <BeatmapListItem
-          key={"beatmap-list-item-" + index}
+          key={'beatmap-list-item-' + index}
           beatmap={beatmap}
           displayStatus={displayStatus}
           canEdit={canEdit}
@@ -47,7 +47,7 @@ const BeatmapList = ({users, loading, error, payload, filter, setEditModalOpen, 
           redirectLocation={redirectLocation}
         />
       })}
-      <Grid.Row className={"table-footer-row"}>
+      <Grid.Row className={'table-footer-row'}>
         <Grid.Column width={2}>
           {payload &&
             <p>{payload.total} Beatmap(s) Found</p>
@@ -62,17 +62,17 @@ const BeatmapList = ({users, loading, error, payload, filter, setEditModalOpen, 
   )
 }
 
-function getReadableStatus(unreadableStatus) {
+function getReadableStatus (unreadableStatus) {
   if (unreadableStatus) {
     const keys = Object.keys(BEATMAP_STATUS)
     for (const key of keys) {
-      let status = BEATMAP_STATUS[key]
+      const status = BEATMAP_STATUS[key]
       if (status.id === unreadableStatus) {
         return status
       }
     }
   } else {
-    return BEATMAP_STATUS["Pending"]
+    return BEATMAP_STATUS.Pending
   }
 }
 

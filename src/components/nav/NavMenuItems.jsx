@@ -1,44 +1,43 @@
-import React from "react"
-import {Image, Menu, MenuItem} from "semantic-ui-react"
-import {ENV} from "../../Settings"
-import {getUserWithId} from "../../util/UserUtil"
+import React from 'react'
+import { Image, Menu, MenuItem } from 'semantic-ui-react'
+import { ENV } from '../../Settings'
+import { getUserWithId } from '../../util/UserUtil'
 
-const NavMenuItems = ({users, isSidebar, hasHiddenPerms, handleNavClick, selected, homeName, beatmapsName, rankedName, gravedName, usersName, contestName, moddingMapName, userId, loginName, osuLoginUrl}) => {
-
+const NavMenuItems = ({ users, isSidebar, hasHiddenPerms, handleNavClick, selected, homeName, beatmapsName, rankedName, gravedName, usersName, contestName, moddingMapName, userId, loginName, osuLoginUrl }) => {
   return (
     <>
       <MenuItem
         name={homeName}
         active={selected === homeName}
-        onClick={() => handleNavClick(homeName, "/")}
+        onClick={() => handleNavClick(homeName, '/')}
       >
         Home
       </MenuItem>
       <MenuItem
         name={beatmapsName}
         active={selected === beatmapsName}
-        onClick={() => handleNavClick(beatmapsName, "/beatmaps")}
+        onClick={() => handleNavClick(beatmapsName, '/beatmaps')}
       >
         In Progress
       </MenuItem>
       <MenuItem
         name={rankedName}
         active={selected === rankedName}
-        onClick={() => handleNavClick(rankedName, "/ranked")}
+        onClick={() => handleNavClick(rankedName, '/ranked')}
       >
         Ranked
       </MenuItem>
       <MenuItem
         name={gravedName}
         active={selected === gravedName}
-        onClick={() => handleNavClick(gravedName, "/graved")}
+        onClick={() => handleNavClick(gravedName, '/graved')}
       >
         Graved
       </MenuItem>
       <MenuItem
         name={usersName}
         active={selected === usersName}
-        onClick={() => handleNavClick(usersName, "/users")}
+        onClick={() => handleNavClick(usersName, '/users')}
       >
         Users
       </MenuItem>
@@ -47,14 +46,14 @@ const NavMenuItems = ({users, isSidebar, hasHiddenPerms, handleNavClick, selecte
           <MenuItem
             name={contestName}
             active={selected === contestName}
-            onClick={() => handleNavClick(contestName, "/contests")}
+            onClick={() => handleNavClick(contestName, '/contests')}
           >
             Contests
           </MenuItem>
           <MenuItem
             name={moddingMapName}
             active={selected === moddingMapName}
-            onClick={() => handleNavClick(moddingMapName, "/modding/maps")}
+            onClick={() => handleNavClick(moddingMapName, '/modding/maps')}
           >
             Modding
           </MenuItem>
@@ -65,7 +64,7 @@ const NavMenuItems = ({users, isSidebar, hasHiddenPerms, handleNavClick, selecte
   )
 }
 
-const RightMenu = ({isSidebar, userId, users, selected, loginName, osuLoginUrl}) => {
+const RightMenu = ({ isSidebar, userId, users, selected, loginName, osuLoginUrl }) => {
   let userDetails
 
   if (userId === 0) {
@@ -78,16 +77,16 @@ const RightMenu = ({isSidebar, userId, users, selected, loginName, osuLoginUrl})
     return (
       <>
         {ENV.is_dev && ENV.is_dev === true &&
-          <MenuItem className={"develop-environment"}>
+          <MenuItem className={'develop-environment'}>
             DEVELOP BACK-END!
           </MenuItem>
         }
         {userId === 0 &&
           <MenuItem
-            className={"login-button"}
+            className={'login-button'}
             name={loginName}
             active={selected === loginName}
-            onClick={() => window.location.href = `${osuLoginUrl}&state=${window.location.pathname}`}
+            onClick={() => { window.location.href = `${osuLoginUrl}&state=${window.location.pathname}` }}
           >
             Login with osu!
           </MenuItem>
@@ -108,16 +107,16 @@ const RightMenu = ({isSidebar, userId, users, selected, loginName, osuLoginUrl})
     return (
       <Menu.Menu position='right'>
         {ENV.is_dev && ENV.is_dev === true &&
-          <MenuItem className={"develop-environment"}>
+          <MenuItem className={'develop-environment'}>
             DEVELOP BACK-END!
           </MenuItem>
         }
         {userId === 0 &&
           <MenuItem
-            className={"login-button"}
+            className={'login-button'}
             name={loginName}
             active={selected === loginName}
-            onClick={() => window.location.href = `${osuLoginUrl}&state=${window.location.pathname}`}
+            onClick={() => { window.location.href = `${osuLoginUrl}&state=${window.location.pathname}` }}
           >
             Login with osu!
           </MenuItem>

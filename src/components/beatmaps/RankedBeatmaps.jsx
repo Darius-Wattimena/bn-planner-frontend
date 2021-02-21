@@ -1,33 +1,33 @@
-import React, {useState} from "react"
-import Api from "../../resources/Api"
-import {useQuery} from "react-fetching-library"
-import {Container} from "semantic-ui-react"
-import BeatmapList from "./BeatmapList"
-import {BEATMAP_STATUS} from "../../Constants"
-import BeatmapFilter from "./BeatmapFilter"
-import {useParams, useLocation} from "react-router-dom"
-import EditBeatmapV2Modal from "./modals/EditBeatmapV2Modal"
+import React, { useState } from 'react'
+import Api from '../../resources/Api'
+import { useQuery } from 'react-fetching-library'
+import { Container } from 'semantic-ui-react'
+import BeatmapList from './BeatmapList'
+import { BEATMAP_STATUS } from '../../Constants'
+import BeatmapFilter from './BeatmapFilter'
+import { useParams, useLocation } from 'react-router-dom'
+import EditBeatmapV2Modal from './modals/EditBeatmapV2Modal'
 
 const filterDefaultState = {
-  "artist": null,
-  "title": null,
-  "mapper": null,
-  "status": [BEATMAP_STATUS.Ranked.id],
-  "limit": "Ten",
-  "page": 1,
-  "countTotal": true,
-  "hideRanked": false,
-  "hideGraved": true,
-  "hideWithTwoNominators": false,
-  "nominator": null
+  artist: null,
+  title: null,
+  mapper: null,
+  status: [BEATMAP_STATUS.Ranked.id],
+  limit: 'Ten',
+  page: 1,
+  countTotal: true,
+  hideRanked: false,
+  hideGraved: true,
+  hideWithTwoNominators: false,
+  nominator: null
 }
 
-const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
+const RankedBeatmaps = ({ canEdit, isAdmin, userId, users }) => {
   const [filter, setFilter] = useState(filterDefaultState)
   const [selectedBeatmap, setSelectedBeatmap] = useState(0)
   const [editModalOpen, setEditModalOpen] = useState(false)
-  const {beatmapId} = useParams();
-  const location = useLocation();
+  const { beatmapId } = useParams()
+  const location = useLocation()
   let selectedNominator
 
   if (location.state) {
@@ -39,24 +39,24 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
     setSelectedBeatmap(beatmapId)
     setEditModalOpen(true)
   }
-    
-  let request = Api.fetchBeatmapsByFilter(filter)
-  const {loading, payload, error, query} = useQuery(request)
 
-  function handleFilterSetPage(value) {
-    let newFilter = filter
-    newFilter["page"] = value
+  const request = Api.fetchBeatmapsByFilter(filter)
+  const { loading, payload, error, query } = useQuery(request)
+
+  function handleFilterSetPage (value) {
+    const newFilter = filter
+    newFilter.page = value
     setFilter({
       ...newFilter
     })
   }
 
   return (
-    <div className={"base-container base-container-large"}>
+    <div className={'base-container base-container-large'}>
       <Container fluid>
-        <div className={"section"}>
-          <div className={"section-title"}>Ranked Beatmaps</div>
-          <div className={"section-container"}>
+        <div className={'section'}>
+          <div className={'section-title'}>Ranked Beatmaps</div>
+          <div className={'section-container'}>
             <BeatmapFilter
               users={users}
               filter={filter}
@@ -69,9 +69,9 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
             />
           </div>
         </div>
-        
-        <div className={"table-section"}>
-          <div className={"table-list-container"}>
+
+        <div className={'table-section'}>
+          <div className={'table-list-container'}>
             <BeatmapList
               users={users}
               loading={loading}
@@ -82,7 +82,7 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
               setSelectedBeatmap={setSelectedBeatmap}
               canEdit={isAdmin}
               setPage={handleFilterSetPage}
-              redirectLocation={"ranked"}
+              redirectLocation={'ranked'}
             />
           </div>
         </div>
@@ -91,13 +91,13 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
         <EditBeatmapV2Modal
           id={selectedBeatmap}
           userId={userId}
-          canEdit={isAdmin  }
+          canEdit={isAdmin }
           query={query}
           open={editModalOpen}
           setOpen={setEditModalOpen}
           users={users}
           setSelectedBeatmap={setSelectedBeatmap}
-          redirectLocation={"ranked"}
+          redirectLocation={'ranked'}
         />
         }
       </Container>

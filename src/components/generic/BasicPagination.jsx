@@ -1,7 +1,7 @@
-import React from "react"
-import {Icon, Menu, MenuItem} from "semantic-ui-react"
+import React from 'react'
+import { Icon, Menu, MenuItem } from 'semantic-ui-react'
 
-const BasicPagination = ({currentPage, lastPage, setPage}) => {
+const BasicPagination = ({ currentPage, lastPage, setPage }) => {
   return (
     <Menu inverted floated='right' pagination>
       <MenuItem disabled={currentPage === 1} as='a' icon onClick={() => setPage(1)}>

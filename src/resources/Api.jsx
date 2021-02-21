@@ -1,18 +1,18 @@
-function filterToUrlParams(filter) {
-  let result = ""
+function filterToUrlParams (filter) {
+  let result = ''
   let first = true
 
-  for (let item in filter) {
-    if (filter.hasOwnProperty(item)) {
+  for (const item in filter) {
+    if (Object.prototype.hasOwnProperty.call(filter, item)) {
       if (filter[item] === null || (Array.isArray(filter[item]) && filter[item].length === 0)) {
         continue
       }
 
       if (first) {
-        result += "?" + item + "=" + filter[item]
+        result += '?' + item + '=' + filter[item]
         first = false
       } else {
-        result += "&" + item + "=" + filter[item]
+        result += '&' + item + '=' + filter[item]
       }
     }
   }
@@ -57,8 +57,8 @@ const Api = {
       method: 'GET',
       endpoint: 'v1/contest/findAll',
       headers: {
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -68,9 +68,9 @@ const Api = {
       endpoint: 'v1/contest/add',
       body: contest,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -79,8 +79,8 @@ const Api = {
       method: 'GET',
       endpoint: 'v1/modding/map/findAll',
       headers: {
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -89,8 +89,8 @@ const Api = {
       method: 'GET',
       endpoint: `v1/modding/map/${mapId}/findDiscussion`,
       headers: {
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -100,9 +100,9 @@ const Api = {
       endpoint: 'v1/modding/map/add',
       body: moddingMap,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -112,9 +112,9 @@ const Api = {
       endpoint: 'v1/modding/comment/add',
       body: moddingComment,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -124,21 +124,21 @@ const Api = {
       endpoint: `v1/modding/comment/${commentId}/resolve`,
       body: status,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
   editModdingComment: (moddingComment, token, userId) => {
     return {
       method: 'PUT',
-      endpoint: `v1/modding/comment/edit`,
+      endpoint: 'v1/modding/comment/edit',
       body: moddingComment,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -147,9 +147,9 @@ const Api = {
       method: 'DELETE',
       endpoint: `v1/modding/comment/${commentId}/delete`,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -159,21 +159,21 @@ const Api = {
       endpoint: 'v1/modding/response/add',
       body: moddingResponse,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
   editModdingResponse: (moddingResponse, token, userId) => {
     return {
       method: 'PUT',
-      endpoint: `v1/modding/response/edit`,
+      endpoint: 'v1/modding/response/edit',
       body: moddingResponse,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -182,9 +182,9 @@ const Api = {
       method: 'DELETE',
       endpoint: `v1/modding/response/${responseId}/delete`,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -193,8 +193,8 @@ const Api = {
       method: 'GET',
       endpoint: `v1/beatmap/${mapId}/refreshMetadata`,
       headers: {
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -204,56 +204,56 @@ const Api = {
       endpoint: 'v1/beatmap/add',
       body: beatmap,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
   updateBeatmap: (beatmap, token, userId) => {
     return {
       method: 'PUT',
-      endpoint: 'v1/beatmap/' + beatmap.osuId + "/update",
+      endpoint: 'v1/beatmap/' + beatmap.osuId + '/update',
       body: beatmap,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
   updateBeatmapStatus: (beatmapId, statusFormValues, token, userId) => {
     return {
       method: 'PUT',
-      endpoint: 'v1/beatmap/' + beatmapId + "/updateStatus",
+      endpoint: 'v1/beatmap/' + beatmapId + '/updateStatus',
       body: statusFormValues,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
   deleteBeatmap: (beatmapId, token, userId) => {
     return {
       method: 'DELETE',
-      endpoint: 'v1/beatmap/' + beatmapId + "/delete",
+      endpoint: 'v1/beatmap/' + beatmapId + '/delete',
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
   updateUser: (user, token, userId) => {
     return {
       method: 'PUT',
-      endpoint: 'v1/user/' + user.osuId + "/update",
+      endpoint: 'v1/user/' + user.osuId + '/update',
       body: user,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -263,9 +263,9 @@ const Api = {
       endpoint: 'v1/user/add',
       body: user,
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "Osu-Id": userId
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+        'Osu-Id': userId
       }
     }
   },
@@ -292,7 +292,7 @@ const Api = {
       method: 'GET',
       endpoint: 'v1/osu/userInfo',
       headers: {
-        "Authorization": "Bearer " + token
+        Authorization: 'Bearer ' + token
       }
     }
   }

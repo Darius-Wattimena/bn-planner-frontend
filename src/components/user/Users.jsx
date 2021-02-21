@@ -1,46 +1,46 @@
-import React, {useState} from "react"
-import UserList from "./UserList"
-import "./Users.scss"
-import UserFilter from "./UserFilter"
-import {Container} from "semantic-ui-react"
-import AddUserModal from "./modals/AddUserModal"
-import Api from "../../resources/Api"
-import {useQuery} from "react-fetching-library"
-import EditUserModal from "./modals/EditUserModal"
+import React, { useState } from 'react'
+import UserList from './UserList'
+import './Users.scss'
+import UserFilter from './UserFilter'
+import { Container } from 'semantic-ui-react'
+import AddUserModal from './modals/AddUserModal'
+import Api from '../../resources/Api'
+import { useQuery } from 'react-fetching-library'
+import EditUserModal from './modals/EditUserModal'
 
 const filterDefaultState = {
-  "name": null,
-  "roles": [],
-  "limit": "Ten",
-  "page": 1,
-  "countTotal": true,
-  "canEdit": null,
-  "isAdmin": null
+  name: null,
+  roles: [],
+  limit: 'Ten',
+  page: 1,
+  countTotal: true,
+  canEdit: null,
+  isAdmin: null
 }
 
-const Users = ({canEdit, isAdmin, userId, users}) => {
+const Users = ({ canEdit, isAdmin, userId, users }) => {
   const [filter, setFilter] = useState(filterDefaultState)
   const [selectedUser, setSelectedUser] = useState(0)
   const [addModalOpen, setAddModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
 
-  let request = Api.fetchUsersByFilter(filter)
-  const {loading, payload, error, query} = useQuery(request)
+  const request = Api.fetchUsersByFilter(filter)
+  const { loading, payload, error, query } = useQuery(request)
 
-  function handleFilterSetPage(value) {
-    let newFilter = filter
-    newFilter["page"] = value
+  function handleFilterSetPage (value) {
+    const newFilter = filter
+    newFilter.page = value
     setFilter({
       ...newFilter
     })
   }
 
   return (
-    <div className={"base-container"}>
+    <div className={'base-container'}>
       <Container fluid>
-        <div className={"section"}>
-          <div className={"section-title"}>Users</div>
-          <div className={"section-container"}>
+        <div className={'section'}>
+          <div className={'section-title'}>Users</div>
+          <div className={'section-container'}>
             <UserFilter
               filter={filter}
               setFilter={setFilter}
@@ -50,8 +50,8 @@ const Users = ({canEdit, isAdmin, userId, users}) => {
               setPage={handleFilterSetPage}/>
           </div>
         </div>
-        <div className={"table-section"}>
-          <div className={"table-list-container"}>
+        <div className={'table-section'}>
+          <div className={'table-list-container'}>
             <UserList
               filter={filter}
               loading={loading}

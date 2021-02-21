@@ -1,13 +1,13 @@
-import React from "react"
-import {Button, Grid, Icon, Image, Label, Popup} from "semantic-ui-react"
-import UserAvatar from "../user/UserAvatar"
-import {getReadableRole, getUserWithId} from "../../util/UserUtil"
-import {useHistory} from "react-router-dom"
+import React from 'react'
+import { Button, Grid, Icon, Image, Label, Popup } from 'semantic-ui-react'
+import UserAvatar from '../user/UserAvatar'
+import { getReadableRole, getUserWithId } from '../../util/UserUtil'
+import { useHistory } from 'react-router-dom'
 
-const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBeatmap, setEditModalOpen, redirectLocation}) => {
+const BeatmapListItem = ({ users, displayStatus, beatmap, canEdit, setSelectedBeatmap, setEditModalOpen, redirectLocation }) => {
   const history = useHistory()
 
-  function getNominator(nominators, nominator) {
+  function getNominator (nominators, nominator) {
     if (nominators.length === 2) {
       return nominators[nominator - 1]
     } else if (nominators.length === 1) {
@@ -19,16 +19,16 @@ const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBea
     }
   }
 
-  function MapperDetails({users, mapper, mapperId}) {
-    let userDetails = getUserWithId(users, mapperId)
-    let profilePictureUri = "https://a.ppy.sh/" + mapperId
+  function MapperDetails ({ users, mapper, mapperId }) {
+    const userDetails = getUserWithId(users, mapperId)
+    const profilePictureUri = 'https://a.ppy.sh/' + mapperId
     let className
 
     if (userDetails) {
-      let roleDetails = getReadableRole(userDetails.role)
-      className = "user-avatar mapper-avatar " + roleDetails.className + "-text"
+      const roleDetails = getReadableRole(userDetails.role)
+      className = 'user-avatar mapper-avatar ' + roleDetails.className + '-text'
     } else {
-      className = "user-avatar mapper-avatar"
+      className = 'user-avatar mapper-avatar'
     }
 
     return (
@@ -39,7 +39,7 @@ const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBea
     )
   }
 
-  function NominatorDetails({users, nominated, nominators, nominatorNumber}) {
+  function NominatorDetails ({ users, nominated, nominators, nominatorNumber }) {
     const nominatorId = getNominator(nominators, nominatorNumber)
     const nominatorDetails = getUserWithId(users, nominatorId)
     if (nominatorDetails && nominatorDetails !== 0) {
@@ -54,29 +54,29 @@ const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBea
   }
 
   return (
-    <Grid.Row className={"table-row"}>
+    <Grid.Row className={'table-row'}>
       <Grid.Column mobile={16} tablet={16} computer={2} >
         <Image fluid label={
           <Label ribbon horizontal className={displayStatus.className}>
             {displayStatus.name}
           </Label>
-        } src={"https://assets.ppy.sh/beatmaps/" + beatmap.osuId + "/covers/cover.jpg"}/>
+        } src={'https://assets.ppy.sh/beatmaps/' + beatmap.osuId + '/covers/cover.jpg'}/>
       </Grid.Column>
       <Grid.Column mobile={8} tablet={8} computer={2}>{beatmap.artist}</Grid.Column>
       <Grid.Column mobile={8} tablet={8} computer={3}>{beatmap.title}</Grid.Column>
-      <Grid.Column textAlign={"left"} computer={2} only={"computer"}>
+      <Grid.Column textAlign={'left'} computer={2} only={'computer'}>
         <MapperDetails users={users} mapper={beatmap.mapper} mapperId={beatmap.mapperId}/>
       </Grid.Column>
-      <Grid.Column textAlign={"left"} mobile={8} tablet={8} computer={2}>
+      <Grid.Column textAlign={'left'} mobile={8} tablet={8} computer={2}>
         <NominatorDetails users={users} nominated={beatmap.nominatedByBNOne} nominators={beatmap.nominators} nominatorNumber={1} />
       </Grid.Column>
-      <Grid.Column textAlign={"left"} mobile={8} tablet={8} computer={2}>
+      <Grid.Column textAlign={'left'} mobile={8} tablet={8} computer={2}>
         <NominatorDetails users={users} nominated={beatmap.nominatedByBNTwo} nominators={beatmap.nominators} nominatorNumber={2} />
       </Grid.Column>
-      <Grid.Column only={"computer"} computer={1}>
+      <Grid.Column only={'computer'} computer={1}>
         {beatmap.note &&
           <Popup trigger={
-            <Icon size={"large"} name={"sticky note"} />
+            <Icon size={'large'} name={'sticky note'} />
           }>
             <Popup.Content>
               {beatmap.note}
@@ -86,20 +86,20 @@ const BeatmapListItem = ({users, displayStatus, beatmap, canEdit, setSelectedBea
       </Grid.Column>
       <Grid.Column mobile={16} tablet={16} computer={2}>
         <Button.Group fluid>
-          <Button color={"green"} onClick={() => {
+          <Button color={'green'} onClick={() => {
             history.push({
               pathname: '/' + redirectLocation + '/' + beatmap.osuId
             })
             setSelectedBeatmap(beatmap.osuId)
             setEditModalOpen(true)
           }}>
-            <Icon fitted name={canEdit ? "pencil" : "eye"}/>
+            <Icon fitted name={canEdit ? 'pencil' : 'eye'}/>
           </Button>
           <Button
             primary
-            onClick={() => window.open("https://osu.ppy.sh/beatmapsets/" + beatmap.osuId, "_blank")}
+            onClick={() => window.open('https://osu.ppy.sh/beatmapsets/' + beatmap.osuId, '_blank')}
           >
-            <Icon fitted name={"linkify"}/>
+            <Icon fitted name={'linkify'}/>
           </Button>
         </Button.Group>
       </Grid.Column>

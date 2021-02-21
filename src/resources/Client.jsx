@@ -1,5 +1,5 @@
-import {createClient} from 'react-fetching-library'
-import {ENV} from "../Settings"
+import { createClient } from 'react-fetching-library'
+import { ENV } from '../Settings'
 
 export const requestHostInterceptor = host => client => async action => {
   return {
@@ -9,5 +9,5 @@ export const requestHostInterceptor = host => client => async action => {
 }
 
 export const Client = createClient({
-  requestInterceptors: [requestHostInterceptor(ENV.api_url)],
+  requestInterceptors: [requestHostInterceptor(ENV.api_url)]
 })

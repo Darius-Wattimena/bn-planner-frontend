@@ -1,12 +1,12 @@
-import {Form} from "semantic-ui-react";
-import React from "react";
+import { Form } from 'semantic-ui-react'
+import React from 'react'
 
-const FilterField = ({id, value, label, group, handleFilterSet, enabled}) => {
+const FilterField = ({ id, value, label, group, handleFilterSet, enabled }) => {
   return (
     <Form.Input
       id={id}
       placeholder={label}
-      size={"small"}
+      size={'small'}
       fluid
       value={value}
       disabled={!enabled}

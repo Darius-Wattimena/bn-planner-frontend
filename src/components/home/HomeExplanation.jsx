@@ -1,16 +1,15 @@
-import React from "react";
-import {Grid} from "semantic-ui-react";
+import React from 'react'
+import { Grid } from 'semantic-ui-react'
 
 const HomeExplanation = () => {
-
   return (
     <div>
       <Grid>
         <Grid.Row>
           <Grid.Column mobile={16} tablet={16} computer={8}>
-            <div className={"text-group"}>
-              <h1 className={"text-group-name text-group-name-main"}>The Nomination Planner</h1>
-              <div className={"text-group-items"}>
+            <div className={'text-group'}>
+              <h1 className={'text-group-name text-group-name-main'}>The Nomination Planner</h1>
+              <div className={'text-group-items'}>
                 <div>We, the osu!catch beatmap nominators like to plan and manage all our icons as a team. We do this so
                   everyone knows which mapsets are being worked on, which ones need help from a 2nd BN and which ones
                   are currently qualified.
@@ -18,7 +17,7 @@ const HomeExplanation = () => {
                 <br/>
                 <div>
                   The nomination planner was first being maintained in a spread sheet (which can be found at <a
-                  href={`https://docs.google.com/spreadsheets/d/e/2PACX-1vTo9Mjlupg-0sA7ITTRRLt9fFFObLkFv21-hgXOBWAxw4k1P_empSrwD2blccmyvQoEeqjVcZziNt6V/pubhtml`}>here</a>).
+                    href={'https://docs.google.com/spreadsheets/d/e/2PACX-1vTo9Mjlupg-0sA7ITTRRLt9fFFObLkFv21-hgXOBWAxw4k1P_empSrwD2blccmyvQoEeqjVcZziNt6V/pubhtml'}>here</a>).
                   This website basically replaces the old spreadsheet and adds a lot of new features to the table such
                   as:
                 </div>
@@ -30,9 +29,9 @@ const HomeExplanation = () => {
             </div>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={16} computer={8}>
-            <div className={"text-group"}>
-              <div className={"text-group-name"}>Why did we move the planner to a website?</div>
-              <div className={"text-group-items"}>
+            <div className={'text-group'}>
+              <div className={'text-group-name'}>Why did we move the planner to a website?</div>
+              <div className={'text-group-items'}>
                 <div>The maintainability of the spreadsheet became a hassle, this was especially a problem since you had
                   to move the beatmap in multiple stages of the nomination to different tab in the spreadsheet.
                 </div>
@@ -46,9 +45,9 @@ const HomeExplanation = () => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column mobile={16} tablet={16} computer={8}>
-            <div className={"text-group"}>
-              <div className={"text-group-name"}>What can I do on this website?</div>
-              <ul className={"text-group-items"}>
+            <div className={'text-group'}>
+              <div className={'text-group-name'}>What can I do on this website?</div>
+              <ul className={'text-group-items'}>
                 <li>
                   <b>What can you do as an osu!catch nominator?</b>
                   <br/>
@@ -76,11 +75,11 @@ const HomeExplanation = () => {
             </div>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={8} computer={4}>
-            <div className={"text-group"}>
-              <div className={"text-group-name"}>Who is hosting the nomination planner?</div>
-              <div className={"text-group-items"}>
+            <div className={'text-group'}>
+              <div className={'text-group-name'}>Who is hosting the nomination planner?</div>
+              <div className={'text-group-items'}>
                 <div>
-                  This planner is hosted by <a href={`https://osu.ppy.sh/users/2369776`}>Greaper</a>. If you encounter
+                  This planner is hosted by <a href={'https://osu.ppy.sh/users/2369776'}>Greaper</a>. If you encounter
                   any problems, have a feature request or want to give feedback then don't hesitate to contact him via
                   osu! or Discord.
                 </div>
@@ -88,12 +87,12 @@ const HomeExplanation = () => {
             </div>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={8} computer={4}>
-            <div className={"text-group"}>
-              <div className={"text-group-name"}>How can I trust this site?</div>
-              <div className={"text-group-items"}>
+            <div className={'text-group'}>
+              <div className={'text-group-name'}>How can I trust this site?</div>
+              <div className={'text-group-items'}>
                 <div><b>Everything is open source!</b> The <a
-                  href={`https://github.com/Darius-Wattimena/bn-planner-frontend`}>front-end</a> and <a
-                  href={`https://github.com/Darius-Wattimena/bnplanner`}>back-end</a> can be found on GitHub.
+                  href={'https://github.com/Darius-Wattimena/bn-planner-frontend'}>front-end</a> and <a
+                  href={'https://github.com/Darius-Wattimena/bnplanner'}>back-end</a> can be found on GitHub.
                 </div>
               </div>
             </div>
@@ -106,6 +105,5 @@ const HomeExplanation = () => {
     </div>
   )
 }
-
 
 export default HomeExplanation

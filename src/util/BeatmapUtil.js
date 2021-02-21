@@ -1,16 +1,16 @@
-import {BEATMAP_STATUS} from "../Constants"
-import {getReadableRole} from "./UserUtil"
+import { BEATMAP_STATUS } from '../Constants'
+import { getReadableRole } from './UserUtil'
 
 let nominatorOptions = []
 
-export function getNominatorOptions(users) {
+export function getNominatorOptions (users) {
   if (nominatorOptions.length > 0) {
     return nominatorOptions
   }
 
   if (users && Array.isArray(users)) {
-    let preparedUsers = users.filter(user => (
-      user.role !== "GST" && user.role !== "OBS"
+    const preparedUsers = users.filter(user => (
+      user.role !== 'GST' && user.role !== 'OBS'
     )).map(user => ({
       key: user.osuId,
       text: user.osuName,
@@ -19,18 +19,18 @@ export function getNominatorOptions(users) {
     }))
 
     nominatorOptions = [
-      {key: 0, text: 'none', value: 0},
+      { key: 0, text: 'none', value: 0 },
       ...preparedUsers
     ]
     return nominatorOptions
   }
 }
 
-export function getReadableStatus(statusId) {
+export function getReadableStatus (statusId) {
   if (statusId) {
     const keys = Object.keys(BEATMAP_STATUS)
     for (const key of keys) {
-      let status = BEATMAP_STATUS[key]
+      const status = BEATMAP_STATUS[key]
       if (status.id === statusId) {
         return status
       }
@@ -40,7 +40,7 @@ export function getReadableStatus(statusId) {
   return BEATMAP_STATUS.Pending
 }
 
-export function getBeatmapStatusOptions() {
+export function getBeatmapStatusOptions () {
   return [
     getOption(BEATMAP_STATUS.Qualified),
     getOption(BEATMAP_STATUS.Bubbled),
@@ -51,11 +51,11 @@ export function getBeatmapStatusOptions() {
   ]
 }
 
-function getOption(status) {
+function getOption (status) {
   return {
     key: status.id,
     text: status.name,
     value: status.id,
-    className: "beatmap-status-item " + status.className
+    className: 'beatmap-status-item ' + status.className
   }
 }

@@ -1,26 +1,28 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "bnplanner-frontend",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "dayjs": "1.8.36",
-    "node-sass": "4.14.1",
-    "query-string": "6.13.2",
-    "react": "16.13.1",
+    "dayjs": "1.10.4",
+    "node-sass": "5.0.0",
+    "query-string": "6.14.0",
+    "react": "17.0.1",
     "react-cookie": "4.0.3",
-    "react-dom": "16.13.1",
-    "react-fetching-library": "1.7.4",
-    "react-notifications-component": "3.0.2",
+    "react-dom": "17.0.1",
+    "react-fetching-library": "1.7.5",
+    "react-notifications-component": "3.0.3",
     "react-router-dom": "5.2.0",
-    "react-scripts": "3.4.3",
-    "recharts": "2.0.3",
+    "react-scripts": "4.0.2",
+    "recharts": "2.0.7",
     "semantic-ui-css": "2.4.1",
-    "semantic-ui-react": "1.2.1",
+    "semantic-ui-react": "2.0.3",
     "spinners-react": "1.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "lint": "eslint --ext .js,.jsx .",
+    "lint-fix": "npm run lint -- --fix",
+    "build": "cross-env EXTEND_ESLINT=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -38,5 +40,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "devDependencies": {
+    "eslint": "7.20.0",
+    "eslint-config-standard": "16.0.2",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.3.1",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "eslint-plugin-react": "7.22.0"
   }
 }

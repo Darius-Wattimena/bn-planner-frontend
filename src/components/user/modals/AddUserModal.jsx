@@ -1,50 +1,48 @@
-import React, {useState} from "react"
-import {Button, Form, Header, Icon, Message, Modal} from "semantic-ui-react"
-import {useMutation} from "react-fetching-library"
-import Api from "../../../resources/Api"
-import {useCookies} from "react-cookie"
+import React, { useState } from 'react'
+import { Button, Form, Header, Icon, Message, Modal } from 'semantic-ui-react'
+import { useMutation } from 'react-fetching-library'
+import Api from '../../../resources/Api'
+import { useCookies } from 'react-cookie'
 
-const AddUserModal = ({open, query, setOpen, userId}) => {
+const AddUserModal = ({ open, query, setOpen, userId }) => {
   const [formValues, setFormValues] = useState({
-    osuUrl: ""
+    osuUrl: ''
   })
   const [incorrectUrl, setIncorrectUrl] = useState(false)
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
 
-  const {mutate} = useMutation(Api.addUser)
+  const { mutate } = useMutation(Api.addUser)
   const handleSubmit = async (formValues) => {
-    const {error: mutateError} = await mutate(formValues, cookies.bnplanner_osu_access_token, userId)
+    const { error: mutateError } = await mutate(formValues, cookies.bnplanner_osu_access_token, userId)
 
     if (mutateError) {
       console.log(mutateError)
     } else {
       setFormValues({
-        osuUrl: "",
-        osuName: ""
+        osuUrl: '',
+        osuName: ''
       })
       query()
       setOpen(false)
     }
   }
 
-  function setFormValue(field, value) {
-    let newFormValues = formValues
+  function setFormValue (field, value) {
+    const newFormValues = formValues
     newFormValues[field] = value
     setFormValues({
       ...newFormValues
     })
   }
 
-  function verifyData() {
-    if (formValues.osuUrl.startsWith("https://osu.ppy.sh/users/") || formValues.osuUrl.startsWith("https://old.ppy.sh/u/")) {
-      let splitUrl = formValues.osuUrl.split("/")
-      let userId
-
-      userId = splitUrl[splitUrl.length - 1]
+  function verifyData () {
+    if (formValues.osuUrl.startsWith('https://osu.ppy.sh/users/') || formValues.osuUrl.startsWith('https://old.ppy.sh/u/')) {
+      const splitUrl = formValues.osuUrl.split('/')
+      const userId = splitUrl[splitUrl.length - 1]
 
       if (!isNaN(userId)) {
-        let preparedValues = {
-          "osuId": userId
+        const preparedValues = {
+          osuId: userId
         }
 
         setIncorrectUrl(false)
@@ -57,23 +55,23 @@ const AddUserModal = ({open, query, setOpen, userId}) => {
 
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
-      <div className={"modal-header"}>
+      <div className={'modal-header'}>
         <Header content='Add New User'/>
       </div>
       <Modal.Content>
         <Form>
           <Form.Input
-            label={"User URL"}
-            placeholder={"https://osu.ppy.sh/users/<USER_ID>"}
+            label={'User URL'}
+            placeholder={'https://osu.ppy.sh/users/<USER_ID>'}
             value={formValues.osuUrl}
-            onChange={event => setFormValue("osuUrl", event.target.value)}
+            onChange={event => setFormValue('osuUrl', event.target.value)}
           />
           <Message
             visible={incorrectUrl === true}
             error
-            header="The provided user url is not correct"
+            header='The provided user url is not correct'
             content="A user url should either start with: 'https://osu.ppy.sh/users/' or 'https://old.ppy.sh/u/' and then followed by the beatmap set id to be counted as a correct url"
-            className={"error-message"}
+            className={'error-message'}
           />
         </Form>
       </Modal.Content>
