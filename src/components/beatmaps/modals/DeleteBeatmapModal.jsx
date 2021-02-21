@@ -3,10 +3,12 @@ import {useCookies} from "react-cookie"
 import {useMutation} from "react-fetching-library"
 import Api from "../../../resources/Api"
 import {Button, Checkbox, Header, Icon, Modal} from "semantic-ui-react"
+import {useHistory} from "react-router-dom";
 
-const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, userId}) => {
+const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, userId, redirectLocation}) => {
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
   const [read, setRead] = useState(false)
+  const history = useHistory()
 
   const {mutate} = useMutation(Api.deleteBeatmap)
   const handleSubmit = async (beatmapId) => {
@@ -18,6 +20,9 @@ const DeleteBeatmapModal = ({open, query, setOpenEditModal, setOpen, beatmap, us
       query()
       setOpenEditModal(false)
       setOpen(false)
+      history.push({
+        pathname: '/' + redirectLocation
+      })
     }
   }
 

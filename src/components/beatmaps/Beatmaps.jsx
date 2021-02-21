@@ -32,9 +32,15 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
   const location = useLocation();
 
   let selectedNominator
+  let asNewlyCreated
 
   if (location.state) {
     selectedNominator = location.state.nominator
+    if (location.state.asNewlyCreated === true) {
+      asNewlyCreated = location.state.asNewlyCreated
+    } else {
+      asNewlyCreated = false
+    }
   }
 
   // Check if a beatmap id is provided so we can already open the modal with the provided map
@@ -84,7 +90,7 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
               setSelectedBeatmap={setSelectedBeatmap}
               canEdit={canEdit}
               setPage={handleFilterSetPage}
-              location={"beatmaps"}
+              redirectLocation={"beatmaps"}
             />
           </div>
         </div>
@@ -100,7 +106,8 @@ const Beatmaps = ({canEdit, isAdmin, userId, users}) => {
           setOpen={setEditModalOpen}
           users={users}
           setSelectedBeatmap={setSelectedBeatmap}
-          location={"beatmaps"}
+          redirectLocation={"beatmaps"}
+          asNewlyCreated={asNewlyCreated}
         />
         }
       </Container>

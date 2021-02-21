@@ -3,7 +3,6 @@ import Api from "../../resources/Api"
 import {useQuery} from "react-fetching-library"
 import {Container} from "semantic-ui-react"
 import BeatmapList from "./BeatmapList"
-import AddBeatmapModal from "./modals/AddBeatmapModal"
 import {BEATMAP_STATUS} from "../../Constants"
 import BeatmapFilter from "./BeatmapFilter"
 import {useParams, useLocation} from "react-router-dom"
@@ -26,7 +25,6 @@ const filterDefaultState = {
 const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
   const [filter, setFilter] = useState(filterDefaultState)
   const [selectedBeatmap, setSelectedBeatmap] = useState(0)
-  const [addModalOpen, setAddModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
   const {beatmapId} = useParams();
   const location = useLocation();
@@ -67,7 +65,6 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
               setPage={handleFilterSetPage}
               onRankedPage={true}
               userId={userId}
-              setAddModalOpen={setAddModalOpen}
               initialNominator={selectedNominator}
             />
           </div>
@@ -85,7 +82,7 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
               setSelectedBeatmap={setSelectedBeatmap}
               canEdit={isAdmin}
               setPage={handleFilterSetPage}
-              location={"ranked"}
+              redirectLocation={"ranked"}
             />
           </div>
         </div>
@@ -100,7 +97,7 @@ const RankedBeatmaps = ({canEdit, isAdmin, userId, users}) => {
           setOpen={setEditModalOpen}
           users={users}
           setSelectedBeatmap={setSelectedBeatmap}
-          location={"ranked"}
+          redirectLocation={"ranked"}
         />
         }
       </Container>

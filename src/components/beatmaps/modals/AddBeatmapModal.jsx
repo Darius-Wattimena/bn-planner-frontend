@@ -29,7 +29,8 @@ const AddBeatmapModal = ({open, query, setOpen, userId}) => {
       query()
       setOpen(false)
       history.push({
-        pathname: '/beatmaps/' + formValues.beatmapId
+        pathname: '/beatmaps/' + formValues.beatmapId,
+        state: { asNewlyCreated: true }
       })
     }
   }

@@ -5,7 +5,7 @@ import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
 import {BEATMAP_STATUS} from "../../../Constants";
 import {getNominatorOptions, getReadableStatus} from "../../../util/BeatmapUtil";
-import {Button, Checkbox, Dropdown, Form, Grid, Header, Icon, Image, Label, Modal} from "semantic-ui-react";
+import {Button, Checkbox, Form, Grid, Header, Icon, Image, Label, Modal} from "semantic-ui-react";
 import DeleteBeatmapModal from "./DeleteBeatmapModal";
 import EditStatusBeatmapModal from "./EditStatusBeatmapModal";
 import {unix} from "dayjs";
@@ -13,7 +13,7 @@ import {getReadableRole, getUserWithId} from "../../../util/UserUtil";
 import RefreshMetadataButton from "../RefreshMetadataButton";
 import BeatmapEventList from "../BeatmapEventList";
 
-const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap, canEdit, userId, location}) => {
+const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap, canEdit, userId, redirectLocation, asNewlyCreated}) => {
   const {loading, payload, error, reset, query: beatmapQuery} = useQuery(Api.getDetailedBeatmap(id))
   const {mutate} = useMutation(Api.updateBeatmap)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -33,7 +33,8 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
     osuEvents: [],
     nominatedByBNOne: null,
     nominatedByBNTwo: null,
-    unfinished: null
+    unfinished: null,
+    asNewlyCreated: null,
   })
   const [showingArtist, setShowingArtist] = useState("")
   const [showSameNominatorWarning, setShowSameNominatorWarning] = useState(false)
@@ -42,6 +43,7 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
 
   if (!loading && !error && id) {
     if (payload && payload !== "" && (formValues.artist === null || (formValues.osuId !== "" && formValues.osuId !== payload.osuId))) {
+      payload["asNewlyCreated"] = asNewlyCreated
       setFormValues(payload)
       setPotentialNewStatus(payload.status)
       setShowingArtist(payload.artist)
@@ -117,7 +119,7 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
 
   function onModalReset() {
     history.push({
-      pathname: '/' + location
+      pathname: '/' + redirectLocation
     })
     setPotentialNewStatus(0)
     setFormValues({
@@ -139,6 +141,8 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
 
   let readablePotentialStatus = getReadableStatus(potentialNewStatus)
   let readableCurrentStatus = getReadableStatus(formValues.status)
+
+  console.log({formValues})
 
   return (
     <div>
@@ -381,6 +385,7 @@ const EditBeatmapV2Modal = ({id, open, query, setOpen, users, setSelectedBeatmap
                   beatmap={payload}
                   setOpenEditModal={setOpen}
                   userId={userId}
+                  redirectLocation={redirectLocation}
                 />
                 <EditStatusBeatmapModal
                   query={query}
