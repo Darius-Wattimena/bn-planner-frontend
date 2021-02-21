@@ -27,5 +27,4 @@ workflows:
   version: 2
   build:
     jobs:
-      - build:
-          context: common-builds-context
+      - build
