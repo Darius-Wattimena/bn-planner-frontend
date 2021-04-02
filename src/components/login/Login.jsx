@@ -9,7 +9,8 @@ import { pushNotification } from '../../util/NotificationUtil'
 const Login = (props) => {
   const history = useHistory()
   const { mutate } = useMutation(Api.loginWithToken)
-  const [setCookie] = useCookies(['bnplanner_osu_token'])
+  // eslint-disable-next-line no-unused-vars
+  const [cookies, setCookie] = useCookies(['bnplanner_osu_token'])
 
   const code = new URLSearchParams(props.location.search).get('code')
   const state = new URLSearchParams(props.location.search).get('state')

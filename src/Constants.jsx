@@ -82,7 +82,7 @@ export const USER_ROLES = {
     name: 'Retired',
     full: 'Retired',
     detailed: 'Retired Nominator',
-    explanation: 'A catch nominator who retired.',
+    explanation: 'A retired catch nominator.',
     className: 'user-role-rc',
     cellColor: '#696969'
   },
