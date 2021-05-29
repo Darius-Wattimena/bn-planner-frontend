@@ -13,25 +13,30 @@ const AddBeatmapModal = ({ open, query, setOpen, userId }) => {
     mapper: ''
   })
   const [incorrectUrl, setIncorrectUrl] = useState(false)
+  const [noBeatmap, setNoBeatmap] = useState(false)
   const [cookies] = useCookies(['bnplanner_osu_access_token'])
   const history = useHistory()
 
   const { mutate } = useMutation(Api.addBeatmap)
   const handleSubmit = async (formValues) => {
-    const { error: mutateError } = await mutate(formValues, cookies.bnplanner_osu_access_token, userId)
+    const { error: mutateError, payload } = await mutate(formValues, cookies.bnplanner_osu_access_token, userId)
 
     if (mutateError) {
       console.log(mutateError)
     } else {
-      setFormValues({
-        beatmapUrl: ''
-      })
-      query()
-      setOpen(false)
-      history.push({
-        pathname: '/beatmaps/' + formValues.beatmapId,
-        state: { asNewlyCreated: true }
-      })
+      if (payload === false) {
+        setNoBeatmap(true)
+      } else {
+        setFormValues({
+          beatmapUrl: ''
+        })
+        query()
+        setOpen(false)
+        history.push({
+          pathname: '/beatmaps/' + formValues.beatmapId,
+          state: { asNewlyCreated: true }
+        })
+      }
     }
   }
 
@@ -83,6 +88,13 @@ const AddBeatmapModal = ({ open, query, setOpen, userId }) => {
             placeholder={'Beatmap URL'}
             value={formValues.beatmapUrl}
             onChange={event => setFormValue('beatmapUrl', event.target.value)}
+          />
+          <Message
+            visible={noBeatmap === true}
+            error
+            header='Could not find beatmap info on osu'
+            content='Please make sure the beatmap you are trying to add is not deleted'
+            className={'error-message'}
           />
           <Message
             visible={incorrectUrl === true}
