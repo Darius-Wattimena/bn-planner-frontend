@@ -4,23 +4,21 @@ import React, { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useHistory } from 'react-router-dom'
 import { BEATMAP_STATUS } from '../../../Constants'
-import { getNominatorOptions, getReadableStatus } from '../../../util/BeatmapUtil'
-import { Button, Checkbox, Form, Grid, Header, Icon, Image, Label, Modal } from 'semantic-ui-react'
+import { getReadableStatus } from '../../../util/BeatmapUtil'
+import { Button, Checkbox, Form, Grid, Header, Icon, Label, Modal } from 'semantic-ui-react'
 import DeleteBeatmapModal from './DeleteBeatmapModal'
 import EditStatusBeatmapModal from './EditStatusBeatmapModal'
 import { unix } from 'dayjs'
-import { getReadableRole, getUserWithId } from '../../../util/UserUtil'
 import RefreshMetadataButton from '../RefreshMetadataButton'
-import BeatmapEventList from '../BeatmapEventList'
+import NominatorField from '../NominatorField'
 
-const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatmap, canEdit, userId, redirectLocation, asNewlyCreated }) => {
+const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatmap, canEdit, isAdmin, userId, redirectLocation, asNewlyCreated }) => {
   const { loading, payload, error, reset, query: beatmapQuery } = useQuery(Api.getDetailedBeatmap(id))
   const { mutate } = useMutation(Api.updateBeatmap)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [editStatusModalOpen, setEditStatusModalOpen] = useState(false)
   const [potentialNewStatus, setPotentialNewStatus] = useState(0)
   const [editNote, setEditNote] = useState(false)
-  const [showEvents, setShowEvents] = useState(false)
   const [newStatus, setNewStatus] = useState(0)
   const [formValues, setFormValues] = useState({
     osuId: '',
@@ -29,8 +27,6 @@ const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatma
     mapper: '',
     note: '',
     nominators: [0, 0],
-    plannerEvents: [],
-    osuEvents: [],
     nominatedByBNOne: null,
     nominatedByBNTwo: null,
     unfinished: null,
@@ -147,7 +143,7 @@ const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatma
         {!loading && !error && payload &&
           <>
             <div className={'modal-header beatmap-edit-header'} style={{
-              backgroundImage: 'linear-gradient(to top, rgb(38 38 50), transparent, rgba(0,0,0,.8)), url(https://assets.ppy.sh/beatmaps/' + payload.osuId + '/covers/cover.jpg)'
+              backgroundImage: 'linear-gradient(to top, rgba(39, 41, 42), rgba(39, 41, 42, 0.8), rgba(39, 41, 42, 0.6), rgba(39, 41, 42, 0.4), rgba(0,0,0,0)), url(https://assets.ppy.sh/beatmaps/' + payload.osuId + '/covers/cover.jpg)'
             }}>
               <div className={'modal-header-image'}/>
               <Header content={showingArtist + ' - ' + payload.title}/>
@@ -156,70 +152,72 @@ const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatma
             <Modal.Content>
               <Form>
                 <Grid className={'modal-beatmap-content-all'}>
-                  <Grid.Row className={'modal-beatmap-buttons'}>
-                    <Grid.Column computer={4} tablet={4} mobile={16}>
-                      <Button
-                        fluid
-                        disabled={!canEdit || (payload.status === BEATMAP_STATUS.Ranked.id || payload.nominators[0] === 0 || payload.nominators[1] === 0)}
-                        color='green'
-                        onClick={() => {
-                          setNewStatus(BEATMAP_STATUS.Ranked.id)
+                  { isAdmin && isAdmin === true && (
+                    <Grid.Row className={'modal-beatmap-buttons'}>
+                      <Grid.Column computer={4} tablet={4} mobile={16}>
+                        <Button
+                          fluid
+                          disabled={!canEdit || (payload.status === BEATMAP_STATUS.Ranked.id || payload.nominators[0] === 0 || payload.nominators[1] === 0)}
+                          color='green'
+                          onClick={() => {
+                            setNewStatus(BEATMAP_STATUS.Ranked.id)
+                            setEditStatusModalOpen(true)
+                          }}>
+                          <Icon name='heart'/> Rank
+                        </Button>
+                      </Grid.Column>
+                      <Grid.Column computer={3} tablet={3} mobile={8}>
+                        <Button
+                          fluid
+                          disabled={!canEdit || (payload.status === BEATMAP_STATUS.Popped.id)}
+                          color='orange'
+                          onClick={() => {
+                            setNewStatus(BEATMAP_STATUS.Popped.id)
+                            setEditStatusModalOpen(true)
+                          }}>
+                          <Icon name='warning'/> Pop
+                        </Button>
+                      </Grid.Column>
+                      <Grid.Column computer={3} tablet={3} mobile={8}>
+                        <Button
+                          fluid
+                          disabled={!canEdit || (payload.status === BEATMAP_STATUS.Disqualified.id)}
+                          color='red'
+                          onClick={() => {
+                            setNewStatus(BEATMAP_STATUS.Disqualified.id)
+                            setEditStatusModalOpen(true)
+                          }}>
+                          <Icon name='close'/> Disqualify
+                        </Button>
+                      </Grid.Column>
+                      <Grid.Column computer={3} tablet={3} mobile={8}>
+                        {payload.status !== BEATMAP_STATUS.Graved.id &&
+                        <Button fluid disabled={!canEdit} color='grey' onClick={() => {
+                          setNewStatus(BEATMAP_STATUS.Graved.id)
                           setEditStatusModalOpen(true)
                         }}>
-                        <Icon name='heart'/> Rank
-                      </Button>
-                    </Grid.Column>
-                    <Grid.Column computer={3} tablet={3} mobile={8}>
-                      <Button
-                        fluid
-                        disabled={!canEdit || (payload.status === BEATMAP_STATUS.Popped.id)}
-                        color='orange'
-                        onClick={() => {
-                          setNewStatus(BEATMAP_STATUS.Popped.id)
+                          <Icon name='archive'/> Grave
+                        </Button>
+                        }
+                        {payload.status === BEATMAP_STATUS.Graved.id &&
+                        <Button fluid disabled={!canEdit} color='grey' onClick={() => {
+                          setNewStatus(BEATMAP_STATUS.Pending.id)
                           setEditStatusModalOpen(true)
                         }}>
-                        <Icon name='warning'/> Pop
-                      </Button>
-                    </Grid.Column>
-                    <Grid.Column computer={3} tablet={3} mobile={8}>
-                      <Button
-                        fluid
-                        disabled={!canEdit || (payload.status === BEATMAP_STATUS.Disqualified.id)}
-                        color='red'
-                        onClick={() => {
-                          setNewStatus(BEATMAP_STATUS.Disqualified.id)
-                          setEditStatusModalOpen(true)
-                        }}>
-                        <Icon name='close'/> Disqualify
-                      </Button>
-                    </Grid.Column>
-                    <Grid.Column computer={3} tablet={3} mobile={8}>
-                      {payload.status !== BEATMAP_STATUS.Graved.id &&
-                      <Button fluid disabled={!canEdit} color='grey' onClick={() => {
-                        setNewStatus(BEATMAP_STATUS.Graved.id)
-                        setEditStatusModalOpen(true)
-                      }}>
-                        <Icon name='archive'/> Grave
-                      </Button>
-                      }
-                      {payload.status === BEATMAP_STATUS.Graved.id &&
-                      <Button fluid disabled={!canEdit} color='grey' onClick={() => {
-                        setNewStatus(BEATMAP_STATUS.Pending.id)
-                        setEditStatusModalOpen(true)
-                      }}>
-                        <Icon name='archive'/> Un-Grave
-                      </Button>
-                      }
-                    </Grid.Column>
-                    <Grid.Column computer={3} tablet={3} mobile={8}>
-                      <Button fluid disabled={!canEdit} color='red' onClick={() => setDeleteModalOpen(true)}>
-                        <Icon name='trash'/> Delete
-                      </Button>
-                    </Grid.Column>
-                  </Grid.Row>
+                          <Icon name='archive'/> Un-Grave
+                        </Button>
+                        }
+                      </Grid.Column>
+                      <Grid.Column computer={3} tablet={3} mobile={8}>
+                        <Button fluid disabled={!canEdit} color='red' onClick={() => setDeleteModalOpen(true)}>
+                          <Icon name='trash'/> Delete
+                        </Button>
+                      </Grid.Column>
+                    </Grid.Row>
+                  )}
                   <Grid.Row className={'modal-beatmap-content-header'}>
                     <Grid.Column computer={7} tablet={16} mobile={16}>
-                      <h3>Settings</h3>
+                      <h3>Nominators</h3>
                     </Grid.Column>
                     <Grid.Column computer={9} tablet={16} mobile={16}>
                       <h3>Metadata</h3>
@@ -290,6 +288,7 @@ const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatma
                           <MetadataFieldItem value={
                             <Checkbox
                               checked={formValues.unfinished}
+                              disabled={!canEdit}
                               onChange={() => {
                                 if (!formValues.unfinished) {
                                   setFormValue('nominatedByBNOne', false)
@@ -319,17 +318,18 @@ const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatma
                   </Grid.Row>
                   <Grid.Row>
                     <Grid.Column computer={7} only={'computer'} />
-                    <Grid.Column computer={3} tablet={16} mobile={16}>
+                    <Grid.Column computer={6} tablet={16} mobile={16}>
                       <RefreshMetadataButton canEdit={canEdit} beatmap={payload} userId={userId} onModalReset={onModalReset} />
                     </Grid.Column>
                     <Grid.Column computer={3} tablet={16} mobile={16}>
-                      <Button fluid disabled={!canEdit} color='grey' onClick={() => { setEditNote(!editNote) }}>
+                      <Button
+                        fluid
+                        disabled={!canEdit}
+                        color='grey'
+                        onClick={() => { setEditNote(!editNote) }}
+                      >
+                        <Icon name={'sticky note'} />
                         {(editNote) ? 'Hide' : 'Edit' } Note
-                      </Button>
-                    </Grid.Column>
-                    <Grid.Column computer={3} tablet={16} mobile={16}>
-                      <Button fluid disabled={!canEdit} color='grey' onClick={() => { setShowEvents(!showEvents) }}>
-                        {(showEvents) ? 'Hide' : 'Show' } Events
                       </Button>
                     </Grid.Column>
                   </Grid.Row>
@@ -345,18 +345,6 @@ const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatma
                           placeholder='Notes'
                           value={formValues.note}
                           onChange={event => setFormValue('note', event.target.value)}/>
-                      </Grid.Column>
-                    </Grid.Row>
-                  }
-                  {showEvents &&
-                    <Grid.Row>
-                      <Grid.Column computer={7} tablet={16} mobile={16}>
-                        <h3>Planner Events</h3>
-                        <BeatmapEventList events={formValues.plannerEvents} users={users}/>
-                      </Grid.Column>
-                      <Grid.Column computer={9} tablet={16} mobile={16}>
-                        <h3>Status Events</h3>
-                        <BeatmapEventList events={formValues.osuEvents} users={users}/>
                       </Grid.Column>
                     </Grid.Row>
                   }
@@ -405,70 +393,6 @@ const EditBeatmapV2Modal = ({ id, open, query, setOpen, users, setSelectedBeatma
           </>
         }
       </Modal>
-    </div>
-  )
-}
-
-const NominatorField = ({ isFirst, unfinished, canEdit, nominatorId, hasNominated, users, onDropdownChange, onCheckboxChange, error }) => {
-  let avatarUri
-  let userDetails
-  let userRole
-
-  if (nominatorId === 0) {
-    avatarUri = 'https://osu.ppy.sh/images/layout/avatar-guest@2x.png'
-    userDetails = null
-    userRole = null
-  } else {
-    userDetails = getUserWithId(users, nominatorId)
-    avatarUri = userDetails.profilePictureUri
-    userRole = getReadableRole(userDetails.role)
-  }
-
-  return (
-    <div>
-      <Grid>
-        <Grid.Row className={'nominator-row'}>
-          <Grid.Column computer={5} tablet={4} mobile={6} className={'nominator-avatar'}>
-            <Image fluid src={avatarUri} className={(hasNominated ? 'nominated' : '')} label={
-              (userRole !== null)
-                ? (
-                  <Label ribbon horizontal className={userRole.className}>
-                    {userRole.name}
-                  </Label>
-                )
-                : null
-            } />
-          </Grid.Column>
-          <Grid.Column computer={11} tablet={12} mobile={10} className={'nominator-details'}>
-            <Grid>
-              <Grid.Row>
-                <Grid.Column computer={16} tablet={16} mobile={16}>
-                  <h4>{(isFirst) ? 'Nominator #1' : 'Nominator #2'}</h4>
-                </Grid.Column>
-                <Grid.Column computer={16} tablet={16} mobile={16}>
-                  <Form.Dropdown
-                    disabled={!canEdit}
-                    selection
-                    search
-                    options={getNominatorOptions(users)}
-                    value={nominatorId}
-                    onChange={onDropdownChange}
-                    error={error}
-                  />
-                </Grid.Column>
-                <Grid.Column computer={16} tablet={16} mobile={16}>
-                  <Form.Checkbox
-                    label={'Nominated'}
-                    disabled={!canEdit || unfinished || nominatorId === 0}
-                    checked={hasNominated}
-                    onChange={onCheckboxChange}
-                  />
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
     </div>
   )
 }

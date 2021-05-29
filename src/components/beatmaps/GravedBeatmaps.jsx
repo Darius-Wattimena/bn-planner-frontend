@@ -92,6 +92,7 @@ const GravedBeatmaps = ({ canEdit, isAdmin, userId, users }) => {
           id={selectedBeatmap}
           userId={userId}
           canEdit={canEdit}
+          isAdmin={isAdmin}
           query={query}
           open={editModalOpen}
           setOpen={setEditModalOpen}

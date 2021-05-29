@@ -12,7 +12,7 @@ const RefreshMetadataButton = ({ canEdit, beatmap, userId, onModalReset }) => {
         disabled={!canEdit}
         color={'green'}
         onClick={() => { setConfirmModalOpen(true) }}>
-        <Icon name={'refresh'} /> Sync
+        <Icon name={'refresh'} /> Refresh Metadata
       </Button>
       <RefreshBeatmapModal
         open={confirmModalOpen}

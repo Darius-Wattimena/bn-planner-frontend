@@ -9,7 +9,7 @@ export const BEATMAP_STATUS = {
     id: 2,
     name: 'Bubbled',
     explanation: 'Beatmaps which are bubbled on osu.',
-    className: 'beatmap-status-bubbed'
+    className: 'beatmap-status-bubbled'
   },
   Pending: {
     id: 5,
@@ -44,7 +44,7 @@ export const BEATMAP_STATUS = {
   Unfinished: {
     id: 8,
     name: 'Unfinished',
-    explanation: 'Beatmaps which are still work in progress.',
+    explanation: 'Beatmaps which are still work in progress but have interest from a nominator.',
     className: 'beatmap-status-unfinished'
   }
 }
@@ -91,7 +91,7 @@ export const USER_ROLES = {
     name: 'Other',
     full: 'Other',
     detailed: 'Other',
-    explanation: 'A nominator who is capable of nominating osu/taiko/mania.',
+    explanation: 'A (former) nominator which nominated a hybrid catch set.',
     className: 'user-role-observer'
   },
   Guest: {

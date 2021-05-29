@@ -55,12 +55,12 @@ const BeatmapListItem = ({ users, displayStatus, beatmap, canEdit, setSelectedBe
 
   return (
     <Grid.Row className={'table-row'}>
-      <Grid.Column mobile={16} tablet={16} computer={2} >
+      <Grid.Column mobile={16} tablet={16} computer={2} className='beatmap-table-banner'>
         <Image fluid label={
           <Label ribbon horizontal className={displayStatus.className}>
             {displayStatus.name}
           </Label>
-        } src={'https://assets.ppy.sh/beatmaps/' + beatmap.osuId + '/covers/cover.jpg'}/>
+        } src={'https://assets.ppy.sh/beatmaps/' + beatmap.osuId + '/covers/card@2x.jpg'}/>
       </Grid.Column>
       <Grid.Column mobile={8} tablet={8} computer={2}>{beatmap.artist}</Grid.Column>
       <Grid.Column mobile={8} tablet={8} computer={3}>{beatmap.title}</Grid.Column>

@@ -91,7 +91,8 @@ const RankedBeatmaps = ({ canEdit, isAdmin, userId, users }) => {
         <EditBeatmapV2Modal
           id={selectedBeatmap}
           userId={userId}
-          canEdit={isAdmin }
+          canEdit={isAdmin}
+          isAdmin={isAdmin}
           query={query}
           open={editModalOpen}
           setOpen={setEditModalOpen}

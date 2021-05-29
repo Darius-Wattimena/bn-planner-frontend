@@ -31,7 +31,7 @@ a, .link {
 
 p, h1, h2, h3, h4, h5, h6, .text, div.text,
 div.field .ui.toggle.checkbox input:checked ~ label, label, div div div.header-text,
-.ui.indicating .label, .ui.indicating .label, .ui.form .field label {
+.ui.indicating .label, .ui.indicating .label, .ui.form .field label, .ui.checkbox label, .ui.checkbox+label {
   color: $text-colour;
 }
 
@@ -234,10 +234,15 @@ div.ui.selection.dropdown div.text {
       @media (min-width: 992px) {
         .table-row {
           transition: background .1s ease,box-shadow .1s ease,color .1s ease;
-        }
+          padding-top: 0.6rem;
+          padding-bottom: 0.6rem;
 
-        .table-row:hover {
-          background-color: $background-colour-light;
+          .beatmap-table-banner {
+          }
+
+          &:hover {
+            background-color: $background-colour-light;
+          }
         }
       }
 
